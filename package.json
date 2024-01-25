@@ -1,0 +1,17 @@
+{
+  "name": "dev-portfolio",
+  "type": "module",
+  "module": "src/index.ts",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typed-html": "^3.0.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@elysiajs/html": "^0.8.0",
+    "beth-stack": "^0.0.34",
+    "elysia": "^0.8.10"
+  }
+}
