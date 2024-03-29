@@ -1,0 +1,25 @@
+font-face {
+  font-family: 'SymbolsNerdFont';
+  src: url('fonts/SymbolsNerdFont-Regular.ttf') format('truetype');
+}
+
+.symbols-font {
+  font-family: 'SymbolshNerdFont';
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(23 23 23);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(214 211 209);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(231 229 228);
+}

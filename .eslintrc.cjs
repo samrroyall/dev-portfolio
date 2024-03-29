@@ -11,7 +11,7 @@ const config = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
-    tsconfigRootDir: __dirname,
+    tsconfigRootDir: import.meta.dir,
     project: [
       "./tsconfig.json",
       "./cli/tsconfig.eslint.json", // separate eslint config for the CLI since we want to lint and typecheck differently due to template files

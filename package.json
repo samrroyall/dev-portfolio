@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@elysiajs/html": "^0.8.0",
+    "@elysiajs/static": "^1.0.2",
     "beth-stack": "^0.0.34",
     "elysia": "^0.8.10"
   }
