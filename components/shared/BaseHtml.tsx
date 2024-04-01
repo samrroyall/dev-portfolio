@@ -11,7 +11,7 @@ const BaseHtml = ({children}: PropsWithChildren) => (
 			<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
       <link rel="stylesheet" type="text/css" href="/public/global.css" />
 		</head>
-		<body class="bg-neutral-900 text-stone-400">
+		<body class="bg-zinc-950 text-stone-400 text-sm">
 			{children}
 		</body>
 	</html>
