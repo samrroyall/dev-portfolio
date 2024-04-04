@@ -1,5 +1,5 @@
 declare namespace JSX {
-    interface HtmlTag {
-        _?: string;
-    }
+  interface HtmlTag {
+    _?: string;
+  }
 }

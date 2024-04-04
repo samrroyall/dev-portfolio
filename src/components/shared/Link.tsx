@@ -1,11 +1,10 @@
-import type { PropsWithChildren } from "beth-stack/jsx";
-
+import { type PropsWithChildren } from "beth-stack/jsx";
 import Icon from "./Icon";
 
 interface LinkProps {
   href: string;
   arrow?: boolean;
-};
+}
 
 const arrowIcon = (
   <span class="text-xs">
@@ -13,7 +12,7 @@ const arrowIcon = (
   </span>
 );
 
-const Link = ({href, arrow, children}: LinkProps & PropsWithChildren) => (
+const Link = ({ href, arrow, children }: LinkProps & PropsWithChildren) => (
   <span>
     <a class="underline" href={href}>
       {children}

@@ -4,7 +4,7 @@ interface IconProps {
   className?: string;
 }
 
-const Icon = ({icon, link, className}: IconProps) => (
+const Icon = ({ icon, link, className }: IconProps) => (
   <span class={`symbols text-white ${className}`}>
     {link ? <a href={link}>{icon}</a> : icon}
   </span>
