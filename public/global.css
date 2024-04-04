@@ -14,8 +14,7 @@
 
 @font-face {
   font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf")
-    format("truetype");
+  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf") format("truetype");
   font-weight: 200;
   font-style: italic;
 }
@@ -71,8 +70,7 @@
 
 @font-face {
   font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf")
-    format("truetype");
+  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
 }
@@ -105,14 +103,6 @@
   font-style: italic;
 }
 
-.symbols {
-  font-family: "SymbolsNerdFont";
-}
-
-.sauce-code-pro {
-  font-family: "SauceCodePro";
-}
-
 /* SCROLLBAR */
 
 ::-webkit-scrollbar {
@@ -132,4 +122,8 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgb(231 229 228);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: white;
 }

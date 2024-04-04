@@ -15,11 +15,13 @@ const Section = ({
     <div class="mb-10 mt-3 flex justify-between p-2">
       <div class="w-1/3">
         <Strong>{title}</Strong>
-        {subtitle ? <div class="font-light text-white">{subtitle}</div> : null}
+        {subtitle ? (
+          <div class="text-secondary-text font-light">{subtitle}</div>
+        ) : null}
       </div>
       <div class="w-2/3">{children}</div>
     </div>
-    <hr class="border-zinc-800 group-last:hidden" />
+    <hr class="border-secondary-bg group-last:hidden" />
   </section>
 );
 

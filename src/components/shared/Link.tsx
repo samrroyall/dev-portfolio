@@ -1,23 +1,37 @@
 import { type PropsWithChildren } from "beth-stack/jsx";
-import Icon from "./Icon";
+
+export type LinkTarget =
+  | "_self"
+  | "_blank"
+  | "_parent"
+  | "_top"
+  | "_unfencedTop";
 
 interface LinkProps {
   href: string;
   arrow?: boolean;
+  noUnderline?: boolean;
+  target?: LinkTarget;
 }
 
-const arrowIcon = (
-  <span class="text-xs">
-    <Icon className="ml-1" icon={"\udb80\udc5c"} />
-  </span>
-);
-
-const Link = ({ href, arrow, children }: LinkProps & PropsWithChildren) => (
-  <span>
-    <a class="underline" href={href}>
+const Link = ({
+  href,
+  arrow,
+  noUnderline,
+  target,
+  children,
+}: LinkProps & PropsWithChildren) => (
+  <span class="hover:text-secondary-text">
+    <a
+      class={noUnderline === true ? "" : "underline"}
+      href={href}
+      target={target || "_blank"}
+    >
       {children}
     </a>
-    {arrow === true ? arrowIcon : null}
+    {arrow === true ? (
+      <span class="font-symbols select-none">{" \udb80\udc5c"}</span>
+    ) : null}
   </span>
 );
 

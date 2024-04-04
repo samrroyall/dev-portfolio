@@ -23,8 +23,14 @@ const Nav = ({ current }: NavProps) => (
               <Code>{`0${i}`}</Code>
             )}
           </div>
-          <div class="font-medium text-white">
-            {label !== current ? <Link href={link}>{label}</Link> : label}
+          <div class="font-medium text-secondary-text">
+            {label !== current ? (
+              <Link href={link} target="_self">
+                {label}
+              </Link>
+            ) : (
+              label
+            )}
           </div>
         </li>
       ))}
