@@ -14,7 +14,8 @@
 
 @font-face {
   font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf") format("truetype");
+  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf")
+    format("truetype");
   font-weight: 200;
   font-style: italic;
 }
@@ -70,7 +71,8 @@
 
 @font-face {
   font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf") format("truetype");
+  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf")
+    format("truetype");
   font-weight: 600;
   font-style: italic;
 }

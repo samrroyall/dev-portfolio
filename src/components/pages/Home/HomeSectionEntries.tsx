@@ -23,7 +23,7 @@ const HomeSectionEntries = ({ entries }: HomeSectionEntriesProps) => (
         ) : (
           <Strong>{entry.title}</Strong>
         )}
-        <div class="flex w-full justify-between font-light text-secondary-text">
+        <div class="text-secondary-text flex w-full justify-between font-light">
           <ul>
             {entry.subtitles.map((subtitle) => (
               <li>{subtitle}</li>

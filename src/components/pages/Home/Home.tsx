@@ -1,4 +1,4 @@
-import { Link, Section } from "../../shared";
+import { Section } from "../../shared";
 import BasePage from "../BasePage";
 import HomeSectionEntries from "./HomeSectionEntries";
 
