@@ -11,21 +11,9 @@ const config = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
-    tsconfigRootDir: import.meta.dir,
-    project: [
-      "./tsconfig.json",
-      "./cli/tsconfig.eslint.json", // separate eslint config for the CLI since we want to lint and typecheck differently due to template files
-      "./upgrade/tsconfig.json",
-      "./www/tsconfig.json",
-    ],
+    tsconfigRootDir: __dirname,
+    project: ["./tsconfig.json"],
   },
-  overrides: [
-    // Template files don't have reliable type information
-    {
-      files: ["./cli/template/**/*.{ts,tsx}"],
-      extends: ["plugin:@typescript-eslint/disable-type-checked"],
-    },
-  ],
   rules: {
     // These off/not-configured-the-way-we-want lint rules we like & opt into
     "@typescript-eslint/no-explicit-any": "error",
