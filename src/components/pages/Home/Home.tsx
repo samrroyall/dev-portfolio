@@ -56,7 +56,10 @@ The frontend is built with Typescript using React and Redux. Styling is done
 using Material UI. View the source code 
 [here](https://github.com/samrroyall/klotski). The backend is build with Rust 
 using Axum and Postgres via Diesel. (**TODO**: Talk about deployment.) View the 
-source code [here](https://github.com/samrroyall/klotski-api).
+source code [here](https://github.com/samrroyall/klotski-api). 
+
+This project is inspired by a CLI tool I built in C++. View the source code 
+[here](https://github.com/samrroyall/klotski-cpp).
 `;
 
 const portfolioText = `
