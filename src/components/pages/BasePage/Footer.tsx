@@ -29,10 +29,10 @@ interface FooterProps {
 
 const Footer = ({ current }: FooterProps) => (
   <footer class="w-full text-lg">
-    <hr class="text-secondary-text" />
+    <hr class="text-secondary-text hidden lg:block" />
     <div class="flex items-center p-2">
       <div class="relative lg:hidden">
-        <div id="footer-nav" class="absolute bottom-[1.5rem] hidden">
+        <div id="footer-nav" class="absolute top-[1.5rem] hidden">
           <Nav current={current} border={true} />
         </div>
         <div
@@ -44,14 +44,22 @@ const Footer = ({ current }: FooterProps) => (
       </div>
       <ul class="ml-auto flex">
         {icons.map(({ link, icon, title }) => (
-          <li class="mx-1 first:ml-0 last:mr-0">
-            <Tooltip text={title}>
-              <Icon link={link} icon={icon} />
-            </Tooltip>
-          </li>
+          <>
+            <li class="mx-1 hidden first:ml-0 last:mr-0 lg:inline-block">
+              <Tooltip text={title}>
+                <Icon link={link} icon={icon} />
+              </Tooltip>
+            </li>
+            <li class="mx-1 first:ml-0 last:mr-0 lg:hidden">
+              <Tooltip text={title} horizontal="left" vertical="below">
+                <Icon link={link} icon={icon} />
+              </Tooltip>
+            </li>
+          </>
         ))}
       </ul>
     </div>
+    <hr class="text-secondary-text lg:hidden" />
   </footer>
 );
 
