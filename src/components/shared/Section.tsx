@@ -11,15 +11,15 @@ const Section = ({
   subtitle,
   children,
 }: SectionProps & PropsWithChildren) => (
-  <section class="group">
-    <div class="mb-10 mt-3 flex justify-between p-2">
-      <div class="w-1/3">
+  <section class="group w-full">
+    <div class="mb-10 mt-3 flex flex-col p-2 lg:flex-row lg:justify-between">
+      <div class="mb-3 max-lg:text-base lg:mb-0 lg:w-1/3">
         <Strong>{title}</Strong>
         {subtitle ? (
           <div class="text-secondary-text font-light">{subtitle}</div>
         ) : null}
       </div>
-      <div class="w-2/3">{children}</div>
+      <div class="lg:w-2/3">{children}</div>
     </div>
     <hr class="border-secondary-bg group-last:hidden" />
   </section>

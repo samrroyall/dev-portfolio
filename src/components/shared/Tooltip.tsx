@@ -9,7 +9,7 @@ const positionClasses =
   "absolute bottom-[1.5rem] left-1/2 hidden -translate-x-1/2 group-hover:inline-block";
 
 const styleClasses =
-  "text-xs text-secondary-text rounded border bg-primary-bg p-1";
+  "text-xs text-secondary-text rounded border bg-primary-bg p-1 select-none";
 
 const Tooltip = ({ text, children }: TooltipProps & PropsWithChildren) => (
   <div class="group relative">

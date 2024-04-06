@@ -8,7 +8,7 @@ interface IconProps {
 }
 
 const Icon = ({ icon, link, linkTarget, className }: IconProps) => (
-  <span class={`font-symbols text-secondary-text ${className}`}>
+  <span class={`font-symbols text-secondary-text select-none ${className}`}>
     {link ? (
       <Link href={link} noUnderline={true} target={linkTarget || "_blank"}>
         <span>{icon}</span>

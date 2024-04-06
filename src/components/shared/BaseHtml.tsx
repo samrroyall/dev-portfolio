@@ -29,7 +29,7 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
       <script>{` 
         tailwind.config = ${JSON.stringify(theme)}
       `}</script>
-      <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
+      <script src="https://unpkg.com/htmx.org@1.9.11"></script>
       <link rel="stylesheet" type="text/css" href="/public/global.css" />
     </head>
     <body class="bg-primary-bg text-primary-text text-sm">{children}</body>

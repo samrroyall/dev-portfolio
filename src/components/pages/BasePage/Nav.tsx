@@ -1,9 +1,5 @@
 import { Code, Icon, Link } from "../../shared";
 
-interface NavProps {
-  current: string;
-}
-
 const pages = [
   { label: "home", link: "/" },
   { label: "interests", link: "/interests" },
@@ -11,19 +7,24 @@ const pages = [
   { label: "contact", link: "/contact" },
 ];
 
-const Nav = ({ current }: NavProps) => (
-  <nav>
+const circleIcon = <Icon icon={"\uf111"} />;
+
+interface NavProps {
+  current: string;
+  border?: boolean;
+}
+
+const Nav = ({ current, border }: NavProps) => (
+  <nav
+    class={`bg-primary-bg p-1 pr-2 text-sm ${border === true ? "rounded border" : ""}`}
+  >
     <ul>
       {pages.map(({ label, link }, i) => (
         <li class="flex">
           <div class="w-8 text-center font-light">
-            {label === current ? (
-              <Icon icon={"\uf111"} />
-            ) : (
-              <Code>{`0${i}`}</Code>
-            )}
+            {label === current ? circleIcon : <Code>{`0${i}`}</Code>}
           </div>
-          <div class="text-secondary-text font-medium">
+          <div class="text-secondary-text">
             {label !== current ? (
               <Link href={link} target="_self">
                 {label}
