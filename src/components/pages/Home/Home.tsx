@@ -1,10 +1,12 @@
-import { Section } from "../../shared";
+import { Sections } from "../../shared";
 import BasePage from "../BasePage";
-import HomeSectionEntries from "./HomeSectionEntries";
+import HomeSectionEntry, {
+  type HomeSectionEntryProps,
+} from "./HomeSectionEntry";
 
 const bioText = `
-I'm a generalist with a passion for problem-solving and a love of learning new 
-programming languages and technologies.
+I am a software engineer with a passion for problem-solving and a love of 
+learning new programming languages and technologies.
 
 I graduated from the University of Chicago in 2019 with a B.S. in Computer 
 Science and a B.A in Philosophy.
@@ -101,79 +103,89 @@ Participated in a 14-week full stack web development bootcamp in 2021,
 receiving highest honors
 `;
 
+interface HomeSection {
+  title: string;
+  entries: HomeSectionEntryProps[];
+}
+
+const content: HomeSection[] = [
+  {
+    title: "About Me",
+    entries: [{ title: "Sam Royall", subtitles: [], text: bioText }],
+  },
+  {
+    title: "Work Experience",
+    entries: [
+      {
+        title: "Manifold",
+        subtitles: ["Software Engineer"],
+        date: "2021 - Present",
+        text: manifoldText,
+      },
+      {
+        title: "Stroz Friedberg",
+        subtitles: ["Cyber Security Consultant"],
+        date: "2019 - 2020",
+        text: strozText,
+      },
+      {
+        title: "",
+        subtitles: [],
+        text: resumeText,
+      },
+    ],
+  },
+  {
+    title: "Education",
+    entries: [
+      {
+        title: "University of Chicago",
+        subtitles: ["B.S. Computer Science", "B.A. Philosophy"],
+        date: "2019",
+        text: uchicagoText,
+      },
+      {
+        title: "Coding Dojo",
+        subtitles: ["Software Development Bootcamp"],
+        date: "2021",
+        text: dojoText,
+      },
+    ],
+  },
+  {
+    title: "Projects",
+    entries: [
+      {
+        title: "Klotski Solver",
+        titleLink: "#",
+        subtitles: [],
+        text: klotskiText,
+      },
+      {
+        title: "Portfolio",
+        subtitles: [],
+        text: portfolioText,
+      },
+      { title: "Tvrtl", subtitles: [], text: tvrtlText },
+      {
+        title: "ElmCalc",
+        titleLink:
+          "https://www.classes.cs.uchicago.edu/archive/2019/spring/22300-1/showcase/samrroyall/index.html",
+        subtitles: [],
+        text: elmCalcText,
+      },
+    ],
+  },
+];
+
+const entries = content.map(({ title, entries }) => ({
+  title,
+  content: entries.map((props) => <HomeSectionEntry {...props} />),
+}));
+
 const Home = () => (
   <BasePage current="home">
-    <Section title="Sam Royall" subtitle="Software Engineer">
-      <HomeSectionEntries
-        entries={[{ title: "", subtitles: [], text: bioText }]}
-      />
-    </Section>
-    <Section title="Work Experience">
-      <HomeSectionEntries
-        entries={[
-          {
-            title: "Manifold",
-            subtitles: ["Software Engineer"],
-            dateString: "2021 - Present",
-            text: manifoldText,
-          },
-          {
-            title: "Stroz Friedberg",
-            subtitles: ["Cyber Security Consultant"],
-            dateString: "2019 - 2020",
-            text: strozText,
-          },
-          {
-            title: "",
-            subtitles: [],
-            text: resumeText,
-          },
-        ]}
-      />
-    </Section>
-    <Section title="Education">
-      <HomeSectionEntries
-        entries={[
-          {
-            title: "University of Chicago",
-            subtitles: ["B.S. Computer Science", "B.A. Philosophy"],
-            dateString: "2019",
-            text: uchicagoText,
-          },
-          {
-            title: "Coding Dojo",
-            subtitles: ["Software Development Bootcamp"],
-            dateString: "2021",
-            text: dojoText,
-          },
-        ]}
-      />
-    </Section>
-    <Section title="Projects">
-      <HomeSectionEntries
-        entries={[
-          {
-            title: "Klotski Solver",
-            titleLink: "#",
-            subtitles: [],
-            text: klotskiText,
-          },
-          {
-            title: "Portfolio",
-            subtitles: [],
-            text: portfolioText,
-          },
-          { title: "Tvrtl", subtitles: [], text: tvrtlText },
-          {
-            title: "ElmCalc",
-            titleLink:
-              "https://www.classes.cs.uchicago.edu/archive/2019/spring/22300-1/showcase/samrroyall/index.html",
-            subtitles: [],
-            text: elmCalcText,
-          },
-        ]}
-      />
-    </Section>
+    <Sections sectionNum="00" entries={entries} />
   </BasePage>
 );
 
