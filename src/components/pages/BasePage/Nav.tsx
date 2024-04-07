@@ -11,13 +11,10 @@ const circleIcon = <Icon icon={"\uf111"} />;
 
 interface NavProps {
   current: string;
-  border?: boolean;
 }
 
-const Nav = ({ current, border }: NavProps) => (
-  <nav
-    class={`bg-primary-bg p-1 pr-2 text-sm ${border === true ? "rounded border" : ""}`}
-  >
+const Nav = ({ current }: NavProps) => (
+  <nav class="bg-primary-bg pb-3 pl-1 text-sm">
     <ul>
       {pages.map(({ label, link }, i) => (
         <li class="flex">

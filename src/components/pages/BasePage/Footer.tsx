@@ -31,33 +31,29 @@ const Footer = ({ current }: FooterProps) => (
   <footer class="w-full text-lg">
     <hr class="text-secondary-text hidden lg:block" />
     <div class="flex items-center p-2">
-      <div class="relative lg:hidden">
-        <div id="footer-nav" class="absolute top-[1.5rem] hidden">
-          <Nav current={current} border={true} />
-        </div>
-        <div
-          class="cursor-pointer"
-          hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
-        >
-          {menuIcon}
-        </div>
+      <div
+        class="cursor-pointer lg:hidden"
+        hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
+      >
+        {menuIcon}
       </div>
       <ul class="ml-auto flex">
         {icons.map(({ link, icon, title }) => (
-          <>
-            <li class="mx-1 hidden first:ml-0 last:mr-0 lg:inline-block">
+          <li class="mx-1 first:ml-0 last:mr-0">
+            <div class="hidden lg:inline-block">
               <Tooltip text={title}>
                 <Icon link={link} icon={icon} />
               </Tooltip>
-            </li>
-            <li class="mx-1 first:ml-0 last:mr-0 lg:hidden">
-              <Tooltip text={title} horizontal="left" vertical="below">
-                <Icon link={link} icon={icon} />
-              </Tooltip>
-            </li>
-          </>
+            </div>
+            <div class="lg:hidden">
+              <Icon link={link} icon={icon} />
+            </div>
+          </li>
         ))}
       </ul>
+    </div>
+    <div id="footer-nav" class="border-bottom hidden">
+      <Nav current={current} />
     </div>
     <hr class="text-secondary-text lg:hidden" />
   </footer>

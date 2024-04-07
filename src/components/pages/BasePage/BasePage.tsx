@@ -3,7 +3,7 @@ import { BaseHtml } from "../../shared";
 import Footer from "./Footer";
 import Nav from "./Nav";
 
-const footerFlexClasses = "flex justify-between flex-col-reverse lg:flex-col";
+const footerFlexClasses = "flex flex-col";
 
 const footerSizeClasses = "h-screen w-full lg:w-auto lg:max-w-screen-md";
 
@@ -18,8 +18,8 @@ const BasePage = ({ current, children }: BasePageProps & PropsWithChildren) => (
         <Nav current={current} />
       </div>
       <div class={`mx-auto ${footerSizeClasses} ${footerFlexClasses}`}>
-        <div class="align-self-top my-2 overflow-y-auto px-3">{children}</div>
-        <div class="w-full">
+        <div class="overflow-y-auto px-3 py-2">{children}</div>
+        <div class="order-first w-full lg:order-last">
           <Footer current={current} />
         </div>
       </div>
