@@ -1,4 +1,4 @@
-import { Link } from "../../shared";
+import { Link, Markdown } from "../../shared";
 
 export interface HomeSectionEntryProps {
   title: string;
@@ -15,7 +15,7 @@ const HomeSectionEntry = ({
   titleLink,
   date,
 }: HomeSectionEntryProps) => (
-  <div class="my-3 first:mt-0 last:mb-0">
+  <div class="mb-6 mt-3 first:mt-0 last:mb-0">
     <span class="text-secondary-text">
       {titleLink ? (
         <Link href={titleLink} arrow={true}>
@@ -33,7 +33,9 @@ const HomeSectionEntry = ({
         {date ? <div class="italic">{date}</div> : null}
       </div>
     </span>
-    <p class="mt-3">{text}</p>
+    <p class="mt-3">
+      <Markdown text={text} />
+    </p>
   </div>
 );
 
