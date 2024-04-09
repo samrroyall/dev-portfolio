@@ -12,7 +12,7 @@ import { marked } from "marked";
 // - tablerow(string content)
 // - tablecell(string content, object flags)
 
-const hr = (): string => `<hr class="my-6" />`;
+const hr = (): string => `<hr class="my-6 mx-3 border-secondary-bg"  />`;
 
 const paragraph = (text: string): string => `<p class="my-3">${text}</p>`;
 
@@ -22,23 +22,20 @@ const paragraph = (text: string): string => `<p class="my-3">${text}</p>`;
 // - image(string href, string title, string text)
 // - text(string text)
 
-const strong = (text: string): string => {
-  const strongClasses = "text-secondary-text font-semibold";
-
-  return `<span class="${strongClasses}">${text}</span>`;
-};
+const strong = (text: string): string =>
+  `<span class="font-semibold text-secondary-text">${text}</span>`;
 
 const em = (text: string): string => `<span class="italic">${text}</span>`;
 
 const codespan = (code: string): string => {
-  const codeClasses = "text-secondary-text font-sauce-code-pro";
+  const codeClasses = "font-sauce-code-pro text-secondary-text";
 
   return `<code class="${codeClasses}">${code}</code>`;
 };
 
 const link = (href: string, title?: string | null, text: string): string => {
-  const displayClasses = "text-secondary-text underline";
-  const displayText = `<span class="${displayClasses}">${text}</span>`;
+  const textClasses = "underline text-secondary-text";
+  const displayText = `<span class="${textClasses}">${text}</span>`;
 
   return `<a href=${href} target="_blank">${displayText}</a>`;
 };

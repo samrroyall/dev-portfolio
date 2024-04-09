@@ -3,7 +3,7 @@ import { BaseHtml } from "../../shared";
 import Footer from "./Footer";
 import Nav from "./Nav";
 
-const footerFlexClasses = "flex flex-col";
+const footerFlexClasses = "flex flex-col lg:justify-between";
 
 const footerSizeClasses = "h-screen w-full lg:w-auto lg:max-w-screen-md";
 
