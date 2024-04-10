@@ -14,9 +14,9 @@ const HomeSectionEntry = ({
   text,
   titleLink,
   date,
-}: HomeSectionEntryProps) => (
-  <div class="mb-6 mt-3 first:mt-0 last:mb-0">
-    <span class="text-secondary-text">
+}: HomeSectionEntryProps) => {
+  const entryHeader = (
+    <div class="text-secondary-text mb-3">
       {titleLink ? (
         <Link href={titleLink} arrow={true}>
           <span class="font-semibold">{title}</span>
@@ -32,11 +32,22 @@ const HomeSectionEntry = ({
         </ul>
         {date ? <div class="italic">{date}</div> : null}
       </div>
-    </span>
-    <p class="mt-3">
+    </div>
+  );
+
+  const entryBody = (
+    <div>
       <Markdown text={text} />
-    </p>
-  </div>
-);
+    </div>
+  );
+
+  return (
+    <div class="group/homesection">
+      {title || subtitles.length ? entryHeader : null}
+      {text ? entryBody : null}
+      <hr class="border-secondary-bg my-6 group-last/homesection:hidden" />
+    </div>
+  );
+};
 
 export default HomeSectionEntry;

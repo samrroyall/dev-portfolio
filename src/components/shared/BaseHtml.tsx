@@ -9,6 +9,7 @@ const theme = {
         "secondary-bg": "rgb(39 39 42)",
         "primary-text": "rgb(168 162 158)",
         "secondary-text": "white",
+        "code-bg": "rgb(36 39 58)",
       },
       fontFamily: {
         symbols: "SymbolsNerdFont",
