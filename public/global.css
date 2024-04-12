@@ -105,6 +105,12 @@
   font-style: italic;
 }
 
+/* KATEX */
+
+.katex {
+  color: rgb(214 211 209);
+}
+
 /* SCROLLBAR */
 
 ::-webkit-scrollbar {

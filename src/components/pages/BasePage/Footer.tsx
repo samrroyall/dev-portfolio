@@ -29,7 +29,7 @@ interface FooterProps {
 
 const Footer = ({ current }: FooterProps) => (
   <footer class="w-full text-lg">
-    <hr class="text-secondary-text hidden lg:block" />
+    <hr class="border-secondary-text hidden lg:block" />
     <div class="flex items-center p-2">
       <div
         class="cursor-pointer lg:hidden"
@@ -37,7 +37,7 @@ const Footer = ({ current }: FooterProps) => (
       >
         {menuIcon}
       </div>
-      <ul class="ml-auto flex">
+      <ul class="text-secondary-text ml-auto flex">
         {icons.map(({ link, icon, title }) => (
           <li class="mx-1 first:ml-0 last:mr-0">
             <div class="hidden lg:inline-block">
@@ -55,7 +55,7 @@ const Footer = ({ current }: FooterProps) => (
     <div id="footer-nav" class="border-bottom hidden">
       <Nav current={current} />
     </div>
-    <hr class="text-secondary-text lg:hidden" />
+    <hr class="border-secondary-text lg:hidden" />
   </footer>
 );
 

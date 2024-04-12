@@ -35,7 +35,7 @@ const entries = posts.map(({ title, subtitle, date }) => ({
   title: "",
   content: [
     <div>
-      <Link href="/blog/post" arrow={true}>
+      <Link href="/blog/post" arrow={true} target="_self">
         <span class="font-bold text-white">{title}</span>
       </Link>
       <div class="flex justify-between font-light">

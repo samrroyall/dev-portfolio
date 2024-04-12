@@ -19,7 +19,8 @@ This is some example blog post text. You can see a link [here](#). This is
 **some bold text**. And so is __this__. And this is _some italic text_. And so 
 is *this*. This is also a \`variable_name\`. This is an equation: $E = mc^2$.
 
-This is a link with no display text: <https://www.google.com>.
+This is a link with no display text: <https://www.google.com>. [This][1] is 
+another link to the same place using the reference link format.
 
 > This is a block quote by someone smart.
 
@@ -78,6 +79,41 @@ also a \`variable_name\`. This is some example blog post text. You can see a
 link [here](#). This is **some bold text**. And this is _some italic text_. 
 This is also a \`variable_name\`.
 
+| First Header  | Second Header | Third Header  |
+| ------------- | ------------- | ------------- |
+| Content Cell  | Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  | Content Cell  |
+
+This is a to-do list:
+
+- [ ] Step One
+- [x] Step Two
+- [ ] Step Three
+
+These are headings:
+
+# This is an h1
+## This is an h2
+### This is an h3
+#### This is an h4
+##### This is an h5
+###### This is an h6
+
+---
+
+This is an image I got from OpenAI's blog.
+
+![Here is some text describing the image][2] 
+
+Here is another image I got from OpenAI's blog. It has more of a square aspect
+ratio.
+
+![Here is some more text describing the image][3]
+
+Here is the Rust logo. It also has a square aspect ratio and is smaller.
+
+![Here is some more text describing the image][4]
+
 ---
 
 This is a C++ code block:
@@ -91,6 +127,24 @@ int fib(int n) {
   return func(n - 1) + func(n - 2);
 }
 \`\`\`
+
+This is a Javascript code block:
+
+\`\`\`js
+function fib(n) {
+  if (n == 0 || n == 1) {
+    return n;
+  }
+
+  return func(n - 1) + func(n - 2);
+}
+\`\`\`
+
+
+[1]: https://www.google.com
+[2]: https://cdn.openai.com/new-and-improved-embedding-model/draft-20221214a/vectors-2.svg
+[3]: https://images.openai.com/blob/b44edb0b-77de-46a9-b4dc-0ff956143d94/CustomBlogCover.png?trim=0,0,0,0&width=3200 (This is a title)
+[4]: https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg (Rust logo)
 `;
 
 // interface BlogPostProps {
@@ -104,7 +158,7 @@ int fib(int n) {
 
 const BlogPost = () => (
   <BasePage current="">
-    <header>
+    <header class="px-1">
       <div class="text-secondary-text text-2xl font-bold">{title}</div>
       <div class="text-lg font-light">{subtitle}</div>
       <div class="text-secondary-text w-full text-right">

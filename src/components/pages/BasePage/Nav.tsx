@@ -7,14 +7,14 @@ const pages = [
   { label: "contact", link: "/contact" },
 ];
 
-const circleIcon = <Icon icon={"\uf111"} />;
+const circleIcon = <Icon className="text-secondary-text" icon={"\uf111"} />;
 
 interface NavProps {
   current: string;
 }
 
 const Nav = ({ current }: NavProps) => (
-  <nav class="bg-primary-bg pb-3 pl-1 text-sm">
+  <nav class="bg-primary-bg pb-3 pl-1">
     <ul>
       {pages.map(({ label, link }, i) => (
         <li class="flex">

@@ -7,9 +7,11 @@ const theme = {
       colors: {
         "primary-bg": "rgb(9 9 11)",
         "secondary-bg": "rgb(39 39 42)",
+        "tertiary-bg": "rgb(23 23 23)",
         "primary-text": "rgb(168 162 158)",
-        "secondary-text": "white",
-        "code-bg": "rgb(36 39 58)",
+        "secondary-text": "rgb(214 211 209)",
+        "primary-code-bg": "rgb(17 17 27)",
+        "secondary-code-bg": "rgb(24 24 37)",
       },
       fontFamily: {
         symbols: "SymbolsNerdFont",
@@ -31,9 +33,21 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
         tailwind.config = ${JSON.stringify(theme)}
       `}</script>
       <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+      <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
+        integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"
+        crossorigin="anonymous"
+      ></script>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
+        integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
+        crossorigin="anonymous"
+      />
       <link rel="stylesheet" type="text/css" href="/public/global.css" />
     </head>
-    <body class="bg-primary-bg text-primary-text text-sm">{children}</body>
+    <body class="bg-primary-bg text-primary-text text-base">{children}</body>
   </html>
 );
 
