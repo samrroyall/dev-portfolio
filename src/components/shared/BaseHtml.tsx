@@ -10,8 +10,6 @@ const theme = {
         "tertiary-bg": "rgb(23 23 23)",
         "primary-text": "rgb(168 162 158)",
         "secondary-text": "rgb(214 211 209)",
-        "primary-code-bg": "rgb(17 17 27)",
-        "secondary-code-bg": "rgb(24 24 37)",
       },
       fontFamily: {
         symbols: "SymbolsNerdFont",
@@ -45,6 +43,7 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
         integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
         crossorigin="anonymous"
       />
+      <link rel="stylesheet" type="text/css" href="/public/prism.css" />
       <link rel="stylesheet" type="text/css" href="/public/global.css" />
     </head>
     <body class="bg-primary-bg text-primary-text text-base">{children}</body>

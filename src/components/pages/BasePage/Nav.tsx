@@ -1,4 +1,4 @@
-import { Code, Icon, Link } from "../../shared";
+import { Icon, Link } from "../../shared";
 
 const pages = [
   { label: "home", link: "/" },
@@ -19,7 +19,11 @@ const Nav = ({ current }: NavProps) => (
       {pages.map(({ label, link }, i) => (
         <li class="flex">
           <div class="w-8 text-center font-light">
-            {label === current ? circleIcon : <Code>{`0${i}`}</Code>}
+            {label === current ? (
+              circleIcon
+            ) : (
+              <span class="font-sauce-code-pro">{`0${i}`}</span>
+            )}
           </div>
           <div class="text-secondary-text">
             {label !== current ? (

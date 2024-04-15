@@ -11,7 +11,8 @@ const date: Dayjs = dayjs("2024-04-08", "YYYY-MM-DD");
 const text = `
 This is some example blog post text. You can see a link [here](#). This is 
 **some bold text**. And so is __this__. And this is _some italic text_. And so 
-is *this*. This is also a \`variable_name\`. This is an equation: $E = mc^2$. This is some example blog post text. You can see a link [here](#). This is 
+is *this*. This is also a \`variable_name\`. This is an equation: $E = mc^2$. 
+This is some example blog post text. You can see a link [here](#). This is 
 **some bold text**. And so is __this__. And this is _some italic text_. And so 
 is *this*. This is also a \`variable_name\`. This is an equation: $E = mc^2$.
 
@@ -124,21 +125,61 @@ int fib(int n) {
     return n;
   }
 
-  return func(n - 1) + func(n - 2);
+  return fib(n - 1) + fib(n - 2);
 }
 \`\`\`
 
-This is a Javascript code block:
+This is a JavaScript code block:
 
 \`\`\`js
 function fib(n) {
-  if (n == 0 || n == 1) {
+  if (n === 0 || n === 1) {
     return n;
   }
 
-  return func(n - 1) + func(n - 2);
+  return fib(n - 1) + fib(n - 2);
 }
 \`\`\`
+
+This is a TypeScript code block:
+
+\`\`\`ts
+const fib = (n: number): number =>
+  n === 0 || n === 1 ? n : fib(n - 1) + fib(n - 2);
+\`\`\`
+
+This is a Python code block:
+
+\`\`\`python
+def fib(n: Int) -> Int:
+  if n == 0 or n == 1:
+    return n
+
+  return fib(n - 1) + fib(n - 2)
+\`\`\`
+
+This is a Rust code block:
+
+\`\`\`rust
+fn fib(n: i32) -> i32 {
+  match n {
+    0 | 1 => n,
+    _ => fib(n - 1) + fib(n - 2),
+  }
+}
+\`\`\`
+
+This is a Gleam code block, which is not set up yet:
+
+\`\`\`gleam
+fn fib(n: Int) -> Int {
+  case n {
+    0 | 1 -> n
+    _ -> fib(n - 1) + fib(n - 2)
+  }
+}
+\`\`\`
+
 
 
 [1]: https://www.google.com

@@ -40,7 +40,7 @@ const entries = posts.map(({ title, subtitle, date }) => ({
       </Link>
       <div class="flex justify-between font-light">
         <span>{subtitle}</span>
-        <span class="text-secondary-text ml-3 text-nowrap italic">
+        <span class="text-secondary-text ml-6 whitespace-nowrap italic">
           {dayjs(date, "YYYY-MM-DD").format("MMMM D, YYYY")}
         </span>
       </div>

@@ -64,19 +64,18 @@ const tablecell = (content: string, flags: TablecellOptions) => {
   return `<${tag} ${align} class="p-3 border border-secondary-bg">${content}</${tag}>`;
 };
 
-const strong = (text: string): string =>
-  `<span class="font-semibold text-secondary-text">${text}</span>`;
-
-const em = (text: string): string => `<span class="italic">${text}</span>`;
-
 const codespan = (code: string): string => {
-  const textClasses =
-    "text-[90%] font-sauce-code-pro text-secondary-text font-light";
+  const textClasses = "text-sm font-sauce-code-pro text-secondary-text";
 
   const bgClasses = "py-[2px] px-[4px] rounded bg-secondary-bg";
 
   return `<code class="${bgClasses} ${textClasses}">${code}</code>`;
 };
+
+const em = (text: string): string => `<span class="italic">${text}</span>`;
+
+const strong = (text: string): string =>
+  `<span class="font-semibold text-secondary-text">${text}</span>`;
 
 const md = marked.use(markedKatex({ throwOnError: false }), {
   renderer: {
@@ -92,10 +91,10 @@ const md = marked.use(markedKatex({ throwOnError: false }), {
     table,
     tablerow,
     tablecell,
-    strong,
-    em,
     codespan,
+    em,
     link,
+    strong,
   },
 });
 

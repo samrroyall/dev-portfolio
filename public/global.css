@@ -105,10 +105,28 @@
   font-style: italic;
 }
 
+/* VARIABLES */
+
+:root {
+  --primary-bg: rgb(9 9 11);
+  --secondary-bg: rgb(39 39 42);
+  --tertiary-bg: rgb(23 23 23);
+  --primary-text: rgb(168 162 158);
+  --secondary-text: rgb(214 211 209);
+  --tertiary-text: rgb(231 229 228);
+}
+
 /* KATEX */
 
 .katex {
-  color: rgb(214 211 209);
+  color: var(--secondary-text);
+}
+
+/* TEXT SELECTION */
+
+*::selection {
+  background: var(--tertiary-text);
+  color: var(--primary-bg);
 }
 
 /* SCROLLBAR */
@@ -119,17 +137,17 @@
 
 ::-webkit-scrollbar-track {
   margin: 5px 0 5px 10px;
-  background-color: rgb(23 23 23);
+  background-color: var(--tertiary-bg);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(214 211 209);
+  background-color: var(--secondary-text);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(231 229 228);
+  background-color: var(--tertiary-text);
 }
 
 ::-webkit-scrollbar-thumb:active {
