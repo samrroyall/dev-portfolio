@@ -1,0 +1,155 @@
+/* FONTS */
+
+@font-face {
+  font-family: "SymbolsNerdFont";
+  src: url("fonts/SymbolsNerdFont-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf")
+    format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf")
+    format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SauceCodePro";
+  src: url("fonts/SauceCodeProNerdFontMono-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* VARIABLES */
+
+:root {
+  --primary-bg: rgb(9 9 11);
+  --secondary-bg: rgb(39 39 42);
+  --tertiary-bg: rgb(23 23 23);
+  --primary-text: rgb(168 162 158);
+  --secondary-text: rgb(214 211 209);
+  --tertiary-text: rgb(231 229 228);
+}
+
+/* KATEX */
+
+.katex {
+  color: var(--secondary-text);
+}
+
+/* TEXT SELECTION */
+
+*::selection {
+  background: var(--tertiary-text);
+  color: var(--primary-bg);
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  margin: 5px 0 5px 10px;
+  background-color: var(--tertiary-bg);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-text);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary-text);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: white;
+}
