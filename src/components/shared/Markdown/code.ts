@@ -19,7 +19,7 @@ loadLanguages(
   Object.keys(languages).filter((lang) => !builtInLanguages.includes(lang)),
 );
 
-export const code = (
+const code = (
   code: string,
   infostring: string | undefined,
   escaped: boolean,
@@ -49,3 +49,5 @@ export const code = (
 
   return `<pre class="${preClasses}">${langLine}<code class="${codeClasses}">${code}</code></pre>`;
 };
+
+export default code;

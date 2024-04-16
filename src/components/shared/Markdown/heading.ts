@@ -44,7 +44,7 @@ const headings: HeadingStyle[] = [
   },
 ];
 
-export const heading = (text: string, level: number, raw: string): string => {
+const heading = (text: string, level: number, raw: string): string => {
   const style = headings[level - 1];
 
   const marginClasses = style
@@ -65,3 +65,5 @@ export const heading = (text: string, level: number, raw: string): string => {
 
   return `<${tag} class="text-secondary-text ${classes}">${text}</${tag}>`;
 };
+
+export default heading;

@@ -201,7 +201,7 @@ const BlogPost = () => (
   <BasePage current="">
     <header class="px-1">
       <div class="text-secondary-text text-2xl font-bold">{title}</div>
-      <div class="text-lg font-light">{subtitle}</div>
+      <div class="text-lg font-medium">{subtitle}</div>
       <div class="text-secondary-text w-full text-right">
         {date.format("MMMM D, YYYY")}
       </div>

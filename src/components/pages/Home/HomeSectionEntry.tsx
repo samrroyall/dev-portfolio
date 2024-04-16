@@ -15,16 +15,18 @@ const HomeSectionEntry = ({
   titleLink,
   date,
 }: HomeSectionEntryProps) => {
+  const titleSpan = <span class="font-bold">{title}</span>;
+
   const entryHeader = (
     <div class="text-secondary-text mb-3">
       {titleLink ? (
         <Link href={titleLink} arrow={true}>
-          <span class="font-semibold">{title}</span>
+          {titleSpan}
         </Link>
       ) : (
-        <span class="font-semibold">{title}</span>
+        titleSpan
       )}
-      <div class="flex w-full justify-between font-light">
+      <div class="flex w-full justify-between">
         <ul>
           {subtitles.map((subtitle) => (
             <li>{subtitle}</li>

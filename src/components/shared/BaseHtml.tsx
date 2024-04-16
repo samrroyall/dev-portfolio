@@ -5,15 +5,12 @@ const theme = {
   theme: {
     extend: {
       colors: {
-        "primary-bg": "rgb(9 9 11)",
-        "secondary-bg": "rgb(39 39 42)",
-        "tertiary-bg": "rgb(23 23 23)",
-        "primary-text": "rgb(168 162 158)",
-        "secondary-text": "rgb(214 211 209)",
-      },
-      fontFamily: {
-        symbols: "SymbolsNerdFont",
-        "sauce-code-pro": "SauceCodePro",
+        "primary-bg": "var(--primary-bg)",
+        "secondary-bg": "var(--secondary-bg)",
+        "tertiary-bg": "var(--tertiary-bg)",
+        "primary-text": "var(--primary-text)",
+        "secondary-text": "var(--secondary-text)",
+        "tertiary-text": "var(--tertiary-text)",
       },
     },
   },
@@ -46,7 +43,9 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
       <link rel="stylesheet" type="text/css" href="/public/prism.css" />
       <link rel="stylesheet" type="text/css" href="/public/global.css" />
     </head>
-    <body class="bg-primary-bg text-primary-text text-base">{children}</body>
+    <body class="bg-primary-bg text-primary-text source-sans-3 text-base font-normal">
+      {children}
+    </body>
   </html>
 );
 
