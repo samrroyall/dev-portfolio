@@ -14,11 +14,14 @@ const ContactForm = () => {
         },
       ).then(
         (_) => {
-          htmx.addClass(htmx.find("#contact-form"), "hidden");
+          const form = htmx.find("#contact-form");
+          form.reset();
+          htmx.addClass(form, "hidden");
           htmx.find("#contact-form-result").innerHTML = "Form submission succeeded.";
         },
         (_) => {
-          htmx.find("#contact-form-result").innerHTML = "Form submission failed. Please try again.";
+          htmx.find("#contact-form-submit-button").disabled = !htmx.find("#contact-form").checkValidity();
+          htmx.find("#contact-form-error").innerHTML = "Form submission failed. Please try again.";
         },
       )
     }
@@ -69,10 +72,11 @@ const ContactForm = () => {
           </Button>
         </div>
       </form>
+      <p id="contact-form-error" class="text-center text-red-400" />
       <p
         id="contact-form-result"
         class="text-secondary-text text-center font-bold"
-      ></p>
+      />
     </div>
   );
 };
