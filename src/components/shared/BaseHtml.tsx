@@ -1,4 +1,5 @@
 import { type PropsWithChildren } from "beth-stack/jsx";
+import "dotenv/config";
 
 /** @type {import('tailwindcss').Config} */
 const theme = {
@@ -24,16 +25,20 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
       <title>Sam Royall</title>
       <script src="https://unpkg.com/htmx.org@1.9.10"></script>
       <script src="https://cdn.tailwindcss.com"></script>
-      <script>{` 
-        tailwind.config = ${JSON.stringify(theme)}
-      `}</script>
+      <script>{`tailwind.config = ${JSON.stringify(theme)}`}</script>
       <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+      <script
+        type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+      ></script>
+      <script type="text/javascript">{`emailjs.init("${process.env.EMAILJS_PUBLIC_KEY}")`}</script>
       <script
         defer
         src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
         integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"
         crossorigin="anonymous"
       ></script>
+      <script src="https://www.google.com/recaptcha/api.js"></script>
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"

@@ -35,9 +35,7 @@ const code = (
   const prettyLang =
     lang && languages[lang]
       ? languages[lang]
-      : lang
-        ? lang[0]!.toUpperCase() + lang.slice(1)
-        : "";
+      : `<span class="capitalize">${lang}</span>` || "";
 
   const langLine = lang
     ? `<div class="text-right text-xs">${prettyLang}</div>`
