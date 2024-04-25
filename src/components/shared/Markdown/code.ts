@@ -19,7 +19,7 @@ loadLanguages(
   Object.keys(languages).filter((lang) => !builtInLanguages.includes(lang)),
 );
 
-export const code = (
+const code = (
   code: string,
   infostring: string | undefined,
   escaped: boolean,
@@ -35,9 +35,7 @@ export const code = (
   const prettyLang =
     lang && languages[lang]
       ? languages[lang]
-      : lang
-        ? lang[0]!.toUpperCase() + lang.slice(1)
-        : "";
+      : `<span class="capitalize">${lang}</span>` || "";
 
   const langLine = lang
     ? `<div class="text-right text-xs">${prettyLang}</div>`
@@ -49,3 +47,5 @@ export const code = (
 
   return `<pre class="${preClasses}">${langLine}<code class="${codeClasses}">${code}</code></pre>`;
 };
+
+export default code;

@@ -7,16 +7,18 @@ interface IconProps {
   className?: string;
 }
 
-const Icon = ({ icon, link, linkTarget, className }: IconProps) => (
-  <span class={`font-symbols select-none ${className}`}>
-    {link ? (
-      <Link href={link} noUnderline={true} target={linkTarget || "_blank"}>
-        <span>{icon}</span>
-      </Link>
-    ) : (
-      icon
-    )}
-  </span>
-);
+const Icon = ({ icon, link, linkTarget, className }: IconProps) => {
+  const iconSpan = (
+    <span class={`font-symbols select-none ${className}`}>{icon}</span>
+  );
+
+  return link ? (
+    <Link href={link} noUnderline={true} target={linkTarget || "_blank"}>
+      {iconSpan}
+    </Link>
+  ) : (
+    iconSpan
+  );
+};
 
 export default Icon;

@@ -105,6 +105,18 @@
   font-style: italic;
 }
 
+@font-face {
+  font-family: "SourceSans3";
+  src: url("fonts/SourceSans3-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SourceSans3";
+  src: url("fonts/SourceSans3-Italic-VariableFont_wght.ttf") format("truetype");
+  font-style: italic;
+}
+
 /* VARIABLES */
 
 :root {
@@ -116,10 +128,27 @@
   --tertiary-text: rgb(231 229 228);
 }
 
+/* FONT CLASSES */
+
+* {
+  font-family: SourceSans3, sans-serif;
+}
+
+.font-symbols,
+.font-symbols * {
+  font-family: SymbolsNerdFont;
+}
+
+.font-sauce-code-pro,
+.font-sauce-code-pro * {
+  font-family: SauceCodePro, monospace;
+}
+
 /* KATEX */
 
 .katex {
   color: var(--secondary-text);
+  font-size: 1rem;
 }
 
 /* TEXT SELECTION */
@@ -152,4 +181,10 @@
 
 ::-webkit-scrollbar-thumb:active {
   background-color: white;
+}
+
+/* GRECAPTCHA */
+
+.grecaptcha-badge {
+  display: none;
 }

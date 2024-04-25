@@ -10,7 +10,7 @@ const cleanUrl = (href: string): string | null => {
   return cleanHref;
 };
 
-export const image = (
+const image = (
   href: string,
   title: string | null,
   text: string,
@@ -28,7 +28,7 @@ export const image = (
   return `<img class="${classes}" src="${cleanHref}" alt="${text}" ${titleAttr} />`;
 };
 
-export const link = (
+const link = (
   href: string,
   title: string | null | undefined,
   text: string,
@@ -45,3 +45,5 @@ export const link = (
 
   return `<a href=${cleanHref} target="_blank" ${titleAttr}>${displayText}</a>`;
 };
+
+export { image, link };
