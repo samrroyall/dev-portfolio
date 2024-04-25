@@ -1,16 +1,24 @@
 type InputType = "email" | "text" | "textarea";
 
-const focusClasses =
-  "focus:outline-none focus:ring-1 focus:ring-secondary-text focus:invalid:ring-red-400";
+const standardBorderClasses = "border border-secondary-text rounded";
 
-const standardClasses =
-  "border border-secondary-text rounded placeholder-primary-text invalid:border-red-400 invalid:ring-red-400";
+const focusBorderClasses =
+  "has-[:focus]:outline-none has-[:focus]:ring-1 has-[:focus]:ring-secondary-text";
 
-const inputClasses = `${standardClasses} ${focusClasses}`;
+const invalidBorderClasses =
+  "has-[:invalid]:border-red-400 has-[:invalid]:ring-red-400 has-[:focus:invalid]:ring-red-400";
+
+const borderClasses = `${standardBorderClasses} ${focusBorderClasses} ${invalidBorderClasses}`;
+
+const fieldClasses = `*:text-secondary-text *:bg-primary-bg my-3 inline-block p-1 ${borderClasses}`;
+
+const noBorderClasses = `border-0 ring-0 outline-none`;
+
+const inputClasses = `placeholder-primary-text w-full p-1 ${noBorderClasses}`;
+
+const legendClasses = "px-1 text-sm";
 
 const requiredClasses = "after:content-['*'] after:ml-1 after:text-red-400";
-
-const labelClasses = "absolute px-1 text-sm leading-3";
 
 interface InputProps {
   label: string;
@@ -46,16 +54,16 @@ const Input = ({
 
   const textareaLengthId = `${name}-${type}-current-length`;
 
+  const bottomLegendClasses = maxlength ? "relative pb-3" : "";
+
   return (
-    <fieldset class="*:text-secondary-text *:bg-primary-bg relative my-3 inline-block">
-      <legend
-        class={`${labelClasses} -top-2.5 left-2 ${required ? requiredClasses : ""}`}
-      >
+    <fieldset class={`${fieldClasses} ${bottomLegendClasses}`}>
+      <legend class={`${legendClasses} ${required ? requiredClasses : ""}`}>
         {label}
       </legend>
       {type === "textarea" ? (
         <textarea
-          class={`h-[15rem] w-full p-3 ${inputClasses} ${noResize ? "resize-none" : ""}`}
+          class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
           placeholder={placeholder || ""}
           title={title || ""}
           {...attrs}
@@ -63,7 +71,7 @@ const Input = ({
         />
       ) : (
         <input
-          class={`w-full p-3 ${inputClasses}`}
+          class={inputClasses}
           type={type || "text"}
           placeholder={placeholder || ""}
           title={title || ""}
@@ -71,7 +79,7 @@ const Input = ({
         />
       )}
       {maxlength !== undefined ? (
-        <legend class={`${labelClasses} -bottom-2.5 right-2`}>
+        <legend class={`${legendClasses} absolute -bottom-2.5 right-[4px]`}>
           <span id={textareaLengthId}>0</span>/{maxlength}
         </legend>
       ) : null}

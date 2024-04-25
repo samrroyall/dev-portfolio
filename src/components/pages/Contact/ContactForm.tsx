@@ -1,4 +1,4 @@
-import { Button, Input } from "../../shared";
+import { Button, Icon, Input } from "../../shared";
 
 const ContactForm = () => {
   const sendEmailFunc = `
@@ -17,11 +17,11 @@ const ContactForm = () => {
           const form = htmx.find("#contact-form");
           form.reset();
           htmx.addClass(form, "hidden");
-          htmx.find("#contact-form-result").innerHTML = "Form submission succeeded.";
+          htmx.removeClass(htmx.find("#contact-form-result"), "hidden");
         },
         (_) => {
           htmx.find("#contact-form-submit-button").disabled = !htmx.find("#contact-form").checkValidity();
-          htmx.find("#contact-form-error").innerHTML = "Form submission failed. Please try again.";
+          htmx.removeClass(htmx.find("#contact-form-error"), "hidden");
         },
       )
     }
@@ -36,6 +36,13 @@ const ContactForm = () => {
         hx-on:change={`htmx.find("#contact-form-submit-button").disabled = !htmx.find("#contact-form").checkValidity();`}
         hx-on:submit={`event.preventDefault(); htmx.find("#contact-form-submit-button").disabled = true; grecaptcha.execute();`}
       >
+        <div
+          id="contact-form-error"
+          class="mx-auto mb-3 flex hidden items-center text-red-400"
+        >
+          <Icon className="mr-1 text-sm" icon={"\ue654"} />
+          Form submission failed
+        </div>
         <Input
           id="contact-form-name"
           name="full"
@@ -72,11 +79,13 @@ const ContactForm = () => {
           </Button>
         </div>
       </form>
-      <p id="contact-form-error" class="text-center text-red-400" />
-      <p
+      <div
         id="contact-form-result"
-        class="text-secondary-text text-center font-bold"
-      />
+        class="text-secondary-text hidden text-center"
+      >
+        <div class="text-2xl font-bold">Thank you</div>
+        The form was successfully submitted.
+      </div>
     </div>
   );
 };
