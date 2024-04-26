@@ -12,6 +12,7 @@ const theme = {
         "primary-text": "var(--primary-text)",
         "secondary-text": "var(--secondary-text)",
         "tertiary-text": "var(--tertiary-text)",
+        "strava-orange": "var(--strava-orange)",
       },
     },
   },

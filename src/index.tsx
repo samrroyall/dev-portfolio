@@ -1,21 +1,32 @@
 import { staticPlugin } from "@elysiajs/static";
 import { bethStack } from "beth-stack/elysia";
 import { Elysia } from "elysia";
+import { getStravaData, type StravaData } from "./api";
 import { Blog, BlogPost, Contact, Home, Interests } from "./components/pages";
+import { getMockStravaData } from "./mocks";
 
-interface ContactState {
-  textareaLength: number;
+export interface InterestsData {
+  letterboxd: null;
+  spotify: null;
+  strava: StravaData;
 }
 
 export interface Store {
-  contact: ContactState;
+  interests: InterestsData;
 }
 
 const app = new Elysia()
   .use(staticPlugin())
   .use(bethStack())
+  .state<Store>("interests", {
+    letterboxd: null,
+    strava: process.env.USE_MOCKS ? getMockStravaData() : getStravaData(),
+    spotify: null,
+  })
   .get("/", ({ html }) => html(() => <Home />))
-  .get("/interests", ({ html }) => html(() => <Interests />))
+  .get("/interests", ({ html, store }) =>
+    html(() => <Interests data={store.interests} />),
+  )
   .get("/blog", ({ html }) => html(() => <Blog />))
   .get("/blog/post", ({ html }) => html(() => <BlogPost />))
   .get("/contact", ({ html }) => html(() => <Contact />))

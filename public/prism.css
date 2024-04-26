@@ -18,7 +18,6 @@ code[class*="language-"] {
 }
 
 @media print {
-
   pre[class*="language-"],
   code[class*="language-"] {
     text-shadow: none;
@@ -31,7 +30,7 @@ pre[class*="language-"] {
   overflow: auto;
 }
 
-:not(pre)>code[class*="language-"] {
+:not(pre) > code[class*="language-"] {
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
   color: #db4c69;
@@ -255,7 +254,7 @@ code[class*="language-html"] {
 /*********************************************************
 * Line highlighting
 */
-pre[class*="language-"]>code[class*="language-"] {
+pre[class*="language-"] > code[class*="language-"] {
   position: relative;
   z-index: 1;
 }
