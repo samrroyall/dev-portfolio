@@ -1,4 +1,4 @@
-import { type RunDay, type RunMonth, type StravaData } from "../api/strava";
+import { type RunDay, type RunMonth, type RunWeek } from "../api/strava";
 
 interface StravaActivity {
   id: number;
@@ -11,7 +11,16 @@ interface StravaActivity {
 
 const rawMockData: (StravaActivity & any)[] = [
   {
+    resource_state: 2,
+    athlete: {
+      id: 66274419,
+      resource_state: 1,
+    },
+    name: "Morning Run",
     distance: 13832.1,
+    moving_time: 4426,
+    elapsed_time: 4550,
+    total_elevation_gain: 10.2,
     type: "Run",
     sport_type: "Run",
     workout_type: null,
@@ -28,6 +37,12 @@ const rawMockData: (StravaActivity & any)[] = [
     comment_count: 0,
     athlete_count: 2,
     photo_count: 0,
+    map: {
+      id: "a11111489052",
+      summary_polyline:
+        "cgt~FhwwuOCIH]Jm@A[Ho@A_@Fq@@g@Im@?cARg@AWI[D_AC_AGi@EKRm@Ci@HSP[j@o@l@SLc@`BBr@IJNH?JIpOBPHl@d@VXr@jAZv@Pv@ZvB@lDNdAJXXl@ZZpAb@h@B|@OpB@ZG~NEh@GTMzEAbEKtG?b@NzHEpAGjADtPK`AVHG\\s@TsAEaDMMQ_@UwAAsBDkAVw@j@w@r@_@`AGh@Rp@j@b@Dh@Ep@D`@KpAEXOt@HLLR@r@`@fBd@t@XnCd@dABzAStAa@zBiA~@q@`C?bAPR]FW\\Lx@OfA[`CKPBDHFr@DPTV`@T~@\\fAPj@@tAI~@[b@Ct@_@l@g@d@i@v@sAL_@t@eA^]b@Wb@Mz@@hBObAU|@c@d@Kl@WdC{Ap@q@fA_Ar@a@jAOn@ApFl@EHSCOB@FLDTGVLxAPFBDb@HBbAAlEmAnAW`@?RF~BfA|BElAJhAAj@MdB{@hACpAUr@c@|Aq@rBs@j@OzAk@xBuALQXI\\YpA]lAo@d@KJQJE|C_A{@h@{@Ri@VWTm@H_Ah@yAd@}BxAo@j@i@L_@VyAZkAj@{Ab@iAv@e@H{BD_@RUTeAb@}ACeBQgBHs@WaAk@u@Mw@FiC`A{A`@c@Di@EOMAQGMcACsA_@POVFAIMC]@aEg@qADiA^q@p@sA`A{E|C{A\\}@PqCJeA^w@r@kAbCiA~AeAj@uCl@qBAaCk@e@a@OUMcAc@I[@KHA`@FTFB?DOYEe@EKI?oARy@\\e@Bc@CO`@KLWIIFOIa@@u@Im@B[JGLe@\\wCpAqA^w@FmAE_Dg@sDiA_@S[W}@FONMEa@@gA`@QM]BIG}@Ig@e@g@Ua@Ei@Fi@Z[Zm@jAI^@vCDj@Pj@b@~@@HBxBGr@CJGBQU}@CUXe@nA]Eu@HeCCkC@aDHmACUDaKDm@Qw@?sCFyH?sDJUL]DoNB_AJ_BAaAJ{@McA_@c@g@O]Uw@EYI{E[oBYcAa@y@m@u@g@a@OIi@Gi@?KDwACiBD}@Iy@DcAGSHaFCOf@]BYPk@`AER@p@E|@BPV`@GH@Bi@TD^Ej@BxCHj@Er@?|@Gh@@h@G~@",
+      resource_state: 2,
+    },
     trainer: false,
     commute: false,
     manual: false,
@@ -341,31 +356,31 @@ const mapStrvaActivityToRunDay = ({
 
   return {
     id,
-    dayOfMonth: new Date(start_date_local).getDate(),
+    day: new Date(start_date_local).getDate(),
     miles,
     minutesPerMile: minutes / miles,
-    avgBpm: average_heartrate ? Math.round(average_heartrate) : null,
+    avgBpm: average_heartrate ? average_heartrate : null,
   };
 };
 
-const year = 2024;
-const month = 4;
-const today = new Date().getDate();
+const now = new Date();
+const daysInMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+const numWeeks = Math.ceil((firstDayOfMonth + daysInMonth) / 7);
 
-const firstDayOfMonth = new Date(year, month, 1).getDay();
-const daysInMonth = new Date(year, month, 0).getDate();
-
-const runs = new Array<RunDay[]>(today).fill(null).map((_) => []);
+const runs = new Array<RunWeek>(numWeeks).fill(null).map((_, i) =>
+  new Array<RunDay[] | null>(7).fill(null).map((_, j) => {
+    const adjustedDayIdx = i * 7 + j - firstDayOfMonth;
+    return adjustedDayIdx >= 0 && adjustedDayIdx < daysInMonth ? [] : null;
+  }),
+);
 
 rawMockData
   .filter(({ sport_type }) => sport_type === "Run")
   .map(mapStrvaActivityToRunDay)
   .forEach((run) => {
-    runs[run.dayOfMonth - 1].push(run);
+    const dayIdx = run.day + firstDayOfMonth;
+    runs[Math.floor(dayIdx / 7)][dayIdx % 7].push(run);
   });
 
-export const getMockStravaData = (): StravaData => ({
-  firstDayOfMonth,
-  daysInMonth,
-  runs,
-});
+export const getMockStravaData = (): RunMonth => runs;

@@ -1,21 +1,25 @@
 export interface RunDay {
   id: number;
-  dayOfMonth: number;
+  day: number; // 1-indexed
   miles: number;
   minutesPerMile: number;
   avgBpm: number | null;
 }
 
-export type RunMonth = RunDay[][];
+export type RunWeek = [
+  RunDay[] | null,
+  RunDay[] | null,
+  RunDay[] | null,
+  RunDay[] | null,
+  RunDay[] | null,
+  RunDay[] | null,
+  RunDay[] | null,
+];
 
-export interface StravaData {
-  firstDayOfMonth: number;
-  daysInMonth: number;
-  runs: RunMonth;
-}
+export type RunMonth = RunWeek[];
 
-export const getStravaData = (): StravaData => ({
-  firstDayOfMonth: 0,
-  daysInMonth: 31,
-  runs: [],
-});
+const emptyRunMonth = new Array(5)
+  .fill(null)
+  .map((_) => new Array(7).fill(null));
+
+export const getStravaData = (): RunMonth => ({ runs: emptyRunMonth });

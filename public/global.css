@@ -126,7 +126,8 @@
   --primary-text: rgb(168 162 158);
   --secondary-text: rgb(214 211 209);
   --tertiary-text: rgb(231 229 228);
-  --strava-orange: rgb(252, 82, 0);
+  --strava-orange: rgb(252 82 0);
+  --strava-orange-light: rgb(252 99 25);
 }
 
 /* FONT CLASSES */

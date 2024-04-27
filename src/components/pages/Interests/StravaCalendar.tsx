@@ -1,51 +1,59 @@
-import { type RunDay, type StravaData } from "../../../api/strava";
-import StravaDay from "./StravaDay";
+import { type RunDay, type RunMonth } from "../../../api/strava";
+import StravaDay, { type StravaDayData } from "./StravaDay";
 
-const daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"];
-const today = new Date().getDate();
+const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+const now = new Date();
+const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+
+const isToday = (i: number, j: number): boolean =>
+  now.getDate() === i * 7 + j + 1 - firstDayOfMonth;
+
+const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
+  if (runs.length === 0) {
+    return null;
+  }
+
+  return {
+    id: runs[0]!.id,
+    miles: runs.reduce((acc, run) => acc + run.miles, 0),
+    pace: runs.reduce((acc, run) => acc + run.minutesPerMile, 0) / runs.length,
+    avgBpm: runs.every((run) => run.avgBpm !== undefined)
+      ? runs.reduce((acc, run) => acc + run.avgBpm!, 0) / runs.length
+      : null,
+  };
+};
 
 interface StravaCalendarProps {
-  data: StravaData;
+  data: RunMonth;
 }
 
-const StravaCalendar = ({ data }: StravaCalendarProps) => {
-  const numWeeks = Math.ceil((data.firstDayOfMonth + data.daysInMonth) / 7);
-
-  const weeks = new Array<(RunDay[] | null)[]>(numWeeks)
-    .fill(null)
-    .map((_) => new Array<RunDay[] | null>(7).fill(null));
-
-  data.runs.forEach((runs, i) => {
-    const offsetIndex = i + data.firstDayOfMonth;
-
-    weeks[Math.floor(offsetIndex / 7)][offsetIndex % 7] = runs;
-  });
-
-  return (
-    <table>
-      <thead class="text-secondary-text">
+const StravaCalendar = ({ data }: StravaCalendarProps) => (
+  <table class="relative">
+    <tbody>
+      {data.map((week, i) => (
         <tr>
-          {daysOfWeek.map((d) => (
-            <th>{d}</th>
+          {week.map((day, j) => (
+            <td>
+              {day ? (
+                <StravaDay
+                  data={mapRunDaysToStravaDayData(day)}
+                  isToday={isToday(i, j)}
+                />
+              ) : null}
+            </td>
           ))}
         </tr>
-      </thead>
-      <tbody>
-        {weeks.map((w, i) => (
-          <tr>
-            {w.map((d, j) => (
-              <td>
-                <StravaDay
-                  data={d}
-                  isToday={i * 7 + j + 1 - data.firstDayOfMonth === today}
-                />
-              </td>
-            ))}
-          </tr>
+      ))}
+    </tbody>
+    <tfoot class="text-secondary-text">
+      <tr>
+        {daysOfWeek.map((d) => (
+          <th>{d}</th>
         ))}
-      </tbody>
-    </table>
-  );
-};
+      </tr>
+    </tfoot>
+  </table>
+);
 
 export default StravaCalendar;
