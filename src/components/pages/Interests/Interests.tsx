@@ -17,8 +17,14 @@ const Interests = ({ data }: InterestsProps) => {
         </div>,
       ],
     },
-    { title: "Music", content: [<span>Spotify recently listened to</span>] },
-    { title: "Movies", content: [<span>Letterboxd recently seen</span>] },
+    {
+      title: "Music",
+      content: [<div class="text-center">Spotify recently listened to</div>],
+    },
+    {
+      title: "Movies",
+      content: [<div class="text-center">Letterboxd recently seen</div>],
+    },
   ];
 
   return (
