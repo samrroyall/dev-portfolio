@@ -1,8 +1,4 @@
-import {
-  emptyRunMonth,
-  type RunDay,
-  type RunMonth,
-} from "../../../api/models/strava";
+import { type RunDay, type RunMonth } from "../../../api/models/strava";
 import StravaDay, { type StravaDayData } from "./StravaDay";
 
 const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];

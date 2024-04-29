@@ -1,52 +1,43 @@
+import { HomeSectionEntry } from "../../../api/models/home";
 import { Link, Markdown } from "../../shared";
 
 export interface HomeSectionEntryProps {
-  title: string;
-  subtitles: string[];
-  text: string;
-  titleLink?: string;
-  date?: string;
+  entry: HomeSectionEntry;
 }
 
-const HomeSectionEntry = ({
-  title,
-  subtitles,
-  text,
-  titleLink,
-  date,
-}: HomeSectionEntryProps) => {
-  const titleSpan = <span class="font-bold">{title}</span>;
+const HomeSectionEntry = ({ entry }: HomeSectionEntryProps) => {
+  const titleSpan = <span class="font-bold text-lg">{entry.title}</span>;
 
   const entryHeader = (
     <div class="text-secondary-text mb-3">
-      {titleLink ? (
-        <Link href={titleLink} arrow={true}>
+      {entry.titleLink ? (
+        <Link href={entry.titleLink} arrow={true}>
           {titleSpan}
         </Link>
       ) : (
         titleSpan
       )}
-      <div class="flex w-full justify-between">
-        <ul>
-          {subtitles.map((subtitle) => (
-            <li>{subtitle}</li>
-          ))}
-        </ul>
-        {date ? <div class="italic">{date}</div> : null}
-      </div>
+      <ul>
+        {entry.subtitles.map(({ title, detail }) => (
+          <li class="flex w-full justify-between">
+            {title}
+            <span class="italic">{detail}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 
   const entryBody = (
     <div>
-      <Markdown text={text} />
+      <Markdown text={entry.text} />
     </div>
   );
 
   return (
     <div class="group/homesection">
-      {title || subtitles.length ? entryHeader : null}
-      {text ? entryBody : null}
+      {entry.title || entry.subtitles.length ? entryHeader : null}
+      {entry.text ? entryBody : null}
       <hr class="border-secondary-bg my-6 group-last/homesection:hidden" />
     </div>
   );

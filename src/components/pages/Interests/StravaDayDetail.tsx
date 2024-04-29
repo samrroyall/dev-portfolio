@@ -1,15 +1,14 @@
 import { Icon } from "../../shared";
 
-const styleClasses =
-  "bg-primary-bg border-secondary-text rounded border-2 border-dashed";
+const borderClasses = "bg-primary-bg border border-secondary-text rounded";
 
-const labelClasses = "text-sm font-light";
+const labelClasses = "text-sm";
 
 const valueClasses = "self-end text-secondary-text text-4xl font-bold";
 
-const unitClasses = "text-base font-normal mx-1";
+const unitClasses = "text-base mx-1";
 
-const mainUnitClasses = `${unitClasses} text-primary-text ml-3`;
+const mainUnitClasses = `text-base text-primary-text ml-3`;
 
 interface StravaDayDetailProps {
   id: number;
@@ -69,16 +68,21 @@ const StravaDayDetail = ({ id, miles, pace, avgBpm }: StravaDayDetailProps) => {
   return (
     <div
       id={`run-${id}-detail`}
-      class={`absolute left-0 top-0 hidden h-full w-full p-3`}
+      class={`absolute left-0 top-0 hidden h-full w-full`}
     >
-      <div class={`${styleClasses} font-sauce-code-pro p-3`}>
-        <div hx-on:click={`htmx.toggleClass("#run-${id}-detail", "hidden")`}>
+      <div
+        class={`flex h-full w-full flex-col ${borderClasses} font-sauce-code-pro p-3`}
+      >
+        <div
+          class="flex-none"
+          hx-on:click={`htmx.toggleClass("#run-${id}-detail", "hidden")`}
+        >
           <Icon
             icon={"\uea9b"}
             className="text-secondary-text hover:text-tertiary-text cursor-pointer"
           />
         </div>
-        <div class="px-8">
+        <div class="flex flex-auto flex-col justify-center px-8">
           {milesValue}
           {paceValue}
           {avgBpm ? bpmValue : null}

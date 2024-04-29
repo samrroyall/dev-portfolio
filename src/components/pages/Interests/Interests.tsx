@@ -1,4 +1,4 @@
-import { type InterestsData } from "../../../index";
+import { type InterestsData } from "../../../api/models/interests";
 import { Sections } from "../../shared";
 import BasePage from "../BasePage";
 import SpotifyTopThreeTracks from "./SpotifyTopThreeTracks";
@@ -28,7 +28,11 @@ const Interests = ({ data }: InterestsProps) => {
     },
     {
       title: "Movies",
-      content: [<div class="text-center">Letterboxd recently seen</div>],
+      content: [
+        <div class="text-center">
+          Wait and see if I get access to Letterboxd API beta...
+        </div>,
+      ],
     },
   ];
 

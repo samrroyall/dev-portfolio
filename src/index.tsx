@@ -1,31 +1,28 @@
 import { staticPlugin } from "@elysiajs/static";
 import { bethStack } from "beth-stack/elysia";
 import { Elysia } from "elysia";
+import { getMockHomeData } from "./api/mocks/home";
 import { getMockSpotifyData } from "./api/mocks/spotify";
 import { getMockStravaData } from "./api/mocks/strava";
-import { type Track } from "./api/models/spotify";
-import { type RunMonth } from "./api/models/strava";
+import { type HomeData } from "./api/models/home";
+import { type InterestsData } from "./api/models/interests";
 import { Blog, BlogPost, Contact, Home, Interests } from "./components/pages";
 
-export interface InterestsData {
-  letterboxd: null;
-  spotify: Promise<[Track, Track, Track]>;
-  strava: Promise<RunMonth>;
-}
-
 export interface Store {
+  home: HomeData;
   interests: InterestsData;
 }
 
 const app = new Elysia()
   .use(staticPlugin())
   .use(bethStack())
-  .state<Store>("interests", {
+  .state("home", getMockHomeData())
+  .state("interests", {
     letterboxd: null,
     spotify: getMockSpotifyData(),
     strava: getMockStravaData(),
   })
-  .get("/", ({ html }) => html(() => <Home />))
+  .get("/", ({ html, store }) => html(() => <Home data={store.home} />))
   .get("/interests", ({ html, store }) =>
     html(() => <Interests data={store.interests} />),
   )
