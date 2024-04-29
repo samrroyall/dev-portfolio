@@ -1,7 +1,7 @@
 import { type BlogPostInfo } from "../../../api/models/blog";
-import { getPrettyDate } from "../../../utils";
 import { BasePage } from "../../pages";
-import { Link, Sections } from "../../shared";
+import { Sections } from "../../shared";
+import BlogPageEntry from "./BlogPageEntry";
 
 interface BlogProps {
   data: Promise<BlogPostInfo[]>;
@@ -11,24 +11,12 @@ const Blog = async ({ data }: BlogProps) => (
   <BasePage current="blog">
     <Sections
       sectionNum="02"
-      entries={(await data).map((post) => ({
-        title: "",
-        content: [
-          <div>
-            <div class="flex justify-between">
-              <Link href={`/blog/post/${post.id}`} arrow={true} target="_self">
-                <span class="text-secondary-text text-2xl font-bold">
-                  {post.title}
-                </span>
-              </Link>
-              <div class="text-secondary-text ml-6 whitespace-nowrap">
-                {getPrettyDate(post.date)}
-              </div>
-            </div>
-            <div class="font-medium">{post.subtitle}</div>
-          </div>,
-        ],
-      }))}
+      entries={[
+        {
+          title: "Recent Posts",
+          content: (await data).map((post) => <BlogPageEntry post={post} />),
+        },
+      ]}
     />
   </BasePage>
 );
