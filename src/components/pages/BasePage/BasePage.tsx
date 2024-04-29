@@ -9,19 +9,19 @@ const footerSizeClasses =
   "h-screen w-full lg:w-auto lg:max-w-screen-md xl:max-w-screen-lg";
 
 interface BasePageProps {
-  current: string;
+  current?: string;
 }
 
 const BasePage = ({ current, children }: BasePageProps & PropsWithChildren) => (
   <BaseHtml>
     <main class="relative">
       <div class="absolute left-0 top-0 hidden px-5 py-4 lg:inline-block">
-        <Nav current={current} />
+        <Nav current={current || null} />
       </div>
       <div class={`mx-auto ${footerSizeClasses} ${footerFlexClasses}`}>
         <div class="overflow-y-auto px-3 py-2">{children}</div>
         <div class="order-first w-full lg:order-last">
-          <Footer current={current} />
+          <Footer current={current || null} />
         </div>
       </div>
     </main>

@@ -8,7 +8,14 @@ import { getMockStravaData } from "./api/mocks/strava";
 import { type BlogData } from "./api/models/blog";
 import { type HomeData } from "./api/models/home";
 import { type InterestsData } from "./api/models/interests";
-import { Blog, BlogPost, Contact, Home, Interests } from "./components/pages";
+import {
+  Blog,
+  BlogPost,
+  Contact,
+  Home,
+  Interests,
+  NotFound,
+} from "./components/pages";
 
 export interface Store {
   home: HomeData;
@@ -26,6 +33,11 @@ const app = new Elysia()
     strava: getMockStravaData(),
   })
   .state("blog", getBlogMockData())
+  .onError(({ html, code }) => {
+    if (code === "NOT_FOUND") {
+      return html(() => <NotFound />);
+    }
+  })
   .get("/", ({ html, store }) => html(() => <Home data={store.home} />))
   .get("/interests", ({ html, store }) =>
     html(() => <Interests data={store.interests} />),

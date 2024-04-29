@@ -10,7 +10,7 @@ const pages = [
 const circleIcon = <Icon className="text-secondary-text" icon={"\uf111"} />;
 
 interface NavProps {
-  current: string;
+  current: string | null;
 }
 
 const Nav = ({ current }: NavProps) => (
@@ -19,14 +19,14 @@ const Nav = ({ current }: NavProps) => (
       {pages.map(({ label, link }, i) => (
         <li class="flex">
           <div class="w-8 text-center font-light">
-            {label === current ? (
+            {current && label === current ? (
               circleIcon
             ) : (
               <span class="font-sauce-code-pro">{`0${i}`}</span>
             )}
           </div>
           <div class="text-secondary-text">
-            {label !== current ? (
+            {!current || label !== current ? (
               <Link href={link} target="_self">
                 {label}
               </Link>

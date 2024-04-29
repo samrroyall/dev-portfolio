@@ -1,7 +1,7 @@
 import { type BlogPostInfo } from "../../../api/models/blog";
 import { getPrettyDate } from "../../../utils";
+import { BasePage } from "../../pages";
 import { Link, Sections } from "../../shared";
-import BasePage from "../BasePage";
 
 interface BlogProps {
   data: Promise<BlogPostInfo[]>;

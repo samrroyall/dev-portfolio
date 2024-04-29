@@ -1,15 +1,10 @@
-import { type Store } from "../../../index";
-import BasePage from "../BasePage";
+import { BasePage } from "../../pages";
 import ContactForm from "./ContactForm";
 
-interface ContactProps {
-  store: Store;
-}
-
-const Contact = ({ store }: ContactProps) => (
+const Contact = () => (
   <BasePage current="contact">
     <div class="mb-6 mt-3">
-      <ContactForm store={store} />
+      <ContactForm />
     </div>
   </BasePage>
 );

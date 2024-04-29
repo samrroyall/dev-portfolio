@@ -1,8 +1,8 @@
 import { getBlogPostMockData } from "../../../api/mocks/blog";
 import { type BlogPost } from "../../../api/models/blog";
 import { getPrettyDate } from "../../../utils";
+import { BasePage, NotFound } from "../../pages";
 import { Markdown } from "../../shared";
-import BasePage from "../BasePage";
 
 interface BlogPostProps {
   id: string;
@@ -12,7 +12,7 @@ const BlogPost = async ({ id }: BlogPostProps) => {
   const data = await getBlogPostMockData(id);
 
   return data ? (
-    <BasePage current="">
+    <BasePage>
       <header class="px-1">
         <div class="text-secondary-text text-2xl font-bold">{data.title}</div>
         <div>{data.subtitle}</div>
@@ -26,7 +26,7 @@ const BlogPost = async ({ id }: BlogPostProps) => {
       </article>
     </BasePage>
   ) : (
-    "Something went wrong"
+    <NotFound />
   );
 };
 

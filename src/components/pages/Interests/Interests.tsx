@@ -1,6 +1,6 @@
 import { type InterestsData } from "../../../api/models/interests";
+import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
-import BasePage from "../BasePage";
 import SpotifyTopThreeTracks from "./SpotifyTopThreeTracks";
 import StravaCalendar from "./StravaCalendar";
 

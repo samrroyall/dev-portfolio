@@ -24,7 +24,7 @@ const icons: FooterIcon[] = [
 const menuIcon = <Icon icon={"\ueb94"} />;
 
 interface FooterProps {
-  current: string;
+  current: string | null;
 }
 
 const Footer = ({ current }: FooterProps) => (

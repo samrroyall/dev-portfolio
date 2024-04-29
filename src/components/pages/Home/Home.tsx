@@ -1,6 +1,6 @@
 import { type HomeSection } from "../../../api/models/home";
+import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
-import BasePage from "../BasePage";
 import HomeSectionEntry from "./HomeSectionEntry";
 
 interface HomeProps {
