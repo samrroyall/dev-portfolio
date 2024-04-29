@@ -5,7 +5,8 @@ import Nav from "./Nav";
 
 const footerFlexClasses = "flex flex-col lg:justify-between";
 
-const footerSizeClasses = "h-screen w-full lg:w-auto lg:max-w-screen-md";
+const footerSizeClasses =
+  "h-screen w-full lg:w-auto lg:max-w-screen-md xl:max-w-screen-lg";
 
 interface BasePageProps {
   current: string;

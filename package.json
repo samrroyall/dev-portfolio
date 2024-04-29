@@ -14,7 +14,6 @@
     "@elysiajs/static": "^1.0.2",
     "beth-stack": "^0.0.34",
     "bun-types": "^1.1.0",
-    "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "elysia": "^0.8.10",
     "marked": "^12.0.1",

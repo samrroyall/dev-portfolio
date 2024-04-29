@@ -1,4 +1,4 @@
-export interface HomeSectionEntry {
+export interface HomeSectionEntryData {
   title: string;
   subtitles: {
     title: string;
@@ -11,7 +11,7 @@ export interface HomeSectionEntry {
 
 export interface HomeSection {
   title: string;
-  entries: HomeSectionEntry[];
+  entries: HomeSectionEntryData[];
 }
 
 export type HomeData = Promise<HomeSection[]>;

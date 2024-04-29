@@ -1,12 +1,12 @@
-import { HomeSectionEntry } from "../../../api/models/home";
+import { type HomeSectionEntryData } from "../../../api/models/home";
 import { Link, Markdown } from "../../shared";
 
 export interface HomeSectionEntryProps {
-  entry: HomeSectionEntry;
+  entry: HomeSectionEntryData;
 }
 
 const HomeSectionEntry = ({ entry }: HomeSectionEntryProps) => {
-  const titleSpan = <span class="font-bold text-lg">{entry.title}</span>;
+  const titleSpan = <span class="text-lg font-bold">{entry.title}</span>;
 
   const entryHeader = (
     <div class="text-secondary-text mb-3">
