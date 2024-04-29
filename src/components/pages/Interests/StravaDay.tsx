@@ -1,6 +1,6 @@
 import StravaDayDetail from "./StravaDayDetail";
 
-const baseSize = 1.3;
+const baseSize = 1.5;
 const maxMilesPerDay = 30;
 const multiplier = 1.5;
 const cellSize = (maxMilesPerDay + baseSize) * multiplier;

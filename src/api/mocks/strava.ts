@@ -1,15 +1,13 @@
-import { type RunDay, type RunMonth, type RunWeek } from "../api/strava";
+import { mockFunc } from "../../utils";
+import {
+  mapApiStravaActivityToRunDay,
+  type ApiStravaActivitiesResponse,
+  type RunDay,
+  type RunMonth,
+  type RunWeek,
+} from "../models/strava";
 
-interface StravaActivity {
-  id: number;
-  sport_type: string;
-  distance: number;
-  elapsed_time: number;
-  start_date_local: string;
-  average_heartrate?: number;
-}
-
-const rawMockData: (StravaActivity & any)[] = [
+const rawActivities: ApiStravaActivitiesResponse = [
   {
     resource_state: 2,
     athlete: {
@@ -340,45 +338,24 @@ const rawMockData: (StravaActivity & any)[] = [
   },
 ];
 
-const metersPerMile = 1609.344;
-
-const mapStrvaActivityToRunDay = ({
-  id,
-  distance,
-  elapsed_time,
-  start_date_local,
-  average_heartrate,
-}: StravaActivity): RunDay => {
-  const minutes = elapsed_time / 60;
-  const miles = distance / metersPerMile;
-
-  return {
-    id,
-    day: new Date(start_date_local).getDate(),
-    miles,
-    minutesPerMile: minutes / miles,
-    avgBpm: average_heartrate ? average_heartrate : null,
-  };
-};
-
 const now = new Date();
 const daysInMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
 const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
 const numWeeks = Math.ceil((firstDayOfMonth + daysInMonth) / 7);
 
-const runs = new Array<RunWeek>(numWeeks).fill(null).map((_, i) =>
+const runs: RunMonth = new Array<RunWeek>(numWeeks).fill(null).map((_, i) =>
   new Array<RunDay[] | null>(7).fill(null).map((_, j) => {
     const adjustedDayIdx = i * 7 + j - firstDayOfMonth;
     return adjustedDayIdx >= 0 && adjustedDayIdx < daysInMonth ? [] : null;
   }),
 );
 
-rawMockData
+rawActivities
   .filter(({ sport_type }) => sport_type === "Run")
-  .map(mapStrvaActivityToRunDay)
+  .map(mapApiStravaActivityToRunDay)
   .forEach((run) => {
     const dayIdx = run.day + firstDayOfMonth;
     runs[Math.floor(dayIdx / 7)][dayIdx % 7].push(run);
   });
 
-export const getMockStravaData = (): RunMonth => runs;
+export const getMockStravaData = (): Promise<RunMonth> => mockFunc(runs);

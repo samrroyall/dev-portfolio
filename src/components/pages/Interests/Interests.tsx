@@ -1,6 +1,7 @@
 import { type InterestsData } from "../../../index";
 import { Sections } from "../../shared";
 import BasePage from "../BasePage";
+import SpotifyTopThreeTracks from "./SpotifyTopThreeTracks";
 import StravaCalendar from "./StravaCalendar";
 
 interface InterestsProps {
@@ -13,13 +14,17 @@ const Interests = ({ data }: InterestsProps) => {
       title: "Running",
       content: [
         <div class="flex justify-center">
-          <StravaCalendar data={data.strava} />
+          <StravaCalendar month={data.strava} />
         </div>,
       ],
     },
     {
       title: "Music",
-      content: [<div class="text-center">Spotify recently listened to</div>],
+      content: [
+        <div class="flex justify-center">
+          <SpotifyTopThreeTracks tracks={data.spotify} />
+        </div>,
+      ],
     },
     {
       title: "Movies",

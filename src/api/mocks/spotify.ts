@@ -1,26 +1,11 @@
-interface ApiSpotifyNameLink {
-  name: string;
-  external_urls: {
-    spotify: string;
-  };
-}
+import { mockFunc } from "../../utils";
+import {
+  mapApiSpotifyTrackToTrack,
+  type ApiSpotifyTopTracksResponse,
+  type Track,
+} from "../models/spotify";
 
-interface ApiSpotifyImage {
-  height: number;
-  url: string;
-  width: number;
-}
-
-interface ApiSpotifyTrack extends ApiSpotifyNameLink {
-  album: ApiSpotifyNameLink & { images: ApiSpotifyImage[] } & any;
-  artists: (ApiSpotifyNameLink & any)[];
-}
-
-interface ApiSpotifyTopTracksResponse {
-  items: (ApiSpotifyTrack & any)[];
-}
-
-const topThreeRecentTracks: ApiSpotifyTopTracksResponse & any = {
+const rawTracks: ApiSpotifyTopTracksResponse = {
   items: [
     {
       album: {
@@ -1376,3 +1361,10 @@ const topThreeRecentTracks: ApiSpotifyTopTracksResponse & any = {
   next: "https://api.spotify.com/v1/me/top/tracks?offset=5&limit=5&time_range=short_term",
   previous: null,
 };
+
+const tracks: [Track, Track, Track] = rawTracks.items.map(
+  mapApiSpotifyTrackToTrack,
+);
+
+export const getMockSpotifyData = (): Promise<[Track, Track, Track]> =>
+  mockFunc(tracks);

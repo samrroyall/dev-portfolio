@@ -1,4 +1,8 @@
-import { type RunDay, type RunMonth } from "../../../api/strava";
+import {
+  emptyRunMonth,
+  type RunDay,
+  type RunMonth,
+} from "../../../api/models/strava";
 import StravaDay, { type StravaDayData } from "./StravaDay";
 
 const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -24,14 +28,24 @@ const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
   };
 };
 
+const tableFooter = (
+  <tfoot class="text-secondary-text">
+    <tr>
+      {daysOfWeek.map((d) => (
+        <th>{d}</th>
+      ))}
+    </tr>
+  </tfoot>
+);
+
 interface StravaCalendarProps {
-  data: RunMonth;
+  month: Promise<RunMonth>;
 }
 
-const StravaCalendar = ({ data }: StravaCalendarProps) => (
+const StravaCalendar = async ({ month }: StravaCalendarProps) => (
   <table class="relative">
     <tbody>
-      {data.map((week, i) => (
+      {(await month).map((week, i) => (
         <tr>
           {week.map((day, j) => (
             <td>
@@ -46,13 +60,7 @@ const StravaCalendar = ({ data }: StravaCalendarProps) => (
         </tr>
       ))}
     </tbody>
-    <tfoot class="text-secondary-text">
-      <tr>
-        {daysOfWeek.map((d) => (
-          <th>{d}</th>
-        ))}
-      </tr>
-    </tfoot>
+    {tableFooter}
   </table>
 );
 
