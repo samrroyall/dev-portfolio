@@ -23,7 +23,7 @@ const image = (
 
   const titleAttr = title ? `title="${title}"` : "";
 
-  const classes = "my-4 mx-auto";
+  const classes = "my-4 mx-auto max-h-[350] w-auto rounded";
 
   return `<img class="${classes}" src="${cleanHref}" alt="${text}" ${titleAttr} />`;
 };

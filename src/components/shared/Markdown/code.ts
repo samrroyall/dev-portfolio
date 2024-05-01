@@ -42,7 +42,7 @@ const code = (
     : "";
 
   const langClass = lang ? `language-${lang}` : "";
-  const preClasses = `my-4 flex flex-col bg-tertiary-bg ${langClass}`;
+  const preClasses = `my-4 flex flex-col bg-tertiary-bg rounded ${langClass}`;
   const codeClasses = `pt-3 font-sauce-code-pro text-sm ${langClass}`;
 
   return `<pre class="${preClasses}">${langLine}<code class="${codeClasses}">${code}</code></pre>`;
