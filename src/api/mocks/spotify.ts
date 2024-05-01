@@ -1362,9 +1362,6 @@ const rawTracks: ApiSpotifyTopTracksResponse = {
   previous: null,
 };
 
-const tracks: [Track, Track, Track] = rawTracks.items.map(
-  mapApiSpotifyTrackToTrack,
-);
+const tracks: Track[] = rawTracks.items.map(mapApiSpotifyTrackToTrack);
 
-export const getMockSpotifyData = (): Promise<[Track, Track, Track]> =>
-  mockFunc(tracks);
+export const getMockSpotifyData = (): Promise<Track[]> => mockFunc(tracks);

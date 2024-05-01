@@ -3,6 +3,6 @@ import { type RunMonth } from "./strava";
 
 export interface InterestsData {
   letterboxd: null;
-  spotify: Promise<[Track, Track, Track]>;
+  spotify: Promise<Track[]>;
   strava: Promise<RunMonth>;
 }

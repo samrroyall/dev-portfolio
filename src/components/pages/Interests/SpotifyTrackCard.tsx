@@ -26,7 +26,7 @@ const SpotifyTrackCard = ({ id, track }: SpotifyTrackCardProps) => {
     <Link href={track.url}>
       <img
         src={track.album.artUrl || undefined}
-        class="h-[250] w-[250] cursor-pointer rounded"
+        class="h-[300] w-[300] cursor-pointer rounded"
         alt={`Cover art for ${track.name} by ${track.artists.join(", ")}`}
       />
     </Link>

@@ -14,7 +14,7 @@ interface NavProps {
 }
 
 const Nav = ({ current }: NavProps) => (
-  <nav class="bg-primary-bg pb-3 pl-1 2xl:text-lg">
+  <nav class="bg-primary-bg pb-3 pl-1">
     <ul>
       {pages.map(({ label, link }, i) => (
         <li class="flex">

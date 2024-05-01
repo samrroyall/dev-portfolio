@@ -206,7 +206,7 @@ const posts: BlogPost[] = [
   },
 ];
 
-export const getBlogMockData = (): Promise<BlogPostInfo[]> =>
+export const getMockBlogData = (): Promise<BlogPostInfo[]> =>
   mockFunc(
     posts.map((post) => ({
       id: post.id,
@@ -216,5 +216,5 @@ export const getBlogMockData = (): Promise<BlogPostInfo[]> =>
     })),
   );
 
-export const getBlogPostMockData = (id: string): Promise<BlogPost | null> =>
+export const getMockBlogPostData = (id: string): Promise<BlogPost | null> =>
   mockFunc(posts.find((post) => post.id === id) || null);

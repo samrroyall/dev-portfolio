@@ -5,6 +5,7 @@ interface SectionEntry {
   title: string;
   content: JSX.Element[];
   titleLink?: string;
+  fullPage?: boolean;
 }
 
 interface SectionProps {
@@ -14,7 +15,7 @@ interface SectionProps {
 
 const Sections = ({ entries, sectionNum }: SectionProps) => (
   <section>
-    {entries.map(({ title, content, titleLink }, i) => (
+    {entries.map(({ title, content, titleLink, fullPage }, i) => (
       <section class="group/section w-full">
         <div class="my-3 flex flex-col p-2">
           <div class="ml-auto w-full max-lg:text-right">
@@ -32,7 +33,11 @@ const Sections = ({ entries, sectionNum }: SectionProps) => (
             </div>
             <hr class="border-secondary-text border border-dashed" />
           </div>
-          <div class="py-4 lg:w-2/3 lg:self-end">{content}</div>
+          <div
+            class={`py-4 ${fullPage === true ? "" : "lg:w-2/3 lg:self-end"}`}
+          >
+            {content}
+          </div>
         </div>
       </section>
     ))}

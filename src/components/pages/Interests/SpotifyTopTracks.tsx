@@ -1,13 +1,11 @@
 import { type Track } from "../../../api/models/spotify";
 import SpotifyTrackCard from "./SpotifyTrackCard";
 
-interface SpotifyTopThreeTracksProps {
-  tracks: Promise<[Track, Track, Track]>;
+interface SpotifyTopTracksProps {
+  tracks: Promise<Track[]>;
 }
 
-const SpotifyTopThreeTracks = async ({
-  tracks,
-}: SpotifyTopThreeTracksProps) => (
+const SpotifyTopTracks = async ({ tracks }: SpotifyTopTracksProps) => (
   <div>
     {(await tracks).map((track, i) => (
       <span id={`spotify-track-card-${i}`} class={i !== 0 ? "hidden" : ""}>
@@ -17,4 +15,4 @@ const SpotifyTopThreeTracks = async ({
   </div>
 );
 
-export default SpotifyTopThreeTracks;
+export default SpotifyTopTracks;

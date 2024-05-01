@@ -1,7 +1,8 @@
 import { type InterestsData } from "../../../api/models/interests";
 import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
-import SpotifyTopThreeTracks from "./SpotifyTopThreeTracks";
+import InterestsPageEntry from "./InterestsPageEntry";
+import SpotifyTopTracks from "./SpotifyTopTracks";
 import StravaCalendar from "./StravaCalendar";
 
 interface InterestsProps {
@@ -11,34 +12,38 @@ interface InterestsProps {
 const Interests = ({ data }: InterestsProps) => {
   const entries = [
     {
-      title: "Running",
-      content: [
-        <div class="flex justify-center">
-          <StravaCalendar month={data.strava} />
-        </div>,
-      ],
+      text: `I love to run. This is a live view of my runs so far this month 
+via the Strava API.`,
+      widget: <StravaCalendar month={data.strava} />,
     },
     {
-      title: "Music",
-      content: [
-        <div class="flex justify-center">
-          <SpotifyTopThreeTracks tracks={data.spotify} />
-        </div>,
-      ],
+      text: `I also love to listen to music. These are my top songs over the 
+past month via the Spotify API.`,
+      widget: <SpotifyTopTracks tracks={data.spotify} />,
     },
     {
-      title: "Movies",
-      content: [
-        <div class="text-center">
-          Wait and see if I get access to Letterboxd API beta...
-        </div>,
-      ],
+      text: "Wait and see if I get access to Letterboxd API beta...",
     },
   ];
 
   return (
     <BasePage current="interests">
-      <Sections sectionNum="01" entries={entries} />
+      <Sections
+        sectionNum="01"
+        entries={[
+          {
+            title: "Interests",
+            fullPage: true,
+            content: entries.map(({ widget, text }, i) => (
+              <InterestsPageEntry
+                index={i}
+                widget={widget || null}
+                text={text || null}
+              />
+            )),
+          },
+        ]}
+      />
     </BasePage>
   );
 };

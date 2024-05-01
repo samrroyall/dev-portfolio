@@ -9,3 +9,5 @@ export interface BlogPost {
 export type BlogPostInfo = Omit<BlogPost, "text">;
 
 export type BlogData = Promise<BlogPostInfo[]>;
+
+export type BlogPostData = Promise<BlogPost | null>;
