@@ -1,6 +1,6 @@
 import StravaDayDetail from "./StravaDayDetail";
 
-const baseSize = 1.5;
+const baseSize = 1;
 const maxMilesPerDay = 30;
 const multiplier = 1.5;
 const cellSize = (maxMilesPerDay + baseSize) * multiplier;
@@ -35,7 +35,7 @@ const StravaDay = ({ data, isToday }: StravaDayProps) => {
     >
       {data ? <StravaDayDetail {...data} /> : null}
       <div
-        class={`h-[${size * multiplier}] w-[${size * multiplier}] rounded-full ${bgClass} ${hoverClasses}`}
+        class={`h-[${size * multiplier}px] w-[${size * multiplier}] rounded-full ${bgClass} ${hoverClasses}`}
         hx-on:click={
           data ? `htmx.toggleClass("#run-${data.id}-detail", "hidden")` : ""
         }

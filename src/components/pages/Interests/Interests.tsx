@@ -5,6 +5,25 @@ import InterestsPageEntry from "./InterestsPageEntry";
 import SpotifyTopTracks from "./SpotifyTopTracks";
 import StravaCalendar from "./StravaCalendar";
 
+const runningText = `Running is one of the best things I have found to regulate 
+both my physical and mental health. 
+
+I love to run as much as I can, and I upload all of my runs on Strava. I 
+created this calendar widget using the Strava API to display my runs for the 
+current month. 
+
+Click on one of the days if you would like to see detailed information about a 
+given run!`;
+
+const musicText = `I also love to listen to music. I generally listen to 
+ambient music while I work, but love many other genres from rap to dream pop to 
+folk. 
+
+If you're curious about what I'm listening to at the moment, I created this 
+widget using the Spotify API that displays my top songs over the past month.`;
+
+const moviesText = "Wait and see if I get access to Letterboxd API beta...";
+
 interface InterestsProps {
   data: InterestsData;
 }
@@ -12,17 +31,16 @@ interface InterestsProps {
 const Interests = ({ data }: InterestsProps) => {
   const entries = [
     {
-      text: `I love to run. This is a live view of my runs so far this month 
-via the Strava API.`,
-      widget: <StravaCalendar month={data.strava} />,
+      text: runningText,
+      content: <StravaCalendar month={data.strava} />,
     },
     {
-      text: `I also love to listen to music. These are my top songs over the 
-past month via the Spotify API.`,
-      widget: <SpotifyTopTracks tracks={data.spotify} />,
+      text: musicText,
+      content: <SpotifyTopTracks data={data.spotify} />,
     },
     {
-      text: "Wait and see if I get access to Letterboxd API beta...",
+      text: moviesText,
+      content: <></>,
     },
   ];
 
@@ -34,12 +52,8 @@ past month via the Spotify API.`,
           {
             title: "Interests",
             fullPage: true,
-            content: entries.map(({ widget, text }, i) => (
-              <InterestsPageEntry
-                index={i}
-                widget={widget || null}
-                text={text || null}
-              />
+            content: entries.map(({ content, text }, i) => (
+              <InterestsPageEntry index={i} content={content} text={text} />
             )),
           },
         ]}
