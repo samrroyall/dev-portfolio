@@ -1,56 +1,23 @@
-import dayjs from "dayjs";
-import { Link, Sections } from "../../shared";
-import BasePage from "../BasePage";
+import { type BlogPostInfo } from "../../../api/models/blog";
+import { BasePage } from "../../pages";
+import { Sections } from "../../shared";
+import BlogPageEntry from "./BlogPageEntry";
 
-interface BlogPostEntry {
-  title: string;
-  subtitle: string;
-  date: string; // ISO format (YYYY-MM-DD)
+interface BlogProps {
+  data: Promise<BlogPostInfo[]>;
 }
 
-const blogPost1: BlogPostEntry = {
-  title: "Blog Post 1",
-  subtitle: "This is the subtitle of the post",
-  date: "2024-04-08",
-};
-
-const blogPost2: BlogPostEntry = {
-  title: "Blog Post 2",
-  subtitle: `
-    This is the subtitle of the post with a slightly longer title to test the
-    text wrapping in this component
-  `,
-  date: "2024-04-14",
-};
-
-const blogPost3: BlogPostEntry = {
-  title: "Blog Post 3",
-  subtitle: "This is the subtitle of the post",
-  date: "2024-04-23",
-};
-
-const posts = [blogPost1, blogPost2, blogPost3];
-
-const entries = posts.map(({ title, subtitle, date }) => ({
-  title: "",
-  content: [
-    <div class="flex justify-between">
-      <div>
-        <Link href="/blog/post" arrow={true} target="_self">
-          <span class="font-bold text-white">{title}</span>
-        </Link>
-        <div class="font-medium">{subtitle}</div>
-      </div>
-      <div class="text-secondary-text ml-6 whitespace-nowrap">
-        {dayjs(date, "YYYY-MM-DD").format("MMMM D, YYYY")}
-      </div>
-    </div>,
-  ],
-}));
-
-const Blog = () => (
+const Blog = async ({ data }: BlogProps) => (
   <BasePage current="blog">
-    <Sections sectionNum="02" entries={entries} />
+    <Sections
+      sectionNum="02"
+      entries={[
+        {
+          title: "Recent Posts",
+          content: (await data).map((post) => <BlogPageEntry post={post} />),
+        },
+      ]}
+    />
   </BasePage>
 );
 

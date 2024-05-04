@@ -23,7 +23,7 @@ const image = (
 
   const titleAttr = title ? `title="${title}"` : "";
 
-  const classes = "my-4 mx-auto";
+  const classes = "my-4 mx-auto max-h-[350] w-auto rounded";
 
   return `<img class="${classes}" src="${cleanHref}" alt="${text}" ${titleAttr} />`;
 };
@@ -40,10 +40,10 @@ const link = (
   }
 
   const titleAttr = title ? `title="${title}"` : "";
-  const textClasses = "underline text-secondary-text";
-  const displayText = `<span class="${textClasses}">${text}</span>`;
+  const displayText = `<span class="text-secondary-text">${text}</span>`;
+  const anchor = `<a class="underline" href=${cleanHref} target="_blank" ${titleAttr}>${displayText}</a>`;
 
-  return `<a href=${cleanHref} target="_blank" ${titleAttr}>${displayText}</a>`;
+  return `<span class="hover:text-secondary-text">${anchor}</span>`;
 };
 
 export { image, link };

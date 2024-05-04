@@ -41,7 +41,7 @@ const ContactForm = () => {
           class="mx-auto mb-3 flex hidden items-center text-red-400"
         >
           <Icon className="mr-1 text-sm" icon={"\ue654"} />
-          Form submission failed
+          {"Form submission failed"}
         </div>
         <Input
           id="contact-form-name"
@@ -84,7 +84,7 @@ const ContactForm = () => {
         class="text-secondary-text hidden text-center"
       >
         <div class="text-2xl font-bold">Thank you</div>
-        The form was successfully submitted.
+        {"The form was successfully submitted."}
       </div>
     </div>
   );

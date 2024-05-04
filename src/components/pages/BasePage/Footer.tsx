@@ -24,13 +24,13 @@ const icons: FooterIcon[] = [
 const menuIcon = <Icon icon={"\ueb94"} />;
 
 interface FooterProps {
-  current: string;
+  current: string | null;
 }
 
 const Footer = ({ current }: FooterProps) => (
-  <footer class="w-full text-lg">
+  <footer class="w-full text-lg 2xl:text-xl">
     <hr class="border-secondary-text hidden lg:block" />
-    <div class="flex items-center p-2">
+    <div class="relative flex items-center p-2">
       <div
         class="cursor-pointer lg:hidden"
         hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
@@ -52,7 +52,10 @@ const Footer = ({ current }: FooterProps) => (
         ))}
       </ul>
     </div>
-    <div id="footer-nav" class="border-bottom hidden">
+    <div
+      id="footer-nav"
+      class="border-secondary-text absolute hidden w-full border-b"
+    >
       <Nav current={current} />
     </div>
     <hr class="border-secondary-text lg:hidden" />

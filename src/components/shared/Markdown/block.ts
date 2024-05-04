@@ -3,7 +3,8 @@ import heading from "./heading";
 import { image } from "./link";
 
 const blockquote = (quote: string): string => {
-  const bgClasses = "my-4 pl-2 border-l-2 bg-tertiary-bg border-primary-text";
+  const bgClasses =
+    "my-4 pl-2 border-l-2 bg-tertiary-bg border-primary-text rounded-tr rounded-br";
   const textClasses = "italic text-secondary-text";
 
   return `<blockquote class="${bgClasses} ${textClasses}">${quote}</blockquote>`;
