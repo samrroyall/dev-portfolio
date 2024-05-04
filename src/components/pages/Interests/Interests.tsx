@@ -22,8 +22,6 @@ folk.
 If you're curious about what I'm listening to at the moment, I created this 
 widget using the Spotify API that displays my top songs over the past month.`;
 
-const moviesText = "Wait and see if I get access to Letterboxd API beta...";
-
 interface InterestsProps {
   data: InterestsData;
 }
@@ -37,10 +35,6 @@ const Interests = ({ data }: InterestsProps) => {
     {
       text: musicText,
       content: <SpotifyTopTracks data={data.spotify} />,
-    },
-    {
-      text: moviesText,
-      content: <></>,
     },
   ];
 
