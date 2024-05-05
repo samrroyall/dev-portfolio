@@ -1,4 +1,4 @@
-import { type BlogPost } from "../../../api/models/blog";
+import { type BlogPost } from "../../../models/blog";
 import { getPrettyDate } from "../../../utils";
 import { BasePage, NotFound } from "../../pages";
 import { Markdown } from "../../shared";

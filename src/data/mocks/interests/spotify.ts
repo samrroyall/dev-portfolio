@@ -1,9 +1,9 @@
-import { mockFunc } from "../../utils";
 import {
   mapApiSpotifyTrackToTrack,
   type ApiSpotifyTopTracksResponse,
   type Track,
-} from "../models/spotify";
+} from "../../../models/interests";
+import { mockFunc } from "../../../utils";
 
 const rawTracks: ApiSpotifyTopTracksResponse = {
   items: [

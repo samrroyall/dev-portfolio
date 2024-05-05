@@ -1,4 +1,4 @@
-import { type Track } from "../../../api/models/spotify";
+import { type Track } from "../../../models/spotify";
 import SpotifyTrackCard from "./SpotifyTrackCard";
 
 interface SpotifyTopTracksProps {

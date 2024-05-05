@@ -1,11 +1,11 @@
-import { mockFunc } from "../../utils";
 import {
   mapApiStravaActivityToRunDay,
   type ApiStravaActivitiesResponse,
   type RunDay,
   type RunMonth,
   type RunWeek,
-} from "../models/strava";
+} from "../../../models/interests";
+import { mockFunc } from "../../../utils";
 
 const rawActivities: ApiStravaActivitiesResponse = [
   {

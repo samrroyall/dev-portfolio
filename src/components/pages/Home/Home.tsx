@@ -1,4 +1,4 @@
-import { type HomeSection } from "../../../api/models/home";
+import { type HomeSection } from "../../../models/home";
 import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
 import HomeSectionEntry from "./HomeSectionEntry";

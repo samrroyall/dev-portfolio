@@ -1,4 +1,4 @@
-import { type BlogPostInfo } from "../../../api/models/blog";
+import { type BlogPostInfo } from "../../../models/blog";
 import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
 import BlogPageEntry from "./BlogPageEntry";

@@ -1,4 +1,4 @@
-import { type BlogPostInfo } from "../../../api/models/blog";
+import { type BlogPostInfo } from "../../../models/blog";
 import { getPrettyDate } from "../../../utils";
 import { Link } from "../../shared";
 

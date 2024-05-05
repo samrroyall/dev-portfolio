@@ -1,13 +1,6 @@
 import { staticPlugin } from "@elysiajs/static";
 import { bethStack } from "beth-stack/elysia";
 import { Elysia } from "elysia";
-import { getMockBlogData, getMockBlogPostData } from "./api/mocks/blog";
-import { getMockHomeData } from "./api/mocks/home";
-import { getMockSpotifyData } from "./api/mocks/spotify";
-import { getMockStravaData } from "./api/mocks/strava";
-import { type BlogData, type BlogPostData } from "./api/models/blog";
-import { type HomeData } from "./api/models/home";
-import { type InterestsData } from "./api/models/interests";
 import {
   Blog,
   BlogPost,
@@ -16,6 +9,12 @@ import {
   Interests,
   NotFound,
 } from "./components/pages";
+import { getMockBlogData, getMockBlogPostData } from "./data/mocks/blog";
+import { getMockHomeData } from "./data/mocks/home";
+import { getMockSpotifyData, getMockStravaData } from "./data/mocks/interests";
+import { type BlogData, type BlogPostData } from "./models/blog";
+import { type HomeData } from "./models/home";
+import { type InterestsData } from "./models/interests";
 
 export interface Store {
   home: HomeData;

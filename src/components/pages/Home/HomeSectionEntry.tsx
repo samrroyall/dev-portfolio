@@ -1,4 +1,4 @@
-import { type HomeSectionEntryData } from "../../../api/models/home";
+import { type HomeSectionEntryData } from "../../../models/home";
 import { Link, Markdown } from "../../shared";
 
 export interface HomeSectionEntryProps {

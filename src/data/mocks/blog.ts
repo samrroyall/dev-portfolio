@@ -1,5 +1,5 @@
+import { type BlogPost, type BlogPostInfo } from "../../models/blog";
 import { mockFunc } from "../../utils";
-import { type BlogPost, type BlogPostInfo } from "../models/blog";
 
 const mockText = `
 This is some example blog post text. You can see a link [here](#). This is 

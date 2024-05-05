@@ -1,4 +1,4 @@
-import { type InterestsData } from "../../../api/models/interests";
+import { type InterestsData } from "../../../models/interests";
 import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
 import InterestsPageEntry from "./InterestsPageEntry";

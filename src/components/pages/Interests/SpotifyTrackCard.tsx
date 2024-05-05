@@ -1,4 +1,4 @@
-import { type Track } from "../../../api/models/spotify";
+import { type Track } from "../../../models/spotify";
 import { Icon, Link } from "../../shared";
 
 const arrowClasses = "text-secondary-text cursor-pointer text-lg";

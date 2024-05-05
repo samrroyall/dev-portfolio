@@ -1,4 +1,4 @@
-export interface ApiStravaActivity {
+interface ApiStravaActivity {
   id: number;
   sport_type: string;
   distance: number;
@@ -49,7 +49,3 @@ export const mapApiStravaActivityToRunDay = ({
     avgBpm: average_heartrate ? average_heartrate : null,
   };
 };
-
-export const emptyRunMonth: RunMonth = new Array(5)
-  .fill(null)
-  .map((_) => new Array(7).fill(null));
