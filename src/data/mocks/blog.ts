@@ -183,21 +183,21 @@ fn fib(n: Int) -> Int {
 
 const posts: BlogPost[] = [
   {
-    id: "1",
+    id: 1,
     title: "Blog Post 1",
     subtitle: "This is the subtitle of the post",
     date: "2024-04-08",
     text: mockText,
   },
   {
-    id: "2",
+    id: 2,
     title: "Blog Post 2, Which Has a Slightly Longer Title",
     subtitle: "This is the subtitle of the post",
     date: "2024-04-15",
     text: mockText,
   },
   {
-    id: "3",
+    id: 3,
     title: "Blog Post 3",
     subtitle:
       "This is the subtitle of the post, but it is slightly longer than the other subtitles",
@@ -216,5 +216,5 @@ export const getMockBlogData = (): Promise<BlogPostInfo[]> =>
     })),
   );
 
-export const getMockBlogPostData = (id: string): Promise<BlogPost | null> =>
+export const getMockBlogPostData = (id: number): Promise<BlogPost | null> =>
   mockFunc(posts.find((post) => post.id === id) || null);

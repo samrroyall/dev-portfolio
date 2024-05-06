@@ -12,26 +12,26 @@ const disabledClasses =
 type ButtonType = "button" | "submit";
 
 interface ButtonProps {
-  type: ButtonType;
   disabled?: boolean;
   id?: string;
+  type?: ButtonType;
 }
 
 const Button = ({
-  type,
+  children,
   disabled,
   id,
-  children,
+  type,
 }: ButtonProps & PropsWithChildren) => {
   const attrs = {
-    ...(disabled !== undefined ? { disabled } : {}),
-    ...(id !== undefined ? { id } : {}),
+    ...(!!disabled ? { disabled } : {}),
+    ...(!!id ? { id } : {}),
   };
 
   return (
     <button
       class={`${buttonClasses} ${hoverClasses} ${disabledClasses}`}
-      type={type}
+      type={type || "button"}
       {...attrs}
     >
       {children}

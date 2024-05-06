@@ -39,19 +39,16 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
       <script
         type="text/javascript"
         src="https://www.google.com/recaptcha/api.js"
+        async
+        defer
       />
-      <script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-      />
-      <script async type="text/javascript">
-        {`emailjs.init("${process.env.EMAILJS_PUBLIC_KEY}")`}
-      </script>
       <script
         type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
         integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"
         crossorigin="anonymous"
+        async
+        defer
       />
 
       <link rel="stylesheet" type="text/css" href="/public/global.css" />

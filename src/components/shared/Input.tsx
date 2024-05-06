@@ -1,4 +1,4 @@
-type InputType = "email" | "text" | "textarea";
+type InputType = "email" | "password" | "text" | "textarea";
 
 const standardBorderClasses = "border border-secondary-text rounded";
 
@@ -46,10 +46,10 @@ const Input = ({
   type,
 }: InputProps) => {
   const attrs = {
-    ...(id !== undefined ? { id } : {}),
+    ...(!!id ? { id } : {}),
+    ...(!!required ? { required: "true" } : {}),
     ...(maxlength !== undefined ? { maxlength: `${maxlength}` } : {}),
     ...(minlength !== undefined ? { minlength: `${minlength}` } : {}),
-    ...(required ? { required: "true" } : {}),
   };
 
   const textareaLengthId = `${name}-${type}-current-length`;
@@ -64,6 +64,7 @@ const Input = ({
       {type === "textarea" ? (
         <textarea
           class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
+          name={name}
           placeholder={placeholder || ""}
           title={title || ""}
           {...attrs}
@@ -73,6 +74,7 @@ const Input = ({
         <input
           class={inputClasses}
           type={type || "text"}
+          name={name}
           placeholder={placeholder || ""}
           title={title || ""}
           {...attrs}

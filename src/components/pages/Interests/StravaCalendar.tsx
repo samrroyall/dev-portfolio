@@ -18,7 +18,7 @@ const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
     id: runs[0]!.id,
     miles: runs.reduce((acc, run) => acc + run.miles, 0),
     pace: runs.reduce((acc, run) => acc + run.minutesPerMile, 0) / runs.length,
-    avgBpm: runs.every((run) => run.avgBpm !== undefined)
+    avgBpm: runs.every((run) => run.avgBpm !== null)
       ? runs.reduce((acc, run) => acc + run.avgBpm!, 0) / runs.length
       : null,
   };
