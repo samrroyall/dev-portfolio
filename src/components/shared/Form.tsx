@@ -1,10 +1,29 @@
 import { type PropsWithChildren } from "beth-stack/jsx";
 import Button from "./Button";
 
+const errorIconContainerClasses =
+  "flex items-center justify-center h-3.5 w-3.5 mr-2 rounded-full";
+
+const errorIconStyleClasses =
+  "text-primary-bg bg-red-400 text-sm font-bold leading-3";
+
+const errorIcon = (
+  <div class={`${errorIconContainerClasses} ${errorIconStyleClasses}`}>
+    {"!"}
+  </div>
+);
+
+const ErrorMsg: Record<string, string> = {
+  recaptcha: "Recaptcha challenge failed",
+  unauthenticated: "User authentication failed",
+  unknown: "Something went wrong",
+};
+
 interface FormProps {
   action: string;
   id: string;
   className?: string;
+  error?: string;
   failure?: boolean;
   submitLabel?: string;
   success?: boolean;
@@ -14,7 +33,9 @@ const Form = ({
   action,
   id,
   className,
+  error,
   submitLabel,
+  success,
   children,
 }: FormProps & PropsWithChildren) => {
   const recaptchaFuncs = `
@@ -23,15 +44,29 @@ const Form = ({
     }
   `;
 
+  const errorMsg = !!error ? ErrorMsg[error] : null;
+
   return (
     <>
       <script>{recaptchaFuncs}</script>
+      <div
+        class={`flex items-center text-red-400 ${success === false ? "" : "hidden"}`}
+      >
+        {errorIcon}
+        <span>{errorMsg || ErrorMsg.unknown}</span>
+      </div>
+      <div
+        class={`text-secondary-text text-center ${success === true ? "" : "hidden"}`}
+      >
+        <div class="text-2xl font-bold">{"Thank you"}</div>
+        <span>{"The form was submitted successfully"}</span>
+      </div>
       <form
         id={id}
-        class={`my-4 flex flex-col ${className || ""}`}
+        class={`flex flex-col ${success === true ? "hidden" : ""} ${className || ""}`}
         action={action}
         method="post"
-        hx-on:change={`htmx.find("#${id}-submit-button").disabled = !htmx.find("#${id}").checkValidity();`}
+        hx-on:keyup={`htmx.find("#${id}-submit-button").disabled = !htmx.find("#${id}").checkValidity();`}
         hx-on:submit={`event.preventDefault(); grecaptcha.execute();`}
       >
         {children}
