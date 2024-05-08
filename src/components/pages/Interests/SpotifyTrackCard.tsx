@@ -1,4 +1,4 @@
-import { type Track } from "../../../models/spotify";
+import { type Track } from "../../../models/interests";
 import { Icon, Link } from "../../shared";
 
 const arrowClasses = "text-secondary-text cursor-pointer text-lg";
@@ -23,7 +23,7 @@ const SpotifyTrackCard = ({ id, total, track }: SpotifyTrackCardProps) => {
       </div>
       <div class="mx-3 w-[300]">
         <img
-          src={track.album.artUrl || undefined}
+          src={track.album.artUrl ?? ""}
           class="rounded"
           alt={`Cover art for ${track.name} by ${track.artists.join(", ")}`}
         />

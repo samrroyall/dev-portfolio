@@ -13,7 +13,7 @@ const Icon = ({ icon, link, linkTarget, className }: IconProps) => {
   );
 
   return link ? (
-    <Link href={link} noUnderline={true} target={linkTarget || "_blank"}>
+    <Link href={link} noUnderline={true} target={linkTarget ?? "_blank"}>
       {iconSpan}
     </Link>
   ) : (

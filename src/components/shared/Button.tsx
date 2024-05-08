@@ -31,7 +31,7 @@ const Button = ({
   return (
     <button
       class={`${buttonClasses} ${hoverClasses} ${disabledClasses}`}
-      type={type || "button"}
+      type={type ?? "button"}
       {...attrs}
     >
       {children}

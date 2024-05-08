@@ -10,7 +10,7 @@ const pages = [
 const circleIcon = <Icon className="text-secondary-text" icon={"\uf111"} />;
 
 interface NavProps {
-  current: string | null;
+  current: string | undefined;
 }
 
 const Nav = ({ current }: NavProps) => (
@@ -26,12 +26,12 @@ const Nav = ({ current }: NavProps) => (
             )}
           </div>
           <div class="text-secondary-text">
-            {!current || label !== current ? (
+            {current !== undefined && label === current ? (
+              label
+            ) : (
               <Link href={link} target="_self">
                 {label}
               </Link>
-            ) : (
-              label
             )}
           </div>
         </li>

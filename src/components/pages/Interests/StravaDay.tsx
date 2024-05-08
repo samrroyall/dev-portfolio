@@ -27,7 +27,7 @@ const StravaDay = ({ data, isToday }: StravaDayProps) => {
         ? "hover:bg-tertiary-text cursor-pointer"
         : "";
 
-  const size = baseSize + (data?.miles || 0);
+  const size = baseSize + (data?.miles ?? 0);
 
   return (
     <div

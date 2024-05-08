@@ -50,6 +50,8 @@ const Input = ({
     ...(!!required ? { required: "true" } : {}),
     ...(maxlength !== undefined ? { maxlength: `${maxlength}` } : {}),
     ...(minlength !== undefined ? { minlength: `${minlength}` } : {}),
+    ...(placeholder !== undefined ? { placeholder } : {}),
+    ...(title !== undefined ? { title } : {}),
   };
 
   const textareaLengthId = `${name}-${type}-current-length`;
@@ -65,18 +67,14 @@ const Input = ({
         <textarea
           class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
           name={name}
-          placeholder={placeholder || ""}
-          title={title || ""}
           {...attrs}
           hx-on:keyup={`htmx.find("#${textareaLengthId}").innerHTML = this.value.length`}
         />
       ) : (
         <input
           class={inputClasses}
-          type={type || "text"}
+          type={type ?? "text"}
           name={name}
-          placeholder={placeholder || ""}
-          title={title || ""}
           {...attrs}
         />
       )}

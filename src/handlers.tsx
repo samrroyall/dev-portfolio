@@ -94,7 +94,7 @@ export const sendHandler = async ({
       set.headers.location = "/contact?success=false&error=recaptcha";
     } else {
       const { status, text } = await sendEmail(
-        body.name || "Anonymous",
+        body.name ?? "Anonymous",
         body.email,
         body.body,
       );

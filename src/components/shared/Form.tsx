@@ -53,7 +53,7 @@ const Form = ({
         class={`flex items-center text-red-400 ${success === false ? "" : "hidden"}`}
       >
         {errorIcon}
-        <span>{errorMsg || ErrorMsg.unknown}</span>
+        <span>{errorMsg ?? ErrorMsg.unknown}</span>
       </div>
       <div
         class={`text-secondary-text text-center ${success === true ? "" : "hidden"}`}
@@ -63,7 +63,7 @@ const Form = ({
       </div>
       <form
         id={id}
-        class={`flex flex-col ${success === true ? "hidden" : ""} ${className || ""}`}
+        class={`flex flex-col ${success === true ? "hidden" : ""} ${className ?? ""}`}
         action={action}
         method="post"
         hx-on:keyup={`htmx.find("#${id}-submit-button").disabled = !htmx.find("#${id}").checkValidity();`}

@@ -25,7 +25,7 @@ const Link = ({
     <a
       class={noUnderline === true ? "" : "underline"}
       href={href}
-      target={target || "_blank"}
+      target={target ?? "_blank"}
     >
       {children}
     </a>
