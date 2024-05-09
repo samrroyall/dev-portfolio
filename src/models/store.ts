@@ -1,9 +1,9 @@
-import { getMockBlogData, getMockBlogPostData } from "./data/mocks/blog";
-import { getMockHomeData } from "./data/mocks/home";
-import { getMockSpotifyData, getMockStravaData } from "./data/mocks/interests";
-import { type BlogData, type BlogPostData } from "./models/blog";
-import { type HomeData } from "./models/home";
-import { type InterestsData } from "./models/interests";
+import { getMockBlogData, getMockBlogPostData } from "../data/mocks/blog";
+import { getMockHomeData } from "../data/mocks/home";
+import { getMockSpotifyData, getMockStravaData } from "../data/mocks/interests";
+import { type BlogData, type BlogPostData } from "./blog";
+import { type HomeData } from "./home";
+import { type InterestsData } from "./interests";
 
 export interface Store {
   home: HomeData;

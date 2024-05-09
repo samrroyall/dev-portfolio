@@ -7,6 +7,7 @@ import {
   Contact,
   Home,
   Interests,
+  NotFound,
 } from "./components/pages";
 import {
   type AuthSchema,
@@ -14,25 +15,14 @@ import {
   type ContactSchema,
   type LoginSchema,
   type SendSchema,
-} from "./schemas";
-import { type Store } from "./store";
+} from "./models/routes";
+import { type Store } from "./models/store";
 import { isAdmin, sendEmail, verifyRecaptcha } from "./utils";
 
-interface HtmlDecorator {
-  html: <A extends JSX.Element, B extends Promise<Request>>(a: () => A) => B;
+interface HandlerContext<Schema extends RouteSchema = RouteSchema>
+  extends Context<Schema> {
+  store: DecoratorBase["store"] & Store;
 }
-
-type HandlerContext<T extends RouteSchema = RouteSchema> = Context<
-  T,
-  {
-    request: DecoratorBase["request"] & HtmlDecorator;
-    store: DecoratorBase["store"] & Store;
-    derive: DecoratorBase["derive"];
-    resolve: DecoratorBase["resolve"];
-  }
->;
-
-export const adminHandler = ({ html }: HandlerContext) => html(() => <Admin />);
 
 export const authHandler = async ({
   body,
@@ -55,33 +45,40 @@ export const authHandler = async ({
   }
 };
 
-export const blogHandler = ({ html, store }: HandlerContext) =>
-  html(() => <Blog data={store.blog} />);
+export const adminHandler = (_: HandlerContext) => <Admin />;
+
+export const blogHandler = ({ store }: HandlerContext) => (
+  <Blog data={store.blog} />
+);
 
 export const blogPostHandler = ({
-  html,
   store,
   params: { id },
-}: HandlerContext<BlogPostSchema>) =>
-  html(() => <BlogPost data={store.blogPost.get(id)} />);
+}: HandlerContext<BlogPostSchema>) => (
+  <BlogPost data={store.blogPost.get(id)} />
+);
 
 export const contactHandler = ({
-  html,
   query: { success, error },
-}: HandlerContext<ContactSchema>) =>
-  html(() => <Contact success={success} error={error} />);
+}: HandlerContext<ContactSchema>) => (
+  <Contact success={success} error={error} />
+);
 
-export const homeHandler = ({ html, store }: HandlerContext) =>
-  html(() => <Home data={store.home} />);
+export const homeHandler = ({ store }: HandlerContext) => (
+  <Home data={store.home} />
+);
 
-export const interestsHandler = ({ html, store }: HandlerContext) =>
-  html(() => <Interests data={store.interests} />);
+export const interestsHandler = ({ store }: HandlerContext) => (
+  <Interests data={store.interests} />
+);
 
 export const loginHandler = ({
-  html,
   query: { success, error },
-}: HandlerContext<LoginSchema>) =>
-  html(() => <AdminLogin success={success} error={error} />);
+}: HandlerContext<LoginSchema>) => (
+  <AdminLogin success={success} error={error} />
+);
+
+export const notFoundHandler = (_: HandlerContext) => <NotFound />;
 
 export const sendHandler = async ({
   body,

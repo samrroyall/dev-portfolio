@@ -1,6 +1,8 @@
-import { bethStack } from "beth-stack/elysia";
+import { html } from "@elysiajs/html";
 import { Elysia } from "elysia";
-import { NotFound } from "./components/pages";
+import { getMockBlogData, getMockBlogPostData } from "./data/mocks/blog";
+import { getMockHomeData } from "./data/mocks/home";
+import { getMockSpotifyData, getMockStravaData } from "./data/mocks/interests";
 import {
   adminHandler,
   authHandler,
@@ -10,6 +12,7 @@ import {
   homeHandler,
   interestsHandler,
   loginHandler,
+  notFoundHandler,
   sendHandler,
 } from "./handlers";
 import {
@@ -18,18 +21,30 @@ import {
   contactSchema,
   loginSchema,
   sendSchema,
-} from "./schemas";
-import { store } from "./store";
+} from "./models/routes";
 
-const hooks = new Elysia().use(bethStack()).onError(({ html, code }) => {
+const hooks = new Elysia().use(html()).onError(({ code, set }) => {
   if (code === "NOT_FOUND") {
-    return html(() => <NotFound />);
+    set.status = 303;
+    set.headers.location = "/404";
+    return "";
   }
 });
 
 const publicRoutes = new Elysia()
-  .state(store)
-  .use(bethStack())
+  .state({
+    home: getMockHomeData(),
+    interests: {
+      letterboxd: null,
+      spotify: getMockSpotifyData(),
+      strava: getMockStravaData(),
+    },
+    blog: getMockBlogData(),
+    blogPost: {
+      get: (id: number) => getMockBlogPostData(id),
+    },
+  })
+  .get("/404", notFoundHandler)
   .get("/", homeHandler)
   .get("/blog", blogHandler)
   .get("/blog/post/:id", blogPostHandler, blogPostSchema)
@@ -40,7 +55,13 @@ const publicRoutes = new Elysia()
   .post("/send", sendHandler, sendSchema);
 
 const adminRoutes = new Elysia().group("/admin", (app) =>
-  app.use(bethStack()).get("", adminHandler),
+  app.get("", adminHandler),
 );
 
-export default new Elysia().use(hooks).use(publicRoutes).use(adminRoutes);
+const routes = new Elysia()
+  .use(html())
+  .use(hooks)
+  .use(publicRoutes)
+  .use(adminRoutes);
+
+export default routes;

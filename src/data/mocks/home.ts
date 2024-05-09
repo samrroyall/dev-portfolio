@@ -1,5 +1,5 @@
+import { type HomeSection } from "../../models/home";
 import { mockFunc } from "../../utils";
-import { HomeSection } from "../models/home";
 
 const entries: HomeSection[] = [
   {

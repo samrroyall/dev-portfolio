@@ -1,5 +1,5 @@
+import { type BlogPost, type BlogPostInfo } from "../../models/blog";
 import { mockFunc } from "../../utils";
-import { type BlogPost, type BlogPostInfo } from "../models/blog";
 
 export const getBlogData = (): Promise<BlogPostInfo[]> => mockFunc([]);
 

@@ -13,7 +13,7 @@ const Blog = async ({ data }: BlogProps) => (
       sectionNum="02"
       entries={[
         {
-          title: "Recent Posts",
+          title: "Blog Posts",
           content: (await data).map((post) => <BlogPageEntry post={post} />),
         },
       ]}

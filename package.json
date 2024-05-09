@@ -17,6 +17,7 @@
     "bun-types": "^1.1.0",
     "dotenv": "^16.4.5",
     "elysia": "^0.8.10",
+    "lucia": "^3.2.0",
     "marked": "^12.0.1",
     "marked-katex-extension": "^5.0.1",
     "prismjs": "^1.29.0",
