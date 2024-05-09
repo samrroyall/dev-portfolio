@@ -7,7 +7,7 @@ const NotFound = () => (
       <div class="text-2xl font-bold">Page Not Found</div>
       <div>{`The page you navigated to could not be found. 
         Please use the navigation bar to get back to safety.`}</div>
-      <Link href="/">
+      <Link href="/" target="_self">
         <div class="mt-4">
           <Button>{"Go back to safety"}</Button>
         </div>

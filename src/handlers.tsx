@@ -1,4 +1,4 @@
-import { type Context, type DecoratorBase, type RouteSchema } from "elysia";
+import { type Context, type RouteSchema } from "elysia";
 import {
   Admin,
   AdminLogin,
@@ -21,7 +21,7 @@ import { isAdmin, sendEmail, verifyRecaptcha } from "./utils";
 
 interface HandlerContext<Schema extends RouteSchema = RouteSchema>
   extends Context<Schema> {
-  store: DecoratorBase["store"] & Store;
+  store: Store;
 }
 
 export const authHandler = async ({
