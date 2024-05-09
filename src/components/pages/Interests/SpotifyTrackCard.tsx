@@ -1,6 +1,7 @@
 import { type Track } from "../../../models/interests";
 import { Icon, Link } from "../../shared";
 
+const imageSize = 300;
 const arrowClasses = "text-secondary-text cursor-pointer text-lg";
 
 interface SpotifyTrackCardProps {
@@ -21,13 +22,15 @@ const SpotifyTrackCard = ({ id, total, track }: SpotifyTrackCardProps) => {
       <div hx-on:click={`${toggleCard(id)}; ${toggleCard(prevId)};`}>
         <Icon className={arrowClasses} icon={`\ueab5`} />
       </div>
-      <div class="mx-3 w-[300]">
-        <img
-          src={track.album.artUrl ?? ""}
-          class="rounded"
-          alt={`Cover art for ${track.name} by ${track.artists.join(", ")}`}
-        />
-        <div class="mt-2 leading-3">
+      <div class="mx-3">
+        <div class={`h-[${imageSize}px] w-[${imageSize}px]`}>
+          <img
+            src={track.album.artUrl ?? ""}
+            class="rounded"
+            alt={`Cover art for ${track.name} by ${track.artists.join(", ")}`}
+          />
+        </div>
+        <div class="mt-2">
           <Link href={track.url}>
             <span class="text-secondary-text text-lg font-semibold">
               {track.name}

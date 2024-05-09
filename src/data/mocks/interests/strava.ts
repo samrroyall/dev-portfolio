@@ -355,7 +355,12 @@ rawActivities
   .map(mapApiStravaActivityToRunDay)
   .forEach((run) => {
     const dayIdx = run.day + firstDayOfMonth;
-    runs[Math.floor(dayIdx / 7)][dayIdx % 7].push(run);
+    const week = runs[Math.floor(dayIdx / 7)];
+    const weekday = !!week ? week[dayIdx % 7] : null;
+
+    if (!!weekday) {
+      weekday.push(run);
+    }
   });
 
 export const getMockStravaData = (): Promise<RunMonth> => mockFunc(runs);
