@@ -27,23 +27,30 @@ const code = (
   const lang = (infostring || "").match(/^\S*/)?.[0];
 
   code = code.replace(/\n$/, "");
+
   code =
-    lang && languages[lang]
+    lang && !!languages[lang]
       ? Prism.highlight(code, Prism.languages[lang]!, lang)
       : code;
 
-  const prettyLang =
-    lang && languages[lang]
+  const prettyLang = !!lang
+    ? !!languages[lang]
       ? languages[lang]
-      : `<span class="capitalize">${lang}</span>` || "";
-
-  const langLine = lang
-    ? `<div class="text-right text-xs">${prettyLang}</div>`
+      : `<span class="capitalize">${lang}</span>`
     : "";
 
-  const langClass = lang ? `language-${lang}` : "";
-  const preClasses = `my-4 flex flex-col bg-tertiary-bg rounded ${langClass}`;
-  const codeClasses = `pt-3 font-sauce-code-pro text-sm ${langClass}`;
+  const langLine = !!lang
+    ? `<div class="absolute top-3 right-3 text-xs">${prettyLang}</div>`
+    : "";
+
+  const defaultLangStyles = "text-secondary-text";
+
+  const langClass =
+    lang && !!languages[lang] ? `language-${lang}` : defaultLangStyles;
+
+  const preClasses = `relative my-4 p-3 ${lang ? "pt-7" : ""} bg-tertiary-bg rounded ${langClass}`;
+
+  const codeClasses = `block whitespace-pre-wrap font-sauce-code-pro text-xs`;
 
   return `<pre class="${preClasses}">${langLine}<code class="${codeClasses}">${code}</code></pre>`;
 };

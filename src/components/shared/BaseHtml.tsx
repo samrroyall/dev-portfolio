@@ -20,7 +20,7 @@ const theme = {
 };
 
 const BaseHtml = ({ children }: PropsWithChildren) => (
-  <html>
+  <html class="h-screen w-screen overflow-hidden">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,7 +61,7 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
         crossorigin="anonymous"
       />
     </head>
-    <body class="bg-primary-bg text-primary-text source-sans-3 text-base font-normal">
+    <body class="bg-primary-bg text-primary-text source-sans-3 text-base">
       {children}
     </body>
   </html>

@@ -21,11 +21,16 @@ const image = (
     return text;
   }
 
-  const titleAttr = title ? `title="${title}"` : "";
+  const titleAttr = !!title ? `title="${title}"` : "";
 
-  const classes = "my-4 mx-auto max-h-[350] w-auto rounded";
+  const imgClasses = "max-h-[300px] w-auto rounded";
 
-  return `<img class="${classes}" src="${cleanHref}" alt="${text}" ${titleAttr} />`;
+  const image = `<img class="${imgClasses}" src="${cleanHref}" alt="${text}" ${titleAttr} />`;
+  const description = !!text
+    ? `<div class="my-1 text-secondary-text text-xs">${text}</div>`
+    : "";
+
+  return `<div class="my-4 mx-auto flex flex-col items-center">${image}${description}</div>`;
 };
 
 const link = (
