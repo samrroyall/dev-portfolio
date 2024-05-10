@@ -12,17 +12,19 @@ const BlogPost = async ({ data }: BlogPostProps) => {
 
   return post ? (
     <BasePage>
-      <header class="px-1">
-        <div class="text-secondary-text text-2xl font-bold">{post.title}</div>
-        <div>{post.subtitle}</div>
-      </header>
-      <hr class="border-primary-text border border-dashed" />
-      <div class="text-secondary-text w-full text-right">
-        {getPrettyDate(post.date)}
+      <div class="my-3 p-2">
+        <header>
+          <div class="text-secondary-text text-2xl font-bold">{post.title}</div>
+          <div>{post.subtitle}</div>
+        </header>
+        <hr class="border-secondary-text border border-dashed" />
+        <div class="text-secondary-text w-full text-right">
+          {getPrettyDate(post.date)}
+        </div>
+        <article class="py-3">
+          <Markdown text={post.text} />
+        </article>
       </div>
-      <article class="p-3">
-        <Markdown text={post.text} />
-      </article>
     </BasePage>
   ) : (
     <NotFound />

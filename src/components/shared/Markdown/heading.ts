@@ -16,28 +16,28 @@ interface HeadingStyle {
 
 const headings: HeadingStyle[] = [
   {
-    fontSize: em(30, 14),
-    fontWeight: "800",
+    fontSize: em(22, 14),
+    fontWeight: "700",
     marginTop: "0",
-    marginBottom: em(24, 30),
+    marginBottom: em(20, 30),
     lineHeight: round(36 / 30),
   },
   {
     fontSize: em(20, 14),
-    fontWeight: "700",
+    fontWeight: "600",
     marginTop: em(32, 20),
-    marginBottom: em(16, 20),
+    marginBottom: em(12, 20),
     lineHeight: round(28 / 20),
   },
   {
     fontSize: em(18, 14),
-    fontWeight: "600",
+    fontWeight: "500",
     marginTop: em(28, 18),
     marginBottom: em(8, 18),
     lineHeight: round(28 / 18),
   },
   {
-    fontWeight: "600",
+    fontWeight: "500",
     marginTop: em(20, 14),
     marginBottom: em(8, 14),
     lineHeight: round(20 / 14),

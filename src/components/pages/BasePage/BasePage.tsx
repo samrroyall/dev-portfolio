@@ -19,7 +19,7 @@ const BasePage = ({ current, children }: BasePageProps & PropsWithChildren) => (
         <Nav current={current} />
       </div>
       <div class={`mx-auto ${contentSizeClasses} ${contentFlexClasses}`}>
-        <div class="overflow-y-auto overflow-x-hidden px-3 pt-2 max-lg:pb-14 lg:pb-2">
+        <div class="overflow-y-auto overflow-x-hidden px-3 pb-6 pt-3 max-sm:pb-14">
           {children}
         </div>
         <div class="order-first w-full lg:order-last">

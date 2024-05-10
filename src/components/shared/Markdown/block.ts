@@ -4,7 +4,7 @@ import { image } from "./link";
 
 const blockquote = (quote: string): string => {
   const bgClasses =
-    "my-4 px-2 border-l-2 bg-tertiary-bg border-primary-text rounded-tr rounded-br";
+    "my-6 px-2 border-l-2 bg-tertiary-bg border-primary-text rounded-tr rounded-br";
   const textClasses = "italic text-secondary-text";
 
   return `<blockquote class="${bgClasses} ${textClasses}">${quote}</blockquote>`;
@@ -46,7 +46,7 @@ const table = (header: string, body: string): string => {
 
   const bodyString = `<tbody>${body}</tbody>`;
 
-  return `<table class="my-4 mx-auto">${headerString}${bodyString}</table>`;
+  return `<table class="my-6 mx-auto">${headerString}${bodyString}</table>`;
 };
 
 const tablerow = (content: string): string => `<tr>${content}</tr>`;

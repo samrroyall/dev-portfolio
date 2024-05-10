@@ -7,7 +7,7 @@ interface ContactProps {
 }
 const Contact = ({ error, success }: ContactProps) => (
   <BasePage current="contact">
-    <div class="mb-6 mt-3">
+    <div>
       <Form
         id="contact-form"
         action="/send"

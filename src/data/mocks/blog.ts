@@ -173,6 +173,15 @@ fn fib(n: Int) -> Int {
 }
 \`\`\`
 
+This is a pseudocode block.
+
+\`\`\`
+fn fib(n):
+  if n is 0 or 1:
+    return n
+  else:
+    return fib(n - 1) + fib(n - 2)
+\`\`\`
 
 
 [1]: https://www.google.com

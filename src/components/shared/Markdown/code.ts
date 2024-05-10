@@ -48,7 +48,7 @@ const code = (
   const langClass =
     lang && !!languages[lang] ? `language-${lang}` : defaultLangStyles;
 
-  const preClasses = `relative my-4 p-3 ${lang ? "pt-7" : ""} bg-tertiary-bg rounded ${langClass}`;
+  const preClasses = `relative my-6 p-3 ${lang ? "pt-7" : ""} bg-tertiary-bg rounded ${langClass}`;
 
   const codeClasses = `block whitespace-pre-wrap font-sauce-code-pro text-xs`;
 
