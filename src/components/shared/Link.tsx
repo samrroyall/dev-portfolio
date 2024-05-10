@@ -29,11 +29,7 @@ const Link = ({
     >
       {children}
     </a>
-    {arrow === true ? (
-      <span class="font-symbols select-none font-normal">
-        {" \udb80\udc5c"}
-      </span>
-    ) : null}
+    {arrow === true ? <span class="select-none">{" ↗"}</span> : null}
   </span>
 );
 
