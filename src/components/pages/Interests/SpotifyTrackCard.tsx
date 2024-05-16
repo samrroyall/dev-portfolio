@@ -2,7 +2,8 @@ import { type Track } from "../../../models/interests";
 import { Icon, Link } from "../../shared";
 
 const imageSize = 300;
-const arrowClasses = "text-secondary-text cursor-pointer text-lg";
+const arrowClasses =
+  "text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg";
 
 interface SpotifyTrackCardProps {
   id: number;
@@ -10,7 +11,11 @@ interface SpotifyTrackCardProps {
   track: Track;
 }
 
-const SpotifyTrackCard = ({ id, total, track }: SpotifyTrackCardProps) => {
+const SpotifyTrackCard = ({
+  id,
+  total,
+  track,
+}: SpotifyTrackCardProps): JSX.Element => {
   const toggleCard = (i: number) =>
     `htmx.toggleClass("#spotify-track-card-${i}", "hidden")`;
 
@@ -32,14 +37,14 @@ const SpotifyTrackCard = ({ id, total, track }: SpotifyTrackCardProps) => {
         </div>
         <div class="mt-2">
           <Link href={track.url}>
-            <span class="text-secondary-text text-lg font-semibold">
+            <span class="text-secondary-text dark:text-secondary-text-dark text-lg font-semibold">
               {track.name}
             </span>
           </Link>
           <div>
-            {track.artists.map((artist) => artist.name).join(", ")}
-            {" · "}
-            {track.album.name}
+            <span>{track.artists.map((artist) => artist.name).join(", ")}</span>
+            <span>{" · "}</span>
+            <span>{track.album.name}</span>
           </div>
         </div>
       </div>

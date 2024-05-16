@@ -1,7 +1,8 @@
+import { type DefaultPageProps } from "../../../models/routes";
 import { BasePage } from "../../pages";
 
-const CreateBlogPost = () => (
-  <BasePage>
+const CreateBlogPost = ({ theme }: DefaultPageProps): JSX.Element => (
+  <BasePage theme={theme}>
     <div>{"This is the CreateBlogPost page..."}</div>
   </BasePage>
 );

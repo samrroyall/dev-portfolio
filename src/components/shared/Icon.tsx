@@ -7,9 +7,14 @@ interface IconProps {
   className?: string;
 }
 
-const Icon = ({ icon, link, linkTarget, className }: IconProps) => {
+const Icon = ({
+  icon,
+  link,
+  linkTarget,
+  className,
+}: IconProps): JSX.Element => {
   const iconSpan = (
-    <span class={`font-symbols select-none ${className}`}>{icon}</span>
+    <span class={`font-symbols select-none ${className ?? ""}`}>{icon}</span>
   );
 
   return link ? (

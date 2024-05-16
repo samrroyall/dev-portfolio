@@ -1,24 +1,31 @@
 import { type BlogPostInfo } from "../../../models/blog";
 import { getPrettyDate } from "../../../utils";
-import { Link } from "../../shared";
+import { Link, TextDivider } from "../../shared";
+
+const titleClasses =
+  "text-secondary-text dark:text-secondary-text-dark text-lg font-bold";
+
+const dateClasses =
+  "text-secondary-text dark:text-secondary-text-dark ml-6 whitespace-nowrap";
+
+const readMoreClasses =
+  "text-secondary-text dark:text-secondary-text-dark font-medium";
 
 interface BlogPageEntryProps {
   post: BlogPostInfo;
 }
 
-const BlogPageEntry = ({ post }: BlogPageEntryProps) => (
+const BlogPageEntry = ({ post }: BlogPageEntryProps): JSX.Element => (
   <div class="group/blogsection">
     <div class="flex justify-between">
-      <span class="text-secondary-text text-lg font-bold">{post.title}</span>
-      <div class="text-secondary-text ml-6 whitespace-nowrap">
-        {getPrettyDate(post.date)}
-      </div>
+      <span class={titleClasses}>{post.title}</span>
+      <div class={dateClasses}>{getPrettyDate(post.date)}</div>
     </div>
     <div class="my-2">{post.subtitle}</div>
     <Link href={`/blog/post/${post.id}`} arrow={true} target="_self">
-      <span class="text-secondary-text font-medium">{"Read more"}</span>
+      <span class={readMoreClasses}>{"Read more"}</span>
     </Link>
-    <hr class="border-secondary-bg my-6 group-last/blogsection:hidden" />
+    <TextDivider className="group-last/blogsection:hidden" />
   </div>
 );
 

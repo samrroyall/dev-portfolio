@@ -14,7 +14,8 @@
 
 @font-face {
   font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf") format("truetype");
+  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf")
+    format("truetype");
   font-weight: 200;
   font-style: italic;
 }
@@ -70,7 +71,8 @@
 
 @font-face {
   font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf") format("truetype");
+  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf")
+    format("truetype");
   font-weight: 600;
   font-style: italic;
 }
@@ -118,12 +120,21 @@
 /* VARIABLES */
 
 :root {
-  --primary-bg: rgb(9 9 11);
-  --secondary-bg: rgb(39 39 42);
-  --tertiary-bg: rgb(23 23 23);
-  --primary-text: rgb(168 162 158);
-  --secondary-text: rgb(214 211 209);
-  --tertiary-text: rgb(231 229 228);
+  --primary-bg: rgb(250 250 250);
+  --secondary-bg: rgb(214 211 209);
+  --tertiary-bg: rgb(168 162 158);
+  --code-bg: rgb(26 27 38);
+  --primary-bg-dark: rgb(9 9 11);
+  --secondary-bg-dark: rgb(39 39 42);
+  --tertiary-bg-dark: rgb(23 23 23);
+  --code-bg-dark: rgb(24 24 27);
+  --primary-text: rgb(9 9 11);
+  --secondary-text: rgb(39 39 42);
+  --tertiary-text: rgb(23 23 23);
+  --primary-text-dark: rgb(168 162 158);
+  --secondary-text-dark: rgb(214 211 209);
+  --tertiary-text-dark: rgb(231 229 228);
+  --code-text: rgb(231 229 228);
   --strava-orange: rgb(252 82 0);
   --strava-orange-light: rgb(252 99 25);
 }
@@ -146,16 +157,26 @@
 
 /* KATEX */
 
-.katex {
+html:not(.dark) .katex {
   color: var(--secondary-text);
+  font-size: 1em !important;
+}
+
+html.dark .katex {
+  color: var(--secondary-text-dark);
   font-size: 1em !important;
 }
 
 /* TEXT SELECTION */
 
-*::selection {
+html:not(.dark) *::selection {
   background: var(--tertiary-text);
   color: var(--primary-bg);
+}
+
+html.dark *::selection {
+  background: var(--tertiary-text-dark);
+  color: var(--primary-bg-dark);
 }
 
 /* SCROLLBAR */
@@ -164,22 +185,41 @@
   width: 5px;
 }
 
-::-webkit-scrollbar-track {
+html:not(.dark) ::-webkit-scrollbar-track {
   margin: 5px 0 5px 10px;
   background-color: var(--tertiary-bg);
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb {
+html.dark ::-webkit-scrollbar-track {
+  margin: 5px 0 5px 10px;
+  background-color: var(--tertiary-bg-dark);
+  border-radius: 5px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
   background-color: var(--secondary-text);
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-text-dark);
+  border-radius: 5px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   background-color: var(--tertiary-text);
 }
 
-::-webkit-scrollbar-thumb:active {
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary-text-dark);
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:active {
+  background-color: black;
+}
+
+html.dark ::-webkit-scrollbar-thumb:active {
   background-color: white;
 }
 

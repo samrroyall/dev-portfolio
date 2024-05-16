@@ -2,19 +2,29 @@ import { staticPlugin } from "@elysiajs/static";
 import { Elysia } from "elysia";
 import routes from "./routes";
 import store from "./store";
+import "dotenv/config";
 
-const hooks = new Elysia().onError(({ code, set }) => {
-  if (code === "NOT_FOUND") {
-    set.status = 303;
-    set.headers.location = "/404";
-    return "";
-  }
-});
+if (!process.env.COOKIE_SECRET) {
+  throw Error("No value provided for COOKIE_SECRET");
+}
 
-const app: Elysia = new Elysia()
+const app = new Elysia({
+  cookie: {
+    secrets: process.env.COOKIE_SECRET,
+    sign: ["session"],
+  },
+})
   .use(staticPlugin())
+  .onError(({ code, error, set }) => {
+    if (code === "NOT_FOUND") {
+      set.status = 303;
+      set.redirect = "/404";
+      return "";
+    } else {
+      return new Response(`${code}: ${JSON.stringify(error)}`);
+    }
+  })
   .state(store)
-  .use(hooks)
   .use(routes)
   .listen(3000);
 

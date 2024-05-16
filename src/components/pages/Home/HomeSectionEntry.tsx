@@ -1,15 +1,15 @@
 import { type HomeSectionEntryData } from "../../../models/home";
-import { Link, Markdown } from "../../shared";
+import { Link, Markdown, TextDivider } from "../../shared";
 
 export interface HomeSectionEntryProps {
   entry: HomeSectionEntryData;
 }
 
-const HomeSectionEntry = ({ entry }: HomeSectionEntryProps) => {
+const HomeSectionEntry = ({ entry }: HomeSectionEntryProps): JSX.Element => {
   const titleSpan = <span class="text-lg font-bold">{entry.title}</span>;
 
   const entryHeader = (
-    <div class="text-secondary-text mb-3">
+    <div class="text-secondary-text dark:text-secondary-text-dark mb-3">
       {entry.titleLink ? (
         <Link href={entry.titleLink} arrow={true}>
           {titleSpan}
@@ -38,7 +38,7 @@ const HomeSectionEntry = ({ entry }: HomeSectionEntryProps) => {
     <div class="group/homesection">
       {entry.title || entry.subtitles.length ? entryHeader : null}
       {entry.text ? entryBody : null}
-      <hr class="border-secondary-bg my-6 group-last/homesection:hidden" />
+      <TextDivider className="group-last/homesection:hidden" />
     </div>
   );
 };

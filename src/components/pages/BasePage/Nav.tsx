@@ -7,14 +7,19 @@ const pages = [
   { label: "contact", link: "/contact" },
 ];
 
-const circleIcon = <Icon className="text-secondary-text" icon={"\uf111"} />;
+const circleIcon = (
+  <Icon
+    className="text-secondary-text dark:text-secondary-text-dark"
+    icon={"\uf111"}
+  />
+);
 
 interface NavProps {
   current: string | undefined;
 }
 
-const Nav = ({ current }: NavProps) => (
-  <nav class="bg-primary-bg pb-3 pl-1">
+const Nav = ({ current }: NavProps): JSX.Element => (
+  <nav class="bg-primary-bg dark:bg-primary-bg-dark pb-3 pl-1">
     <ul>
       {pages.map(({ label, link }, i) => (
         <li class="flex">
@@ -25,7 +30,7 @@ const Nav = ({ current }: NavProps) => (
               <span class="font-sauce-code-pro">{`0${i}`}</span>
             )}
           </div>
-          <div class="text-secondary-text">
+          <div class="text-secondary-text dark:text-secondary-text-dark">
             {current !== undefined && label === current ? (
               label
             ) : (

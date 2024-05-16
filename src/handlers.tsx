@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 import { type Context, type RouteSchema } from "elysia";
 import {
   Admin,
@@ -9,25 +10,34 @@ import {
   Interests,
   NotFound,
 } from "./components/pages";
+import { sessions } from "./models/db";
 import {
-  type AuthSchema,
+  type AuthenticateSchema,
   type BlogPostSchema,
   type ContactSchema,
+  type CookieSchema,
   type LoginSchema,
-  type SendSchema,
+  type SendEmailSchema,
+  type ToggleThemeSchema,
 } from "./models/routes";
 import { type Store } from "./models/store";
 import { isAdmin, sendEmail, verifyRecaptcha } from "./utils";
 
-interface HandlerContext<Schema extends RouteSchema = RouteSchema>
-  extends Context<Schema> {
+interface StoreSchema {
   store: Store;
 }
 
-export const authHandler = async ({
+type HandlerContext<Schema extends RouteSchema = RouteSchema> = Context<
+  Schema & CookieSchema
+> &
+  StoreSchema;
+
+export const authenticateHandler = async ({
   body,
+  cookie: { session },
   set,
-}: HandlerContext<AuthSchema>) => {
+  store: { db },
+}: HandlerContext<AuthenticateSchema>) => {
   set.status = 303;
 
   try {
@@ -36,6 +46,19 @@ export const authHandler = async ({
     } else if (!(await isAdmin(body.username, body.password))) {
       set.headers.location = "/login?success=false&error=unauthenticated";
     } else {
+      const sessionId = randomBytes(16).toString("hex");
+      const expiry = new Date(Date.now() + 24 * 3600 * 1000);
+
+      await db.sessions.insert(sessions).values({ sessionId, expiry });
+
+      session.set({
+        value: {
+          sessionId: sessionId,
+        },
+        expires: expiry,
+        httpOnly: true,
+      });
+
       set.headers.location = "/admin";
     }
   } catch (err) {
@@ -45,45 +68,54 @@ export const authHandler = async ({
   }
 };
 
-export const adminHandler = (_: HandlerContext) => <Admin />;
-
-export const blogHandler = ({ store }: HandlerContext) => (
-  <Blog data={store.blog} />
+export const adminHandler = ({ cookie: { theme } }: HandlerContext) => (
+  <Admin theme={theme} />
 );
 
-export const blogPostHandler = ({
+export const blogHandler = async ({
+  cookie: { theme },
+  store,
+}: HandlerContext) => Blog({ data: store.blog, theme });
+
+export const blogPostHandler = async ({
+  cookie: { theme },
   store,
   params: { id },
-}: HandlerContext<BlogPostSchema>) => (
-  <BlogPost data={store.blogPost.get(id)} />
-);
+}: HandlerContext<BlogPostSchema>) =>
+  BlogPost({ data: store.blogPost.get(id), theme });
 
 export const contactHandler = ({
+  cookie: { theme },
   query: { success, error },
 }: HandlerContext<ContactSchema>) => (
-  <Contact success={success} error={error} />
+  <Contact success={success} error={error} theme={theme} />
 );
 
-export const homeHandler = ({ store }: HandlerContext) => (
-  <Home data={store.home} />
-);
+export const homeHandler = async ({
+  cookie: { theme },
+  store,
+}: HandlerContext) => Home({ data: store.home, theme });
 
-export const interestsHandler = ({ store }: HandlerContext) => (
-  <Interests data={store.interests} />
-);
+export const interestsHandler = async ({
+  cookie: { theme },
+  store,
+}: HandlerContext) => Interests({ data: store.interests, theme });
 
 export const loginHandler = ({
+  cookie: { theme },
   query: { success, error },
 }: HandlerContext<LoginSchema>) => (
-  <AdminLogin success={success} error={error} />
+  <AdminLogin success={success} error={error} theme={theme} />
 );
 
-export const notFoundHandler = (_: HandlerContext) => <NotFound />;
+export const notFoundHandler = ({ cookie: { theme } }: HandlerContext) => (
+  <NotFound theme={theme} />
+);
 
-export const sendHandler = async ({
+export const sendEmailHandler = async ({
   body,
   set,
-}: HandlerContext<SendSchema>) => {
+}: HandlerContext<SendEmailSchema>) => {
   set.status = 303;
 
   try {
@@ -111,4 +143,16 @@ export const sendHandler = async ({
 
     set.headers.location = "/contact?success=false&error=unknown";
   }
+};
+
+export const toggleThemeHandler = ({
+  cookie: { theme },
+}: HandlerContext<ToggleThemeSchema>) => {
+  if (!theme.value || !["dark", "light"].includes(theme.value)) {
+    theme.value = "dark";
+  } else {
+    theme.value = theme.value === "dark" ? "light" : "dark";
+  }
+
+  return "";
 };

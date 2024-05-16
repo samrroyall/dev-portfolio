@@ -5,7 +5,9 @@ import Icon from "./Icon";
 import Input from "./Input";
 import Link from "./Link";
 import Markdown from "./Markdown";
+import SectionDivider from "./SectionDivider";
 import Sections from "./Sections";
+import TextDivider from "./TextDivider";
 import Tooltip from "./Tooltip";
 
 export {
@@ -17,5 +19,7 @@ export {
   Link,
   Markdown,
   Sections,
+  SectionDivider,
+  TextDivider,
   Tooltip,
 };

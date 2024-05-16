@@ -5,7 +5,9 @@ interface SpotifyTopTracksProps {
   data: Promise<Track[]>;
 }
 
-const SpotifyTopTracks = async ({ data }: SpotifyTopTracksProps) => {
+const SpotifyTopTracks = async ({
+  data,
+}: SpotifyTopTracksProps): Promise<JSX.Element> => {
   const tracks = await data;
 
   return (

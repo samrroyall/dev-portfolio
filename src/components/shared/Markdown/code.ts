@@ -22,7 +22,7 @@ loadLanguages(
 const code = (
   code: string,
   infostring: string | undefined,
-  escaped: boolean,
+  _escaped: boolean,
 ): string | false => {
   const lang = (infostring || "").match(/^\S*/)?.[0];
 
@@ -30,7 +30,7 @@ const code = (
 
   code =
     lang && !!languages[lang]
-      ? Prism.highlight(code, Prism.languages[lang]!, lang)
+      ? Prism.highlight(code, Prism.languages[lang], lang)
       : code;
 
   const prettyLang = !!lang
@@ -43,14 +43,19 @@ const code = (
     ? `<div class="absolute top-3 right-3 text-xs">${prettyLang}</div>`
     : "";
 
-  const defaultLangStyles = "text-secondary-text";
+  const defaultLangStyles = "text-code-text";
 
   const langClass =
     lang && !!languages[lang] ? `language-${lang}` : defaultLangStyles;
 
-  const preClasses = `relative my-6 p-3 ${lang ? "pt-7" : ""} bg-tertiary-bg rounded ${langClass}`;
+  const preStyleClasses =
+    "bg-code-bg dark:bg-code-bg-dark font-sauce-code-pro text-xs";
 
-  const codeClasses = `block whitespace-pre-wrap font-sauce-code-pro text-xs`;
+  const prePositioningClasses = `relative my-6 p-3 ${lang ? "pt-7" : ""} rounded`;
+
+  const preClasses = `${prePositioningClasses} ${preStyleClasses} ${langClass}`;
+
+  const codeClasses = `block whitespace-pre-wrap`;
 
   return `<pre class="${preClasses}">${langLine}<code class="${codeClasses}">${code}</code></pre>`;
 };

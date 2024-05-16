@@ -1,4 +1,5 @@
 import { type InterestsData } from "../../../models/interests";
+import { type DefaultPageProps } from "../../../models/routes";
 import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
 import InterestsPageEntry from "./InterestsPageEntry";
@@ -22,24 +23,27 @@ folk.
 If you're curious about what I'm listening to at the moment, I created this 
 widget using the Spotify API that displays my top songs over the past month.`;
 
-interface InterestsProps {
+interface InterestsProps extends DefaultPageProps {
   data: InterestsData;
 }
 
-const Interests = ({ data }: InterestsProps) => {
+const Interests = async ({
+  data,
+  theme,
+}: InterestsProps): Promise<JSX.Element> => {
   const entries = [
     {
       text: runningText,
-      content: <StravaCalendar month={data.strava} />,
+      content: await StravaCalendar({ month: data.strava }),
     },
     {
       text: musicText,
-      content: <SpotifyTopTracks data={data.spotify} />,
+      content: await SpotifyTopTracks({ data: data.spotify }),
     },
   ];
 
   return (
-    <BasePage current="interests">
+    <BasePage current="interests" theme={theme}>
       <Sections
         sectionNum="01"
         entries={[

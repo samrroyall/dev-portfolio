@@ -1,17 +1,37 @@
-import { type PropsWithChildren } from "beth-stack/jsx";
-import "dotenv/config";
+import { type DefaultPageProps } from "../../models/routes";
 
-/** @type {import('tailwindcss').Config} */
-const theme = {
+const defaultBgColor = "bg-primary-bg";
+
+const defaultBg = `${defaultBgColor} dark:${defaultBgColor}-dark`;
+
+const defaultTextColor = "text-primary-text";
+
+const defaultText = `${defaultTextColor} dark:${defaultTextColor}-dark`;
+
+const defaultFont = "source-sans-3 text-base";
+
+const defaultClasses = `${defaultBg} ${defaultText} ${defaultFont}`;
+
+const twTheme = {
+  darkMode: "selector",
   theme: {
     extend: {
       colors: {
         "primary-bg": "var(--primary-bg)",
         "secondary-bg": "var(--secondary-bg)",
         "tertiary-bg": "var(--tertiary-bg)",
+        "code-bg": "var(--code-bg)",
+        "primary-bg-dark": "var(--primary-bg-dark)",
+        "secondary-bg-dark": "var(--secondary-bg-dark)",
+        "tertiary-bg-dark": "var(--tertiary-bg-dark)",
+        "code-bg-dark": "var(--code-bg-dark)",
         "primary-text": "var(--primary-text)",
         "secondary-text": "var(--secondary-text)",
         "tertiary-text": "var(--tertiary-text)",
+        "primary-text-dark": "var(--primary-text-dark)",
+        "secondary-text-dark": "var(--secondary-text-dark)",
+        "tertiary-text-dark": "var(--tertiary-text-dark)",
+        "code-text": "var(--code-text)",
         "strava-orange": "var(--strava-orange)",
         "strava-orange-light": "var(--strava-orange-light)",
       },
@@ -19,8 +39,14 @@ const theme = {
   },
 };
 
-const BaseHtml = ({ children }: PropsWithChildren) => (
-  <html class="h-screen w-screen overflow-hidden">
+interface BaseHtmlProps extends DefaultPageProps {
+  children: Html.Children;
+}
+
+const BaseHtml = ({ children, theme }: BaseHtmlProps): JSX.Element => (
+  <html
+    class={`h-screen w-screen overflow-hidden ${theme.value === "dark" ? "dark" : ""}`}
+  >
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,7 +55,7 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
       <script
         async
         type="text/javascript"
-      >{`tailwind.config = ${JSON.stringify(theme)}`}</script>
+      >{`tailwind.config = ${JSON.stringify(twTheme)}`}</script>
       <script
         type="text/javascript"
         src="https://unpkg.com/htmx.org@1.9.12"
@@ -61,9 +87,7 @@ const BaseHtml = ({ children }: PropsWithChildren) => (
         crossorigin="anonymous"
       />
     </head>
-    <body class="bg-primary-bg text-primary-text source-sans-3 text-base">
-      {children}
-    </body>
+    <body class={defaultClasses}>{children}</body>
   </html>
 );
 

@@ -44,26 +44,30 @@ const headings: HeadingStyle[] = [
   },
 ];
 
-const heading = (text: string, level: number, raw: string): string => {
+const heading = (text: string, level: number, _raw: string): string => {
   const style = headings[level - 1];
 
   const marginClasses = style
     ? `mt-[${style.marginTop}] mb-[${style.marginBottom}]`
     : "";
 
+  const lineHeightClass = style?.lineHeight
+    ? `leading-[${style.lineHeight}]`
+    : "";
+
+  const fontColorClasses = "text-secondary-text dark:text-secondary-text-dark";
+
   const fontSizeClass = style?.fontSize ? `text-[${style.fontSize}]` : "";
 
-  const fontClasses = style
-    ? `${fontSizeClass} font-[${style.fontWeight}]`
-    : "";
+  const fontStyleClass = style ? `font-[${style.fontWeight}]` : "";
 
-  const classes = style
-    ? `${marginClasses} ${fontClasses} leading-[${style.lineHeight}]`
-    : "";
+  const fontClasses = `${fontColorClasses} ${fontSizeClass} ${fontStyleClass}`;
+
+  const classes = `${marginClasses} ${fontClasses} ${lineHeightClass}`;
 
   const tag = `h${level}`;
 
-  return `<${tag} class="text-secondary-text ${classes}">${text}</${tag}>`;
+  return `<${tag} class="${classes}">${text}</${tag}>`;
 };
 
 export default heading;

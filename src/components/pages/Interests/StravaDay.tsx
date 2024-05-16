@@ -17,14 +17,16 @@ interface StravaDayProps {
   isToday: boolean;
 }
 
-const StravaDay = ({ data, isToday }: StravaDayProps) => {
-  const bgClass = isToday ? "bg-strava-orange" : "bg-secondary-text";
+const StravaDay = ({ data, isToday }: StravaDayProps): JSX.Element => {
+  const bgClass = isToday
+    ? "bg-strava-orange"
+    : "bg-secondary-text dark:bg-secondary-text-dark";
 
   const hoverClasses =
     data && isToday
       ? "hover:bg-strava-orange-light cursor-pointer"
       : data
-        ? "hover:bg-tertiary-text cursor-pointer"
+        ? "hover:bg-tertiary-text hover:dark:bg-tertiary-text-dark cursor-pointer"
         : "";
 
   const size = baseSize + (data?.miles ?? 0);

@@ -3,21 +3,26 @@ import heading from "./heading";
 import { image } from "./link";
 
 const blockquote = (quote: string): string => {
-  const bgClasses =
-    "my-6 px-2 border-l-2 bg-tertiary-bg border-primary-text rounded-tr rounded-br";
-  const textClasses = "italic text-secondary-text";
+  const borderClasses = "border-secondary-bg dark:border-secondary-bg-dark";
 
-  return `<blockquote class="${bgClasses} ${textClasses}">${quote}</blockquote>`;
+  const bgClasses = "my-6 px-2 border-l-4 rounded-tr rounded-br";
+
+  const textClasses =
+    "italic text-secondary-text dark:text-secondary-text-dark";
+
+  return `<blockquote class="${bgClasses} ${borderClasses} ${textClasses}">${quote}</blockquote>`;
 };
 
 const checkbox = (checked: boolean): string => {
   const checkedAttr = checked ? "checked" : "";
+
   const classes = "-ml-4 mr-2 h-[0.65rem]";
 
   return `<input class="${classes}" type="checkbox" disabled ${checkedAttr} />`;
 };
 
-const hr = (): string => `<hr class="my-6 mx-3 border-secondary-bg" />`;
+const hr = (): string =>
+  `<hr class="my-6 mx-3 border-secondary-bg dark:border-secondary-bg-dark" />`;
 
 const list = (
   body: string,
@@ -31,7 +36,7 @@ const list = (
   return `<${tag} class="${classes}" ${startAttr}>${body}</${tag}>`;
 };
 
-const listitem = (text: string, task: boolean, checked: boolean): string => {
+const listitem = (text: string, task: boolean, _checked: boolean): string => {
   const checkboxClasses = task ? "list-none" : "";
 
   return `<li class="[&>p:first-child]:my-0 ${checkboxClasses}">${text}</li>`;
@@ -41,7 +46,13 @@ const paragraph = (text: string): string =>
   `<p class="${!!text ? "my-3 leading-6 text-pretty" : ""}">${text}</p>`;
 
 const table = (header: string, body: string): string => {
-  const headerClasses = "bg-tertiary-bg text-secondary-text font-semibold";
+  const headerTextClasses =
+    "text-secondary-text dark:text-secondary-text-dark font-semibold";
+
+  const headerBgClasses = "bg-tertiary-bg dark:bg-tertiary-bg-dark";
+
+  const headerClasses = `${headerBgClasses} ${headerTextClasses}`;
+
   const headerString = `<thead class="${headerClasses}">${header}</thead>`;
 
   const bodyString = `<tbody>${body}</tbody>`;
@@ -60,7 +71,10 @@ const tablecell = (content: string, flags: TablecellOptions) => {
   const tag = flags.header ? "th" : "td";
   const align = flags.align ? "" : `align=${flags.align}`;
 
-  return `<${tag} ${align} class="p-3 border border-secondary-bg">${content}</${tag}>`;
+  const classes =
+    "p-3 border border-secondary-bg dark:border-secondary-bg-dark";
+
+  return `<${tag} ${align} class="${classes}">${content}</${tag}>`;
 };
 
 export default {

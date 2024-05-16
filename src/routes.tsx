@@ -2,7 +2,7 @@ import { html } from "@elysiajs/html";
 import { Elysia } from "elysia";
 import {
   adminHandler,
-  authHandler,
+  authenticateHandler,
   blogHandler,
   blogPostHandler,
   contactHandler,
@@ -10,14 +10,16 @@ import {
   interestsHandler,
   loginHandler,
   notFoundHandler,
-  sendHandler,
+  sendEmailHandler,
+  toggleThemeHandler,
 } from "./handlers";
 import {
-  authSchema,
+  authenticateSchema,
   blogPostSchema,
   contactSchema,
   loginSchema,
-  sendSchema,
+  sendEmailSchema,
+  toggleThemeSchema,
 } from "./models/routes";
 
 const publicRoutes = new Elysia()
@@ -28,8 +30,9 @@ const publicRoutes = new Elysia()
   .get("/contact", contactHandler, contactSchema)
   .get("/interests", interestsHandler)
   .get("/login", loginHandler, loginSchema)
-  .post("/authenticate", authHandler, authSchema)
-  .post("/send", sendHandler, sendSchema);
+  .post("/authenticate", authenticateHandler, authenticateSchema)
+  .post("/sendemail", sendEmailHandler, sendEmailSchema)
+  .post("/toggletheme", toggleThemeHandler, toggleThemeSchema);
 
 const adminRoutes = new Elysia().group("/admin", (app) =>
   app.get("", adminHandler),

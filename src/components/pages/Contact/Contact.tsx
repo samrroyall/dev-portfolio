@@ -1,16 +1,17 @@
+import { type DefaultPageProps } from "../../../models/routes";
 import { BasePage } from "../../pages";
 import { Form, Input } from "../../shared";
 
-interface ContactProps {
+interface ContactProps extends DefaultPageProps {
   error: string | undefined;
   success: string | undefined;
 }
-const Contact = ({ error, success }: ContactProps) => (
-  <BasePage current="contact">
+const Contact = ({ error, success, theme }: ContactProps): JSX.Element => (
+  <BasePage current="contact" theme={theme}>
     <div>
       <Form
         id="contact-form"
-        action="/send"
+        action="/sendemail"
         submitLabel="Send"
         {...(!!error ? { error } : {})}
         {...(!!success ? { success: success === "true" } : {})}

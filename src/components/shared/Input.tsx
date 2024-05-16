@@ -1,20 +1,27 @@
 type InputType = "email" | "password" | "text" | "textarea";
 
-const standardBorderClasses = "border border-secondary-text rounded";
+const standardBorderClasses =
+  "border border-secondary-text dark:border-secondary-text-dark rounded";
 
 const focusBorderClasses =
-  "has-[:focus]:outline-none has-[:focus]:ring-1 has-[:focus]:ring-secondary-text";
+  "has-[:focus]:outline-none has-[:focus]:ring-1 has-[:focus]:ring-secondary-text has-[:focus]:dark:ring-secondary-text";
 
 const invalidBorderClasses =
   "has-[:invalid]:border-red-400 has-[:invalid]:ring-red-400 has-[:focus:invalid]:ring-red-400";
 
+const bgClasses = "*:bg-primary-bg *:dark:bg-primary-bg-dark";
+
 const borderClasses = `${standardBorderClasses} ${focusBorderClasses} ${invalidBorderClasses}`;
 
-const fieldClasses = `*:text-secondary-text *:bg-primary-bg my-3 inline-block p-1 ${borderClasses}`;
+const textClasses = "*:text-secondary-text dark:*:text-secondary-text-dark";
+
+const fieldClasses = `my-3 inline-block p-1 ${bgClasses} ${borderClasses} ${textClasses}`;
 
 const noBorderClasses = `border-0 ring-0 outline-none`;
 
-const inputClasses = `placeholder-primary-text w-full p-1 ${noBorderClasses}`;
+const placeholderClasses = `placeholder-primary-text dark:placeholder-primary-text-dark text`;
+
+const inputClasses = `w-full p-1 ${noBorderClasses} ${placeholderClasses}`;
 
 const legendClasses = "px-1 text-sm";
 
@@ -44,7 +51,7 @@ const Input = ({
   required,
   title,
   type,
-}: InputProps) => {
+}: InputProps): JSX.Element => {
   const attrs = {
     ...(!!id ? { id } : {}),
     ...(!!required ? { required: "true" } : {}),

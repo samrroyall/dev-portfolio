@@ -5,9 +5,10 @@ import {
 } from "../../../models/interests";
 import { mockFunc } from "../../../utils";
 
-// TODO: Temporary placeholder
-const emptyRunMonth = new Array<RunWeek>(5)
+const emptyRunMonth: RunMonth = new Array<RunWeek>(5)
   .fill(null)
-  .map((_) => new Array<RunDay | null>(7).fill(null));
+  .map(
+    (_) => new Array<RunDay | null>(7).fill(null as RunDay | null) as RunWeek,
+  ) as RunMonth;
 
 export const getStravaData = (): Promise<RunMonth> => mockFunc(emptyRunMonth);

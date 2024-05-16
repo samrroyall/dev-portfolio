@@ -1,6 +1,10 @@
-import { t, type Static } from "elysia";
+import { t, type Cookie, type Static } from "elysia";
 
-export const authSchema = {
+export interface DefaultPageProps {
+  theme: Cookie<string | undefined>;
+}
+
+export const authenticateSchema = {
   body: t.Object({
     username: t.String(),
     password: t.String(),
@@ -8,8 +12,8 @@ export const authSchema = {
   }),
 };
 
-export interface AuthSchema {
-  body: Static<typeof authSchema.body>;
+export interface AuthenticateSchema {
+  body: Static<typeof authenticateSchema.body>;
 }
 
 export const blogPostSchema = {
@@ -33,6 +37,21 @@ export interface ContactSchema {
   query: Static<typeof contactSchema.query>;
 }
 
+export const cookieSchema = {
+  cookie: t.Cookie({
+    theme: t.Optional(t.String()),
+    session: t.Optional(
+      t.Object({
+        sessionId: t.String(),
+      }),
+    ),
+  }),
+};
+
+export interface CookieSchema {
+  cookie: Static<typeof cookieSchema.cookie>;
+}
+
 export const loginSchema = {
   query: t.Object({
     success: t.Optional(t.String()),
@@ -44,7 +63,7 @@ export interface LoginSchema {
   query: Static<typeof loginSchema.query>;
 }
 
-export const sendSchema = {
+export const sendEmailSchema = {
   body: t.Object({
     name: t.Union([t.String(), t.Undefined()]),
     email: t.String(),
@@ -53,6 +72,17 @@ export const sendSchema = {
   }),
 };
 
-export interface SendSchema {
-  body: Static<typeof sendSchema.body>;
+export interface SendEmailSchema {
+  body: Static<typeof sendEmailSchema.body>;
+}
+
+export const toggleThemeSchema = {
+  headers: t.Object({
+    origin: t.String(),
+    referer: t.String(),
+  }),
+};
+
+export interface ToggleThemeSchema {
+  headers: Static<typeof toggleThemeSchema.headers>;
 }

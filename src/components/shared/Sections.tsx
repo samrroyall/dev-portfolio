@@ -1,4 +1,4 @@
-import { Link } from "../../components/shared";
+import { Link, SectionDivider } from "../../components/shared";
 import { getLowercaseCharAt } from "../../utils";
 
 interface SectionEntry {
@@ -13,7 +13,7 @@ interface SectionProps {
   sectionNum: string;
 }
 
-const Sections = ({ entries, sectionNum }: SectionProps) => (
+const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
   <section>
     {entries.map(({ title, content, titleLink, fullPage }, i) => (
       <section class="group/section w-full">
@@ -22,16 +22,16 @@ const Sections = ({ entries, sectionNum }: SectionProps) => (
             <div class="font-sauce-code-pro">
               {`${sectionNum}.${getLowercaseCharAt(i)}`}
             </div>
-            <div class="text-secondary-text text-2xl font-bold">
+            <div class="text-secondary-text dark:text-secondary-text-dark text-2xl font-bold">
               {titleLink ? (
                 <Link href={titleLink} arrow={true} target="_self">
-                  {title}
+                  <span>{title}</span>
                 </Link>
               ) : (
-                title
+                <span>{title}</span>
               )}
             </div>
-            <hr class="border-secondary-text border border-dashed" />
+            <SectionDivider />
           </div>
           <div
             class={`py-4 ${fullPage === true ? "" : "lg:w-2/3 lg:self-end"}`}

@@ -1,5 +1,3 @@
-import { type PropsWithChildren } from "beth-stack/jsx";
-
 export type LinkTarget =
   | "_self"
   | "_blank"
@@ -8,20 +6,15 @@ export type LinkTarget =
   | "_unfencedTop";
 
 interface LinkProps {
+  children: Html.Children;
   href: string;
   arrow?: boolean;
   noUnderline?: boolean;
   target?: LinkTarget;
 }
 
-const Link = ({
-  href,
-  arrow,
-  noUnderline,
-  target,
-  children,
-}: LinkProps & PropsWithChildren) => (
-  <span class="hover:text-secondary-text">
+const Link = ({ href, arrow, noUnderline, target, children }: LinkProps) => (
+  <span class="hover:text-secondary-text hover:dark:text-secondary-text-dark">
     <a
       class={noUnderline === true ? "" : "underline"}
       href={href}
