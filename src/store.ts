@@ -1,13 +1,10 @@
+import { Elysia } from "elysia";
 import { getMockBlogData, getMockBlogPostData } from "./data/mocks/blog";
 import { getMockHomeData } from "./data/mocks/home";
 import { getMockSpotifyData, getMockStravaData } from "./data/mocks/interests";
-import sessionsDb from "./db";
 import { type Store } from "./models/store";
 
-const store: Store = {
-  db: {
-    sessions: sessionsDb,
-  },
+const storeData: Store = {
   home: getMockHomeData(),
   interests: {
     spotify: getMockSpotifyData(),
@@ -18,5 +15,7 @@ const store: Store = {
     get: (id: number) => getMockBlogPostData(id),
   },
 };
+
+const store = new Elysia().state(storeData);
 
 export default store;

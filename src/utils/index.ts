@@ -1,10 +1,15 @@
+import { randomBytes } from "crypto";
 import emailjs, { type EmailJSResponseStatus } from "@emailjs/nodejs";
+import { and, eq, gt } from "drizzle-orm";
+import { type LibSQLDatabase } from "drizzle-orm/libsql";
+import { type Cookie } from "elysia";
+import { sessions } from "../models/db";
 
 export const getLowercaseCharAt = (i: number): string | null =>
   i >= 0 && i <= 25
     ? String.fromCharCode("a".charCodeAt(0) + i)
     : i > 25
-      ? getLowercaseCharAt(i / 26 - 1) + getLowercaseCharAt(i % 26)
+      ? getLowercaseCharAt(i / 26 - 1)! + getLowercaseCharAt(i % 26)!
       : null;
 
 export const getPrettyDate = (dateString: string): string => {
@@ -102,4 +107,49 @@ export const sendEmail = async (
   } catch (err) {
     return Promise.resolve({ status: 500, text: `${err}` });
   }
+};
+
+export const createNewSession = async (
+  db: LibSQLDatabase,
+  session: Cookie<string | undefined>,
+) => {
+  if (!process.env.COOKIE_EXPIRY_MS) {
+    throw new Error("No value provided for COOKIE_EXPIRY_MS");
+  }
+
+  const expiryMs = parseInt(process.env.COOKIE_EXPIRY_MS!);
+
+  if (isNaN(expiryMs)) {
+    throw new Error("Invalid number value provided for COOKIE_EXPIRY_MS");
+  }
+
+  const sessionId = randomBytes(16).toString("hex");
+  const expiry = new Date(Date.now() + expiryMs);
+
+  await db.insert(sessions).values({ sessionId, expiry });
+
+  session.value = sessionId;
+  session.expires = expiry;
+  session.httpOnly = true;
+};
+
+export const validateSession = async (
+  db: LibSQLDatabase,
+  session: Cookie<string | undefined>,
+) => {
+  if (!session.value) {
+    return false;
+  }
+
+  const result = await db
+    .select()
+    .from(sessions)
+    .where(
+      and(
+        eq(sessions.sessionId, session.value),
+        gt(sessions.expiry, new Date()),
+      ),
+    );
+
+  return result.length > 0;
 };

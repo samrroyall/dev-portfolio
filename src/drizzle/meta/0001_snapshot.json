@@ -1,0 +1,45 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "74feaa1f-4a4c-4087-9f29-92c1d61931e9",
+  "prevId": "117f869a-b93c-49e8-8d91-62d35cf66add",
+  "tables": {
+    "sessions": {
+      "name": "sessions",
+      "columns": {
+        "sessionId": {
+          "name": "sessionId",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expiry": {
+          "name": "expiry",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "sessionId": {
+          "name": "sessionId",
+          "columns": [
+            "sessionId"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

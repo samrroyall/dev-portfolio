@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "bun run --watch src/index.tsx",
+    "db:generate": "drizzle-kit generate --dialect sqlite",
+    "db:migrate": "drizzle-kit migrate --config ./drizzle.config.ts",
     "format:check": "prettier --check .",
     "format": "prettier --write . --list-different",
     "lint": "eslint . --report-unused-disable-directives",
@@ -16,6 +18,7 @@
     "@emailjs/nodejs": "^2.2.0",
     "@kitajs/html": "^4.1.0",
     "@kitajs/ts-html-plugin": "^4.0.1",
+    "@libsql/client": "^0.6.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.10",
     "elysia": "latest",

@@ -1,4 +1,4 @@
-import { randomBytes } from "crypto";
+import { type LibSQLDatabase } from "drizzle-orm/libsql";
 import { type Context, type RouteSchema } from "elysia";
 import {
   Admin,
@@ -10,7 +10,6 @@ import {
   Interests,
   NotFound,
 } from "./components/pages";
-import { sessions } from "./models/db";
 import {
   type AuthenticateSchema,
   type BlogPostSchema,
@@ -21,7 +20,11 @@ import {
   type ToggleThemeSchema,
 } from "./models/routes";
 import { type Store } from "./models/store";
-import { isAdmin, sendEmail, verifyRecaptcha } from "./utils";
+import { createNewSession, isAdmin, sendEmail, verifyRecaptcha } from "./utils";
+
+interface DbSchema {
+  db: LibSQLDatabase;
+}
 
 interface StoreSchema {
   store: Store;
@@ -30,13 +33,14 @@ interface StoreSchema {
 type HandlerContext<Schema extends RouteSchema = RouteSchema> = Context<
   Schema & CookieSchema
 > &
-  StoreSchema;
+  StoreSchema &
+  DbSchema;
 
 export const authenticateHandler = async ({
   body,
-  cookie: { session },
   set,
-  store: { db },
+  db,
+  cookie: { session },
 }: HandlerContext<AuthenticateSchema>) => {
   set.status = 303;
 
@@ -46,25 +50,16 @@ export const authenticateHandler = async ({
     } else if (!(await isAdmin(body.username, body.password))) {
       set.headers.location = "/login?success=false&error=unauthenticated";
     } else {
-      const sessionId = randomBytes(16).toString("hex");
-      const expiry = new Date(Date.now() + 24 * 3600 * 1000);
-
-      await db.sessions.insert(sessions).values({ sessionId, expiry });
-
-      session.set({
-        value: {
-          sessionId: sessionId,
-        },
-        expires: expiry,
-        httpOnly: true,
-      });
+      await createNewSession(db, session);
 
       set.headers.location = "/admin";
     }
   } catch (err) {
-    console.error(`Unexpected error encountered while authenticating: ${err}`);
+    console.error(
+      `Unexpected error encountered while authenticating: ${JSON.stringify(err)}`,
+    );
 
-    set.headers.location = "/login?success=false&error=unknown";
+    set.headers.location = `/login?success=false&error=unknown`;
   }
 };
 
@@ -148,10 +143,10 @@ export const sendEmailHandler = async ({
 export const toggleThemeHandler = ({
   cookie: { theme },
 }: HandlerContext<ToggleThemeSchema>) => {
-  if (!theme.value || !["dark", "light"].includes(theme.value)) {
-    theme.value = "dark";
+  if (theme.value === "dark") {
+    theme.value = "light";
   } else {
-    theme.value = theme.value === "dark" ? "light" : "dark";
+    theme.value = "dark";
   }
 
   return "";

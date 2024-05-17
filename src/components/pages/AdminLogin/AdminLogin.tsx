@@ -13,7 +13,7 @@ const AdminLogin = ({
   theme,
 }: AdminLoginProps): JSX.Element => (
   <BasePage theme={theme}>
-    <div class="mx-auto mb-6 mt-3 lg:w-1/2">
+    <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
       <Form
         id="admin-form"
         action="/authenticate"

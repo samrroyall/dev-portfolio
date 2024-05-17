@@ -1,11 +1,14 @@
+import "dotenv/config";
+import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
 import { Elysia } from "elysia";
-import routes from "./routes";
+import db from "./db";
+import { adminRoutes, publicRoutes } from "./routes";
 import store from "./store";
-import "dotenv/config";
+import { validateSession } from "./utils";
 
 if (!process.env.COOKIE_SECRET) {
-  throw Error("No value provided for COOKIE_SECRET");
+  throw new Error("No value provided for COOKIE_SECRET");
 }
 
 const app = new Elysia({
@@ -15,17 +18,39 @@ const app = new Elysia({
   },
 })
   .use(staticPlugin())
-  .onError(({ code, error, set }) => {
+  .use(html())
+  .use(db)
+  .use(store)
+  .onError(({ code, error, redirect }) => {
     if (code === "NOT_FOUND") {
-      set.status = 303;
-      set.redirect = "/404";
-      return "";
+      return redirect("/404");
     } else {
-      return new Response(`${code}: ${JSON.stringify(error)}`);
+      return new Response(`${code}: ${error}`);
     }
   })
-  .state(store)
-  .use(routes)
+  .guard((app) =>
+    app
+      .onBeforeHandle(async ({ db, redirect, cookie: { session } }) => {
+        console.log(JSON.stringify(session));
+
+        console.log("Current session value: ", {
+          value: session.value,
+          exp: session.expires,
+        });
+
+        const authenticated = await validateSession(db, session);
+
+        console.log(
+          `User authentication ${authenticated ? "successful" : "failed"}.`,
+        );
+
+        if (!authenticated) {
+          return redirect("/");
+        }
+      })
+      .use(adminRoutes),
+  )
+  .use(publicRoutes)
   .listen(3000);
 
 console.log(

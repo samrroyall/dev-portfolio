@@ -22,7 +22,7 @@ import {
   toggleThemeSchema,
 } from "./models/routes";
 
-const publicRoutes = new Elysia()
+export const publicRoutes = new Elysia()
   .get("/404", notFoundHandler)
   .get("/", homeHandler)
   .get("/blog", blogHandler)
@@ -34,10 +34,4 @@ const publicRoutes = new Elysia()
   .post("/sendemail", sendEmailHandler, sendEmailSchema)
   .post("/toggletheme", toggleThemeHandler, toggleThemeSchema);
 
-const adminRoutes = new Elysia().group("/admin", (app) =>
-  app.get("", adminHandler),
-);
-
-const routes = new Elysia().use(html()).use(publicRoutes).use(adminRoutes);
-
-export default routes;
+export const adminRoutes = new Elysia().get("/admin", adminHandler);

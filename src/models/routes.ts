@@ -40,11 +40,7 @@ export interface ContactSchema {
 export const cookieSchema = {
   cookie: t.Cookie({
     theme: t.Optional(t.String()),
-    session: t.Optional(
-      t.Object({
-        sessionId: t.String(),
-      }),
-    ),
+    session: t.Optional(t.String()),
   }),
 };
 

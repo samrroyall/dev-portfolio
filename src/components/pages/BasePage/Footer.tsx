@@ -52,7 +52,7 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
   const icons = [themeButton, linkedInIcon, githubIcon];
 
   return (
-    <footer class="w-full text-lg 2xl:text-xl">
+    <footer class="w-full xl:text-lg 2xl:text-xl">
       <hr class="border-secondary-text dark:border-secondary-text-dark hidden lg:block" />
       <div class="relative flex items-center p-2">
         <div
