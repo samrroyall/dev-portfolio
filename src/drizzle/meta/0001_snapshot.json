@@ -25,9 +25,7 @@
       "indexes": {
         "sessionId": {
           "name": "sessionId",
-          "columns": [
-            "sessionId"
-          ],
+          "columns": ["sessionId"],
           "isUnique": false
         }
       },

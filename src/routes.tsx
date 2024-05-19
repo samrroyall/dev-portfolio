@@ -1,4 +1,3 @@
-import { html } from "@elysiajs/html";
 import { Elysia } from "elysia";
 import {
   adminHandler,

@@ -1,19 +1,9 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { Elysia } from "elysia";
+import config from "../drizzle.config";
 
-if (!process.env.DB_PATH) {
-  throw new Error("No value provided for DB_PATH");
-}
-
-if (!process.env.DB_ACCESS_TOKEN) {
-  throw new Error("No value provided for DB_ACCESS_TOKEN");
-}
-
-const client = createClient({
-  url: process.env.DB_PATH!,
-  authToken: process.env.DB_ACCESS_TOKEN!,
-});
+const client = createClient(config.dbCredentials);
 
 const db = drizzle(client);
 

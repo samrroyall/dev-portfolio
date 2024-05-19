@@ -117,27 +117,26 @@ export const createNewSession = async (
     throw new Error("No value provided for COOKIE_EXPIRY_MS");
   }
 
-  const expiryMs = parseInt(process.env.COOKIE_EXPIRY_MS!);
+  const expiryMs = parseInt(process.env.COOKIE_EXPIRY_MS);
 
   if (isNaN(expiryMs)) {
     throw new Error("Invalid number value provided for COOKIE_EXPIRY_MS");
   }
 
-  const sessionId = randomBytes(16).toString("hex");
-  const expiry = new Date(Date.now() + expiryMs);
-
-  await db.insert(sessions).values({ sessionId, expiry });
-
-  session.value = sessionId;
-  session.expires = expiry;
+  session.value = randomBytes(16).toString("hex");
+  session.expires = new Date(Date.now() + expiryMs);
   session.httpOnly = true;
+
+  await db
+    .insert(sessions)
+    .values({ sessionId: session.value, expiry: session.expires });
 };
 
 export const validateSession = async (
   db: LibSQLDatabase,
-  session: Cookie<string | undefined>,
+  sessionId: string | undefined,
 ) => {
-  if (!session.value) {
+  if (!sessionId || sessionId.length < 32) {
     return false;
   }
 
@@ -146,7 +145,7 @@ export const validateSession = async (
     .from(sessions)
     .where(
       and(
-        eq(sessions.sessionId, session.value),
+        eq(sessions.sessionId, sessionId.slice(0, 32)),
         gt(sessions.expiry, new Date()),
       ),
     );

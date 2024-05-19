@@ -3,6 +3,7 @@ import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
 import { Elysia } from "elysia";
 import db from "./db";
+import { cookieSchema } from "./models/routes";
 import { adminRoutes, publicRoutes } from "./routes";
 import store from "./store";
 import { validateSession } from "./utils";
@@ -25,30 +26,19 @@ const app = new Elysia({
     if (code === "NOT_FOUND") {
       return redirect("/404");
     } else {
-      return new Response(`${code}: ${error}`);
+      return new Response(`${code}: ${JSON.stringify(error)}`);
     }
   })
-  .guard((app) =>
-    app
-      .onBeforeHandle(async ({ db, redirect, cookie: { session } }) => {
-        console.log(JSON.stringify(session));
-
-        console.log("Current session value: ", {
-          value: session.value,
-          exp: session.expires,
-        });
-
-        const authenticated = await validateSession(db, session);
-
-        console.log(
-          `User authentication ${authenticated ? "successful" : "failed"}.`,
-        );
-
-        if (!authenticated) {
+  .guard(
+    {
+      ...cookieSchema,
+      beforeHandle: async ({ cookie: { session }, db, redirect }) => {
+        if (!(await validateSession(db, session.value))) {
           return redirect("/");
         }
-      })
-      .use(adminRoutes),
+      },
+    },
+    (app) => app.use(adminRoutes),
   )
   .use(publicRoutes)
   .listen(3000);

@@ -1,11 +1,17 @@
 import { type Config } from "drizzle-kit";
 
-if (!process.env.DB_PATH) {
-  throw new Error("No value provided for DB_PATH");
+const useMocks = process.env.USE_MOCKS === "true";
+
+if (useMocks && !process.env.LOCAL_DB_PATH) {
+  throw new Error("No value provided for LOCAL_DB_PATH");
 }
 
-if (!process.env.DB_ACCESS_TOKEN) {
-  throw new Error("No value provided for DB_ACCESS_TOKEN");
+if (!useMocks && !process.env.TURSO_DB_PATH) {
+  throw new Error("No value provided for TURSO_DB_PATH");
+}
+
+if (!useMocks && !process.env.TURSO_DB_ACCESS_TOKEN) {
+  throw new Error("No value provided for TURSO_DB_ACCESS_TOKEN");
 }
 
 const config = {
@@ -14,8 +20,8 @@ const config = {
   schema: "./src/models/db/*",
   out: "./src/drizzle",
   dbCredentials: {
-    url: process.env.DB_PATH!,
-    authToken: process.env.DB_ACCESS_TOKEN!,
+    url: useMocks ? process.env.LOCAL_DB_PATH! : process.env.TURSO_DB_PATH!,
+    authToken: useMocks ? "access-token" : process.env.TURSO_DB_ACCESS_TOKEN!,
   },
 } satisfies Config;
 

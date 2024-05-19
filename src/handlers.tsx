@@ -1,5 +1,3 @@
-import { type LibSQLDatabase } from "drizzle-orm/libsql";
-import { type Context, type RouteSchema } from "elysia";
 import {
   Admin,
   AdminLogin,
@@ -10,31 +8,16 @@ import {
   Interests,
   NotFound,
 } from "./components/pages";
+import { type HandlerContext } from "./models/handlers";
 import {
   type AuthenticateSchema,
   type BlogPostSchema,
   type ContactSchema,
-  type CookieSchema,
   type LoginSchema,
   type SendEmailSchema,
   type ToggleThemeSchema,
 } from "./models/routes";
-import { type Store } from "./models/store";
 import { createNewSession, isAdmin, sendEmail, verifyRecaptcha } from "./utils";
-
-interface DbSchema {
-  db: LibSQLDatabase;
-}
-
-interface StoreSchema {
-  store: Store;
-}
-
-type HandlerContext<Schema extends RouteSchema = RouteSchema> = Context<
-  Schema & CookieSchema
-> &
-  StoreSchema &
-  DbSchema;
 
 export const authenticateHandler = async ({
   body,
