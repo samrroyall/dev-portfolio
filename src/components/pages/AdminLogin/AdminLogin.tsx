@@ -12,7 +12,7 @@ const AdminLogin = ({
   success,
   theme,
 }: AdminLoginProps): JSX.Element => (
-  <BasePage theme={theme}>
+  <BasePage theme={theme} title="Admin Login">
     <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
       <Form
         id="admin-form"

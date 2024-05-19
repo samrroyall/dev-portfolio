@@ -9,15 +9,13 @@ interface BlogProps extends DefaultPageProps {
 }
 
 const Blog = async ({ data, theme }: BlogProps): Promise<JSX.Element> => (
-  <BasePage current="blog" theme={theme}>
+  <BasePage current="blog" theme={theme} title="Blog">
     <Sections
       sectionNum="02"
-      entries={[
-        {
-          title: "Blog Posts",
-          content: (await data).map((post) => <BlogPageEntry post={post} />),
-        },
-      ]}
+      entries={(await data).map((post) => ({
+        title: post.title,
+        content: [<BlogPageEntry post={post} />],
+      }))}
     />
   </BasePage>
 );

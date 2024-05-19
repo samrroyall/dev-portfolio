@@ -21,7 +21,7 @@ const HomeSectionEntry = ({ entry }: HomeSectionEntryProps): JSX.Element => {
         {entry.subtitles.map(({ title, detail }) => (
           <li class="flex w-full justify-between">
             <div>{title}</div>
-            <div class="ml-6 whitespace-nowrap italic">{detail}</div>
+            <div class="ml-6 whitespace-nowrap">{detail}</div>
           </li>
         ))}
       </ul>

@@ -6,7 +6,7 @@ const entries: HomeSection[] = [
     title: "About Me",
     entries: [
       {
-        title: "Sam Royall",
+        title: "",
         subtitles: [],
         text: `I am a software engineer with a passion for problem-solving 
 and a love of learning new programming languages and technologies.
@@ -49,11 +49,11 @@ intrstructure in AWS.`,
       {
         title: "Stroz Friedberg",
         subtitles: [
-          { title: "Consultant, DFIR", detail: "Jun 2020 &#8212; Dec 2020" },
-          { title: "Cyber Associate", detail: "Jul 2019 &#8212; Jun 2020" },
+          { title: "Consultant, DFIR", detail: "Jun 2020 - Dec 2020" },
+          { title: "Cyber Associate", detail: "Jul 2019 - Jun 2020" },
           {
             title: "Cyber Summer Associate",
-            detail: "Jun 2018 &#8212; Aug 2018",
+            detail: "Jun 2018 - Aug 2018",
           },
         ],
         text: `I started at Stroz Friedberg as an intern in the summer of 2018. 
@@ -82,7 +82,7 @@ created various internal tools, primarily written in Python.`,
         subtitles: [
           {
             title: "B.S. Computer Science, B.A. Philosophy",
-            detail: "Oct 2015 &#8212; Jun 2019",
+            detail: "Oct 2015 - Jun 2019",
           },
         ],
         date: "2019",
@@ -95,12 +95,12 @@ _Dean's List_ all four years`,
         subtitles: [
           {
             title: "Software Development Bootcamp",
-            detail: "Jan 2021 &#8212; Apr 2021",
+            detail: "Jan 2021 - Apr 2021",
           },
         ],
         date: "2021",
         text: `Participated in a 14-week full stack web development bootcamp 
-in 2021,receiving highest honors`,
+in 2021, receiving highest honors`,
       },
     ],
   },

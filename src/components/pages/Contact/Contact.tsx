@@ -7,8 +7,8 @@ interface ContactProps extends DefaultPageProps {
   success: string | undefined;
 }
 const Contact = ({ error, success, theme }: ContactProps): JSX.Element => (
-  <BasePage current="contact" theme={theme}>
-    <div>
+  <BasePage current="contact" theme={theme} title="Contact Me">
+    <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
       <Form
         id="contact-form"
         action="/sendemail"
