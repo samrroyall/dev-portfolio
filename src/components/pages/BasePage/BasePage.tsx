@@ -1,6 +1,5 @@
 import { type DefaultPageProps } from "../../../models/routes";
-import { BaseHtml } from "../../shared";
-import PageTitle from "../../shared/PageTitle";
+import { BaseHtml, PageTitle } from "../../shared";
 import Footer from "./Footer";
 import Nav from "./Nav";
 

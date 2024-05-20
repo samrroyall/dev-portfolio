@@ -1,4 +1,4 @@
-import { Link, SectionDivider } from "../../components/shared";
+import { Heading, Link, SectionDivider } from "../../components/shared";
 import { getLowercaseCharAt } from "../../utils";
 
 interface SectionEntry {
@@ -22,15 +22,13 @@ const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
             <div class="font-sauce-code-pro">
               {`${sectionNum}.${getLowercaseCharAt(i)}`}
             </div>
-            <div class="text-secondary-text dark:text-secondary-text-dark text-2xl font-bold">
-              {titleLink ? (
-                <Link href={titleLink} arrow={true} target="_self">
-                  <span>{title}</span>
-                </Link>
-              ) : (
-                <span>{title}</span>
-              )}
-            </div>
+            {titleLink ? (
+              <Link href={titleLink} arrow={true} target="_self">
+                <Heading variant={3} text={title} />
+              </Link>
+            ) : (
+              <Heading variant={3} text={title} />
+            )}
             <SectionDivider />
           </div>
           <div
