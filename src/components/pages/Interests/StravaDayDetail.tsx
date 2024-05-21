@@ -84,7 +84,7 @@ const StravaDayDetail = ({
   return (
     <div
       id={`run-${id}-detail`}
-      class={`font-sauce-code-pro absolute left-0 top-0 hidden h-full w-full`}
+      class={`font-geist-mono absolute left-0 top-0 hidden h-full w-full`}
     >
       <div
         class={`flex h-full w-full flex-col p-3 ${borderClasses} ${bgClasses}`}

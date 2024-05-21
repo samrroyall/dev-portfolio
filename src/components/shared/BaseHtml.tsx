@@ -1,16 +1,9 @@
 import { type DefaultPageProps } from "../../models/routes";
 
-const defaultBgColor = "bg-primary-bg";
+const bgClasses = "bg-primary-bg dark:bg-primary-bg-dark";
 
-const defaultBg = `${defaultBgColor} dark:${defaultBgColor}-dark`;
-
-const defaultTextColor = "text-primary-text";
-
-const defaultText = `${defaultTextColor} dark:${defaultTextColor}-dark`;
-
-const defaultFont = "source-sans-3 text-base";
-
-const defaultClasses = `${defaultBg} ${defaultText} ${defaultFont}`;
+const textClasses =
+  "text-primary-text dark:text-primary-text-dark text-xs max-sm:text-sm";
 
 const twTheme = {
   darkMode: "selector",
@@ -43,52 +36,56 @@ interface BaseHtmlProps extends DefaultPageProps {
   children: Html.Children;
 }
 
-const BaseHtml = ({ children, theme }: BaseHtmlProps): JSX.Element => (
-  <html
-    class={`h-screen w-screen overflow-hidden ${theme.value === "dark" ? "dark" : ""}`}
-  >
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Sam Royall</title>
-      <script type="text/javascript" src="https://cdn.tailwindcss.com" />
-      <script
-        async
-        type="text/javascript"
-      >{`tailwind.config = ${JSON.stringify(twTheme)}`}</script>
-      <script
-        type="text/javascript"
-        src="https://unpkg.com/htmx.org@1.9.12"
-        integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
-        crossorigin="anonymous"
-      />
-      <script
-        type="text/javascript"
-        src="https://www.google.com/recaptcha/api.js"
-        async
-        defer
-      />
-      <script
-        type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
-        integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"
-        crossorigin="anonymous"
-        async
-        defer
-      />
+const BaseHtml = ({ children, theme }: BaseHtmlProps): JSX.Element => {
+  const mode = theme.value === "dark" ? "dark" : "";
 
-      <link rel="stylesheet" type="text/css" href="/public/global.css" />
-      <link rel="stylesheet" type="text/css" href="/public/prism.css" />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
-        integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
-        crossorigin="anonymous"
-      />
-    </head>
-    <body class={defaultClasses}>{children}</body>
-  </html>
-);
+  return (
+    <html
+      class={`h-screen w-screen overflow-hidden ${bgClasses} ${textClasses} ${mode}`}
+    >
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sam Royall</title>
+        <script type="text/javascript" src="https://cdn.tailwindcss.com" />
+        <script
+          async
+          type="text/javascript"
+        >{`tailwind.config = ${JSON.stringify(twTheme)}`}</script>
+        <script
+          type="text/javascript"
+          src="https://unpkg.com/htmx.org@1.9.12"
+          integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+          crossorigin="anonymous"
+        />
+        <script
+          type="text/javascript"
+          src="https://www.google.com/recaptcha/api.js"
+          async
+          defer
+        />
+        <script
+          type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
+          integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd"
+          crossorigin="anonymous"
+          async
+          defer
+        />
+
+        <link rel="stylesheet" type="text/css" href="/public/global.css" />
+        <link rel="stylesheet" type="text/css" href="/public/prism.css" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
+          integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
+          crossorigin="anonymous"
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+};
 
 export default BaseHtml;

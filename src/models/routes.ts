@@ -18,7 +18,7 @@ export interface AuthenticateSchema {
 
 export const blogPostSchema = {
   params: t.Object({
-    id: t.Numeric(),
+    slug: t.String(),
   }),
 };
 

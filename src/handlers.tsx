@@ -58,9 +58,9 @@ export const blogHandler = async ({
 export const blogPostHandler = async ({
   cookie: { theme },
   store,
-  params: { id },
+  params: { slug },
 }: HandlerContext<BlogPostSchema>) =>
-  BlogPost({ data: store.blogPost.get(id), theme });
+  BlogPost({ data: store.blogPost.get(slug), theme });
 
 export const contactHandler = ({
   cookie: { theme },

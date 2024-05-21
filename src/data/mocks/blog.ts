@@ -192,24 +192,29 @@ fn fib(n):
 
 const posts: BlogPost[] = [
   {
-    id: 1,
+    slug: "blog-post-1",
     title: "Blog Post 1",
     subtitle: "This is the subtitle of the post",
+    blurb:
+      "This article explores all of the renderers available for a blog post via the markedJS library. This is effectively a style guide for my blog posts.",
     date: "2024-04-08",
     text: mockText,
   },
   {
-    id: 2,
+    slug: "blog-post-2",
     title: "Blog Post 2, Which Has a Slightly Longer Title",
     subtitle: "This is the subtitle of the post",
+    blurb:
+      "This article explores all of the renderers available for a blog post via the markedJS library. This is effectively a style guide for my blog posts.",
     date: "2024-04-15",
     text: mockText,
   },
   {
-    id: 3,
+    slug: "blog-post-3",
     title: "Blog Post 3",
-    subtitle:
-      "This is the subtitle of the post, but it is slightly longer than the other subtitles",
+    subtitle: "This is the subtitle of the post, but it's slightly longer",
+    blurb:
+      "This article explores all of the renderers available for a blog post via the markedJS library. This is effectively a style guide for my blog posts.",
     date: "2024-04-21",
     text: mockText,
   },
@@ -218,12 +223,13 @@ const posts: BlogPost[] = [
 export const getMockBlogData = (): Promise<BlogPostInfo[]> =>
   mockFunc(
     posts.map((post) => ({
-      id: post.id,
+      slug: post.slug,
       title: post.title,
       subtitle: post.subtitle,
+      blurb: post.blurb,
       date: post.date,
     })),
   );
 
-export const getMockBlogPostData = (id: number): Promise<BlogPost | null> =>
-  mockFunc(posts.find((post) => post.id === id) || null);
+export const getMockBlogPostData = (slug: string): Promise<BlogPost | null> =>
+  mockFunc(posts.find((post) => post.slug === slug) || null);

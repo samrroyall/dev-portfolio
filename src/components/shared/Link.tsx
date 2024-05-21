@@ -22,7 +22,7 @@ const Link = ({ href, arrow, noUnderline, target, children }: LinkProps) => (
     >
       {children}
     </a>
-    {arrow === true ? <span class="select-none">{" ↗"}</span> : null}
+    {arrow === true ? <span class="select-none">{" \u2197"}</span> : null}
   </span>
 );
 

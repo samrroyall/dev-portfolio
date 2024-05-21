@@ -1,120 +1,18 @@
 /* FONTS */
 
 @font-face {
-  font-family: "SymbolsNerdFont";
+  font-family: SymbolsNerdFont;
   src: url("fonts/SymbolsNerdFont-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-ExtraLight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
+  font-family: GeistSans;
+  src: url("fonts/GeistVF.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-ExtraLightItalic.ttf")
-    format("truetype");
-  font-weight: 200;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-LightItalic.ttf") format("truetype");
-  font-weight: 300;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-MediumItalic.ttf") format("truetype");
-  font-weight: 500;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-SemiBoldItalic.ttf")
-    format("truetype");
-  font-weight: 600;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-BoldItalic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-Black.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SauceCodePro";
-  src: url("fonts/SauceCodeProNerdFontMono-BlackItalic.ttf") format("truetype");
-  font-weight: 900;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "SourceSans3";
-  src: url("fonts/SourceSans3-VariableFont_wght.ttf") format("truetype");
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "SourceSans3";
-  src: url("fonts/SourceSans3-Italic-VariableFont_wght.ttf") format("truetype");
-  font-style: italic;
+  font-family: GeistMono;
+  src: url("fonts/GeistMonoVF.ttf") format("truetype");
 }
 
 /* VARIABLES */
@@ -128,8 +26,8 @@
   --secondary-bg-dark: rgb(39 39 42);
   --tertiary-bg-dark: rgb(23 23 23);
   --code-bg-dark: rgb(24 24 27);
-  --primary-text: rgb(9 9 11);
-  --secondary-text: rgb(39 39 42);
+  --primary-text: rgb(115 115 115);
+  --secondary-text: rgb(38 38 38);
   --tertiary-text: rgb(23 23 23);
   --primary-text-dark: rgb(168 162 158);
   --secondary-text-dark: rgb(214 211 209);
@@ -141,21 +39,31 @@
 
 /* FONT CLASSES */
 
-* {
-  font-family: SourceSans3, sans-serif;
-}
-
 .font-symbols,
 .font-symbols * {
-  font-family: SymbolsNerdFont;
+  font-family: SymbolsNerdFont !important;
 }
 
-.font-sauce-code-pro,
-.font-sauce-code-pro * {
-  font-family: SauceCodePro, monospace;
+.font-geist-sans .font-geist-sans * {
+  font-family: GeistSans !important;
+}
+
+/* Set GeistSans as the default font */
+* {
+  font-family: GeistSans !important;
+}
+
+.font-geist-mono,
+.font-geist-mono * {
+  font-family: GeistMono !important;
 }
 
 /* KATEX */
+
+.katex,
+.katex * {
+  font-family: KATEX_MATH !important;
+}
 
 html:not(.dark) .katex {
   color: var(--secondary-text);

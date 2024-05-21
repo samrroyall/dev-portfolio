@@ -12,7 +12,7 @@ const storeData: Store = {
   },
   blog: getMockBlogData(),
   blogPost: {
-    get: (id: number) => getMockBlogPostData(id),
+    get: (slug: string) => getMockBlogPostData(slug),
   },
 };
 

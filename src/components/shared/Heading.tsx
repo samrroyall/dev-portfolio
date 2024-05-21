@@ -1,11 +1,11 @@
 const secondaryText = "text-secondary-text dark:text-secondary-text-dark";
 
 const hClasses = [
-  `text-4xl font-black ${secondaryText}`,
-  `text-3xl font-black ${secondaryText}`,
+  `text-4xl font-bold ${secondaryText}`,
+  `text-3xl font-bold ${secondaryText}`,
   `text-2xl font-bold ${secondaryText}`,
-  `text-xl font-bold ${secondaryText}`,
-  `text-lg font-bold`,
+  `text-xl font-semibold ${secondaryText}`,
+  `text-lg font-semibold`,
   `text-lg font-semibold`,
 ];
 

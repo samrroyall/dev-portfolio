@@ -19,7 +19,7 @@ const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
       <section class="group/section w-full">
         <div class="my-3 flex flex-col p-2">
           <div class="ml-auto w-full max-lg:text-right">
-            <div class="font-sauce-code-pro">
+            <div class="font-geist-mono">
               {`${sectionNum}.${getLowercaseCharAt(i)}`}
             </div>
             {titleLink ? (
@@ -32,7 +32,7 @@ const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
             <SectionDivider />
           </div>
           <div
-            class={`py-4 ${fullPage === true ? "" : "lg:w-2/3 lg:self-end"}`}
+            class={`py-4 ${fullPage === true ? "" : "lg:w-3/4 lg:self-end"}`}
           >
             {content}
           </div>

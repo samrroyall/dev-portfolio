@@ -19,7 +19,7 @@ const BlogPost = async ({
       <div class="my-3 p-2">
         <header>
           <Heading variant={1} text={post.title} />
-          <div>{post.subtitle}</div>
+          <div class="mb-1">{post.subtitle}</div>
         </header>
         <SectionDivider />
         <div

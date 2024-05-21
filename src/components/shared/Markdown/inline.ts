@@ -2,7 +2,7 @@ import { link } from "./link";
 
 const codespan = (code: string): string => {
   const textClasses =
-    "text-[90%] font-sauce-code-pro text-secondary-text dark:text-secondary-text-dark";
+    "text-[90%] font-geist-mono text-secondary-text dark:text-secondary-text-dark";
 
   const bgClasses = "rounded bg-secondary-bg dark:bg-secondary-bg-dark";
 
