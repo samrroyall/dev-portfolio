@@ -1,17 +1,8 @@
+import { navRoutes } from "../../../models/routes";
 import { Icon, Link } from "../../shared";
 
-const pages = [
-  { label: "home", link: "/" },
-  { label: "interests", link: "/interests" },
-  { label: "blog", link: "/blog" },
-  { label: "contact", link: "/contact" },
-];
-
 const circleIcon = (
-  <Icon
-    className="text-secondary-text dark:text-secondary-text-dark"
-    icon={"\uf111"}
-  />
+  <Icon className="text-xs max-sm:text-base" icon={"\uebb4"} />
 );
 
 interface NavProps {
@@ -19,26 +10,24 @@ interface NavProps {
 }
 
 const Nav = ({ current }: NavProps): JSX.Element => (
-  <nav class="bg-primary-bg dark:bg-primary-bg-dark pb-3 pl-1">
+  <nav class="bg-primary-bg dark:bg-primary-bg-dark text-secondary-text dark:text-secondary-text-dark pb-3 pl-1 sm:text-sm">
     <ul>
-      {pages.map(({ label, link }, i) => (
-        <li class="flex">
-          <div class="w-8 text-center font-light">
+      {navRoutes.map(({ label, link }, i) => (
+        <li class="flex h-5 items-center max-sm:h-8">
+          <div class="w-8 text-center max-sm:mr-1">
             {current && label === current ? (
-              circleIcon
+              <div class="mb-[1px]">{circleIcon}</div>
             ) : (
-              <span class="font-sauce-code-pro">{`0${i}`}</span>
+              <span class="font-sauce-code-pro text-primary-text dark:text-primary-text-dark">{`0${i}`}</span>
             )}
           </div>
-          <div class="text-secondary-text dark:text-secondary-text-dark">
-            {current !== undefined && label === current ? (
-              label
-            ) : (
-              <Link href={link} target="_self">
-                {label}
-              </Link>
-            )}
-          </div>
+          {current && label === current ? (
+            <span>{label}</span>
+          ) : (
+            <Link href={link} target="_self">
+              <span>{label}</span>
+            </Link>
+          )}
         </li>
       ))}
     </ul>

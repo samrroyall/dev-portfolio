@@ -6,23 +6,24 @@ export interface HomeSectionEntryProps {
 }
 
 const HomeSectionEntry = ({ entry }: HomeSectionEntryProps): JSX.Element => {
-  const titleHeading = (
-    <Heading
-      variant={4}
-      text={entry.title}
-      className="text-secondary-text dark:text-secondary-text-dark"
-      inline={true}
-    />
-  );
-
   const entryHeader = (
     <div class="text-secondary-text dark:text-secondary-text-dark mb-3">
       {entry.titleLink ? (
         <Link href={entry.titleLink} arrow={true}>
-          {titleHeading}
+          <Heading
+            variant={4}
+            text={entry.title}
+            className="text-secondary-text dark:text-secondary-text-dark underline"
+            inline={true}
+          />
         </Link>
       ) : (
-        titleHeading
+        <Heading
+          variant={4}
+          text={entry.title}
+          className="text-secondary-text dark:text-secondary-text-dark"
+          inline={true}
+        />
       )}
       <ul>
         {entry.subtitles.map(({ title, detail }) => (

@@ -59,6 +59,18 @@ export interface LoginSchema {
   query: Static<typeof loginSchema.query>;
 }
 
+interface NavRoute {
+  label: string;
+  link: string;
+}
+
+export const navRoutes: NavRoute[] = [
+  { label: "home", link: "/" },
+  { label: "interests", link: "/interests" },
+  { label: "blog", link: "/blog" },
+  { label: "contact", link: "/contact" },
+];
+
 export const sendEmailSchema = {
   body: t.Object({
     name: t.Union([t.String(), t.Undefined()]),

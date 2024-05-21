@@ -12,7 +12,7 @@ const linkedInIcon = (
 
 const menuIcon = <Icon icon={"\ueb94"} />;
 
-const darkModeIcon = <Icon icon={"\uf4ee"} />;
+const darkModeIcon = <Icon icon={"\udb81\udd94"} />;
 
 const lightModeIcon = <Icon icon={"\uf522"} />;
 
@@ -52,16 +52,16 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
   const icons = [themeButton, linkedInIcon, githubIcon];
 
   return (
-    <footer class="w-full xl:text-lg 2xl:text-xl">
+    <footer class="w-full max-sm:text-xl">
       <hr class="border-secondary-text dark:border-secondary-text-dark hidden lg:block" />
-      <div class="relative flex items-center p-2">
+      <div class="text-secondary-text dark:text-secondary-text-dark relative flex items-center p-2 ">
         <div
           class="cursor-pointer lg:hidden"
           hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
         </div>
-        <ul class="text-secondary-text dark:text-secondary-text-dark ml-auto flex">
+        <ul class="ml-auto flex">
           {icons.map((icon) => (
             <li class="mx-1 first:ml-0 last:mr-0">{icon}</li>
           ))}

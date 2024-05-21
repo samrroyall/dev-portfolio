@@ -50,15 +50,12 @@ const link = (
 
   const titleAttr = title ? `title="${title}"` : "";
 
-  const textClasses = "text-secondary-text dark:text-secondary-text-dark";
-  const hoverTextClasses =
-    "hover:text-secondary-text hover:dark:text-secondary-text-dark";
+  const textClasses =
+    "text-secondary-text dark:text-secondary-text-dark underline";
 
-  const displayText = `<span class="${textClasses}">${text}</span>`;
+  const anchor = `<a href="${cleanHref}" target="_blank" ${titleAttr}>${text}</a>`;
 
-  const anchor = `<a class="underline" href="${cleanHref}" target="_blank" ${titleAttr}>${displayText}</a>`;
-
-  return `<span class="${hoverTextClasses}">${anchor}</span>`;
+  return `<span class="${textClasses}">${anchor}</span>`;
 };
 
 export { image, link };

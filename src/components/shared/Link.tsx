@@ -14,7 +14,7 @@ interface LinkProps {
 }
 
 const Link = ({ href, arrow, noUnderline, target, children }: LinkProps) => (
-  <span class="hover:text-secondary-text hover:dark:text-secondary-text-dark">
+  <span class="text-secondary-text dark:text-secondary-text-dark">
     <a
       class={noUnderline === true ? "" : "underline"}
       href={href}
