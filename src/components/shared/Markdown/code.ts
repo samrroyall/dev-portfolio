@@ -49,7 +49,7 @@ const code = (
     lang && !!languages[lang] ? `language-${lang}` : defaultLangStyles;
 
   const preStyleClasses =
-    "bg-code-bg dark:bg-code-bg-dark font-geist-mono text-xs";
+    "bg-code-bg dark:bg-code-bg-dark font-geist-mono text-sm";
 
   const prePositioningClasses = `relative my-6 p-3 ${lang ? "pt-7" : ""} rounded`;
 

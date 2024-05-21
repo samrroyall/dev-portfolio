@@ -21,17 +21,17 @@ const image = (
     return text;
   }
 
-  const titleAttr = !!title ? `title="${title}"` : "";
-
   const imgClasses = "max-h-[300px] w-auto rounded";
 
-  const image = `<img class="${imgClasses}" src="${cleanHref}" alt="${text}" ${titleAttr} />`;
+  const image = `<img class="${imgClasses}" src="${cleanHref}" alt="${text}" />`;
 
   const descriptionClasses =
     "my-1 text-secondary-text dark:text-secondary-text-dark text-xs";
 
-  const description = !!text
-    ? `<div class="${descriptionClasses}">${text}</div>`
+  const imageTitle = !!title ? `<span class="font-bold">${title}: </span>` : "";
+
+  const description = text
+    ? `<div class="${descriptionClasses}">${imageTitle}${text}</div>`
     : "";
 
   return `<div class="my-4 mx-auto flex flex-col items-center">${image}${description}</div>`;

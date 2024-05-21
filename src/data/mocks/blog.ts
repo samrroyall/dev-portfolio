@@ -185,9 +185,9 @@ fn fib(n):
 
 
 [1]: https://www.google.com
-[2]: https://cdn.openai.com/new-and-improved-embedding-model/draft-20221214a/vectors-2.svg
-[3]: https://images.openai.com/blob/b44edb0b-77de-46a9-b4dc-0ff956143d94/CustomBlogCover.png?trim=0,0,0,0&width=3200 (This is a title)
-[4]: https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg (Rust logo)
+[2]: https://cdn.openai.com/new-and-improved-embedding-model/draft-20221214a/vectors-2.svg (FIG 1)
+[3]: https://images.openai.com/blob/b44edb0b-77de-46a9-b4dc-0ff956143d94/CustomBlogCover.png?trim=0,0,0,0&width=3200 (FIG 2)
+[4]: https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg (FIG 3)
 `;
 
 const posts: BlogPost[] = [
