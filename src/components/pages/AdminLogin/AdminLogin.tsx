@@ -1,6 +1,6 @@
 import { type DefaultPageProps } from "../../../models/routes";
 import { BasePage } from "../../pages";
-import { Form, Input } from "../../shared";
+import { Form, Input, SectionDivider } from "../../shared";
 
 interface AdminLoginProps extends DefaultPageProps {
   error: string | undefined;
@@ -13,6 +13,7 @@ const AdminLogin = ({
   theme,
 }: AdminLoginProps): JSX.Element => (
   <BasePage theme={theme} title="Admin Login">
+    <SectionDivider />
     <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
       <Form
         id="admin-form"

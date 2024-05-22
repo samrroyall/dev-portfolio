@@ -1,6 +1,6 @@
 import { type DefaultPageProps } from "../../../models/routes";
 import { BasePage } from "../../pages";
-import { Form, Input } from "../../shared";
+import { Form, Input, SectionDivider } from "../../shared";
 
 interface ContactProps extends DefaultPageProps {
   error: string | undefined;
@@ -8,6 +8,7 @@ interface ContactProps extends DefaultPageProps {
 }
 const Contact = ({ error, success, theme }: ContactProps): JSX.Element => (
   <BasePage current="contact" theme={theme} title="Contact Me">
+    <SectionDivider />
     <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
       <Form
         id="contact-form"
