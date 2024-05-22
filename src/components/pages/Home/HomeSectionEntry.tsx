@@ -29,7 +29,7 @@ const HomeSectionEntry = ({ entry }: HomeSectionEntryProps): JSX.Element => {
         {entry.subtitles.map(({ title, detail }) => (
           <li class="flex w-full justify-between">
             <div>{title}</div>
-            <div class="ml-6 whitespace-nowrap">{detail}</div>
+            <div class="ml-6 whitespace-nowrap font-light">{detail}</div>
           </li>
         ))}
       </ul>

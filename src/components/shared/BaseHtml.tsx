@@ -1,9 +1,9 @@
 import { type DefaultPageProps } from "../../models/routes";
 
-const bgClasses = "bg-primary-bg dark:bg-primary-bg-dark";
+const bgClasses = `bg-primary-bg dark:bg-none dark:bg-primary-bg-dark`;
 
 const textClasses =
-  "text-primary-text dark:text-primary-text-dark text-xs max-sm:text-sm";
+  "text-primary-text dark:text-primary-text-dark text-sm 2xl:text-xs";
 
 const twTheme = {
   darkMode: "selector",
@@ -34,9 +34,10 @@ const twTheme = {
 
 interface BaseHtmlProps extends DefaultPageProps {
   children: Html.Children;
+  title?: String;
 }
 
-const BaseHtml = ({ children, theme }: BaseHtmlProps): JSX.Element => {
+const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
   const mode = theme.value === "dark" ? "dark" : "";
 
   return (
@@ -46,7 +47,7 @@ const BaseHtml = ({ children, theme }: BaseHtmlProps): JSX.Element => {
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sam Royall</title>
+        <title>{title ?? "Sam Royall"}</title>
         <script type="text/javascript" src="https://cdn.tailwindcss.com" />
         <script
           async

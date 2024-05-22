@@ -18,7 +18,7 @@ const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
     {entries.map(({ title, content, titleLink, fullPage }, i) => (
       <section class="group/section w-full">
         <div class="my-3 flex flex-col p-2">
-          <div class="ml-auto w-full max-lg:text-right">
+          <div class="ml-auto w-full text-right">
             <div class="font-geist-mono">
               {`${sectionNum}.${getLowercaseCharAt(i)}`}
             </div>
@@ -31,9 +31,7 @@ const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
             )}
             <SectionDivider />
           </div>
-          <div
-            class={`py-4 ${fullPage === true ? "" : "lg:w-3/4 lg:self-end"}`}
-          >
+          <div class={`py-4 ${fullPage === true ? "" : "lg:mx-auto lg:w-3/4"}`}>
             {content}
           </div>
         </div>

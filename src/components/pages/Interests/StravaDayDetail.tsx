@@ -14,13 +14,6 @@ const unitClasses = "text-base mx-1";
 
 const mainUnitClasses = `text-base text-primary-text dark:text-primary-text-dark ml-3`;
 
-const textClasses = "text-secondary-text dark:text-secondary-text-dark ";
-
-const hoverTextClasses =
-  "hover:text-tertiary-text hover:dark:text-tertiary-text-dark";
-
-const iconClasses = `${textClasses} ${hoverTextClasses} cursor-pointer`;
-
 interface StravaDayDetailProps {
   id: number;
   miles: number;
@@ -84,7 +77,7 @@ const StravaDayDetail = ({
   return (
     <div
       id={`run-${id}-detail`}
-      class={`font-geist-mono absolute left-0 top-0 hidden h-full w-full`}
+      class={`absolute left-0 top-0 hidden h-full w-full`}
     >
       <div
         class={`flex h-full w-full flex-col p-3 ${borderClasses} ${bgClasses}`}
@@ -93,9 +86,9 @@ const StravaDayDetail = ({
           class="flex-none"
           hx-on:click={`htmx.toggleClass("#run-${id}-detail", "hidden")`}
         >
-          <Icon icon={"\uea9b"} className={iconClasses} />
+          <Icon icon={"\udb80\udc4d"} className="cursor-pointer" />
         </div>
-        <div class="flex flex-auto flex-col justify-center px-8">
+        <div class="font-geist-mono flex flex-auto flex-col justify-center px-8 ">
           {milesValue}
           {paceValue}
           {avgBpm ? bpmValue : null}

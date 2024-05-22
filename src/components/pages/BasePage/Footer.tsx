@@ -1,5 +1,5 @@
 import { type Cookie } from "elysia";
-import { Icon } from "../../shared";
+import { Heading, Icon } from "../../shared";
 import Nav from "./Nav";
 
 const githubIcon = (
@@ -53,15 +53,16 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
 
   return (
     <footer class="w-full text-lg max-sm:text-xl">
-      <hr class="border-secondary-text dark:border-secondary-text-dark hidden lg:block" />
-      <div class="text-secondary-text dark:text-secondary-text-dark relative flex items-center p-2 ">
+      <hr class="border-secondary-text dark:border-secondary-text-dark max-lg:hidden" />
+      <div class="text-secondary-text dark:text-secondary-text-dark relative flex items-center justify-between p-2 ">
         <div
-          class="cursor-pointer lg:hidden"
+          class="basis-20 cursor-pointer lg:hidden"
           hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
         </div>
-        <ul class="ml-auto flex">
+        <Heading variant={3} text="Sam Royall" className="lg:hidden" />
+        <ul class="flex basis-20 justify-end lg:ml-auto">
           {icons.map((icon) => (
             <li class="mx-1 first:ml-0 last:mr-0">{icon}</li>
           ))}

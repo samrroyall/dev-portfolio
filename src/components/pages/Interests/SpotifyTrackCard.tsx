@@ -2,8 +2,6 @@ import { type Track } from "../../../models/interests";
 import { Icon, Link } from "../../shared";
 
 const imageSize = 300;
-const arrowClasses =
-  "text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg";
 
 interface SpotifyTrackCardProps {
   id: number;
@@ -25,7 +23,10 @@ const SpotifyTrackCard = ({
   return (
     <div class="flex items-center">
       <div hx-on:click={`${toggleCard(id)}; ${toggleCard(prevId)};`}>
-        <Icon className={arrowClasses} icon={`\ueab5`} />
+        <Icon
+          icon={`\ueab5`}
+          className="text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg"
+        />
       </div>
       <div class="mx-3">
         <div class={`h-[${imageSize}px] w-[${imageSize}px]`}>
@@ -49,7 +50,10 @@ const SpotifyTrackCard = ({
         </div>
       </div>
       <div hx-on:click={`${toggleCard(id)}; ${toggleCard(nextId)};`}>
-        <Icon className={arrowClasses} icon={`\ueab6`} />
+        <Icon
+          icon={`\ueab6`}
+          className="text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg"
+        />
       </div>
     </div>
   );

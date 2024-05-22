@@ -1,31 +1,16 @@
-const borderClasses =
-  "border-secondary-text dark:border-secondary-text-dark rounded border";
+const borderClasses = `
+  border-secondary-text dark:border-secondary-text-dark rounded border
+  disabled:border-primary-text disabled:dark:border-primary-text-dark
+`;
 
-const textClasses = "text-secondary-text dark:text-secondary-text-dark text-sm";
+const textClasses = `
+  text-secondary-text dark:text-secondary-text-dark text-sm
+  disabled:text-primary-text disabled:dark:text-sdiabled:econdary-text-dark
+  enabled:hover:text-primary-bg enabled:hover:dark:text-primary-bg-dark
+  enabled:hover:bg-primary-bg-dark enabled:hover:dark:bg-primary-bg
+`;
 
-const hoverBgClasses =
-  "hover:bg-tertiary-text hover:dark:bg-tertiary-text-dark";
-
-const hoverBorderClasses =
-  "hover:border-tertiary-text hover:dark:border-tertiary-text-dark";
-
-const hoverTextClasses =
-  "hover:text-primary-bg hover:dark:text-primary-bg-dark";
-
-const hoverClasses = `${hoverBgClasses} ${hoverBorderClasses} ${hoverTextClasses}`;
-
-const disabledTextClasses =
-  "disabled:text-primary-text disabled:dark:text-primary-text-dark";
-
-const disabledBorderClasses =
-  "disabled:border-primary-text disabled:dark:border-primary-text-dark";
-
-const disabledBgClasses =
-  "disabled:bg-primary-bg disabled:dark:bg-primary-bg-dark";
-
-const disabledClasses = `${disabledTextClasses} ${disabledBgClasses} ${disabledBorderClasses}`;
-
-const classes = `px-3 py-2 ${borderClasses} ${textClasses} ${hoverClasses} ${disabledClasses}`;
+const classes = `px-3 py-2 ${borderClasses} ${textClasses}`;
 
 type ButtonType = "button" | "submit";
 

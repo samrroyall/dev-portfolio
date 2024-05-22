@@ -53,7 +53,7 @@ const link = (
   const textClasses =
     "text-secondary-text dark:text-secondary-text-dark underline";
 
-  const anchor = `<a href="${cleanHref}" target="_blank" ${titleAttr}>${text}</a>`;
+  const anchor = `<a href="${cleanHref}" target="_blank" class="cursor-pointer" ${titleAttr}>${text}</a>`;
 
   return `<span class="${textClasses}">${anchor}</span>`;
 };

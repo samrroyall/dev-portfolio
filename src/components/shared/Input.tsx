@@ -21,7 +21,7 @@ const noBorderClasses = `border-0 ring-0 outline-none`;
 
 const placeholderClasses = `placeholder-primary-text dark:placeholder-primary-text-dark text`;
 
-const inputClasses = `w-full p-1 ${noBorderClasses} ${placeholderClasses}`;
+const inputClasses = `bg-transparent w-full p-1 ${noBorderClasses} ${placeholderClasses}`;
 
 const legendClasses = "px-1 text-sm";
 

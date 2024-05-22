@@ -1,5 +1,8 @@
 import { navRoutes } from "../../../models/routes";
-import { Icon, Link } from "../../shared";
+import { Heading, Icon, Link } from "../../shared";
+
+const colorClasses =
+  "bg-primary-bg dark:bg-primary-bg-dark text-secondary-text dark:text-secondary-text-dark";
 
 const circleIcon = (
   <Icon className="text-sm max-sm:text-base" icon={"\uebb4"} />
@@ -10,11 +13,12 @@ interface NavProps {
 }
 
 const Nav = ({ current }: NavProps): JSX.Element => (
-  <nav class="bg-primary-bg dark:bg-primary-bg-dark text-secondary-text dark:text-secondary-text-dark pb-3 pl-1 text-base">
+  <nav class={`pb-3 pl-1 text-base max-lg:pl-3 ${colorClasses}`}>
+    <Heading variant={3} text="Sam Royall" className="max-lg:hidden" />
     <ul>
       {navRoutes.map(({ label, link }, i) => (
         <li class="flex h-5 items-end max-sm:h-7">
-          <div class="w-8 text-center max-sm:mr-1">
+          <div class="mr-2 basis-5 text-center">
             {current && label === current ? (
               <div class="mb-[1px]">{circleIcon}</div>
             ) : (

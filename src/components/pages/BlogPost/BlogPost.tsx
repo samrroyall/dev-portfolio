@@ -15,7 +15,7 @@ const BlogPost = async ({
   const post = await data;
 
   return post ? (
-    <BasePage theme={theme}>
+    <BasePage theme={theme} title={post.title} pageTitle={false}>
       <div class="my-3 p-2">
         <header>
           <Heading variant={1} text={post.title} />

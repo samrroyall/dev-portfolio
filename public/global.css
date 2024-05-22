@@ -50,7 +50,7 @@
 
 /* Set GeistSans as the default font */
 * {
-  font-family: GeistSans !important;
+  font-family: GeistSans;
 }
 
 .font-geist-mono,
@@ -60,19 +60,16 @@
 
 /* KATEX */
 
-.katex,
 .katex * {
-  font-family: KATEX_MATH !important;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 html:not(.dark) .katex {
   color: var(--secondary-text);
-  font-size: 1em !important;
 }
 
 html.dark .katex {
   color: var(--secondary-text-dark);
-  font-size: 1em !important;
 }
 
 /* TEXT SELECTION */
