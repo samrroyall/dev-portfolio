@@ -15,6 +15,20 @@
       "when": 1715890942379,
       "tag": "0001_colorful_mysterio",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1716429797709,
+      "tag": "0002_workable_morg",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1716472328166,
+      "tag": "0003_brave_sleepwalker",
+      "breakpoints": true
     }
   ]
 }
