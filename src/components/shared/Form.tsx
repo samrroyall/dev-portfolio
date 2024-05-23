@@ -1,16 +1,7 @@
 import Button from "./Button";
+import Icon from "./Icon";
 
-const errorIconContainerClasses =
-  "flex items-center justify-center h-3.5 w-3.5 mr-2 rounded-full";
-
-const errorIconStyleClasses =
-  "text-primary-bg dark:text-primary-bg-dark bg-red-400 text-sm font-bold leading-3";
-
-const errorIcon = (
-  <div class={`${errorIconContainerClasses} ${errorIconStyleClasses}`}>
-    {"!"}
-  </div>
-);
+const errorIcon = <Icon icon={"\uf06a"} className="text-error-text mr-2" />;
 
 const successClasses =
   "text-secondary-text dark:text-secondary-text-dark text-center";
@@ -53,7 +44,7 @@ const Form = ({
     <>
       <script>{recaptchaFuncs}</script>
       <div
-        class={`flex items-center text-red-400 ${success === false ? "" : "hidden"}`}
+        class={`text-error-text flex items-center ${success === false ? "" : "hidden"}`}
       >
         {errorIcon}
         <span>{errorMsg ?? ErrorMsg.unknown}</span>

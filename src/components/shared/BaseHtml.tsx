@@ -25,6 +25,7 @@ const twTheme = {
         "secondary-text-dark": "var(--secondary-text-dark)",
         "tertiary-text-dark": "var(--tertiary-text-dark)",
         "code-text": "var(--code-text)",
+        "error-text": "var(--error-text)",
         "strava-orange": "var(--strava-orange)",
         "strava-orange-light": "var(--strava-orange-light)",
       },

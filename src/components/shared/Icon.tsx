@@ -1,7 +1,5 @@
 import Link, { type LinkTarget } from "./Link";
 
-const colorClasses = "text-secondary-text dark:text-secondary-text-dark";
-
 interface IconProps {
   icon: string;
   link?: string;
@@ -16,9 +14,7 @@ const Icon = ({
   className,
 }: IconProps): JSX.Element => {
   const iconSpan = (
-    <span class={`font-symbols select-none ${colorClasses} ${className ?? ""}`}>
-      {icon}
-    </span>
+    <span class={`font-symbols select-none ${className ?? ""}`}>{icon}</span>
   );
 
   return link ? (

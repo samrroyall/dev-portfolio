@@ -2,6 +2,14 @@ import { type Cookie } from "elysia";
 import { Heading, Icon } from "../../shared";
 import Nav from "./Nav";
 
+const footerNavColorClasses =
+  "border-secondary-text dark:border-secondary-text-dark bg-primary-bg dark:bg-primary-bg-dark";
+
+const footerNavPositionClasses =
+  "absolute flex hidden w-full items-end justify-between border-b";
+
+const footerNavClasses = `${footerNavPositionClasses} ${footerNavColorClasses}`;
+
 const githubIcon = (
   <Icon icon={"\uf113"} link={"https://github.com/samrroyall"} />
 );
@@ -10,11 +18,11 @@ const linkedInIcon = (
   <Icon icon={"\udb80\udf3b"} link={"https://linkedin.com/in/samrroyall"} />
 );
 
+const lightModeIcon = <Icon icon={"\uf522"} />;
+
 const menuIcon = <Icon icon={"\ueb94"} />;
 
 const darkModeIcon = <Icon icon={"\udb81\udd94"} />;
-
-const lightModeIcon = <Icon icon={"\uf522"} />;
 
 const optimisticallyUpdateTheme = `
 document.body.addEventListener("htmx:afterRequest", function(evt) {
@@ -49,30 +57,53 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
     </button>
   );
 
-  const icons = [themeButton, linkedInIcon, githubIcon];
+  const icons = [
+    {
+      icon: linkedInIcon,
+      inMobileDropdown: true,
+    },
+    {
+      icon: githubIcon,
+      inMobileDropdown: true,
+    },
+    {
+      icon: themeButton,
+      inMobileDropdown: false,
+    },
+  ];
 
   return (
-    <footer class="w-full text-lg max-sm:text-xl">
+    <footer class="w-full">
       <hr class="border-secondary-text dark:border-secondary-text-dark max-lg:hidden" />
       <div class="text-secondary-text dark:text-secondary-text-dark relative flex items-center justify-between p-2 ">
         <div
-          class="basis-20 cursor-pointer lg:hidden"
+          class="basis-20 cursor-pointer text-xl max-sm:text-2xl lg:hidden"
           hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
         </div>
         <Heading variant={3} text="Sam Royall" className="lg:hidden" />
-        <ul class="flex basis-20 justify-end lg:ml-auto">
-          {icons.map((icon) => (
-            <li class="mx-1 first:ml-0 last:mr-0">{icon}</li>
+        <ul class="flex basis-20 justify-end text-xl max-sm:text-2xl lg:ml-auto">
+          {icons.map(({ icon, inMobileDropdown }) => (
+            <li
+              class={`mx-1 first:ml-0 last:mr-0 ${inMobileDropdown ? "max-lg:hidden" : ""}`}
+            >
+              {icon}
+            </li>
           ))}
         </ul>
       </div>
-      <div
-        id="footer-nav"
-        class="border-secondary-text dark:border-secondary-text-dark absolute hidden w-full border-b"
-      >
+      <div id="footer-nav" class={footerNavClasses}>
         <Nav current={current} />
+        <ul class="flex pb-3 pr-3 text-xl max-sm:text-2xl">
+          {icons.map(({ icon, inMobileDropdown }) => (
+            <li
+              class={`mx-1 first:ml-0 last:mr-0 ${!inMobileDropdown ? "hidden" : ""}`}
+            >
+              {icon}
+            </li>
+          ))}
+        </ul>
       </div>
       <hr class="border-secondary-text dark:border-secondary-text-dark lg:hidden" />
       <script>{optimisticallyUpdateTheme}</script>

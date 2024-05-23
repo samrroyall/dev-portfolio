@@ -7,7 +7,7 @@ const focusBorderClasses =
   "has-[:focus]:outline-none has-[:focus]:ring-1 has-[:focus]:ring-secondary-text has-[:focus]:dark:ring-secondary-text";
 
 const invalidBorderClasses =
-  "has-[:invalid]:border-red-400 has-[:invalid]:ring-red-400 has-[:focus:invalid]:ring-red-400";
+  "has-[:invalid]:border-error-text has-[:invalid]:ring-error-text has-[:focus:invalid]:ring-error-text";
 
 const bgClasses = "*:bg-primary-bg *:dark:bg-primary-bg-dark";
 
@@ -25,7 +25,7 @@ const inputClasses = `bg-transparent w-full p-1 ${noBorderClasses} ${placeholder
 
 const legendClasses = "px-1 text-sm";
 
-const requiredClasses = "after:content-['*'] after:ml-1 after:text-red-400";
+const requiredClasses = "after:content-['*'] after:ml-1 after:text-error-text";
 
 interface InputProps {
   label: string;

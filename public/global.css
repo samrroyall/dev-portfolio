@@ -33,6 +33,7 @@
   --secondary-text-dark: rgb(214 211 209);
   --tertiary-text-dark: rgb(231 229 228);
   --code-text: rgb(231 229 228);
+  --error-text: rgb(248 113 113);
   --strava-orange: rgb(252 82 0);
   --strava-orange-light: rgb(252 99 25);
 }
