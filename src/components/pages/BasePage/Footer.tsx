@@ -75,15 +75,15 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
   return (
     <footer class="w-full">
       <hr class="border-secondary-text dark:border-secondary-text-dark max-lg:hidden" />
-      <div class="text-secondary-text dark:text-secondary-text-dark relative flex items-center justify-between p-2 ">
+      <div class="relative flex items-center justify-between p-2 ">
         <div
-          class="basis-20 cursor-pointer text-xl max-sm:text-2xl lg:hidden"
+          class="text-secondary-text dark:text-secondary-text-dark cursor-pointer text-xl max-sm:text-2xl lg:hidden"
           hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
         </div>
         <Heading variant={3} text="Sam Royall" className="lg:hidden" />
-        <ul class="flex basis-20 justify-end text-xl max-sm:text-2xl lg:ml-auto">
+        <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center justify-end text-xl max-sm:text-2xl lg:ml-auto">
           {icons.map(({ icon, inMobileDropdown }) => (
             <li
               class={`mx-1 first:ml-0 last:mr-0 ${inMobileDropdown ? "max-lg:hidden" : ""}`}
@@ -95,10 +95,10 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
       </div>
       <div id="footer-nav" class={footerNavClasses}>
         <Nav current={current} />
-        <ul class="flex pb-3 pr-3 text-xl max-sm:text-2xl">
+        <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center pb-3 pr-3 text-xl max-sm:text-2xl ">
           {icons.map(({ icon, inMobileDropdown }) => (
             <li
-              class={`mx-1 first:ml-0 last:mr-0 ${!inMobileDropdown ? "hidden" : ""}`}
+              class={`mx-1 leading-6 first:ml-0 last:mr-0 max-sm:leading-7 ${!inMobileDropdown ? "hidden" : ""}`}
             >
               {icon}
             </li>

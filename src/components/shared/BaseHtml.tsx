@@ -35,7 +35,7 @@ const twTheme = {
 
 interface BaseHtmlProps extends DefaultPageProps {
   children: Html.Children;
-  title?: String;
+  title?: string;
 }
 
 const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
