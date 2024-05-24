@@ -2,8 +2,7 @@ import { type DefaultPageProps } from "../../models/routes";
 
 const bgClasses = `bg-primary-bg dark:bg-none dark:bg-primary-bg-dark`;
 
-const textClasses =
-  "text-primary-text dark:text-primary-text-dark text-sm 2xl:text-xs";
+const textClasses = "text-primary-text dark:text-primary-text-dark text-sm";
 
 const twTheme = {
   darkMode: "selector",
@@ -48,7 +47,7 @@ const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{title ?? "Sam Royall"}</title>
+        <title>{`Sam Royall${title ? ` — ${title}` : ""}`}</title>
         <script type="text/javascript" src="https://cdn.tailwindcss.com" />
         <script
           async

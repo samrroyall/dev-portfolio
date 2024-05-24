@@ -16,7 +16,7 @@ const BlogPageEntry = ({ post }: BlogPageEntryProps): JSX.Element => (
   <div class="group/blogsection">
     <div class="mb-3 flex justify-between">
       <span class="italic">{post.blurb}</span>
-      <div class={dateClasses}>{getPrettyDate(post.date)}</div>
+      <div class={dateClasses}>{getPrettyDate(post.dateString)}</div>
     </div>
     <Link href={`/blog/post/${post.slug}`} arrow={true} target="_self">
       <span class={readMoreClasses}>{"Read more"}</span>

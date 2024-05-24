@@ -4,9 +4,7 @@ import { Heading, Icon, Link } from "../../shared";
 const colorClasses =
   "bg-primary-bg dark:bg-primary-bg-dark text-secondary-text dark:text-secondary-text-dark";
 
-const circleIcon = (
-  <Icon className="text-base max-sm:text-lg" icon={"\uebb4"} />
-);
+const circleIcon = <Icon icon={"\uebb4"} />;
 
 const pageIndexClasses =
   "font-geist-mono text-primary-text dark:text-primary-text-dark";
@@ -16,7 +14,7 @@ interface NavProps {
 }
 
 const Nav = ({ current }: NavProps): JSX.Element => (
-  <nav class={`pb-3 pl-1 text-base max-lg:pl-3 max-sm:text-lg ${colorClasses}`}>
+  <nav class={`pb-3 pl-1 text-lg max-lg:pl-3 max-sm:text-xl ${colorClasses}`}>
     <Heading variant={3} text="Sam Royall" className="max-lg:hidden" />
     <ul>
       {navRoutes.map(({ label, link }, i) => (

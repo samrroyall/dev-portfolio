@@ -9,7 +9,7 @@ interface HomeProps extends DefaultPageProps {
 }
 
 const Home = async ({ data, theme }: HomeProps): Promise<JSX.Element> => (
-  <BasePage current="home" theme={theme}>
+  <BasePage current="home" theme={theme} title="Home">
     <Sections
       sectionNum="00"
       entries={(await data).map(({ title, entries }) => ({

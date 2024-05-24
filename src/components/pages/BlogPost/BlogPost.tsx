@@ -25,7 +25,7 @@ const BlogPost = async ({
         <div
           class={`text-secondary-text dark:text-secondary-text-dark text-right`}
         >
-          {getPrettyDate(post.date)}
+          {getPrettyDate(post.dateString)}
         </div>
         <article class="py-3">
           <Markdown text={post.text} />
