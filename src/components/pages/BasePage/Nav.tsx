@@ -19,7 +19,7 @@ const Nav = ({ current }: NavProps): JSX.Element => (
     <ul>
       {navRoutes.map(({ label, link }, i) => (
         <li class="flex h-5 items-end max-sm:h-7">
-          <div class="mr-2 basis-5 text-center">
+          <div class="mr-2 w-5 text-center max-sm:w-7">
             {current && label === current ? (
               <div>{circleIcon}</div>
             ) : (
