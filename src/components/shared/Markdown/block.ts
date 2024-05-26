@@ -57,7 +57,9 @@ const table = (header: string, body: string): string => {
 
   const bodyString = `<tbody>${body}</tbody>`;
 
-  return `<table class="my-6 mx-auto">${headerString}${bodyString}</table>`;
+  const tableClasses = "my-6 mx-auto table-auto";
+
+  return `<table class="${tableClasses}">${headerString}${bodyString}</table>`;
 };
 
 const tablerow = (content: string): string => `<tr>${content}</tr>`;

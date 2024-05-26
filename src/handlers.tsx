@@ -1,23 +1,30 @@
+import { randomBytes } from "crypto";
 import {
   Admin,
   AdminLogin,
   Blog,
   BlogPost,
   Contact,
+  CreateBlogPost,
+  CreateHomeSection,
   Home,
   Interests,
   NotFound,
 } from "./components/pages";
+import CreateNewHomeSectionEntry from "./components/pages/CreateHomeSection/CreateHomeSectionEntry";
+import CreateHomeSectionEntrySubtitle from "./components/pages/CreateHomeSection/CreateHomeSectionEntrySubtitle";
 import { type HandlerContext } from "./models/handlers";
 import {
   type AuthenticateSchema,
   type BlogPostSchema,
   type ContactSchema,
   type LoginSchema,
+  type NewHomeSectionEntrySubtitleSchema,
   type SendEmailSchema,
   type ToggleThemeSchema,
 } from "./models/routes";
 import { createNewSession, isAdmin, sendEmail, verifyRecaptcha } from "./utils";
+import { createNewHomeSection } from "./utils/homesections";
 
 export const authenticateHandler = async ({
   body,
@@ -46,21 +53,23 @@ export const authenticateHandler = async ({
   }
 };
 
-export const adminHandler = ({ cookie: { theme } }: HandlerContext) => (
-  <Admin theme={theme} />
-);
+export const adminHandler = async ({
+  cookie: { theme },
+  blog,
+  home,
+}: HandlerContext) => Admin({ blogData: blog, homeData: home, theme });
 
 export const blogHandler = async ({
   cookie: { theme },
-  store,
-}: HandlerContext) => Blog({ data: store.blog, theme });
+  blog,
+}: HandlerContext) => Blog({ data: blog, theme });
 
 export const blogPostHandler = async ({
   cookie: { theme },
-  store,
+  blogPost,
   params: { slug },
 }: HandlerContext<BlogPostSchema>) =>
-  BlogPost({ data: store.blogPost.get(slug), theme });
+  BlogPost({ data: blogPost.get(slug), theme });
 
 export const contactHandler = ({
   cookie: { theme },
@@ -69,15 +78,57 @@ export const contactHandler = ({
   <Contact success={success} error={error} theme={theme} />
 );
 
+export const createBlogPostHandler = ({
+  cookie: { theme },
+}: HandlerContext) => <CreateBlogPost theme={theme} />;
+
+export const createHomeSectionHandler = ({
+  cookie: { theme },
+}: HandlerContext) => <CreateHomeSection theme={theme} />;
+
+export const insertHomeSectionHandler = async ({
+  body,
+  db,
+  set,
+}: HandlerContext) => {
+  set.status = 303;
+
+  try {
+    await createNewHomeSection(db, body);
+
+    set.headers.location = "/admin?success=true";
+  } catch (err) {
+    console.error(
+      `Unexpected error encountered while creating contact message: ${err}`,
+    );
+
+    set.headers.location = "/admin/home/new?error=unknown";
+  }
+};
+
+export const newHomeSectionEntryHandler = () => {
+  const id = randomBytes(8).toString("hex");
+
+  return <CreateNewHomeSectionEntry id={id} />;
+};
+
+export const newHomeSectionEntrySubtitleHandler = ({
+  query: { entryId },
+}: HandlerContext<NewHomeSectionEntrySubtitleSchema>) => {
+  const id = randomBytes(8).toString("hex");
+
+  return <CreateHomeSectionEntrySubtitle id={id} entryId={entryId} />;
+};
+
 export const homeHandler = async ({
   cookie: { theme },
-  store,
-}: HandlerContext) => Home({ data: store.home, theme });
+  home,
+}: HandlerContext) => Home({ data: home, theme });
 
 export const interestsHandler = async ({
   cookie: { theme },
-  store,
-}: HandlerContext) => Interests({ data: store.interests, theme });
+  interests,
+}: HandlerContext) => Interests({ data: interests, theme });
 
 export const loginHandler = ({
   cookie: { theme },

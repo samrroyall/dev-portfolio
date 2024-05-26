@@ -1,4 +1,4 @@
-import { type DefaultPageProps } from "../../../models/routes";
+import { type DefaultPageProps } from "../../../models/components";
 import { BasePage } from "../../pages";
 import { Form, Input, SectionDivider } from "../../shared";
 

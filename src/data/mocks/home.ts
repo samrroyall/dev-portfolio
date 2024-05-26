@@ -3,9 +3,12 @@ import { mockFunc } from "../../utils";
 
 const entries: HomeSection[] = [
   {
+    id: 123412341234,
+    order: 0,
     title: "About Me",
     entries: [
       {
+        id: 1234123412341234,
         title: "",
         subtitles: [],
         text: `I am a software engineer with a passion for problem-solving 
@@ -21,13 +24,21 @@ engineer, I have worked on a variety of projects all over the stack.
 I am always eager to explore new projects. If you have an exciting opportunity, 
 or if you would like to discuss a potential collaboration, please don't 
 hesitate to [reach out](#).`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
     ],
+
+    createdAt: 1713212115000,
+    lastModifiedAt: 1713212115000,
   },
   {
+    id: 234523452345,
+    order: 1,
     title: "Work Experience",
     entries: [
       {
+        id: 2345234523452345,
         title: "Manifold",
         subtitles: [
           {
@@ -45,8 +56,11 @@ and graph databases, and worked in cloud environments.
 My backend work has been primarily in Scala and Python, while my frontend work
 has been in Angular and React with Typescript. I have also handled cloud 
 intrstructure in AWS.`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
       {
+        id: 2345234523452346,
         title: "Stroz Friedberg",
         subtitles: [
           { title: "Consultant, DFIR", detail: "Jun 2020 - Dec 2020" },
@@ -65,19 +79,29 @@ After this program, I was promoted to consultant in the DFIR business unit.
 Throughout these three roles, I worked on a variety of client engagements, 
 including data breaches, ransomware attacks, and insider threats. I also 
 created various internal tools, primarily written in Python.`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
       {
+        id: 2345234523452347,
         title: "",
         subtitles: [],
         text: `For more information about my work experience, please refer to 
 [my resume](#).`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
     ],
+    createdAt: 1713212115000,
+    lastModifiedAt: 1713212115000,
   },
   {
+    id: 345634563456,
+    order: 2,
     title: "Education",
     entries: [
       {
+        id: 3456345634563456,
         title: "University of Chicago",
         subtitles: [
           {
@@ -85,12 +109,14 @@ created various internal tools, primarily written in Python.`,
             detail: "Oct 2015 - Jun 2019",
           },
         ],
-        date: "2019",
         text: `Attended the University of Chicago from 2015 to 2019, graduating 
 with a double major in Computer Science and Philosophy and receiving 
 _Dean's List_ all four years`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
       {
+        id: 3456345634563457,
         title: "Coding Dojo",
         subtitles: [
           {
@@ -98,16 +124,22 @@ _Dean's List_ all four years`,
             detail: "Jan 2021 - Apr 2021",
           },
         ],
-        date: "2021",
         text: `Participated in a 14-week full stack web development bootcamp 
 in 2021, receiving highest honors`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
     ],
+    createdAt: 1713212115000,
+    lastModifiedAt: 1713212115000,
   },
   {
+    id: 456745674567,
+    order: 3,
     title: "Projects",
     entries: [
       {
+        id: 4567456745674567,
         title: "Klotski Solver",
         titleLink: "#",
         subtitles: [],
@@ -124,8 +156,11 @@ backend source code [here](https://github.com/samrroyall/klotski-api).
 
 This project is inspired by a CLI tool I built in C++. View the source code 
 [here](https://github.com/samrroyall/klotski-cpp).`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
       {
+        id: 4567456745674568,
         title: "Portfolio",
         subtitles: [],
         text: `This project is my portfolio, which you are currently viewing. 
@@ -133,8 +168,11 @@ It is built with Typescript using Bun, ElysiaJS, Turso, and HTMX. Templating is
 done with TSX, and styling is done with Tailwind CSS. (**TODO**: Talk about 
 deployment and any APIs or Lambda functions.) View the source code 
 [here](https://github.com/samrroyall/dev-portfolio).`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
       {
+        id: 4567456745674569,
         title: "Tvrtl",
         subtitles: [],
         text: `This project is built to simulate 
@@ -148,8 +186,11 @@ split evenly among the remaining users.
 The project is build with Typescript using ReactNative and Recoil. Styling is 
 done using NativeBase. View the source code and a video demo of the app 
 [here](https://github.com/samrroyall/tvrtl).`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
       {
+        id: 4567456745674570,
         title: "ElmCalc",
         titleLink:
           "https://www.classes.cs.uchicago.edu/archive/2019/spring/22300-1/showcase/samrroyall/index.html",
@@ -158,8 +199,12 @@ done using NativeBase. View the source code and a video demo of the app
 project using Elm. The calculator is styled to look like a TI-84 graphing 
 calculator. View the source code 
 [here](https://github.com/samrroyall/elmcalc).`,
+        createdAt: 1713212115000,
+        lastModifiedAt: 1713212115000,
       },
     ],
+    createdAt: 1713212115000,
+    lastModifiedAt: 1713212115000,
   },
 ];
 

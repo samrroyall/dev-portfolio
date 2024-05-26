@@ -22,7 +22,7 @@ const SpotifyTrackCard = ({
 
   return (
     <div class="flex items-center">
-      <div hx-on:click={`${toggleCard(id)}; ${toggleCard(prevId)};`}>
+      <div hx-on-click={`${toggleCard(id)}; ${toggleCard(prevId)};`}>
         <Icon
           icon={`\ueab5`}
           className="text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg"
@@ -49,7 +49,7 @@ const SpotifyTrackCard = ({
           </div>
         </div>
       </div>
-      <div hx-on:click={`${toggleCard(id)}; ${toggleCard(nextId)};`}>
+      <div hx-on-click={`${toggleCard(id)}; ${toggleCard(nextId)};`}>
         <Icon
           icon={`\ueab6`}
           className="text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg"

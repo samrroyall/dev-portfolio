@@ -5,7 +5,7 @@ import { Elysia } from "elysia";
 import db from "./db";
 import { cookieSchema } from "./models/routes";
 import { adminRoutes, publicRoutes } from "./routes";
-import store from "./store";
+import { getStoreData } from "./store";
 import { validateSession } from "./utils";
 
 if (!process.env.COOKIE_SECRET) {
@@ -21,7 +21,7 @@ const app = new Elysia({
   .use(staticPlugin())
   .use(html())
   .use(db)
-  .use(store)
+  .derive(({ db }) => getStoreData(db))
   .onError(({ code, error, redirect }) => {
     if (code === "NOT_FOUND") {
       return redirect("/404");

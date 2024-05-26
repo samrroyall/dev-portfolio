@@ -7,12 +7,8 @@ interface DbSchema {
   db: LibSQLDatabase;
 }
 
-interface StoreSchema {
-  store: Store;
-}
-
 export type HandlerContext<Schema extends RouteSchema = RouteSchema> = Context<
   Schema & CookieSchema
 > &
-  StoreSchema &
+  Store &
   DbSchema;

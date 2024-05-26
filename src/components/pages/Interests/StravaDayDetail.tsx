@@ -84,7 +84,7 @@ const StravaDayDetail = ({
       >
         <div
           class="flex-none"
-          hx-on:click={`htmx.toggleClass("#run-${id}-detail", "hidden")`}
+          hx-on-click={`htmx.toggleClass("#run-${id}-detail", "hidden")`}
         >
           <Icon icon={"\udb80\udc4d"} className="cursor-pointer" />
         </div>

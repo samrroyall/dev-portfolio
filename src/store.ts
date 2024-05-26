@@ -1,21 +1,17 @@
-import { Elysia } from "elysia";
-import { getMockBlogData, getMockBlogPostData } from "./data/mocks/blog";
-import { getMockHomeData } from "./data/mocks/home";
+import { type LibSQLDatabase } from "drizzle-orm/libsql";
+import { getBlogData, getBlogPostData } from "./data/api/blog";
+import { getHomeData } from "./data/api/home";
 import { getMockSpotifyData, getMockStravaData } from "./data/mocks/interests";
 import { type Store } from "./models/store";
 
-const storeData: Store = {
-  home: getMockHomeData(),
+export const getStoreData = (db: LibSQLDatabase): Store => ({
+  home: getHomeData(db),
   interests: {
     spotify: getMockSpotifyData(),
     strava: getMockStravaData(),
   },
-  blog: getMockBlogData(),
+  blog: getBlogData(db),
   blogPost: {
-    get: (slug: string) => getMockBlogPostData(slug),
+    get: (slug: string) => getBlogPostData(db, slug),
   },
-};
-
-const store = new Elysia().state(storeData);
-
-export default store;
+});

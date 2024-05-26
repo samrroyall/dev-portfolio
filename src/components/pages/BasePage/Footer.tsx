@@ -18,11 +18,11 @@ const linkedInIcon = (
   <Icon icon={"\udb80\udf3b"} link={"https://linkedin.com/in/samrroyall"} />
 );
 
+const darkModeIcon = <Icon icon={"\uf4ee"} />;
+
 const lightModeIcon = <Icon icon={"\uf522"} />;
 
 const menuIcon = <Icon icon={"\ueb94"} />;
-
-const darkModeIcon = <Icon icon={"\udb81\udd94"} />;
 
 const optimisticallyUpdateTheme = `
 document.body.addEventListener("htmx:afterRequest", function(evt) {
@@ -79,7 +79,7 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
       <div class="relative flex items-center justify-between p-2">
         <div
           class="text-secondary-text dark:text-secondary-text-dark cursor-pointer lg:hidden"
-          hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
+          hx-on-click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
         </div>

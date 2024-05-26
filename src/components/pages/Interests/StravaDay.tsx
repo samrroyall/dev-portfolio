@@ -38,7 +38,7 @@ const StravaDay = ({ data, isToday }: StravaDayProps): JSX.Element => {
       {data ? <StravaDayDetail {...data} /> : null}
       <div
         class={`h-[${size * multiplier}px] w-[${size * multiplier}px] rounded-full ${bgClass} ${hoverClasses}`}
-        hx-on:click={
+        hx-on-click={
           data ? `htmx.toggleClass("#run-${data.id}-detail", "hidden")` : ""
         }
       />

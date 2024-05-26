@@ -1,5 +1,5 @@
 import { type BlogPost } from "../../../models/blog";
-import { type DefaultPageProps } from "../../../models/routes";
+import { type DefaultPageProps } from "../../../models/components";
 import { getPrettyDate } from "../../../utils";
 import { BasePage, NotFound } from "../../pages";
 import { Heading, Markdown, SectionDivider } from "../../shared";
@@ -25,7 +25,7 @@ const BlogPost = async ({
         <div
           class={`text-secondary-text dark:text-secondary-text-dark text-right`}
         >
-          {getPrettyDate(post.dateString)}
+          {getPrettyDate(post.createdAt)}
         </div>
         <article class="py-3">
           <Markdown text={post.text} />

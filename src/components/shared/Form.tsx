@@ -18,7 +18,6 @@ interface FormProps {
   id: string;
   className?: string;
   error?: string;
-  failure?: boolean;
   submitLabel?: string;
   success?: boolean;
 }
@@ -58,8 +57,8 @@ const Form = ({
         class={`flex flex-col ${success === true ? "hidden" : ""} ${className ?? ""}`}
         action={action}
         method="post"
-        hx-on:keyup={`htmx.find("#${id}-submit-button").disabled = !htmx.find("#${id}").checkValidity();`}
-        hx-on:submit={`event.preventDefault(); grecaptcha.execute();`}
+        hx-on-keyup={`htmx.find("#${id}-submit-button").disabled = !htmx.find("#${id}").checkValidity();`}
+        hx-on-submit={`event.preventDefault(); grecaptcha.execute();`}
       >
         {children}
         <div

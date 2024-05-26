@@ -1,1 +1,0 @@
-CREATE INDEX `sessionId` ON `sessions` (`sessionId`);

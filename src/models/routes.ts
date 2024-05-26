@@ -1,8 +1,4 @@
-import { t, type Cookie, type Static } from "elysia";
-
-export interface DefaultPageProps {
-  theme: Cookie<string | undefined>;
-}
+import { t, type Static } from "elysia";
 
 export const authenticateSchema = {
   body: t.Object({
@@ -70,6 +66,16 @@ export const navRoutes: NavRoute[] = [
   { label: "blog", link: "/blog" },
   { label: "contact", link: "/contact" },
 ];
+
+export const newHomeSectionEntrySubtitleSchema = {
+  query: t.Object({
+    entryId: t.String(),
+  }),
+};
+
+export interface NewHomeSectionEntrySubtitleSchema {
+  query: Static<typeof newHomeSectionEntrySubtitleSchema.query>;
+}
 
 export const sendEmailSchema = {
   body: t.Object({

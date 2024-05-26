@@ -63,5 +63,3 @@ export const mapApiSpotifyTrackToTrack = ({
     url: a.external_urls.spotify,
   })),
 });
-
-export default {};

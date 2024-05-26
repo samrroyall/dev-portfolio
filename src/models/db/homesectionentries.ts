@@ -1,16 +1,20 @@
-import { blob, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { blob, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 import { type HomeSectionEntrySubtitle } from "../home";
 import { homesections } from "./homesections";
 
-export const homesectionentries = sqliteTable("sessions", {
-  id: text("id").primaryKey(),
+export const homesectionentries = sqliteTable("homesectionentries", {
+  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
   sectionId: text("section_id")
     .references(() => homesections.id)
     .notNull(),
-  title: text("title").notNull(),
+  title: text("title"),
   subtitles: blob("subtitles", { mode: "json" })
     .$type<HomeSectionEntrySubtitle[]>()
-    .default([]),
+    .notNull(),
   text: text("text").notNull(),
   titleLink: text("title_link"),
+  createdAt: integer("created_at", { mode: "timestamp" }),
+  lastModifiedAt: integer("last_modified_at", {
+    mode: "timestamp",
+  }),
 });

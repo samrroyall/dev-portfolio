@@ -1,4 +1,4 @@
-type InputType = "email" | "password" | "text" | "textarea";
+type InputType = "email" | "number" | "password" | "text" | "textarea";
 
 const standardBorderClasses =
   "border border-secondary-text dark:border-secondary-text-dark rounded";
@@ -15,7 +15,7 @@ const borderClasses = `${standardBorderClasses} ${focusBorderClasses} ${invalidB
 
 const textClasses = "*:text-secondary-text dark:*:text-secondary-text-dark";
 
-const fieldClasses = `my-3 inline-block p-1 ${bgClasses} ${borderClasses} ${textClasses}`;
+const fieldClasses = `my-3 p-1 ${bgClasses} ${borderClasses} ${textClasses}`;
 
 const noBorderClasses = `border-0 ring-0 outline-none`;
 
@@ -30,6 +30,7 @@ const requiredClasses = "after:content-['*'] after:ml-1 after:text-error-text";
 interface InputProps {
   label: string;
   name: string;
+  className?: string;
   id?: string;
   minlength?: number;
   maxlength?: number;
@@ -41,11 +42,12 @@ interface InputProps {
 }
 
 const Input = ({
-  label,
-  name,
+  className,
   id,
+  label,
   minlength,
   maxlength,
+  name,
   noResize,
   placeholder,
   required,
@@ -66,7 +68,9 @@ const Input = ({
   const bottomLegendClasses = maxlength ? "relative pb-3" : "";
 
   return (
-    <fieldset class={`${fieldClasses} ${bottomLegendClasses}`}>
+    <fieldset
+      class={`${fieldClasses} ${bottomLegendClasses} ${className ?? ""}`}
+    >
       <legend class={`${legendClasses} ${required ? requiredClasses : ""}`}>
         {label}
       </legend>
@@ -75,7 +79,7 @@ const Input = ({
           class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
           name={name}
           {...attrs}
-          hx-on:keyup={`htmx.find("#${textareaLengthId}").innerHTML = this.value.length`}
+          hx-on-keyup={`htmx.find("#${textareaLengthId}").innerHTML = this.value.length`}
         />
       ) : (
         <input

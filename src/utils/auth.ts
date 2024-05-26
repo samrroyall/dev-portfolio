@@ -1,4 +1,4 @@
-import { RecaptchaVerificationResponse } from "../models/auth";
+import { type RecaptchaVerificationResponse } from "../models/auth";
 
 export const verifyRecaptcha = async (response: string): Promise<boolean> => {
   const recaptchaUrl = process.env.RECAPTCHA_VERIFICATION_URL;

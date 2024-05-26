@@ -4,10 +4,13 @@ import { type LibSQLDatabase } from "drizzle-orm/libsql";
 import { type Cookie } from "elysia";
 import { sessions } from "../models/db";
 
+export const cleanupSessions = async (db: LibSQLDatabase) =>
+  db.delete(sessions).where(lt(sessions.expiry, new Date()));
+
 export const createNewSession = async (
   db: LibSQLDatabase,
   session: Cookie<string | undefined>,
-) => {
+): Promise<void> => {
   if (!process.env.COOKIE_EXPIRY_MS) {
     throw new Error("No value provided for COOKIE_EXPIRY_MS");
   }
@@ -30,7 +33,7 @@ export const createNewSession = async (
 export const validateSession = async (
   db: LibSQLDatabase,
   sessionId: string | undefined,
-) => {
+): Promise<boolean> => {
   if (!sessionId || sessionId.length < 32) {
     return false;
   }
@@ -45,9 +48,7 @@ export const validateSession = async (
       ),
     );
 
-  return result.length > 0;
-};
+  void cleanupSessions(db);
 
-export const cleanupSessions = async (db: LibSQLDatabase) => {
-  db.delete(sessions).where(lt(sessions.expiry, new Date()));
+  return result.length > 0;
 };

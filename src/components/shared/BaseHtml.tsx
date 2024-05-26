@@ -1,4 +1,4 @@
-import { type DefaultPageProps } from "../../models/routes";
+import { type DefaultPageProps } from "../../models/components";
 
 const bgClasses = `bg-primary-bg dark:bg-none dark:bg-primary-bg-dark`;
 

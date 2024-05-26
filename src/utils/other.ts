@@ -5,15 +5,16 @@ export const getLowercaseCharAt = (i: number): string | null =>
       ? getLowercaseCharAt(i / 26 - 1)! + getLowercaseCharAt(i % 26)!
       : null;
 
-export const getPrettyDate = (dateString: string): string => {
-  const date = new Date(dateString);
+export const getPrettyDate = (date: number): string =>
+  new Date(date).toLocaleString("en-US", {
+    dateStyle: "long",
+  });
 
-  const day = date.getDate();
-  const month = date.toLocaleString("default", { month: "long" });
-  const year = date.getFullYear();
-
-  return `${month} ${day}, ${year}`;
-};
+export const getPrettyDateTime = (date: number): string =>
+  new Date(date).toLocaleString("en-US", {
+    dateStyle: "long",
+    timeStyle: "short",
+  });
 
 export const mockFunc = async <T>(data: T, delayMs?: number): Promise<T> => {
   const defaultDelayMs = !!process.env.MOCK_DELAY_MS
