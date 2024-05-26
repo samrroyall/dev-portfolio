@@ -65,6 +65,14 @@ const Input = ({
 
   const textareaLengthId = `${name}-${type}-current-length`;
 
+  const hxAttrs = {
+    ...(maxlength !== undefined
+      ? {
+          "hx-on-keyup": `htmx.find("#${textareaLengthId}").innerHTML = this.value.length`,
+        }
+      : {}),
+  };
+
   const bottomLegendClasses = maxlength ? "relative pb-3" : "";
 
   return (
@@ -79,7 +87,7 @@ const Input = ({
           class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
           name={name}
           {...attrs}
-          hx-on-keyup={`htmx.find("#${textareaLengthId}").innerHTML = this.value.length`}
+          {...hxAttrs}
         />
       ) : (
         <input

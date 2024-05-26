@@ -10,7 +10,7 @@ export const getPrettyDate = (date: number): string =>
     dateStyle: "long",
   });
 
-export const getPrettyDateTime = (date: number): string =>
+export const getPrettyDateTime = (date: Date): string =>
   new Date(date).toLocaleString("en-US", {
     dateStyle: "long",
     timeStyle: "short",

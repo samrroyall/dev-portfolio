@@ -7,7 +7,9 @@ import {
   contactHandler,
   createBlogPostHandler,
   createHomeSectionHandler,
+  deleteHomeSectionHandler,
   homeHandler,
+  insertHomeSectionHandler,
   interestsHandler,
   loginHandler,
   newHomeSectionEntryHandler,
@@ -21,6 +23,7 @@ import {
   blogPostSchema,
   contactSchema,
   loginSchema,
+  modifyHomeSectionSchema,
   newHomeSectionEntrySubtitleSchema,
   sendEmailSchema,
   toggleThemeSchema,
@@ -38,13 +41,16 @@ export const publicRoutes = new Elysia()
   .post("/sendemail", sendEmailHandler, sendEmailSchema)
   .post("/toggletheme", toggleThemeHandler, toggleThemeSchema);
 
+//.post("/admin/blog/new", )
+//.get("/admin/blog/:id", )
+//.post("/admin/blog/:id", )
+//.delete("/admin/blog/:id", )
+//.get("/admin/home/:id", )
+//.post("/admin/home/:id", )
+
 export const adminRoutes = new Elysia()
   .get("/admin", adminHandler)
   .get("/admin/blog/new", createBlogPostHandler)
-  //.post("/admin/blog/new", createBlogPostHandler)
-  //.get("/admin/blog/:id", createBlogPostHandler)
-  //.post("/admin/blog/:id", createBlogPostHandler)
-  //.delete("/admin/blog/:id", createBlogPostHandler)
   .get("/admin/home/new", createHomeSectionHandler)
   .post("/admin/home/new", insertHomeSectionHandler)
   .post("/admin/home/entry/new", newHomeSectionEntryHandler)
@@ -52,7 +58,5 @@ export const adminRoutes = new Elysia()
     "/admin/home/entry/subtitle/new",
     newHomeSectionEntrySubtitleHandler,
     newHomeSectionEntrySubtitleSchema,
-  );
-//.get("/admin/home/:id", createHomeSectionHandler)
-//.post("/admin/home/:id", createHomeSectionHandler)
-//.delete("/admin/home/:id", createHomeSectionHandler);
+  )
+  .delete("/admin/home/:id", deleteHomeSectionHandler, modifyHomeSectionSchema);

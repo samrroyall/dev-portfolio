@@ -8,15 +8,15 @@ export interface HomeSectionEntryData {
   title: string;
   subtitles: HomeSectionEntrySubtitle[];
   text: string;
-  createdAt: number;
-  lastModifiedAt: number;
+  createdAt: Date;
+  lastModifiedAt: Date;
   titleLink?: string;
 }
 
 export const mapRowToHomeSectionEntry = (row: any): HomeSectionEntryData => ({
   id: row.entryId,
-  title: row.title,
-  subtitles: JSON.parse(row.subtitles) as HomeSectionEntrySubtitle[],
+  title: row.entryTitle,
+  subtitles: row.subtitles,
   text: row.text,
   createdAt: row.createdAt,
   lastModifiedAt: row.lastModifiedAt,
@@ -28,8 +28,8 @@ export interface HomeSection {
   order: number;
   title: string;
   entries: HomeSectionEntryData[];
-  createdAt: number;
-  lastModifiedAt: number;
+  createdAt: Date;
+  lastModifiedAt: Date;
 }
 
 export const mapRowToHomeSection = (row: any): HomeSection => ({

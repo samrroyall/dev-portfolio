@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "9cb4afdb-be70-4fa1-825a-e1b24554b8e0",
+  "id": "d69e225b-b51b-4dea-b860-3155ca069e29",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "blogposts": {
@@ -96,7 +96,7 @@
         },
         "section_id": {
           "name": "section_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false

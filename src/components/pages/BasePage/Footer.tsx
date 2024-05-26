@@ -25,27 +25,28 @@ const lightModeIcon = <Icon icon={"\uf522"} />;
 const menuIcon = <Icon icon={"\ueb94"} />;
 
 const optimisticallyUpdateTheme = `
-document.body.addEventListener("htmx:afterRequest", function(evt) {
-  const toggleButton = document.getElementById("toggle-theme-button");
-  if (evt.target === toggleButton) {
-    const html = document.documentElement;
-    if (html.classList.contains("dark")) {
-      html.classList.remove("dark");
-      toggleButton.innerHTML = ${JSON.stringify(lightModeIcon)};
-    } else {
-      html.classList.add("dark");
-      toggleButton.innerHTML = ${JSON.stringify(darkModeIcon)};
+  document.body.addEventListener("htmx:afterRequest", function(evt) {
+    const toggleButton = document.getElementById("toggle-theme-button");
+    if (evt.target === toggleButton) {
+      const html = document.documentElement;
+      if (html.classList.contains("dark")) {
+        html.classList.remove("dark");
+        toggleButton.innerHTML = ${JSON.stringify(lightModeIcon)};
+      } else {
+        html.classList.add("dark");
+        toggleButton.innerHTML = ${JSON.stringify(darkModeIcon)};
+      }
     }
-  }
-})
+  })
 `;
 
 interface FooterProps {
+  admin: boolean;
   current: string | undefined;
   theme: Cookie<string | undefined>;
 }
 
-const Footer = ({ current, theme }: FooterProps): JSX.Element => {
+const Footer = ({ admin, current, theme }: FooterProps): JSX.Element => {
   const themeButton = (
     <button
       id="toggle-theme-button"
@@ -77,12 +78,12 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
     <footer class="w-full text-xl max-sm:text-2xl xl:text-2xl">
       <hr class="border-secondary-text dark:border-secondary-text-dark max-lg:hidden" />
       <div class="relative flex items-center justify-between p-2">
-        <div
+        <button
           class="text-secondary-text dark:text-secondary-text-dark cursor-pointer lg:hidden"
           hx-on-click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
-        </div>
+        </button>
         <Heading variant={3} text="Sam Royall" className="lg:hidden" />
         <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center justify-end lg:ml-auto">
           {icons.map(({ icon, inMobileDropdown }) => (
@@ -95,7 +96,7 @@ const Footer = ({ current, theme }: FooterProps): JSX.Element => {
         </ul>
       </div>
       <div id="footer-nav" class={footerNavClasses}>
-        <Nav current={current} />
+        <Nav admin={admin} current={current} />
         <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center pb-3 pr-3">
           {icons.map(({ icon, inMobileDropdown }) => (
             <li

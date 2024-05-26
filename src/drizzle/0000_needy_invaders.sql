@@ -11,7 +11,7 @@ CREATE TABLE `blogposts` (
 --> statement-breakpoint
 CREATE TABLE `homesectionentries` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`section_id` text NOT NULL,
+	`section_id` integer NOT NULL,
 	`title` text,
 	`subtitles` blob NOT NULL,
 	`text` text NOT NULL,

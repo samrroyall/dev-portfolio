@@ -55,10 +55,25 @@ export interface LoginSchema {
   query: Static<typeof loginSchema.query>;
 }
 
+export const modifyHomeSectionSchema = {
+  params: t.Object({
+    id: t.Numeric(),
+  }),
+};
+
+export interface ModifyHomeSectionSchema {
+  params: Static<typeof modifyHomeSectionSchema.params>;
+}
+
 interface NavRoute {
   label: string;
   link: string;
 }
+export const adminNavRoutes: NavRoute[] = [
+  { label: "home", link: "/admin" },
+  { label: "create blog post", link: "/admin/blog/new" },
+  { label: "create home section", link: "/admin/home/new" },
+];
 
 export const navRoutes: NavRoute[] = [
   { label: "home", link: "/" },

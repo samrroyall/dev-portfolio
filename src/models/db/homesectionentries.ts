@@ -4,7 +4,7 @@ import { homesections } from "./homesections";
 
 export const homesectionentries = sqliteTable("homesectionentries", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  sectionId: text("section_id")
+  sectionId: integer("section_id")
     .references(() => homesections.id)
     .notNull(),
   title: text("title"),

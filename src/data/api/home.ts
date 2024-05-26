@@ -19,6 +19,8 @@ export const getHomeData = async (db: LibSQLDatabase): HomeData => {
       subtitles: homesectionentries.subtitles,
       text: homesectionentries.text,
       titleLink: homesectionentries.titleLink,
+      createdAt: homesections.createdAt,
+      lastModifiedAt: homesections.lastModifiedAt,
     })
     .from(homesections)
     .fullJoin(

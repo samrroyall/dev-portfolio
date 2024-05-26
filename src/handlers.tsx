@@ -19,12 +19,19 @@ import {
   type BlogPostSchema,
   type ContactSchema,
   type LoginSchema,
+  type ModifyHomeSectionSchema,
   type NewHomeSectionEntrySubtitleSchema,
   type SendEmailSchema,
   type ToggleThemeSchema,
 } from "./models/routes";
-import { createNewSession, isAdmin, sendEmail, verifyRecaptcha } from "./utils";
-import { createNewHomeSection } from "./utils/homesections";
+import {
+  createNewHomeSection,
+  createNewSession,
+  isAdmin,
+  sendEmail,
+  verifyRecaptcha,
+} from "./utils";
+import { deleteHomeSection } from "./utils/homesections";
 
 export const authenticateHandler = async ({
   body,
@@ -86,6 +93,25 @@ export const createHomeSectionHandler = ({
   cookie: { theme },
 }: HandlerContext) => <CreateHomeSection theme={theme} />;
 
+export const deleteHomeSectionHandler = async ({
+  db,
+  params: { id },
+  set,
+}: HandlerContext<ModifyHomeSectionSchema>) => {
+  try {
+    const result = await deleteHomeSection(db, id);
+
+    return result;
+  } catch (err) {
+    console.error(
+      `Unexpected error encountered while deleting the home section: ${err}`,
+    );
+
+    set.status = 500;
+    return JSON.stringify(err);
+  }
+};
+
 export const insertHomeSectionHandler = async ({
   body,
   db,
@@ -94,12 +120,12 @@ export const insertHomeSectionHandler = async ({
   set.status = 303;
 
   try {
-    await createNewHomeSection(db, body);
+    await createNewHomeSection(db, body as Record<string, string>);
 
     set.headers.location = "/admin?success=true";
   } catch (err) {
     console.error(
-      `Unexpected error encountered while creating contact message: ${err}`,
+      `Unexpected error encountered while creating new home section: ${err}`,
     );
 
     set.headers.location = "/admin/home/new?error=unknown";

@@ -1,4 +1,4 @@
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { type LibSQLDatabase } from "drizzle-orm/libsql";
 import { homesectionentries, homesections } from "../models/db";
 import {
@@ -16,12 +16,12 @@ interface HomeSectionFormData {
   entries: HomeSectionEntryFormData[];
 }
 
-const entryTitleRegex = /entryTitle-(?<entryId>.+)/g;
-const entryTitleLinkRegex = /entryTitleLink-(?<entryId>.+)/g;
-const entryTextRegex = /entryText-(?<entryId>.+)/g;
-const entrySubtitleRegex = /entrySubtitle-(?<entryId>.+)-(?<subtitleId>.+)/g;
+const entryTitleRegex = /entryTitle-(?<entryId>.+)/;
+const entryTitleLinkRegex = /entryTitleLink-(?<entryId>.+)/;
+const entryTextRegex = /entryText-(?<entryId>.+)/;
+const entrySubtitleRegex = /entrySubtitle-(?<entryId>.+)-(?<subtitleId>.+)/;
 const entrySubtitleDetailRegex =
-  /entrySubtitleDetail-(?<entryId>.+)-(?<subtitleId>.+)/g;
+  /entrySubtitleDetail-(?<entryId>.+)-(?<subtitleId>.+)/;
 
 const parseHomeSectionFormData = (
   data: Record<string, string>,
@@ -34,25 +34,39 @@ const parseHomeSectionFormData = (
   const res: Partial<HomeSectionFormData> = {};
 
   for (const [key, value] of Object.entries(data)) {
+    const cleanedValue = value.length === 0 ? undefined : value;
+
     if (key === "sectionTitle") {
-      res.title = value;
+      res.title = cleanedValue;
     } else if (key.startsWith("entryTitle-")) {
       const groups = key.match(entryTitleRegex)?.groups;
 
       if (!!groups?.entryId) {
-        entries[groups.entryId].title = value;
+        if (!entries[groups.entryId]) {
+          entries[groups.entryId] = {};
+        }
+
+        entries[groups.entryId].title = cleanedValue;
       }
     } else if (key.startsWith("entryTitleLink-")) {
       const groups = key.match(entryTitleLinkRegex)?.groups;
 
       if (!!groups?.entryId) {
-        entries[groups.entryId].titleLink = value;
+        if (!entries[groups.entryId]) {
+          entries[groups.entryId] = {};
+        }
+
+        entries[groups.entryId].titleLink = cleanedValue;
       }
     } else if (key.startsWith("entryText-")) {
       const groups = key.match(entryTextRegex)?.groups;
 
       if (!!groups?.entryId) {
-        entries[groups.entryId].text = value;
+        if (!entries[groups.entryId]) {
+          entries[groups.entryId] = {};
+        }
+
+        entries[groups.entryId].text = cleanedValue;
       }
     } else if (key.startsWith("entrySubtitle-")) {
       const groups = key.match(entrySubtitleRegex)?.groups;
@@ -61,15 +75,15 @@ const parseHomeSectionFormData = (
         const entryId = groups.entryId;
         const subtitleId = groups.subtitleId;
 
-        if (!!subtitles[entryId]) {
+        if (!subtitles[entryId]) {
           subtitles[entryId] = {};
         }
 
-        if (!!subtitles[entryId][subtitleId]) {
+        if (!subtitles[entryId][subtitleId]) {
           subtitles[entryId][subtitleId] = {};
         }
 
-        subtitles[entryId][subtitleId].title = value;
+        subtitles[entryId][subtitleId].title = cleanedValue;
       }
     } else if (key.startsWith("entrySubtitleDetail-")) {
       const groups = key.match(entrySubtitleDetailRegex)?.groups;
@@ -78,30 +92,34 @@ const parseHomeSectionFormData = (
         const entryId = groups.entryId;
         const subtitleId = groups.subtitleId;
 
-        if (!!subtitles[entryId]) {
+        if (!subtitles[entryId]) {
           subtitles[entryId] = {};
         }
 
-        if (!!subtitles[entryId][subtitleId]) {
+        if (!subtitles[entryId][subtitleId]) {
           subtitles[entryId][subtitleId] = {};
         }
 
-        subtitles[entryId][subtitleId].detail = value;
+        subtitles[entryId][subtitleId].detail = cleanedValue;
       }
-    } else {
-      console.log(
-        `Unexpected key '${key}' passed as new home section form input.`,
-      );
     }
   }
 
   for (const entryId in subtitles) {
-    entries[entryId].subtitles = Object.values(
-      subtitles[entryId],
-    ) as HomeSectionEntrySubtitle[];
+    if (Object.keys(subtitles[entryId]).length > 0) {
+      entries[entryId].subtitles = Object.values(
+        subtitles[entryId],
+      ) as HomeSectionEntrySubtitle[];
+    } else {
+      entries[entryId].subtitles = [];
+    }
   }
 
-  res.entries = Object.values(entries) as HomeSectionEntryFormData[];
+  if (Object.keys(entries).length > 0) {
+    res.entries = Object.values(entries) as HomeSectionEntryFormData[];
+  } else {
+    res.entries = [];
+  }
 
   return res as HomeSectionFormData;
 };
@@ -120,27 +138,44 @@ export const createNewHomeSection = async (
 
   const maxOrder = maxOrderResult.length > 0 ? maxOrderResult[0].order : 0;
 
-  const homeSectionResult = await db
-    .insert(homesections)
-    .values({
-      order: maxOrder + 1,
-      title: formData.title,
-      createdAt: Date.now(),
-      lastModifiedAt: Date.now(),
-    })
-    .returning({ sectionId: homesections.id });
+  await db.transaction(async (tx) => {
+    const homeSectionResult = await tx
+      .insert(homesections)
+      .values({
+        order: maxOrder + 1,
+        title: formData.title,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
+      })
+      .returning({ sectionId: homesections.id });
 
-  const sectionId = homeSectionResult[0].sectionId;
+    const sectionId = homeSectionResult[0].sectionId;
 
-  void db.insert(homesectionentries).values(
-    formData.entries.map((entry) => ({
+    const rows = formData.entries.map((entry) => ({
       sectionId,
       title: entry.title,
-      subtitles: entry.subtitles,
+      subtitles: entry.subtitles ?? [],
       titleLink: entry.titleLink,
       text: entry.text,
-      createdAt: Date.now(),
-      lastModifiedAt: Date.now(),
-    })),
-  );
+      createdAt: new Date(),
+      lastModifiedAt: new Date(),
+    }));
+
+    if (rows.length > 0) {
+      await tx.insert(homesectionentries).values(rows);
+    }
+  });
+};
+
+export const deleteHomeSection = async (
+  db: LibSQLDatabase,
+  sectionId: number,
+): Promise<void> => {
+  await db.transaction(async (tx) => {
+    await tx
+      .delete(homesectionentries)
+      .where(eq(homesectionentries.sectionId, sectionId));
+
+    await tx.delete(homesections).where(eq(homesections.id, sectionId));
+  });
 };

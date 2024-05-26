@@ -1,6 +1,6 @@
 export { isAdmin, verifyRecaptcha } from "./auth";
 export { sendEmail } from "./email";
-export { insertNewHomeSection } from "./homesections";
+export { createNewHomeSection } from "./homesections";
 export {
   getLowercaseCharAt,
   getPrettyDate,

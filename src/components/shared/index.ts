@@ -7,6 +7,7 @@ import IconButton from "./IconButton";
 import Input from "./Input";
 import Link from "./Link";
 import Markdown from "./Markdown";
+import Modal from "./Modal";
 import NoData from "./NoData";
 import PageTitle from "./PageTitle";
 import SectionDivider from "./SectionDivider";
@@ -23,6 +24,7 @@ export {
   Input,
   Link,
   Markdown,
+  Modal,
   NoData,
   PageTitle,
   Sections,

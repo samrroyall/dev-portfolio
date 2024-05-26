@@ -1,6 +1,11 @@
 import { type Track } from "../../../models/interests";
 import { Icon, Link } from "../../shared";
 
+const arrowClasses = `
+  text-secondary-text dark:text-secondary-text-dark text-xl
+  hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
+`;
+
 const imageSize = 300;
 
 interface SpotifyTrackCardProps {
@@ -21,14 +26,14 @@ const SpotifyTrackCard = ({
   const nextId = (id + 1) % total;
 
   return (
-    <div class="flex items-center">
-      <div hx-on-click={`${toggleCard(id)}; ${toggleCard(prevId)};`}>
-        <Icon
-          icon={`\ueab5`}
-          className="text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg"
-        />
-      </div>
-      <div class="mx-3">
+    <div class="mx-3">
+      <div class="flex items-center">
+        <button
+          class="mr-4"
+          hx-on-click={`${toggleCard(id)}; ${toggleCard(prevId)};`}
+        >
+          <Icon icon={"\udb80\udc4d"} className={arrowClasses} />
+        </button>
         <div class={`h-[${imageSize}px] w-[${imageSize}px]`}>
           <img
             src={track.album.artUrl ?? ""}
@@ -36,24 +41,24 @@ const SpotifyTrackCard = ({
             alt={`Cover art for ${track.name} by ${track.artists.join(", ")}`}
           />
         </div>
-        <div class="mt-2">
-          <Link href={track.url}>
-            <span class="text-secondary-text dark:text-secondary-text-dark text-lg font-semibold">
-              {track.name}
-            </span>
-          </Link>
-          <div>
-            <span>{track.artists.map((artist) => artist.name).join(", ")}</span>
-            <span>{" · "}</span>
-            <span>{track.album.name}</span>
-          </div>
-        </div>
+        <button
+          class="ml-4"
+          hx-on-click={`${toggleCard(id)}; ${toggleCard(nextId)};`}
+        >
+          <Icon icon={"\udb80\udc54"} className={arrowClasses} />
+        </button>
       </div>
-      <div hx-on-click={`${toggleCard(id)}; ${toggleCard(nextId)};`}>
-        <Icon
-          icon={`\ueab6`}
-          className="text-secondary-text dark:text-secondary-text-dark cursor-pointer text-lg"
-        />
+      <div class="ml-8 mt-2">
+        <Link href={track.url}>
+          <span class="text-secondary-text dark:text-secondary-text-dark text-lg font-semibold">
+            {track.name}
+          </span>
+        </Link>
+        <div>
+          <span>{track.artists.map((artist) => artist.name).join(", ")}</span>
+          <span>{" · "}</span>
+          <span>{track.album.name}</span>
+        </div>
       </div>
     </div>
   );

@@ -1,13 +1,16 @@
-import { navRoutes } from "../../models/routes";
+import { adminNavRoutes, navRoutes } from "../../models/routes";
 import { Heading } from "../shared";
 
 interface PageTitleProps {
   title: string;
+  admin?: boolean;
   current?: string;
 }
 
-const PageTitle = ({ current, title }: PageTitleProps) => {
-  const currentIdx = navRoutes.findIndex(({ label }) => label === current);
+const PageTitle = ({ admin, current, title }: PageTitleProps) => {
+  const currentIdx = (admin === true ? adminNavRoutes : navRoutes).findIndex(
+    ({ label }) => label === current,
+  );
 
   return (
     <div class="mx-2 mt-3 flex items-end p-2">

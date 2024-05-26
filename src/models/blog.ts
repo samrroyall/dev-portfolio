@@ -5,8 +5,8 @@ export interface BlogPost {
   subtitle: string;
   blurb: string;
   text: string;
-  createdAt: number;
-  lastModifiedAt: number;
+  createdAt: Date;
+  lastModifiedAt: Date;
 }
 
 export type BlogPostInfo = Omit<BlogPost, "text">;

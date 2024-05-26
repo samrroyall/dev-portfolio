@@ -14,7 +14,7 @@ interface SectionProps {
 }
 
 const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
-  <section>
+  <>
     {entries.map(({ title, content, titleLink, fullPage }, i) => (
       <section class="group/section w-full">
         <div class="my-3 flex flex-col p-2">
@@ -37,7 +37,7 @@ const Sections = ({ entries, sectionNum }: SectionProps): JSX.Element => (
         </div>
       </section>
     ))}
-  </section>
+  </>
 );
 
 export default Sections;

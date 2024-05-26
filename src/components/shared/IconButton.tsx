@@ -19,12 +19,17 @@ interface IconButtonProps extends Partial<HtmxAttributes> {
   label: string;
   icon: string;
   href?: string;
+  id?: string;
   target?: LinkTarget;
   type?: ButtonType;
 }
 
 const IconButton = (props: IconButtonProps) => {
-  const { icon, label, href, target, type } = props;
+  const { icon, label, href, id, target, type } = props;
+
+  const attrs = {
+    ...(id ? { id } : {}),
+  };
 
   const hxAttrs = getHxAttrsFromProps(props);
 
@@ -32,6 +37,7 @@ const IconButton = (props: IconButtonProps) => {
     <button
       class={`px-3 py-2 ${borderClasses} ${textClasses}`}
       type={type ?? "button"}
+      {...attrs}
       {...hxAttrs}
     >
       <div class="flex items-center">

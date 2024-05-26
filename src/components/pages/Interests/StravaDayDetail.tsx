@@ -1,5 +1,10 @@
 import { Icon } from "../../shared";
 
+const arrowClasses = `
+  text-secondary-text dark:text-secondary-text-dark cursor-pointer text-xl
+  hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
+`;
+
 const bgClasses = "bg-primary-bg dark:bg-primary-bg-dark";
 
 const borderClasses =
@@ -86,7 +91,7 @@ const StravaDayDetail = ({
           class="flex-none"
           hx-on-click={`htmx.toggleClass("#run-${id}-detail", "hidden")`}
         >
-          <Icon icon={"\udb80\udc4d"} className="cursor-pointer" />
+          <Icon icon={"\udb80\udc4d"} className={arrowClasses} />
         </div>
         <div class="font-geist-mono flex flex-auto flex-col justify-center px-8 ">
           {milesValue}

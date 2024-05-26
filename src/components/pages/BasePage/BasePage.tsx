@@ -10,12 +10,14 @@ const contentSizeClasses =
 
 interface BasePageProps extends DefaultPageProps {
   children: Html.Children;
+  admin?: boolean;
   current?: string;
   pageTitle?: boolean;
   title?: string;
 }
 
 const BasePage = ({
+  admin,
   current,
   children,
   theme,
@@ -26,17 +28,17 @@ const BasePage = ({
     <BaseHtml theme={theme} title={title}>
       <main class="relative">
         <div class="absolute left-0 top-0 hidden px-5 py-4 lg:inline-block">
-          <Nav current={current} />
+          <Nav admin={admin ?? false} current={current} />
         </div>
         <div class={`mx-auto ${contentSizeClasses} ${contentFlexClasses}`}>
           <div class="overflow-y-auto overflow-x-hidden px-3 pb-6 pt-3 max-sm:pb-20">
             {pageTitle !== false && title ? (
-              <PageTitle current={current} title={title} />
+              <PageTitle admin={admin} current={current} title={title} />
             ) : null}
             {children}
           </div>
           <div class="order-first w-full lg:order-last">
-            <Footer current={current} theme={theme} />
+            <Footer admin={admin ?? false} current={current} theme={theme} />
           </div>
         </div>
       </main>

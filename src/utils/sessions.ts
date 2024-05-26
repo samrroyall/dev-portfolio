@@ -48,7 +48,7 @@ export const validateSession = async (
       ),
     );
 
-  void cleanupSessions(db);
+  await cleanupSessions(db);
 
   return result.length > 0;
 };

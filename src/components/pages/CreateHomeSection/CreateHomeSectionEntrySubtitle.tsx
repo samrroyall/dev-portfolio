@@ -1,4 +1,4 @@
-import { IconButton, Input, TextDivider } from "../../shared";
+import { IconButton, Input } from "../../shared";
 
 interface CreateNewHomeSectionEntrySubtitleProps {
   id: string;
@@ -10,7 +10,6 @@ const CreateNewHomeSectionEntrySubtitle = ({
   entryId,
 }: CreateNewHomeSectionEntrySubtitleProps) => (
   <div id={`entry-${entryId}-subtitle-${id}`}>
-    <TextDivider />
     <div class="flex">
       <Input
         className="w-full"
@@ -31,7 +30,6 @@ const CreateNewHomeSectionEntrySubtitle = ({
         hx-on-click={`deleteEntrySubtitle("${entryId}", "${id}");`}
       />
     </div>
-    <TextDivider />
   </div>
 );
 

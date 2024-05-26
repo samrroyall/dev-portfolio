@@ -24,13 +24,12 @@ engineer, I have worked on a variety of projects all over the stack.
 I am always eager to explore new projects. If you have an exciting opportunity, 
 or if you would like to discuss a potential collaboration, please don't 
 hesitate to [reach out](#).`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
     ],
-
-    createdAt: 1713212115000,
-    lastModifiedAt: 1713212115000,
+    createdAt: new Date(),
+    lastModifiedAt: new Date(),
   },
   {
     id: 234523452345,
@@ -56,8 +55,8 @@ and graph databases, and worked in cloud environments.
 My backend work has been primarily in Scala and Python, while my frontend work
 has been in Angular and React with Typescript. I have also handled cloud 
 intrstructure in AWS.`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
       {
         id: 2345234523452346,
@@ -79,8 +78,8 @@ After this program, I was promoted to consultant in the DFIR business unit.
 Throughout these three roles, I worked on a variety of client engagements, 
 including data breaches, ransomware attacks, and insider threats. I also 
 created various internal tools, primarily written in Python.`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
       {
         id: 2345234523452347,
@@ -88,12 +87,12 @@ created various internal tools, primarily written in Python.`,
         subtitles: [],
         text: `For more information about my work experience, please refer to 
 [my resume](#).`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
     ],
-    createdAt: 1713212115000,
-    lastModifiedAt: 1713212115000,
+    createdAt: new Date(),
+    lastModifiedAt: new Date(),
   },
   {
     id: 345634563456,
@@ -112,8 +111,8 @@ created various internal tools, primarily written in Python.`,
         text: `Attended the University of Chicago from 2015 to 2019, graduating 
 with a double major in Computer Science and Philosophy and receiving 
 _Dean's List_ all four years`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
       {
         id: 3456345634563457,
@@ -126,12 +125,12 @@ _Dean's List_ all four years`,
         ],
         text: `Participated in a 14-week full stack web development bootcamp 
 in 2021, receiving highest honors`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
     ],
-    createdAt: 1713212115000,
-    lastModifiedAt: 1713212115000,
+    createdAt: new Date(),
+    lastModifiedAt: new Date(),
   },
   {
     id: 456745674567,
@@ -156,8 +155,8 @@ backend source code [here](https://github.com/samrroyall/klotski-api).
 
 This project is inspired by a CLI tool I built in C++. View the source code 
 [here](https://github.com/samrroyall/klotski-cpp).`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
       {
         id: 4567456745674568,
@@ -168,8 +167,8 @@ It is built with Typescript using Bun, ElysiaJS, Turso, and HTMX. Templating is
 done with TSX, and styling is done with Tailwind CSS. (**TODO**: Talk about 
 deployment and any APIs or Lambda functions.) View the source code 
 [here](https://github.com/samrroyall/dev-portfolio).`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
       {
         id: 4567456745674569,
@@ -186,8 +185,8 @@ split evenly among the remaining users.
 The project is build with Typescript using ReactNative and Recoil. Styling is 
 done using NativeBase. View the source code and a video demo of the app 
 [here](https://github.com/samrroyall/tvrtl).`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
       {
         id: 4567456745674570,
@@ -199,12 +198,12 @@ done using NativeBase. View the source code and a video demo of the app
 project using Elm. The calculator is styled to look like a TI-84 graphing 
 calculator. View the source code 
 [here](https://github.com/samrroyall/elmcalc).`,
-        createdAt: 1713212115000,
-        lastModifiedAt: 1713212115000,
+        createdAt: new Date(),
+        lastModifiedAt: new Date(),
       },
     ],
-    createdAt: 1713212115000,
-    lastModifiedAt: 1713212115000,
+    createdAt: new Date(),
+    lastModifiedAt: new Date(),
   },
 ];
 
