@@ -1,4 +1,10 @@
-type InputType = "email" | "number" | "password" | "text" | "textarea";
+type InputType =
+  | "email"
+  | "hidden"
+  | "number"
+  | "password"
+  | "text"
+  | "textarea";
 
 const standardBorderClasses =
   "border border-secondary-text dark:border-secondary-text-dark rounded";
@@ -21,7 +27,10 @@ const noBorderClasses = `border-0 ring-0 outline-none`;
 
 const placeholderClasses = `placeholder-primary-text dark:placeholder-primary-text-dark text`;
 
-const inputClasses = `bg-transparent w-full p-1 ${noBorderClasses} ${placeholderClasses}`;
+const disabledClasses =
+  "disabled:text-secondary-bg disabled:dark:text-secondary-bg-dark";
+
+const inputClasses = `bg-transparent w-full p-1 ${noBorderClasses} ${placeholderClasses} ${disabledClasses}`;
 
 const legendClasses = "px-1 text-sm";
 
@@ -31,6 +40,7 @@ interface InputProps {
   label: string;
   name: string;
   className?: string;
+  disabled?: boolean;
   id?: string;
   minlength?: number;
   maxlength?: number;
@@ -39,10 +49,12 @@ interface InputProps {
   required?: boolean;
   title?: string;
   type?: InputType;
+  value?: any;
 }
 
 const Input = ({
   className,
+  disabled,
   id,
   label,
   minlength,
@@ -53,6 +65,7 @@ const Input = ({
   required,
   title,
   type,
+  value,
 }: InputProps): JSX.Element => {
   const attrs = {
     ...(!!id ? { id } : {}),
@@ -74,10 +87,11 @@ const Input = ({
   };
 
   const bottomLegendClasses = maxlength ? "relative pb-3" : "";
+  const hiddenClasses = type === "hidden" ? "hidden" : "";
 
   return (
     <fieldset
-      class={`${fieldClasses} ${bottomLegendClasses} ${className ?? ""}`}
+      class={`${fieldClasses} ${bottomLegendClasses} ${hiddenClasses} $${className ?? ""}`}
     >
       <legend class={`${legendClasses} ${required ? requiredClasses : ""}`}>
         {label}
@@ -86,14 +100,19 @@ const Input = ({
         <textarea
           class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
           name={name}
+          disabled={disabled ?? false}
           {...attrs}
           {...hxAttrs}
-        />
+        >
+          {value ?? null}
+        </textarea>
       ) : (
         <input
           class={inputClasses}
           type={type ?? "text"}
           name={name}
+          value={value ?? null}
+          disabled={disabled ?? false}
           {...attrs}
         />
       )}

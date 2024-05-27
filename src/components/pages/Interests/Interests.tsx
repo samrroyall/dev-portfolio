@@ -1,6 +1,6 @@
 import { musicText, runningText } from "../../../data/api/interests";
-import { type InterestsData } from "../../../models/interests";
 import { type DefaultPageProps } from "../../../models/components";
+import { type InterestsData } from "../../../models/interests";
 import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
 import InterestsPageEntry from "./InterestsPageEntry";

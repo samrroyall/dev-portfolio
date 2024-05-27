@@ -1,26 +1,29 @@
-import { IconButton, Input } from "../../shared";
+import { type HomeSectionEntrySubtitle } from "../../models/home";
+import { IconButton, Input } from "../shared";
 
 interface CreateNewHomeSectionEntrySubtitleProps {
   id: string;
   entryId: string;
+  data?: HomeSectionEntrySubtitle;
 }
 
-const CreateNewHomeSectionEntrySubtitle = ({
+const HomeSectionEntrySubtitleInput = ({
   id,
+  data,
   entryId,
 }: CreateNewHomeSectionEntrySubtitleProps) => (
   <div id={`entry-${entryId}-subtitle-${id}`}>
-    <div class="flex">
+    <div class="flex gap-x-2 *:w-full">
       <Input
-        className="w-full"
         label="Entry Subtitle"
         name={`entrySubtitle-${entryId}-${id}`}
         required={true}
+        value={data?.title ?? ""}
       />
       <Input
-        className="ml-2 w-full"
         label="Entry Subtitle Detail"
         name={`entrySubtitleDetail-${entryId}-${id}`}
+        value={data?.detail ?? ""}
       />
     </div>
     <div class="text-center">
@@ -33,4 +36,4 @@ const CreateNewHomeSectionEntrySubtitle = ({
   </div>
 );
 
-export default CreateNewHomeSectionEntrySubtitle;
+export default HomeSectionEntrySubtitleInput;

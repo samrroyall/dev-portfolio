@@ -8,7 +8,7 @@ const CreateBlogPost = ({ theme }: DefaultPageProps): JSX.Element => (
     theme={theme}
     title="Create Blog Post"
   >
-    <div>{"This is the CreateBlogPost page..."}</div>
+    <p>{"This is the CreateBlogPost page..."}</p>
   </BasePage>
 );
 

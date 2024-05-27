@@ -1,6 +1,12 @@
 export { isAdmin, verifyRecaptcha } from "./auth";
 export { sendEmail } from "./email";
-export { createNewHomeSection } from "./homesections";
+export {
+  createHomeSection,
+  deleteHomeSection,
+  deleteHomeSectionEntry,
+  getHomeSection,
+  modifyHomeSection,
+} from "./homesections";
 export {
   getLowercaseCharAt,
   getPrettyDate,

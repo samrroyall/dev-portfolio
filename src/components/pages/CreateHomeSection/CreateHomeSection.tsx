@@ -1,6 +1,6 @@
 import { type DefaultPageProps } from "../../../models/components";
 import { BasePage } from "../../pages";
-import { Form, IconButton, Input, SectionDivider } from "../../shared";
+import { Form, IconButton, Input } from "../../shared";
 
 const formFuncs = `
   function deleteEntry(entryId) {
@@ -18,7 +18,7 @@ const formFuncs = `
 
 interface CreateHomeSectionProps extends DefaultPageProps {
   error?: string;
-  success?: boolean;
+  success?: string;
 }
 
 const CreateHomeSection = ({
@@ -28,7 +28,7 @@ const CreateHomeSection = ({
 }: CreateHomeSectionProps): JSX.Element => {
   const attrs = {
     ...(error ? { error } : {}),
-    ...(success ? { success } : {}),
+    ...(success ? { success: success === "true" } : {}),
   };
 
   return (
@@ -38,7 +38,6 @@ const CreateHomeSection = ({
       theme={theme}
       title="Create Home Section"
     >
-      <SectionDivider />
       <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
         <script>{formFuncs}</script>
         <Form

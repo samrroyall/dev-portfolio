@@ -25,7 +25,10 @@ const Modal = ({ children, className, id }: ModalProps) => {
   return (
     <div id={id} class={containerClasses}>
       <div class={`${alertClasses} ${className ?? ""}`}>
-        <button hx-on-click={`htmx.toggleClass("#${id}", "hidden");`}>
+        <button
+          type="button"
+          hx-on-click={`htmx.toggleClass("#${id}", "hidden");`}
+        >
           <Icon className={closeModalIconClasses} icon={"\udb80\udd56"} />
         </button>
         {children}

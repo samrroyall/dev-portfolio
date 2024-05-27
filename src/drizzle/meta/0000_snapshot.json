@@ -67,16 +67,12 @@
       "indexes": {
         "blogposts_slug_unique": {
           "name": "blogposts_slug_unique",
-          "columns": [
-            "slug"
-          ],
+          "columns": ["slug"],
           "isUnique": true
         },
         "slug": {
           "name": "slug",
-          "columns": [
-            "slug"
-          ],
+          "columns": ["slug"],
           "isUnique": false
         }
       },
@@ -150,12 +146,8 @@
           "name": "homesectionentries_section_id_homesections_id_fk",
           "tableFrom": "homesectionentries",
           "tableTo": "homesections",
-          "columnsFrom": [
-            "section_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["section_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

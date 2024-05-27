@@ -17,6 +17,7 @@ const app = new Elysia({
     secrets: process.env.COOKIE_SECRET,
     sign: ["session"],
   },
+  normalize: true,
 })
   .use(staticPlugin())
   .use(html())
