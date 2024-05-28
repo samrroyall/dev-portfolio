@@ -1,4 +1,5 @@
 import BaseHtml from "./BaseHtml";
+import BlogPostPreview from "./BlogPostPreview";
 import Button from "./Button";
 import Form from "./Form";
 import Heading from "./Heading";
@@ -18,6 +19,7 @@ import TextDivider from "./TextDivider";
 
 export {
   BaseHtml,
+  BlogPostPreview,
   Button,
   Form,
   Heading,

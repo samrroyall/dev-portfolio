@@ -11,7 +11,7 @@ const HomeSectionEntrySubtitleInput = ({
   id,
   data,
   entryId,
-}: CreateNewHomeSectionEntrySubtitleProps) => (
+}: CreateNewHomeSectionEntrySubtitleProps): JSX.Element => (
   <div id={`entry-${entryId}-subtitle-${id}`}>
     <div class="flex gap-x-2 *:w-full">
       <Input

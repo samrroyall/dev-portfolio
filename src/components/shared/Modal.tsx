@@ -21,7 +21,7 @@ interface ModalProps {
   className?: string;
 }
 
-const Modal = ({ children, className, id }: ModalProps) => {
+const Modal = ({ children, className, id }: ModalProps): JSX.Element => {
   return (
     <div id={id} class={containerClasses}>
       <div class={`${alertClasses} ${className ?? ""}`}>

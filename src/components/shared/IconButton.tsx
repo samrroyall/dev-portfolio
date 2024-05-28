@@ -24,7 +24,7 @@ interface IconButtonProps extends Partial<HtmxAttributes> {
   type?: ButtonType;
 }
 
-const IconButton = (props: IconButtonProps) => {
+const IconButton = (props: IconButtonProps): JSX.Element => {
   const { icon, label, href, id, target, type } = props;
 
   const attrs = {

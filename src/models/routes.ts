@@ -61,6 +61,32 @@ export interface CookieSchema {
   cookie: Static<typeof cookieSchema.cookie>;
 }
 
+export const createBlogPostPageSchema = {
+  query: t.Object({
+    success: t.Optional(t.String()),
+    error: t.Optional(t.String()),
+  }),
+};
+
+export interface CreateBlogPostPageSchema {
+  query: Static<typeof createBlogPostPageSchema.query>;
+}
+
+export const createBlogPostSchema = {
+  body: t.Object({
+    slug: t.String(),
+    title: t.String(),
+    subtitle: t.String(),
+    blurb: t.String(),
+    text: t.String(),
+    "g-recaptcha-response": t.String(),
+  }),
+};
+
+export interface CreateBlogPostSchema {
+  body: Static<typeof createBlogPostSchema.body>;
+}
+
 export const createHomeSectionPageSchema = {
   query: t.Object({
     success: t.Optional(t.String()),
@@ -70,6 +96,16 @@ export const createHomeSectionPageSchema = {
 
 export interface CreateHomeSectionPageSchema {
   query: Static<typeof createHomeSectionPageSchema.query>;
+}
+
+export const deleteBlogPostSchema = {
+  params: t.Object({
+    id: t.Numeric(),
+  }),
+};
+
+export interface DeleteBlogPostSchema {
+  params: Static<typeof deleteBlogPostSchema.params>;
 }
 
 export const deleteHomeSectionSchema = {
@@ -82,9 +118,15 @@ export interface DeleteHomeSectionSchema {
   params: Static<typeof deleteHomeSectionSchema.params>;
 }
 
-export const deleteHomeSectionEntrySchema = deleteHomeSectionSchema;
+export const deleteHomeSectionEntrySchema = {
+  params: t.Object({
+    id: t.Numeric(),
+  }),
+};
 
-export type DeleteHomeSectionEntrySchema = DeleteHomeSectionSchema;
+export interface DeleteHomeSectionEntrySchema {
+  params: Static<typeof deleteHomeSectionEntrySchema.params>;
+}
 
 export const loginPageSchema = {
   query: t.Object({
@@ -95,6 +137,40 @@ export const loginPageSchema = {
 
 export interface LoginPageSchema {
   query: Static<typeof loginPageSchema.query>;
+}
+
+export const modifyBlogPostPageSchema = {
+  params: t.Object({
+    id: t.Numeric(),
+  }),
+  query: t.Object({
+    success: t.Optional(t.String()),
+    error: t.Optional(t.String()),
+  }),
+};
+
+export interface ModifyBlogPostPageSchema {
+  params: Static<typeof modifyBlogPostPageSchema.params>;
+  query: Static<typeof modifyBlogPostPageSchema.query>;
+}
+
+export const modifyBlogPostSchema = {
+  body: t.Object({
+    slug: t.String(),
+    title: t.String(),
+    subtitle: t.String(),
+    blurb: t.String(),
+    text: t.String(),
+    "g-recaptcha-response": t.String(),
+  }),
+  params: t.Object({
+    id: t.Numeric(),
+  }),
+};
+
+export interface ModifyBlogPostSchema {
+  body: Static<typeof modifyBlogPostSchema.body>;
+  params: Static<typeof modifyBlogPostSchema.params>;
 }
 
 export const modifyHomeSectionSchema = {
@@ -130,6 +206,20 @@ export const newHomeSectionEntrySubtitleSchema = {
 
 export interface NewHomeSectionEntrySubtitleSchema {
   query: Static<typeof newHomeSectionEntrySubtitleSchema.query>;
+}
+
+export const previewBlogPostSchema = {
+  body: t.Object({
+    slug: t.Optional(t.String()),
+    title: t.Optional(t.String()),
+    subtitle: t.Optional(t.String()),
+    blurb: t.Optional(t.String()),
+    text: t.Optional(t.String()),
+  }),
+};
+
+export interface PreviewBlogPostSchema {
+  body: Static<typeof previewBlogPostSchema.body>;
 }
 
 export const sendEmailSchema = {

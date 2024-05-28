@@ -57,7 +57,7 @@ const Form = ({
         class={`flex flex-col ${success === true ? "hidden" : ""} ${className ?? ""}`}
         action={action}
         method="post"
-        hx-on-keyup={`htmx.find("#${id}-submit-button").disabled = !htmx.find("#${id}").checkValidity();`}
+        hx-on-keyup={`htmx.find("#${id}-submit-button").disabled = !htmx.find("#${id}").checkValidity()`}
         hx-on-submit={`event.preventDefault(); grecaptcha.execute();`}
       >
         {children}

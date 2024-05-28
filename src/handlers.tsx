@@ -12,32 +12,48 @@ import {
   ModifyHomeSection,
   NotFound,
 } from "./components/pages";
+import ModifyBlogPost from "./components/pages/ModifyBlogPost/ModifyBlogPost";
 import {
+  BlogPostPreview,
   HomeSectionEntryInput,
   HomeSectionEntrySubtitleInput,
 } from "./components/shared";
+import { getSpotifyData, getStravaData } from "./data/api/interests";
 import { type HandlerContext } from "./models/handlers";
 import {
-  NewHomeSectionEntrySubtitleSchema,
   type AuthenticateSchema,
   type BlogPostPageSchema,
   type ContactPageSchema,
+  type CreateBlogPostPageSchema,
+  type CreateBlogPostSchema,
   type CreateHomeSectionPageSchema,
+  type DeleteBlogPostSchema,
   type DeleteHomeSectionEntrySchema,
   type DeleteHomeSectionSchema,
   type LoginPageSchema,
+  type ModifyBlogPostPageSchema,
+  type ModifyBlogPostSchema,
   type ModifyHomeSectionPageSchema,
   type ModifyHomeSectionSchema,
+  type NewHomeSectionEntrySubtitleSchema,
+  type PreviewBlogPostSchema,
   type SendEmailSchema,
   type ToggleThemeSchema,
 } from "./models/routes";
 import {
+  createBlogPost,
   createHomeSection,
   createNewSession,
+  deleteBlogPost,
   deleteHomeSection,
   deleteHomeSectionEntry,
+  getBlogPost,
+  getBlogPostBySlug,
+  getBlogPosts,
   getHomeSection,
+  getHomeSections,
   isAdmin,
+  modifyBlogPost,
   modifyHomeSection,
   sendEmail,
   verifyRecaptcha,
@@ -49,9 +65,9 @@ export const authenticateHandler = async ({
   db,
   cookie: { session },
 }: HandlerContext<AuthenticateSchema>) => {
-  set.status = 303;
-
   try {
+    set.status = 303;
+
     if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
       set.headers.location = "/login?success=false&error=recaptcha";
     } else if (!(await isAdmin(body.username, body.password))) {
@@ -72,32 +88,58 @@ export const authenticateHandler = async ({
 
 export const adminPageHandler = async ({
   cookie: { theme },
-  blog,
-  home,
-}: HandlerContext) => Admin({ blogData: blog, homeData: home, theme });
+  db,
+}: HandlerContext) =>
+  Admin({ blogData: getBlogPosts(db), homeData: getHomeSections(db), theme });
 
 export const blogPageHandler = async ({
   cookie: { theme },
-  blog,
-}: HandlerContext) => Blog({ data: blog, theme });
+  db,
+}: HandlerContext) => Blog({ data: getBlogPosts(db), theme });
 
 export const blogPostPageHandler = async ({
   cookie: { theme },
-  blogPost,
+  db,
   params: { slug },
 }: HandlerContext<BlogPostPageSchema>) =>
-  BlogPost({ data: blogPost.get(slug), theme });
+  BlogPost({ data: getBlogPostBySlug(db, slug), theme });
 
 export const contactPageHandler = ({
   cookie: { theme },
-  query: { success, error },
+  query: { error, success },
 }: HandlerContext<ContactPageSchema>) => (
-  <Contact success={success} error={error} theme={theme} />
+  <Contact error={error} success={success} theme={theme} />
 );
+
+export const createBlogPostHandler = async ({
+  db,
+  body,
+  set,
+}: HandlerContext<CreateBlogPostSchema>) => {
+  try {
+    set.status = 303;
+
+    if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
+      set.headers.location = "/admin/blog/new?success=false&error=recaptcha";
+    } else {
+      await createBlogPost(db, body);
+      set.headers.location = "/admin";
+    }
+  } catch (err) {
+    console.error(
+      `Unexpected error encountered while creating new blog post: ${err}`,
+    );
+
+    set.headers.location = "/admin/blog/new?success=false&error=unknown";
+  }
+};
 
 export const createBlogPostPageHandler = ({
   cookie: { theme },
-}: HandlerContext) => <CreateBlogPost theme={theme} />;
+  query: { error, success },
+}: HandlerContext<CreateBlogPostPageSchema>) => (
+  <CreateBlogPost error={error} success={success} theme={theme} />
+);
 
 export const createHomeSectionPageHandler = ({
   cookie: { theme },
@@ -111,9 +153,9 @@ export const createHomeSectionHandler = async ({
   db,
   set,
 }: HandlerContext) => {
-  set.status = 303;
-
   try {
+    set.status = 303;
+
     if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
       set.headers.location = "/admin/home/new?success=false&error=recaptcha";
     } else {
@@ -129,6 +171,23 @@ export const createHomeSectionHandler = async ({
   }
 };
 
+export const deleteBlogPostHandler = async ({
+  db,
+  params: { id },
+  set,
+}: HandlerContext<DeleteBlogPostSchema>) => {
+  try {
+    await deleteBlogPost(db, id);
+  } catch (err) {
+    console.error(
+      `Unexpected error encountered while deleting blog post: ${err}`,
+    );
+
+    set.status = 500;
+    return JSON.stringify(err);
+  }
+};
+
 export const deleteHomeSectionHandler = async ({
   db,
   params: { id },
@@ -138,7 +197,7 @@ export const deleteHomeSectionHandler = async ({
     await deleteHomeSection(db, id);
   } catch (err) {
     console.error(
-      `Unexpected error encountered while deleting the home section: ${err}`,
+      `Unexpected error encountered while deleting home section: ${err}`,
     );
 
     set.status = 500;
@@ -155,11 +214,43 @@ export const deleteHomeSectionEntryHandler = async ({
     await deleteHomeSectionEntry(db, id);
   } catch (err) {
     console.error(
-      `Unexpected error encountered while deleting the home section entry: ${err}`,
+      `Unexpected error encountered while deleting home section entry: ${err}`,
     );
 
     set.status = 500;
     return JSON.stringify(err);
+  }
+};
+
+export const modifyBlogPostPageHandler = async ({
+  cookie: { theme },
+  db,
+  params: { id },
+  query: { success, error },
+}: HandlerContext<ModifyBlogPostPageSchema>) =>
+  ModifyBlogPost({ data: getBlogPost(db, id), error, success, theme });
+
+export const modifyBlogPostHandler = async ({
+  body,
+  db,
+  params: { id },
+  set,
+}: HandlerContext<ModifyBlogPostSchema>) => {
+  try {
+    set.status = 303;
+
+    if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
+      set.headers.location = `/admin/blog/${id}?success=false&error=recaptcha`;
+    } else {
+      await modifyBlogPost(db, id, body);
+      set.headers.location = "/admin";
+    }
+  } catch (err) {
+    console.error(
+      `Unexpected error encountered while modifying blog post: ${err}`,
+    );
+
+    set.headers.location = `/admin/blog/${id}?success=false&error=unknown`;
   }
 };
 
@@ -177,10 +268,8 @@ export const modifyHomeSectionHandler = async ({
   params: { id },
   set,
 }: HandlerContext<ModifyHomeSectionSchema>) => {
-  set.status = 303;
-
   try {
-    console.log(body);
+    set.status = 303;
 
     if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
       set.headers.location = `/admin/home/${id}?success=false&error=recaptcha`;
@@ -190,7 +279,7 @@ export const modifyHomeSectionHandler = async ({
     }
   } catch (err) {
     console.error(
-      `Unexpected error encountered while modifying new home section: ${err}`,
+      `Unexpected error encountered while modifying home section: ${err}`,
     );
 
     set.headers.location = `/admin/home/${id}?success=false&error=unknown`;
@@ -213,13 +302,13 @@ export const newHomeSectionEntrySubtitleHandler = ({
 
 export const homePageHandler = async ({
   cookie: { theme },
-  home,
-}: HandlerContext) => Home({ data: home, theme });
+  db,
+}: HandlerContext) => Home({ data: getHomeData(db), theme });
 
 export const interestsPageHandler = async ({
   cookie: { theme },
-  interests,
-}: HandlerContext) => Interests({ data: interests, theme });
+}: HandlerContext) =>
+  Interests({ spotify: getSpotifyData(), strava: getStravaData(), theme });
 
 export const loginPageHandler = ({
   cookie: { theme },
@@ -232,13 +321,17 @@ export const notFoundPageHandler = ({ cookie: { theme } }: HandlerContext) => (
   <NotFound theme={theme} />
 );
 
+export const previewBlogPostHandler = ({
+  body,
+}: HandlerContext<PreviewBlogPostSchema>) => <BlogPostPreview post={body} />;
+
 export const sendEmailHandler = async ({
   body,
   set,
 }: HandlerContext<SendEmailSchema>) => {
-  set.status = 303;
-
   try {
+    set.status = 303;
+
     if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
       set.headers.location = "/contact?success=false&error=recaptcha";
     } else {

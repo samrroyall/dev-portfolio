@@ -16,7 +16,12 @@ interface HeadingProps {
   inline?: boolean;
 }
 
-const Heading = ({ text, variant, className, inline }: HeadingProps) => {
+const Heading = ({
+  text,
+  variant,
+  className,
+  inline,
+}: HeadingProps): JSX.Element => {
   const display = inline === true ? "inline-block" : "block";
   const classes = `${display} ${hClasses[variant - 1]} ${className ?? ""}`;
 

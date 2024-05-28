@@ -147,18 +147,13 @@ const validHtmxKeys: (keyof HtmxAttributes)[] = [
   ...(globalEventHandlers.map(
     (evt) => `hx-on-${evt}`,
   ) as (keyof HtmxAttributes)[]),
-  ...(globalEventHandlers.map(
-    (evt) => `hx-on-${evt}`,
-  ) as (keyof HtmxAttributes)[]),
 ];
 
-export const getHxAttrsFromProps = (
-  props: Record<string, any>,
-): Record<string, any> => {
-  const hxProps: Partial<HtmxAttributes> = {};
+export const getHxAttrsFromProps = (props: HtmxAttributes): HtmxAttributes => {
+  const hxProps: HtmxAttributes = {};
 
   validHtmxKeys.forEach((key) => {
-    if (!!props[key]) {
+    if (props[key] !== undefined) {
       hxProps[key] = props[key];
     }
   });

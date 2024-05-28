@@ -36,7 +36,7 @@ const AdminTable = ({
   deleteHref,
   editHref,
   rows,
-}: AdminTableProps) => {
+}: AdminTableProps): JSX.Element => {
   const tableId = randomBytes(8).toString("hex");
 
   return (
@@ -65,9 +65,7 @@ const AdminTable = ({
                   id={`delete-${tableId}-${id}-modal`}
                   className="flex flex-col items-center justify-center"
                 >
-                  <p class="mb-3">
-                    {"Are you sure you want to delete this home section?"}
-                  </p>
+                  <p class="mb-3">{"Are you sure you want to delete this?"}</p>
                   <IconButton
                     id={`modal-delete-button-${tableId}-${id}`}
                     label="Delete"

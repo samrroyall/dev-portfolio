@@ -1,11 +1,3 @@
-import { type Track } from "./spotify";
-import { type RunMonth } from "./strava";
-
-export interface InterestsData {
-  spotify: Promise<Track[]>;
-  strava: Promise<RunMonth>;
-}
-
 export {
   type ApiSpotifyTopTracksResponse,
   type Track,

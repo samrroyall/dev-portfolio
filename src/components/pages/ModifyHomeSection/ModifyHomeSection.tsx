@@ -29,7 +29,7 @@ const ModifyHomeSection = async ({
   error,
   success,
   theme,
-}: ModifyHomeSectionProps) => {
+}: ModifyHomeSectionProps): Promise<JSX.Element> => {
   const attrs = {
     ...(error ? { error } : {}),
     ...(success ? { success: success === "true" } : {}),
@@ -60,7 +60,7 @@ const ModifyHomeSection = async ({
             name="sectionOrder"
             required={true}
             type="number"
-            value={section.order}
+            value={section.order.toString()}
           />
           <div id="entry-container">
             {section.entries

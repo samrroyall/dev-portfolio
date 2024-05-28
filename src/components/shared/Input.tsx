@@ -1,3 +1,6 @@
+import { getHxAttrsFromProps } from "../../models/components";
+import { type HtmxAttributes } from "../../types";
+
 type InputType =
   | "email"
   | "hidden"
@@ -36,7 +39,7 @@ const legendClasses = "px-1 text-sm";
 
 const requiredClasses = "after:content-['*'] after:ml-1 after:text-error-text";
 
-interface InputProps {
+interface InputProps extends HtmxAttributes {
   label: string;
   name: string;
   className?: string;
@@ -49,27 +52,29 @@ interface InputProps {
   required?: boolean;
   title?: string;
   type?: InputType;
-  value?: any;
+  value?: string;
 }
 
-const Input = ({
-  className,
-  disabled,
-  id,
-  label,
-  minlength,
-  maxlength,
-  name,
-  noResize,
-  placeholder,
-  required,
-  title,
-  type,
-  value,
-}: InputProps): JSX.Element => {
+const Input = (props: InputProps): JSX.Element => {
+  const {
+    className,
+    disabled,
+    id,
+    label,
+    minlength,
+    maxlength,
+    name,
+    noResize,
+    placeholder,
+    required,
+    title,
+    type,
+    value,
+  } = props;
+
   const attrs = {
     ...(!!id ? { id } : {}),
-    ...(!!required ? { required: "true" } : {}),
+    ...(!!required ? { required: true } : {}),
     ...(maxlength !== undefined ? { maxlength: `${maxlength}` } : {}),
     ...(minlength !== undefined ? { minlength: `${minlength}` } : {}),
     ...(placeholder !== undefined ? { placeholder } : {}),
@@ -78,20 +83,28 @@ const Input = ({
 
   const textareaLengthId = `${name}-${type}-current-length`;
 
-  const hxAttrs = {
-    ...(maxlength !== undefined
-      ? {
-          "hx-on-keyup": `htmx.find("#${textareaLengthId}").innerHTML = this.value.length`,
-        }
-      : {}),
-  };
+  const updateCharCountFunc = `htmx.find("#${textareaLengthId}").innerHTML = this.value.length`;
+
+  const hxAttrs = getHxAttrsFromProps(props);
+
+  if (maxlength !== undefined) {
+    const hxOnKeyupVal = hxAttrs["hx-on-keyup"];
+
+    if (!!hxOnKeyupVal) {
+      hxAttrs["hx-on-keyup"] +=
+        `${hxOnKeyupVal.endsWith(";") ? "" : ";"} ${updateCharCountFunc})`;
+    } else {
+      hxAttrs["hx-on-keyup"] = updateCharCountFunc;
+    }
+  }
 
   const bottomLegendClasses = maxlength ? "relative pb-3" : "";
+
   const hiddenClasses = type === "hidden" ? "hidden" : "";
 
   return (
     <fieldset
-      class={`${fieldClasses} ${bottomLegendClasses} ${hiddenClasses} $${className ?? ""}`}
+      class={`${fieldClasses} ${bottomLegendClasses} ${hiddenClasses} ${className ?? ""}`}
     >
       <legend class={`${legendClasses} ${required ? requiredClasses : ""}`}>
         {label}
@@ -100,20 +113,20 @@ const Input = ({
         <textarea
           class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
           name={name}
-          disabled={disabled ?? false}
           {...attrs}
           {...hxAttrs}
         >
-          {value ?? null}
+          {value ?? ""}
         </textarea>
       ) : (
         <input
           class={inputClasses}
           type={type ?? "text"}
           name={name}
-          value={value ?? null}
+          value={value ?? ""}
           disabled={disabled ?? false}
           {...attrs}
+          {...hxAttrs}
         />
       )}
       {maxlength !== undefined ? (

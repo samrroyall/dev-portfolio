@@ -22,7 +22,7 @@ interface CreateNewHomeSectionEntryProps {
 const HomeSectionEntryInput = ({
   data,
   id,
-}: CreateNewHomeSectionEntryProps) => (
+}: CreateNewHomeSectionEntryProps): JSX.Element => (
   <div id={`entry-${id}`}>
     {data ? (
       <Input

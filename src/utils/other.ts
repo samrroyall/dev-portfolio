@@ -5,7 +5,7 @@ export const getLowercaseCharAt = (i: number): string | null =>
       ? getLowercaseCharAt(i / 26 - 1)! + getLowercaseCharAt(i % 26)!
       : null;
 
-export const getPrettyDate = (date: number): string =>
+export const getPrettyDate = (date: Date): string =>
   new Date(date).toLocaleString("en-US", {
     dateStyle: "long",
   });

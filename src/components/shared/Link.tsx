@@ -13,7 +13,13 @@ interface LinkProps {
   target?: LinkTarget;
 }
 
-const Link = ({ href, arrow, noUnderline, target, children }: LinkProps) => (
+const Link = ({
+  href,
+  arrow,
+  noUnderline,
+  target,
+  children,
+}: LinkProps): JSX.Element => (
   <span class="text-secondary-text dark:text-secondary-text-dark">
     <a
       class={noUnderline === true ? "" : "underline"}

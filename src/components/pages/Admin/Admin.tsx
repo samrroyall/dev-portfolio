@@ -1,6 +1,6 @@
-import { type BlogData } from "../../../models/blog";
+import { type BlogPostInfo } from "../../../models/blog";
 import { type DefaultPageProps } from "../../../models/components";
-import { type HomeData } from "../../../models/home";
+import { type HomeSection } from "../../../models/home";
 import { BasePage } from "../../pages";
 import { Sections } from "../../shared";
 import AdminTable from "./AdminTable";
@@ -14,8 +14,8 @@ const reloadPageAfterDelete = `
 `;
 
 interface AdminProps extends DefaultPageProps {
-  blogData: BlogData;
-  homeData: HomeData;
+  blogData: Promise<BlogPostInfo[]>;
+  homeData: Promise<HomeSection[]>;
 }
 
 const Admin = async ({

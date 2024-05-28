@@ -25,7 +25,3 @@ export const mapRowToBlogPost = (row: any): BlogPost => ({
   ...mapRowToBlogInfo(row),
   text: row.text,
 });
-
-export type BlogData = Promise<BlogPostInfo[]>;
-
-export type BlogPostData = Promise<BlogPost | null>;

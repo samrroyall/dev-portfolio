@@ -1,22 +1,25 @@
+import { type BlogPost } from "../../../models/blog";
 import { type DefaultPageProps } from "../../../models/components";
-import { BasePage } from "../../pages";
-import { Form, Icon, Input } from "../../shared";
+import { BasePage, NotFound } from "../../pages";
+import { BlogPostPreview, Form, Icon, Input } from "../../shared";
 
 const previewWindowClasses = `
   hidden h-[90%] w-[640px] py-3 px-2 rounded overflow-y-scroll border 
   border-secondary-text dark:border-secondary-text-dark
 `;
 
-interface CreateBlogPostProps extends DefaultPageProps {
+interface ModifyBlogPostProps extends DefaultPageProps {
+  data: Promise<BlogPost | null>;
   error?: string;
   success?: string;
 }
 
-const CreateBlogPost = ({
+const ModifyBlogPost = async ({
+  data,
   error,
   success,
   theme,
-}: CreateBlogPostProps): JSX.Element => {
+}: ModifyBlogPostProps): Promise<JSX.Element> => {
   const attrs = {
     ...(error ? { error } : {}),
     ...(success ? { success: success === "true" } : {}),
@@ -28,7 +31,11 @@ const CreateBlogPost = ({
     "hx-trigger": "keyup changed delay:1s",
   };
 
-  return (
+  const post = await data;
+
+  return post === null ? (
+    <NotFound theme={theme} />
+  ) : (
     <BasePage
       admin={true}
       current="create blog post"
@@ -48,17 +55,24 @@ const CreateBlogPost = ({
             </button>
           </div>
           <Form
-            id="create-blog-post-form"
-            action="/admin/blog/new"
-            submitLabel="Publish Post"
+            id="update-blog-post-form"
+            action={`/admin/blog/${post.id}`}
+            submitLabel="Update Post"
             {...attrs}
           >
-            <Input label="Slug" name="slug" required={true} />
-            <Input label="Title" name="title" required={true} {...hxAttrs} />
+            <Input label="Slug" name="slug" required={true} value={post.slug} />
+            <Input
+              label="Title"
+              name="title"
+              required={true}
+              value={post.title}
+              {...hxAttrs}
+            />
             <Input
               label="Subtitle"
               name="subtitle"
               required={true}
+              value={post.subtitle}
               {...hxAttrs}
             />
             <Input
@@ -67,6 +81,7 @@ const CreateBlogPost = ({
               required={true}
               type="textarea"
               noResize={true}
+              value={post.blurb}
             />
             <Input
               label="Text"
@@ -74,14 +89,17 @@ const CreateBlogPost = ({
               required={true}
               type="textarea"
               noResize={true}
+              value={post.text}
               {...hxAttrs}
             />
           </Form>
         </div>
-        <div id="blog-post-preview" class={previewWindowClasses} />
+        <div id="blog-post-preview" class={previewWindowClasses}>
+          <BlogPostPreview post={post} />
+        </div>
       </div>
     </BasePage>
   );
 };
 
-export default CreateBlogPost;
+export default ModifyBlogPost;
