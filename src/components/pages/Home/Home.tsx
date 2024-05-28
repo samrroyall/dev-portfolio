@@ -1,22 +1,31 @@
-import { type HomeSection } from "../../../api/models/home";
+import { type DefaultPageProps } from "../../../models/components";
+import { type HomeSection } from "../../../models/home";
 import { BasePage } from "../../pages";
-import { Sections } from "../../shared";
+import { NoData, Sections } from "../../shared";
 import HomeSectionEntry from "./HomeSectionEntry";
 
-interface HomeProps {
+interface HomeProps extends DefaultPageProps {
   data: Promise<HomeSection[]>;
 }
 
-const Home = async ({ data }: HomeProps) => (
-  <BasePage current="home">
-    <Sections
-      sectionNum="00"
-      entries={(await data).map(({ title, entries }) => ({
-        title,
-        content: entries.map((entry) => <HomeSectionEntry entry={entry} />),
-      }))}
-    />
-  </BasePage>
-);
+const Home = async ({ data, theme }: HomeProps): Promise<JSX.Element> => {
+  const sections = await data;
+
+  return (
+    <BasePage current="home" theme={theme} title="Home">
+      {sections.length === 0 ? (
+        <NoData />
+      ) : (
+        <Sections
+          sectionNum="00"
+          entries={sections.map(({ title, entries }) => ({
+            title,
+            content: entries.map((entry) => <HomeSectionEntry entry={entry} />),
+          }))}
+        />
+      )}
+    </BasePage>
+  );
+};
 
 export default Home;

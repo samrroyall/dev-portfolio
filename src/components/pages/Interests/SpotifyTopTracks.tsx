@@ -1,11 +1,13 @@
-import { type Track } from "../../../api/models/spotify";
+import { type Track } from "../../../models/interests";
 import SpotifyTrackCard from "./SpotifyTrackCard";
 
 interface SpotifyTopTracksProps {
   data: Promise<Track[]>;
 }
 
-const SpotifyTopTracks = async ({ data }: SpotifyTopTracksProps) => {
+const SpotifyTopTracks = async ({
+  data,
+}: SpotifyTopTracksProps): Promise<JSX.Element> => {
   const tracks = await data;
 
   return (

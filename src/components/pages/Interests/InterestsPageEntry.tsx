@@ -1,4 +1,4 @@
-import { Markdown } from "../../shared";
+import { Markdown, TextDivider } from "../../shared";
 
 interface InterestsPageEntryProps {
   index: number;
@@ -10,20 +10,18 @@ const InterestsPageEntry = ({
   index,
   content,
   text,
-}: InterestsPageEntryProps) => {
-  const order = index % 2 == 0 ? "" : "-reverse";
-  const flexClasses = `flex items-center max-lg:flex-col lg:flex-row${order}`;
-  const textPadding = `py-6 lg:p${index % 2 == 0 ? "r" : "l"}-6`;
+}: InterestsPageEntryProps): JSX.Element => {
+  const even = index % 2 == 0;
 
   return (
     <div class="group/interestsection">
-      <div class={flexClasses}>
-        <div class={textPadding}>
+      <div class={`flex max-lg:flex-col lg:flex-row${even ? "" : "-reverse"}`}>
+        <div class={`py-6 max-lg:text-center lg:p${even ? "r" : "l"}-6`}>
           <Markdown text={text} />
         </div>
         {content}
       </div>
-      <hr class="border-secondary-bg my-6 group-last/interestsection:hidden" />
+      <TextDivider className="group-last/interestsection:hidden" />
     </div>
   );
 };

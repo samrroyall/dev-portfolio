@@ -1,40 +1,42 @@
-import { type PropsWithChildren } from "beth-stack/jsx";
+import { getHxAttrsFromProps } from "../../models/components";
+import { type HtmxAttributes } from "../../types";
 
-const hoverClasses =
-  "hover:border-tertiary-text hover:bg-tertiary-text hover:text-tertiary-bg";
+const borderClasses = `
+  border-secondary-text dark:border-secondary-text-dark rounded border
+  disabled:border-primary-text disabled:dark:border-primary-text-dark
+`;
 
-const buttonClasses =
-  "text-secondary-text border-secondary-text rounded border px-3 py-2 text-sm";
+const textClasses = `
+  text-secondary-text dark:text-secondary-text-dark text-sm
+  disabled:text-primary-text disabled:dark:text-secondary-text-dark
+  enabled:hover:text-primary-bg enabled:hover:dark:text-primary-bg-dark
+  enabled:hover:bg-primary-bg-dark enabled:hover:dark:bg-primary-bg
+`;
 
-const disabledClasses =
-  "disabled:text-primary-text disabled:border-primary-text disabled:bg-primary-bg";
+const classes = `px-3 py-2 ${borderClasses} ${textClasses}`;
 
 type ButtonType = "button" | "submit";
 
-interface ButtonProps {
-  type: ButtonType;
+interface ButtonProps extends Partial<HtmxAttributes> {
+  label: string;
   disabled?: boolean;
   id?: string;
+  type?: ButtonType;
 }
 
-const Button = ({
-  type,
-  disabled,
-  id,
-  children,
-}: ButtonProps & PropsWithChildren) => {
+const Button = (props: ButtonProps): JSX.Element => {
+  const { disabled, id, label, type } = props;
+
   const attrs = {
-    ...(disabled !== undefined ? { disabled } : {}),
-    ...(id !== undefined ? { id } : {}),
+    ...(!!id ? { id } : {}),
+    ...(!!disabled ? { disabled } : {}),
   };
 
+  const hxAttrs = getHxAttrsFromProps(props);
+
   return (
-    <button
-      class={`${buttonClasses} ${hoverClasses} ${disabledClasses}`}
-      type={type}
-      {...attrs}
-    >
-      {children}
+    <button class={classes} type={type ?? "button"} {...attrs} {...hxAttrs}>
+      {label}
     </button>
   );
 };

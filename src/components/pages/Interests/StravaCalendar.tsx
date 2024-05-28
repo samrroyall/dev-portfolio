@@ -1,4 +1,4 @@
-import { type RunDay, type RunMonth } from "../../../api/models/strava";
+import { type RunDay, type RunMonth } from "../../../models/interests";
 import StravaDay, { type StravaDayData } from "./StravaDay";
 
 const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -15,20 +15,20 @@ const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
   }
 
   return {
-    id: runs[0]!.id,
+    id: runs[0].id,
     miles: runs.reduce((acc, run) => acc + run.miles, 0),
     pace: runs.reduce((acc, run) => acc + run.minutesPerMile, 0) / runs.length,
-    avgBpm: runs.every((run) => run.avgBpm !== undefined)
-      ? runs.reduce((acc, run) => acc + run.avgBpm!, 0) / runs.length
+    avgBpm: runs.every((run) => run.avgBpm !== null)
+      ? runs.reduce((acc, run) => acc + run.avgBpm, 0) / runs.length
       : null,
   };
 };
 
 const tableFooter = (
-  <tfoot class="text-secondary-text">
+  <tfoot class="text-secondary-text dark:text-secondary-text-dark">
     <tr>
       {daysOfWeek.map((d) => (
-        <th>{d}</th>
+        <th safe>{d}</th>
       ))}
     </tr>
   </tfoot>
@@ -38,7 +38,9 @@ interface StravaCalendarProps {
   month: Promise<RunMonth>;
 }
 
-const StravaCalendar = async ({ month }: StravaCalendarProps) => (
+const StravaCalendar = async ({
+  month,
+}: StravaCalendarProps): Promise<JSX.Element> => (
   <table class="relative">
     <tbody>
       {(await month).map((week, i) => (

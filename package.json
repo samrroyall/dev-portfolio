@@ -1,21 +1,28 @@
 {
   "name": "dev-portfolio",
-  "module": "src/index.tsx",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "bun run --watch src/index.tsx",
+    "db:generate": "drizzle-kit generate --dialect sqlite",
+    "db:migrate": "drizzle-kit migrate --config ./drizzle.config.ts",
     "format:check": "prettier --check .",
     "format": "prettier --write . --list-different",
     "lint": "eslint . --report-unused-disable-directives",
-    "lint:fix": "eslint . --report-unused-disable-directives --fix"
+    "lint:fix": "eslint . --report-unused-disable-directives --fix",
+    "test": "xss-scan"
   },
   "dependencies": {
-    "@elysiajs/html": "^0.8.0",
+    "@elysiajs/html": "^1.0.2",
     "@elysiajs/static": "^1.0.2",
-    "beth-stack": "^0.0.34",
-    "bun-types": "^1.1.0",
+    "@emailjs/nodejs": "^2.2.0",
+    "@kitajs/html": "^4.1.0",
+    "@kitajs/ts-html-plugin": "^4.0.1",
+    "@libsql/client": "^0.6.0",
     "dotenv": "^16.4.5",
-    "elysia": "^0.8.10",
+    "drizzle-orm": "^0.30.10",
+    "elysia": "latest",
+    "lucia": "^3.2.0",
     "marked": "^12.0.1",
     "marked-katex-extension": "^5.0.1",
     "prismjs": "^1.29.0",
@@ -29,6 +36,8 @@
     "@types/prismjs": "^1.26.3",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
+    "bun-types": "latest",
+    "drizzle-kit": "^0.21.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -36,5 +45,6 @@
     "eslint-plugin-prettier": "^5.1.3",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.13"
-  }
+  },
+  "module": "src/index.tsx"
 }

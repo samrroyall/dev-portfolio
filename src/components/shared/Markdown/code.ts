@@ -22,28 +22,40 @@ loadLanguages(
 const code = (
   code: string,
   infostring: string | undefined,
-  escaped: boolean,
+  _escaped: boolean,
 ): string | false => {
   const lang = (infostring || "").match(/^\S*/)?.[0];
 
   code = code.replace(/\n$/, "");
+
   code =
-    lang && languages[lang]
-      ? Prism.highlight(code, Prism.languages[lang]!, lang)
+    lang && !!languages[lang]
+      ? Prism.highlight(code, Prism.languages[lang], lang)
       : code;
 
-  const prettyLang =
-    lang && languages[lang]
+  const prettyLang = !!lang
+    ? !!languages[lang]
       ? languages[lang]
-      : `<span class="capitalize">${lang}</span>` || "";
-
-  const langLine = lang
-    ? `<div class="text-right text-xs">${prettyLang}</div>`
+      : `<span class="capitalize">${lang}</span>`
     : "";
 
-  const langClass = lang ? `language-${lang}` : "";
-  const preClasses = `my-4 flex flex-col bg-tertiary-bg rounded ${langClass}`;
-  const codeClasses = `pt-3 font-sauce-code-pro text-sm ${langClass}`;
+  const langLine = !!lang
+    ? `<div class="absolute top-3 right-3 text-xs">${prettyLang}</div>`
+    : "";
+
+  const defaultLangStyles = "text-code-text";
+
+  const langClass =
+    lang && !!languages[lang] ? `language-${lang}` : defaultLangStyles;
+
+  const preStyleClasses =
+    "bg-code-bg dark:bg-code-bg-dark font-geist-mono text-sm";
+
+  const prePositioningClasses = `relative my-6 p-3 ${lang ? "pt-7" : ""} rounded`;
+
+  const preClasses = `${prePositioningClasses} ${preStyleClasses} ${langClass}`;
+
+  const codeClasses = `block whitespace-pre-wrap`;
 
   return `<pre class="${preClasses}">${langLine}<code class="${codeClasses}">${code}</code></pre>`;
 };

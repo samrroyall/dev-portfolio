@@ -1,28 +1,49 @@
-type InputType = "email" | "text" | "textarea";
+import { getHxAttrsFromProps } from "../../models/components";
+import { type HtmxAttributes } from "../../types";
 
-const standardBorderClasses = "border border-secondary-text rounded";
+type InputType =
+  | "email"
+  | "hidden"
+  | "number"
+  | "password"
+  | "text"
+  | "textarea";
+
+const standardBorderClasses =
+  "border border-secondary-text dark:border-secondary-text-dark rounded";
 
 const focusBorderClasses =
-  "has-[:focus]:outline-none has-[:focus]:ring-1 has-[:focus]:ring-secondary-text";
+  "has-[:focus]:outline-none has-[:focus]:ring-1 has-[:focus]:ring-secondary-text has-[:focus]:dark:ring-secondary-text";
 
 const invalidBorderClasses =
-  "has-[:invalid]:border-red-400 has-[:invalid]:ring-red-400 has-[:focus:invalid]:ring-red-400";
+  "has-[:invalid]:border-error-text has-[:invalid]:ring-error-text has-[:focus:invalid]:ring-error-text";
+
+const bgClasses = "*:bg-primary-bg *:dark:bg-primary-bg-dark";
 
 const borderClasses = `${standardBorderClasses} ${focusBorderClasses} ${invalidBorderClasses}`;
 
-const fieldClasses = `*:text-secondary-text *:bg-primary-bg my-3 inline-block p-1 ${borderClasses}`;
+const textClasses = "*:text-secondary-text dark:*:text-secondary-text-dark";
+
+const fieldClasses = `my-3 p-1 ${bgClasses} ${borderClasses} ${textClasses}`;
 
 const noBorderClasses = `border-0 ring-0 outline-none`;
 
-const inputClasses = `placeholder-primary-text w-full p-1 ${noBorderClasses}`;
+const placeholderClasses = `placeholder-primary-text dark:placeholder-primary-text-dark text`;
+
+const disabledClasses =
+  "disabled:text-secondary-bg disabled:dark:text-secondary-bg-dark";
+
+const inputClasses = `bg-transparent w-full p-1 ${noBorderClasses} ${placeholderClasses} ${disabledClasses}`;
 
 const legendClasses = "px-1 text-sm";
 
-const requiredClasses = "after:content-['*'] after:ml-1 after:text-red-400";
+const requiredClasses = "after:content-['*'] after:ml-1 after:text-error-text";
 
-interface InputProps {
+interface InputProps extends HtmxAttributes {
   label: string;
   name: string;
+  className?: string;
+  disabled?: boolean;
   id?: string;
   minlength?: number;
   maxlength?: number;
@@ -31,51 +52,81 @@ interface InputProps {
   required?: boolean;
   title?: string;
   type?: InputType;
+  value?: string;
 }
 
-const Input = ({
-  label,
-  name,
-  id,
-  minlength,
-  maxlength,
-  noResize,
-  placeholder,
-  required,
-  title,
-  type,
-}: InputProps) => {
+const Input = (props: InputProps): JSX.Element => {
+  const {
+    className,
+    disabled,
+    id,
+    label,
+    minlength,
+    maxlength,
+    name,
+    noResize,
+    placeholder,
+    required,
+    title,
+    type,
+    value,
+  } = props;
+
   const attrs = {
-    ...(id !== undefined ? { id } : {}),
+    ...(!!id ? { id } : {}),
+    ...(!!required ? { required: true } : {}),
     ...(maxlength !== undefined ? { maxlength: `${maxlength}` } : {}),
     ...(minlength !== undefined ? { minlength: `${minlength}` } : {}),
-    ...(required ? { required: "true" } : {}),
+    ...(placeholder !== undefined ? { placeholder } : {}),
+    ...(title !== undefined ? { title } : {}),
   };
 
   const textareaLengthId = `${name}-${type}-current-length`;
 
+  const updateCharCountFunc = `htmx.find("#${textareaLengthId}").innerHTML = this.value.length`;
+
+  const hxAttrs = getHxAttrsFromProps(props);
+
+  if (maxlength !== undefined) {
+    const hxOnKeyupVal = hxAttrs["hx-on-keyup"];
+
+    if (!!hxOnKeyupVal) {
+      hxAttrs["hx-on-keyup"] +=
+        `${hxOnKeyupVal.endsWith(";") ? "" : ";"} ${updateCharCountFunc})`;
+    } else {
+      hxAttrs["hx-on-keyup"] = updateCharCountFunc;
+    }
+  }
+
   const bottomLegendClasses = maxlength ? "relative pb-3" : "";
 
+  const hiddenClasses = type === "hidden" ? "hidden" : "";
+
   return (
-    <fieldset class={`${fieldClasses} ${bottomLegendClasses}`}>
+    <fieldset
+      class={`${fieldClasses} ${bottomLegendClasses} ${hiddenClasses} ${className ?? ""}`}
+    >
       <legend class={`${legendClasses} ${required ? requiredClasses : ""}`}>
         {label}
       </legend>
       {type === "textarea" ? (
         <textarea
           class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
-          placeholder={placeholder || ""}
-          title={title || ""}
+          name={name}
           {...attrs}
-          hx-on:keyup={`htmx.find("#${textareaLengthId}").innerHTML = this.value.length`}
-        />
+          {...hxAttrs}
+        >
+          {value ?? ""}
+        </textarea>
       ) : (
         <input
           class={inputClasses}
-          type={type || "text"}
-          placeholder={placeholder || ""}
-          title={title || ""}
+          type={type ?? "text"}
+          name={name}
+          value={value ?? ""}
+          disabled={disabled ?? false}
           {...attrs}
+          {...hxAttrs}
         />
       )}
       {maxlength !== undefined ? (

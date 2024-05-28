@@ -1,65 +1,116 @@
-import { Icon, Tooltip } from "../../shared";
+import { type Cookie } from "elysia";
+import { Heading, Icon } from "../../shared";
 import Nav from "./Nav";
 
-interface FooterIcon {
-  link: string;
-  icon: string;
-  title: string;
-}
+const footerNavColorClasses =
+  "border-secondary-text dark:border-secondary-text-dark bg-primary-bg dark:bg-primary-bg-dark";
 
-const icons: FooterIcon[] = [
-  { link: "#", icon: "\udb80\ude19", title: "resume" },
-  {
-    link: "https://linkedin.com/in/samrroyall",
-    icon: "\udb80\udf3b",
-    title: "linkedin",
-  },
-  {
-    link: "https://github.com/samrroyall",
-    icon: "\uf113",
-    title: "github",
-  },
-];
+const footerNavPositionClasses =
+  "absolute flex hidden w-full items-end justify-between border-b";
+
+const footerNavClasses = `${footerNavPositionClasses} ${footerNavColorClasses}`;
+
+const githubIcon = (
+  <Icon icon={"\uf113"} link={"https://github.com/samrroyall"} />
+);
+
+const linkedInIcon = (
+  <Icon icon={"\udb80\udf3b"} link={"https://linkedin.com/in/samrroyall"} />
+);
+
+const darkModeIcon = <Icon icon={"\uf4ee"} />;
+
+const lightModeIcon = <Icon icon={"\uf522"} />;
 
 const menuIcon = <Icon icon={"\ueb94"} />;
 
+const optimisticallyUpdateTheme = `
+  document.body.addEventListener("htmx:afterRequest", function(evt) {
+    const toggleButton = document.getElementById("toggle-theme-button");
+    if (evt.target === toggleButton) {
+      const html = document.documentElement;
+      if (html.classList.contains("dark")) {
+        html.classList.remove("dark");
+        toggleButton.innerHTML = ${JSON.stringify(lightModeIcon)};
+      } else {
+        html.classList.add("dark");
+        toggleButton.innerHTML = ${JSON.stringify(darkModeIcon)};
+      }
+    }
+  })
+`;
+
 interface FooterProps {
-  current: string | null;
+  admin: boolean;
+  current: string | undefined;
+  theme: Cookie<string | undefined>;
 }
 
-const Footer = ({ current }: FooterProps) => (
-  <footer class="w-full text-lg 2xl:text-xl">
-    <hr class="border-secondary-text hidden lg:block" />
-    <div class="relative flex items-center p-2">
-      <div
-        class="cursor-pointer lg:hidden"
-        hx-on:click={`htmx.toggleClass("#footer-nav", "hidden")`}
-      >
-        {menuIcon}
-      </div>
-      <ul class="text-secondary-text ml-auto flex">
-        {icons.map(({ link, icon, title }) => (
-          <li class="mx-1 first:ml-0 last:mr-0">
-            <div class="hidden lg:inline-block">
-              <Tooltip text={title}>
-                <Icon link={link} icon={icon} />
-              </Tooltip>
-            </div>
-            <div class="lg:hidden">
-              <Icon link={link} icon={icon} />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div
-      id="footer-nav"
-      class="border-secondary-text absolute hidden w-full border-b"
+const Footer = ({ admin, current, theme }: FooterProps): JSX.Element => {
+  const themeButton = (
+    <button
+      id="toggle-theme-button"
+      hx-post="/toggletheme"
+      hx-trigger="click"
+      hx-swap="none"
+      class="flex items-center"
     >
-      <Nav current={current} />
-    </div>
-    <hr class="border-secondary-text lg:hidden" />
-  </footer>
-);
+      {theme.value === "dark" ? darkModeIcon : lightModeIcon}
+    </button>
+  );
+
+  const icons = [
+    {
+      icon: linkedInIcon,
+      inMobileDropdown: true,
+    },
+    {
+      icon: githubIcon,
+      inMobileDropdown: true,
+    },
+    {
+      icon: themeButton,
+      inMobileDropdown: false,
+    },
+  ];
+
+  return (
+    <footer class="w-full text-xl max-sm:text-2xl xl:text-2xl">
+      <hr class="border-secondary-text dark:border-secondary-text-dark max-lg:hidden" />
+      <div class="relative flex items-center justify-between p-2">
+        <button
+          class="text-secondary-text dark:text-secondary-text-dark cursor-pointer lg:hidden"
+          hx-on-click={`htmx.toggleClass("#footer-nav", "hidden")`}
+        >
+          {menuIcon}
+        </button>
+        <Heading variant={3} text="Sam Royall" className="lg:hidden" />
+        <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center justify-end lg:ml-auto">
+          {icons.map(({ icon, inMobileDropdown }) => (
+            <li
+              class={`mx-1 first:ml-0 last:mr-0 ${inMobileDropdown ? "max-lg:hidden" : ""}`}
+            >
+              {icon}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div id="footer-nav" class={footerNavClasses}>
+        <Nav admin={admin} current={current} />
+        <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center pb-3 pr-3">
+          {icons.map(({ icon, inMobileDropdown }) => (
+            <li
+              class={`mx-1 leading-6 first:ml-0 last:mr-0 max-sm:leading-7 ${!inMobileDropdown ? "hidden" : ""}`}
+            >
+              {icon}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <hr class="border-secondary-text dark:border-secondary-text-dark lg:hidden" />
+      <script>{optimisticallyUpdateTheme}</script>
+    </footer>
+  );
+};
 
 export default Footer;

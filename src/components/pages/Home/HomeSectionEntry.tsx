@@ -1,27 +1,35 @@
-import { type HomeSectionEntryData } from "../../../api/models/home";
-import { Link, Markdown } from "../../shared";
+import { type HomeSectionEntryData } from "../../../models/home";
+import { Heading, Link, Markdown, TextDivider } from "../../shared";
 
 export interface HomeSectionEntryProps {
   entry: HomeSectionEntryData;
 }
 
-const HomeSectionEntry = ({ entry }: HomeSectionEntryProps) => {
-  const titleSpan = <span class="text-lg font-bold">{entry.title}</span>;
-
+const HomeSectionEntry = ({ entry }: HomeSectionEntryProps): JSX.Element => {
   const entryHeader = (
-    <div class="text-secondary-text mb-3">
+    <div class="text-secondary-text dark:text-secondary-text-dark mb-3">
       {entry.titleLink ? (
         <Link href={entry.titleLink} arrow={true}>
-          {titleSpan}
+          <Heading
+            variant={4}
+            text={entry.title}
+            className="text-secondary-text dark:text-secondary-text-dark underline"
+            inline={true}
+          />
         </Link>
       ) : (
-        titleSpan
+        <Heading
+          variant={4}
+          text={entry.title}
+          className="text-secondary-text dark:text-secondary-text-dark"
+          inline={true}
+        />
       )}
       <ul>
         {entry.subtitles.map(({ title, detail }) => (
           <li class="flex w-full justify-between">
-            {title}
-            <span class="italic">{detail}</span>
+            <div>{title}</div>
+            <div class="ml-6 whitespace-nowrap font-light">{detail}</div>
           </li>
         ))}
       </ul>
@@ -38,7 +46,7 @@ const HomeSectionEntry = ({ entry }: HomeSectionEntryProps) => {
     <div class="group/homesection">
       {entry.title || entry.subtitles.length ? entryHeader : null}
       {entry.text ? entryBody : null}
-      <hr class="border-secondary-bg my-6 group-last/homesection:hidden" />
+      <TextDivider className="group-last/homesection:hidden" />
     </div>
   );
 };

@@ -1,7 +1,12 @@
-import { type Track } from "../../../api/models/spotify";
+import { type Track } from "../../../models/interests";
 import { Icon, Link } from "../../shared";
 
-const arrowClasses = "text-secondary-text cursor-pointer text-lg";
+const arrowClasses = `
+  text-secondary-text dark:text-secondary-text-dark text-xl
+  hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
+`;
+
+const imageSize = 300;
 
 interface SpotifyTrackCardProps {
   id: number;
@@ -9,7 +14,11 @@ interface SpotifyTrackCardProps {
   track: Track;
 }
 
-const SpotifyTrackCard = ({ id, total, track }: SpotifyTrackCardProps) => {
+const SpotifyTrackCard = ({
+  id,
+  total,
+  track,
+}: SpotifyTrackCardProps): JSX.Element => {
   const toggleCard = (i: number) =>
     `htmx.toggleClass("#spotify-track-card-${i}", "hidden")`;
 
@@ -17,31 +26,39 @@ const SpotifyTrackCard = ({ id, total, track }: SpotifyTrackCardProps) => {
   const nextId = (id + 1) % total;
 
   return (
-    <div class="flex items-center">
-      <div hx-on:click={`${toggleCard(id)}; ${toggleCard(prevId)};`}>
-        <Icon className={arrowClasses} icon={`\ueab5`} />
-      </div>
-      <div class="mx-3 w-[300]">
-        <img
-          src={track.album.artUrl || undefined}
-          class="rounded"
-          alt={`Cover art for ${track.name} by ${track.artists.join(", ")}`}
-        />
-        <div class="mt-2 leading-3">
-          <Link href={track.url}>
-            <span class="text-secondary-text text-lg font-semibold">
-              {track.name}
-            </span>
-          </Link>
-          <div>
-            {track.artists.map((artist) => artist.name).join(", ")}
-            {" · "}
-            {track.album.name}
-          </div>
+    <div class="mx-3">
+      <div class="flex items-center">
+        <button
+          class="mr-4"
+          hx-on-click={`${toggleCard(id)}; ${toggleCard(prevId)};`}
+        >
+          <Icon icon={"\udb80\udc4d"} className={arrowClasses} />
+        </button>
+        <div class={`h-[${imageSize}px] w-[${imageSize}px]`}>
+          <img
+            src={track.album.artUrl ?? ""}
+            class="rounded"
+            alt={`Cover art for ${track.name} by ${track.artists.join(", ")}`}
+          />
         </div>
+        <button
+          class="ml-4"
+          hx-on-click={`${toggleCard(id)}; ${toggleCard(nextId)};`}
+        >
+          <Icon icon={"\udb80\udc54"} className={arrowClasses} />
+        </button>
       </div>
-      <div hx-on:click={`${toggleCard(id)}; ${toggleCard(nextId)};`}>
-        <Icon className={arrowClasses} icon={`\ueab6`} />
+      <div class="ml-8 mt-2">
+        <Link href={track.url}>
+          <span class="text-secondary-text dark:text-secondary-text-dark text-lg font-semibold">
+            {track.name}
+          </span>
+        </Link>
+        <div>
+          <span>{track.artists.map((artist) => artist.name).join(", ")}</span>
+          <span>{" · "}</span>
+          <span>{track.album.name}</span>
+        </div>
       </div>
     </div>
   );

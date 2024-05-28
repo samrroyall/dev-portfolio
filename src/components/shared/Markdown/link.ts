@@ -21,11 +21,20 @@ const image = (
     return text;
   }
 
-  const titleAttr = title ? `title="${title}"` : "";
+  const imgClasses = "max-h-[300px] w-auto rounded";
 
-  const classes = "my-4 mx-auto max-h-[350] w-auto rounded";
+  const image = `<img class="${imgClasses}" src="${cleanHref}" alt="${text}" />`;
 
-  return `<img class="${classes}" src="${cleanHref}" alt="${text}" ${titleAttr} />`;
+  const descriptionClasses =
+    "my-1 text-secondary-text dark:text-secondary-text-dark text-xs";
+
+  const imageTitle = !!title ? `<span class="font-bold">${title}: </span>` : "";
+
+  const description = text
+    ? `<div class="${descriptionClasses}">${imageTitle}${text}</div>`
+    : "";
+
+  return `<div class="my-4 mx-auto flex flex-col items-center">${image}${description}</div>`;
 };
 
 const link = (
@@ -40,10 +49,13 @@ const link = (
   }
 
   const titleAttr = title ? `title="${title}"` : "";
-  const displayText = `<span class="text-secondary-text">${text}</span>`;
-  const anchor = `<a class="underline" href=${cleanHref} target="_blank" ${titleAttr}>${displayText}</a>`;
 
-  return `<span class="hover:text-secondary-text">${anchor}</span>`;
+  const textClasses =
+    "text-secondary-text dark:text-secondary-text-dark underline";
+
+  const anchor = `<a href="${cleanHref}" target="_blank" class="cursor-pointer" ${titleAttr}>${text}</a>`;
+
+  return `<span class="${textClasses}">${anchor}</span>`;
 };
 
 export { image, link };

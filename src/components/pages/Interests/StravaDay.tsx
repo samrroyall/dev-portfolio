@@ -17,26 +17,28 @@ interface StravaDayProps {
   isToday: boolean;
 }
 
-const StravaDay = ({ data, isToday }: StravaDayProps) => {
-  const bgClass = isToday ? "bg-strava-orange" : "bg-secondary-text";
+const StravaDay = ({ data, isToday }: StravaDayProps): JSX.Element => {
+  const bgClass = isToday
+    ? "bg-strava-orange"
+    : "bg-secondary-text dark:bg-secondary-text-dark";
 
   const hoverClasses =
     data && isToday
       ? "hover:bg-strava-orange-light cursor-pointer"
       : data
-        ? "hover:bg-tertiary-text cursor-pointer"
+        ? "hover:bg-tertiary-text hover:dark:bg-tertiary-text-dark cursor-pointer"
         : "";
 
-  const size = baseSize + (data?.miles || 0);
+  const size = baseSize + (data?.miles ?? 0);
 
   return (
     <div
-      class={`flex items-center justify-center h-[${cellSize}] w-[${cellSize}]`}
+      class={`flex items-center justify-center h-[${cellSize}px] w-[${cellSize}px]`}
     >
       {data ? <StravaDayDetail {...data} /> : null}
       <div
-        class={`h-[${size * multiplier}px] w-[${size * multiplier}] rounded-full ${bgClass} ${hoverClasses}`}
-        hx-on:click={
+        class={`h-[${size * multiplier}px] w-[${size * multiplier}px] rounded-full ${bgClass} ${hoverClasses}`}
+        hx-on-click={
           data ? `htmx.toggleClass("#run-${data.id}-detail", "hidden")` : ""
         }
       />

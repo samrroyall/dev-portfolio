@@ -1,43 +1,47 @@
-import { Icon, Link } from "../../shared";
+import { adminNavRoutes, navRoutes } from "../../../models/routes";
+import { Heading, Icon, Link } from "../../shared";
 
-const pages = [
-  { label: "home", link: "/" },
-  { label: "interests", link: "/interests" },
-  { label: "blog", link: "/blog" },
-  { label: "contact", link: "/contact" },
-];
+const colorClasses =
+  "bg-primary-bg dark:bg-primary-bg-dark text-secondary-text dark:text-secondary-text-dark";
 
-const circleIcon = <Icon className="text-secondary-text" icon={"\uf111"} />;
+const circleIcon = <Icon icon={"\uebb4"} />;
+
+const pageIndexClasses =
+  "font-geist-mono text-primary-text dark:text-primary-text-dark";
 
 interface NavProps {
-  current: string | null;
+  admin: boolean;
+  current: string | undefined;
 }
 
-const Nav = ({ current }: NavProps) => (
-  <nav class="bg-primary-bg pb-3 pl-1">
-    <ul>
-      {pages.map(({ label, link }, i) => (
-        <li class="flex">
-          <div class="w-8 text-center font-light">
+const Nav = ({ admin, current }: NavProps): JSX.Element => {
+  const routes = admin === true ? adminNavRoutes : navRoutes;
+
+  return (
+    <nav class={`pb-3 pl-1 text-lg max-lg:pl-3 max-sm:text-xl ${colorClasses}`}>
+      <Heading variant={3} text="Sam Royall" className="max-lg:hidden" />
+      <ul>
+        {routes.map(({ label, link }, i) => (
+          <li class="flex h-5 items-end max-sm:h-7">
+            <div class="mr-2 w-5 text-center max-sm:w-7">
+              {current && label === current ? (
+                <div>{circleIcon}</div>
+              ) : (
+                <span class={pageIndexClasses}>{`0${i}`}</span>
+              )}
+            </div>
             {current && label === current ? (
-              circleIcon
+              <span>{label}</span>
             ) : (
-              <span class="font-sauce-code-pro">{`0${i}`}</span>
-            )}
-          </div>
-          <div class="text-secondary-text">
-            {!current || label !== current ? (
               <Link href={link} target="_self">
-                {label}
+                <span>{label}</span>
               </Link>
-            ) : (
-              label
             )}
-          </div>
-        </li>
-      ))}
-    </ul>
-  </nav>
-);
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 export default Nav;

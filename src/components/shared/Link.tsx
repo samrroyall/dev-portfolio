@@ -1,5 +1,3 @@
-import { type PropsWithChildren } from "beth-stack/jsx";
-
 export type LinkTarget =
   | "_self"
   | "_blank"
@@ -8,6 +6,7 @@ export type LinkTarget =
   | "_unfencedTop";
 
 interface LinkProps {
+  children: Html.Children;
   href: string;
   arrow?: boolean;
   noUnderline?: boolean;
@@ -20,20 +19,16 @@ const Link = ({
   noUnderline,
   target,
   children,
-}: LinkProps & PropsWithChildren) => (
-  <span class="hover:text-secondary-text">
+}: LinkProps): JSX.Element => (
+  <span class="text-secondary-text dark:text-secondary-text-dark">
     <a
       class={noUnderline === true ? "" : "underline"}
       href={href}
-      target={target || "_blank"}
+      target={target ?? "_blank"}
     >
       {children}
     </a>
-    {arrow === true ? (
-      <span class="font-symbols select-none font-normal">
-        {" \udb80\udc5c"}
-      </span>
-    ) : null}
+    {arrow === true ? <span class="select-none">{" \u2197"}</span> : null}
   </span>
 );
 
