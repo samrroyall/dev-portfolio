@@ -15,7 +15,9 @@ const InterestsPageEntry = ({
 
   return (
     <div class="group/interestsection">
-      <div class={`flex max-lg:flex-col lg:flex-row${even ? "" : "-reverse"}`}>
+      <div
+        class={`flex max-lg:flex-col max-lg:items-center lg:flex-row${even ? "" : "-reverse"}`}
+      >
         <div class={`py-6 max-lg:text-center lg:p${even ? "r" : "l"}-6`}>
           <Markdown text={text} />
         </div>

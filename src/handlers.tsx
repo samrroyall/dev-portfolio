@@ -303,7 +303,7 @@ export const newHomeSectionEntrySubtitleHandler = ({
 export const homePageHandler = async ({
   cookie: { theme },
   db,
-}: HandlerContext) => Home({ data: getHomeData(db), theme });
+}: HandlerContext) => Home({ data: getHomeSections(db), theme });
 
 export const interestsPageHandler = async ({
   cookie: { theme },

@@ -60,9 +60,7 @@ const entrySubtitleRegex = /entrySubtitle-(?<entryId>.+)-(?<subtitleId>.+)/;
 const entrySubtitleDetailRegex =
   /entrySubtitleDetail-(?<entryId>.+)-(?<subtitleId>.+)/;
 
-export const parseHomeSectionFormData = (
-  data: unknown,
-): HomeSectionFormData => {
+export const parseHomeSectionFormData = (data: any): HomeSectionFormData => {
   const subtitles: Record<
     string,
     Record<string, Partial<HomeSectionEntrySubtitle>>
