@@ -26,45 +26,37 @@ const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
 };
 
 interface StravaCalendarProps {
-  data: Promise<RunMonth | null>;
+  runs: RunMonth;
 }
 
 const StravaCalendar = async ({
-  data,
-}: StravaCalendarProps): Promise<JSX.Element> => {
-  const runs = await data;
-
-  return runs ? (
-    <div class="w-[350px] py-9">
-      <NoData centered={false} className="text-right" />
-    </div>
-  ) : (
-    <table class="relative max-w-[350px]">
-      <tbody>
-        {runs.map((week, i) => (
-          <tr>
-            {week.map((day, j) => (
-              <td>
-                {day ? (
-                  <StravaDay
-                    data={mapRunDaysToStravaDayData(day)}
-                    isToday={isToday(i, j)}
-                  />
-                ) : null}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-      <tfoot class="text-secondary-text dark:text-secondary-text-dark">
+  runs,
+}: StravaCalendarProps): Promise<JSX.Element> => (
+  <table class="relative max-w-[350px]">
+    <tbody>
+      {runs.map((week, i) => (
         <tr>
-          {daysOfWeek.map((d) => (
-            <th safe>{d}</th>
+          {week.map((day, j) => (
+            <td>
+              {day ? (
+                <StravaDay
+                  data={mapRunDaysToStravaDayData(day)}
+                  isToday={isToday(i, j)}
+                />
+              ) : null}
+            </td>
           ))}
         </tr>
-      </tfoot>
-    </table>
-  );
-};
+      ))}
+    </tbody>
+    <tfoot class="text-secondary-text dark:text-secondary-text-dark">
+      <tr>
+        {daysOfWeek.map((d) => (
+          <th safe>{d}</th>
+        ))}
+      </tr>
+    </tfoot>
+  </table>
+);
 
 export default StravaCalendar;

@@ -10,15 +10,10 @@ const bgClasses = "bg-primary-bg dark:bg-primary-bg-dark";
 const borderClasses =
   "border border-secondary-text dark:border-secondary-text-dark rounded";
 
-const labelClasses = "font-semibold";
-
 const valueClasses =
   "text-secondary-text dark:text-secondary-text-dark text-4xl font-bold";
 
-const unitClasses =
-  "font-semibold mx-1 text-secondary-text dark:text-secondary-text-dark";
-
-const mainUnitClasses = "font-semibold ml-3";
+const unitClasses = "mx-1 text-secondary-text dark:text-secondary-text-dark";
 
 interface StravaDayDetailProps {
   id: number;
@@ -54,16 +49,16 @@ const StravaDayDetail = ({
         <div class="font-geist-mono flex flex-auto flex-col justify-center px-8 ">
           {
             <div class="flex flex-col">
-              <span class={labelClasses}>{"DISTANCE"}</span>
+              <span>{"DISTANCE"}</span>
               <div class="self-end">
                 <span class={valueClasses}>{miles.toFixed(2)}</span>
-                <span class={mainUnitClasses}>{"mi"}</span>
+                <span class="ml-3">{"mi"}</span>
               </div>
             </div>
           }
           {
             <div class="flex flex-col">
-              <span class={labelClasses}>{"PACE"}</span>
+              <span>{"PACE"}</span>
               <div class="flex gap-x-1 self-end">
                 {hours ? (
                   <div>
@@ -78,17 +73,17 @@ const StravaDayDetail = ({
                 <div>
                   <span class={valueClasses}>{seconds}</span>
                   <span class={unitClasses}>S</span>
-                  <span class={mainUnitClasses}>{"/mi"}</span>
+                  <span class="ml-3">{"/mi"}</span>
                 </div>
               </div>
             </div>
           }
           {avgBpm ? (
             <div class="flex flex-col">
-              <span class={labelClasses}>{"AVG HR"}</span>
+              <span>{"AVG HR"}</span>
               <div class="self-end">
                 <span class={valueClasses}>{avgBpm.toFixed(0)}</span>
-                <span class={mainUnitClasses}>{"bpm"}</span>
+                <span class="ml-3">{"bpm"}</span>
               </div>
             </div>
           ) : null}
