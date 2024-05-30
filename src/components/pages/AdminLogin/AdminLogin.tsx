@@ -1,6 +1,6 @@
 import { type DefaultPageProps } from "../../../models/components";
 import { BasePage } from "../../pages";
-import { Form, Input, SectionDivider } from "../../shared";
+import { Form, Input, NoMobile, SectionDivider } from "../../shared";
 
 interface AdminLoginProps extends DefaultPageProps {
   error: string | undefined;
@@ -20,7 +20,8 @@ const AdminLogin = ({
   return (
     <BasePage theme={theme} title="Admin Login">
       <SectionDivider />
-      <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
+      <NoMobile className="my-6 justify-center sm:hidden" />
+      <div class="mx-auto mb-6 mt-3 max-w-screen-sm max-sm:hidden">
         <Form
           id="admin-form"
           action="/authenticate"

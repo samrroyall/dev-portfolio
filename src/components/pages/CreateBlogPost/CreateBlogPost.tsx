@@ -1,9 +1,9 @@
 import { type DefaultPageProps } from "../../../models/components";
 import { BasePage } from "../../pages";
-import { Form, Icon, Input } from "../../shared";
+import { Form, Icon, Input, NoMobile } from "../../shared";
 
 const previewWindowClasses = `
-  hidden h-[90%] w-[640px] py-3 px-2 rounded overflow-y-scroll border 
+  hidden h-[79vh] w-[640px] py-3 px-2 rounded overflow-y-scroll border 
   border-secondary-text dark:border-secondary-text-dark
 `;
 
@@ -36,7 +36,8 @@ const CreateBlogPost = ({
       title="Create Blog Post"
       fullPage={true}
     >
-      <div class="mb-6 mt-3 flex h-full items-start justify-center space-x-6">
+      <NoMobile className="my-6 justify-center sm:hidden" />
+      <div class="mb-6 mt-3 flex items-start justify-center space-x-6 max-sm:hidden">
         <div class="w-[640px] self-start">
           <div class="text-right">
             <button
@@ -67,6 +68,7 @@ const CreateBlogPost = ({
               required={true}
               type="textarea"
               noResize={true}
+              className="h-[3rem]"
             />
             <Input
               label="Text"

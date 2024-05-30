@@ -1,6 +1,6 @@
 import { type DefaultPageProps } from "../../../models/components";
 import { BasePage } from "../../pages";
-import { Form, IconButton, Input } from "../../shared";
+import { Form, IconButton, Input, NoMobile } from "../../shared";
 
 const formFuncs = `
   function deleteEntry(entryId) {
@@ -38,7 +38,8 @@ const CreateHomeSection = ({
       theme={theme}
       title="Create Home Section"
     >
-      <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
+      <NoMobile className="my-6 justify-center sm:hidden" />
+      <div class="mx-auto mb-6 mt-3 max-w-screen-sm max-sm:hidden">
         <script>{formFuncs}</script>
         <Form
           id="create-home-section-form"

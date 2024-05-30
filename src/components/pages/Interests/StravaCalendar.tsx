@@ -1,5 +1,4 @@
 import { type RunDay, type RunMonth } from "../../../models/interests";
-import { NoData } from "../../shared";
 import StravaDay, { type StravaDayData } from "./StravaDay";
 
 const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];

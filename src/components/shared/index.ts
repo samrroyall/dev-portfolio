@@ -12,6 +12,7 @@ import Link from "./Link";
 import Markdown from "./Markdown";
 import Modal from "./Modal";
 import NoData from "./NoData";
+import NoMobile from "./NoMobile";
 import PageTitle from "./PageTitle";
 import SectionDivider from "./SectionDivider";
 import Sections from "./Sections";
@@ -32,6 +33,7 @@ export {
   Markdown,
   Modal,
   NoData,
+  NoMobile,
   PageTitle,
   Sections,
   SectionDivider,

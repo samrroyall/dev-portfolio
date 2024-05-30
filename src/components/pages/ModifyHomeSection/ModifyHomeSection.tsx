@@ -1,6 +1,12 @@
 import { type DefaultPageProps } from "../../../models/components";
 import { type HomeSection } from "../../../models/home";
-import { Form, HomeSectionEntryInput, IconButton, Input } from "../../shared";
+import {
+  Form,
+  HomeSectionEntryInput,
+  IconButton,
+  Input,
+  NoMobile,
+} from "../../shared";
 import BasePage from "../BasePage";
 import NotFound from "../NotFound";
 
@@ -41,7 +47,8 @@ const ModifyHomeSection = async ({
     <NotFound theme={theme} />
   ) : (
     <BasePage admin={true} theme={theme} title="Modify Home Section">
-      <div class="mx-auto mb-6 mt-3 max-w-screen-sm">
+      <NoMobile className="my-6 justify-center sm:hidden" />
+      <div class="mx-auto mb-6 mt-3 max-w-screen-sm max-sm:hidden">
         <script>{formFuncs}</script>
         <Form
           id="update-home-section-form"
