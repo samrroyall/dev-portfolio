@@ -46,7 +46,10 @@ const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
     >
       <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+        />
         <title>{`Sam Royall${title ? ` — ${title}` : ""}`}</title>
         <script type="text/javascript" src="https://cdn.tailwindcss.com" />
         <script

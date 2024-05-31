@@ -1,5 +1,5 @@
 import { type Cookie } from "elysia";
-import { Heading, Icon } from "../../shared";
+import { Heading, Icon, Link } from "../../shared";
 import Nav from "./Nav";
 
 const footerNavColorClasses =
@@ -84,7 +84,9 @@ const Footer = ({ admin, current, theme }: FooterProps): JSX.Element => {
         >
           {menuIcon}
         </button>
-        <Heading variant={3} text="Sam Royall" className="lg:hidden" />
+        <Link href="/" noUnderline={true}>
+          <Heading variant={3} text="Sam Royall" className="lg:hidden" />
+        </Link>
         <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center justify-end lg:ml-auto">
           {icons.map(({ icon, inMobileDropdown }) => (
             <li
