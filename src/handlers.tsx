@@ -286,29 +286,32 @@ export const modifyHomeSectionHandler = async ({
   }
 };
 
-export const newHomeSectionEntryHandler = () => {
-  const id = randomBytes(8).toString("hex");
-
-  return <HomeSectionEntryInput id={id} />;
-};
+export const newHomeSectionEntryHandler = () => (
+  <HomeSectionEntryInput id={randomBytes(8).toString("hex")} />
+);
 
 export const newHomeSectionEntrySubtitleHandler = ({
   query: { entryId },
-}: HandlerContext<NewHomeSectionEntrySubtitleSchema>) => {
-  const id = randomBytes(8).toString("hex");
-
-  return <HomeSectionEntrySubtitleInput id={id} entryId={entryId} />;
-};
+}: HandlerContext<NewHomeSectionEntrySubtitleSchema>) => (
+  <HomeSectionEntrySubtitleInput
+    id={randomBytes(8).toString("hex")}
+    entryId={entryId}
+  />
+);
 
 export const homePageHandler = async ({
   cookie: { theme },
   db,
-}: HandlerContext) => Home({ data: getHomeData(db), theme });
+}: HandlerContext) => Home({ data: getHomeSections(db), theme });
 
 export const interestsPageHandler = async ({
   cookie: { theme },
 }: HandlerContext) =>
-  Interests({ spotify: getSpotifyData(), strava: getStravaData(), theme });
+  Interests({
+    spotifyData: getSpotifyData(),
+    stravaData: getStravaData(),
+    theme,
+  });
 
 export const loginPageHandler = ({
   cookie: { theme },

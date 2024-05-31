@@ -1,18 +1,26 @@
-import {
-  type RunDay,
-  type RunMonth,
-  type RunWeek,
-} from "../../../models/interests";
-import { mockFunc } from "../../../utils";
+import { type RunMonth } from "../../../models/interests";
 import { getMockStravaData } from "../../mocks/interests";
 
-const emptyRunMonth: RunMonth = new Array<RunWeek>(5)
-  .fill(null)
-  .map(
-    (_) => new Array<RunDay | null>(7).fill(null as RunDay | null) as RunWeek,
-  ) as RunMonth;
+export const getStravaData = async (): Promise<RunMonth | null> => {
+  if (process.env.USE_MOCKS === "true") {
+    return await getMockStravaData();
+  }
 
-export const getStravaData = (): Promise<RunMonth> =>
-  process.env.USE_MOCKS === "true"
-    ? getMockStravaData()
-    : mockFunc(emptyRunMonth);
+  const apiUrl = process.env.VERCEL_API_URL;
+
+  if (!apiUrl) {
+    throw new Error("No value provided for VERCEL_API_URL");
+  }
+
+  try {
+    const apiResponse = await fetch(`${apiUrl}/api/strava`);
+
+    return (await apiResponse.json()) as RunMonth;
+  } catch (err) {
+    console.error(
+      `Unexpected error encountered while retrieving Strava data: ${JSON.stringify(err)}`,
+    );
+
+    return null;
+  }
+};

@@ -8,25 +8,31 @@ import SpotifyTopTracks from "./SpotifyTopTracks";
 import StravaCalendar from "./StravaCalendar";
 
 interface InterestsProps extends DefaultPageProps {
-  spotify: Promise<Track[]>;
-  strava: Promise<RunMonth>;
+  spotifyData: Promise<Track[] | null>;
+  stravaData: Promise<RunMonth | null>;
 }
 
 const Interests = async ({
-  spotify,
-  strava,
+  spotifyData,
+  stravaData,
   theme,
 }: InterestsProps): Promise<JSX.Element> => {
+  const runs = await stravaData;
+  const stravaContent = runs ? StravaCalendar({ runs }) : null;
+
+  const tracks = await spotifyData;
+  const spotifyContent = tracks ? SpotifyTopTracks({ tracks }) : null;
+
   const content = [
     {
       title: "Running",
       text: runningText,
-      content: await StravaCalendar({ month: strava }),
+      content: stravaContent,
     },
     {
       title: "Music",
       text: musicText,
-      content: await SpotifyTopTracks({ data: spotify }),
+      content: spotifyContent,
     },
   ];
 

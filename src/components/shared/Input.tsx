@@ -103,15 +103,13 @@ const Input = (props: InputProps): JSX.Element => {
   const hiddenClasses = type === "hidden" ? "hidden" : "";
 
   return (
-    <fieldset
-      class={`${fieldClasses} ${bottomLegendClasses} ${hiddenClasses} ${className ?? ""}`}
-    >
+    <fieldset class={`${fieldClasses} ${bottomLegendClasses} ${hiddenClasses}`}>
       <legend class={`${legendClasses} ${required ? requiredClasses : ""}`}>
         {label}
       </legend>
       {type === "textarea" ? (
         <textarea
-          class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""}`}
+          class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""} ${className ?? ""}`}
           name={name}
           {...attrs}
           {...hxAttrs}
@@ -120,7 +118,7 @@ const Input = (props: InputProps): JSX.Element => {
         </textarea>
       ) : (
         <input
-          class={inputClasses}
+          class={`${inputClasses} ${className ?? ""}`}
           type={type ?? "text"}
           name={name}
           value={value ?? ""}
