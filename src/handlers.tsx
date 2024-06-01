@@ -1,4 +1,3 @@
-import { randomBytes } from "crypto";
 import {
   Admin,
   AdminLogin,
@@ -27,6 +26,7 @@ import {
   type CreateBlogPostPageSchema,
   type CreateBlogPostSchema,
   type CreateHomeSectionPageSchema,
+  type CreateHomeSectionSchema,
   type DeleteBlogPostSchema,
   type DeleteHomeSectionEntrySchema,
   type DeleteHomeSectionSchema,
@@ -35,7 +35,6 @@ import {
   type ModifyBlogPostSchema,
   type ModifyHomeSectionPageSchema,
   type ModifyHomeSectionSchema,
-  type NewHomeSectionEntrySubtitleSchema,
   type PreviewBlogPostSchema,
   type SendEmailSchema,
   type ToggleThemeSchema,
@@ -152,14 +151,14 @@ export const createHomeSectionHandler = async ({
   body,
   db,
   set,
-}: HandlerContext) => {
+}: HandlerContext<CreateHomeSectionSchema>) => {
   try {
     set.status = 303;
 
     if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
       set.headers.location = "/admin/home/new?success=false&error=recaptcha";
     } else {
-      await createHomeSection(db, body);
+      await createHomeSection(db, JSON.parse(body.jsonData));
       set.headers.location = "/admin";
     }
   } catch (err) {
@@ -274,7 +273,7 @@ export const modifyHomeSectionHandler = async ({
     if (!(await verifyRecaptcha(body["g-recaptcha-response"]))) {
       set.headers.location = `/admin/home/${id}?success=false&error=recaptcha`;
     } else {
-      await modifyHomeSection(db, id, body);
+      await modifyHomeSection(db, id, JSON.parse(body.jsonData));
       set.headers.location = "/admin";
     }
   } catch (err) {
@@ -286,17 +285,10 @@ export const modifyHomeSectionHandler = async ({
   }
 };
 
-export const newHomeSectionEntryHandler = () => (
-  <HomeSectionEntryInput id={randomBytes(8).toString("hex")} />
-);
+export const newHomeSectionEntryHandler = () => <HomeSectionEntryInput />;
 
-export const newHomeSectionEntrySubtitleHandler = ({
-  query: { entryId },
-}: HandlerContext<NewHomeSectionEntrySubtitleSchema>) => (
-  <HomeSectionEntrySubtitleInput
-    id={randomBytes(8).toString("hex")}
-    entryId={entryId}
-  />
+export const newHomeSectionEntrySubtitleHandler = () => (
+  <HomeSectionEntrySubtitleInput />
 );
 
 export const homePageHandler = async ({

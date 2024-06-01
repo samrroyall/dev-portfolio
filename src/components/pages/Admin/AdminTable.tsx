@@ -55,7 +55,7 @@ const AdminTable = ({
               <td>{title}</td>
               <td>{getPrettyDateTime(createdAt)}</td>
               <td>{getPrettyDateTime(lastModifiedAt)}</td>
-              <td>
+              <td class="flex flex-wrap justify-center *:m-1">
                 <IconButton
                   label="Edit"
                   icon={"\udb80\udfeb"}
@@ -76,13 +76,11 @@ const AdminTable = ({
                     hx-on-click={`htmx.toggleClass("#delete-${tableId}-${id}-modal", "hidden");`}
                   />
                 </Modal>
-                <span class="ml-2">
-                  <IconButton
-                    label="Delete"
-                    icon={"\udb80\uddb4"}
-                    hx-on-click={`htmx.toggleClass("#delete-${tableId}-${id}-modal", "hidden");`}
-                  />
-                </span>
+                <IconButton
+                  label="Delete"
+                  icon={"\udb80\uddb4"}
+                  hx-on-click={`htmx.toggleClass("#delete-${tableId}-${id}-modal", "hidden");`}
+                />
               </td>
             </tr>
           ))}

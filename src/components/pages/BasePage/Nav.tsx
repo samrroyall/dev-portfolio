@@ -12,14 +12,19 @@ const pageIndexClasses =
 interface NavProps {
   admin: boolean;
   current: string | undefined;
+  mobileNav: boolean;
 }
 
-const Nav = ({ admin, current }: NavProps): JSX.Element => {
+const Nav = ({ admin, current, mobileNav }: NavProps): JSX.Element => {
   const routes = admin === true ? adminNavRoutes : navRoutes;
 
   return (
     <nav class={`pb-3 pl-1 text-lg max-lg:pl-3 max-sm:text-xl ${colorClasses}`}>
-      <Heading variant={3} text="Sam Royall" className="max-lg:hidden" />
+      <Heading
+        variant={3}
+        text="Sam Royall"
+        className={mobileNav ? "hidden" : "max-lg:hidden"}
+      />
       <ul>
         {routes.map(({ label, link }, i) => (
           <li class="flex h-5 items-end max-sm:h-7">

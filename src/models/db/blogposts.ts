@@ -9,10 +9,10 @@ export const blogposts = sqliteTable(
     subtitle: text("subtitle").notNull(),
     blurb: text("blurb").notNull(),
     text: text("text").notNull(),
-    createdAt: integer("created_at", { mode: "timestamp" }),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
     lastModifiedAt: integer("last_modified_at", {
       mode: "timestamp",
-    }),
+    }).notNull(),
   },
   (table) => ({
     idx1: index("slug").on(table.slug),

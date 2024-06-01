@@ -4,16 +4,27 @@ import { homesectionentries, homesections } from "../models/db";
 import {
   mapRowToHomeSection,
   mapRowToHomeSectionEntry,
-  parseHomeSectionFormData,
   type HomeSection,
+  type HomeSectionEntryData,
+  type HomeSectionRow,
 } from "../models/home";
+
+type NewHomeSectionEntryFormData = Omit<
+  HomeSectionEntryData,
+  "id" | "createdAt" | "lastModifiedAt"
+>;
+
+type NewHomeSectionFormData = Omit<
+  HomeSection,
+  "id" | "order" | "entries" | "createdAt" | "lastModifiedAt"
+> & {
+  entries: NewHomeSectionEntryFormData[];
+};
 
 export const createHomeSection = async (
   db: LibSQLDatabase,
-  data: unknown,
+  section: NewHomeSectionFormData,
 ): Promise<void> => {
-  const formData = parseHomeSectionFormData(data);
-
   const maxOrderResult = await db
     .select({ order: homesections.order })
     .from(homesections)
@@ -27,7 +38,7 @@ export const createHomeSection = async (
       .insert(homesections)
       .values({
         order: maxOrder + 1,
-        title: formData.title,
+        title: section.title,
         createdAt: new Date(),
         lastModifiedAt: new Date(),
       })
@@ -35,18 +46,18 @@ export const createHomeSection = async (
 
     const sectionId = homeSectionResult[0].sectionId;
 
-    const rows = formData.entries.map((entry) => ({
-      sectionId,
-      title: entry.title,
-      subtitles: entry.subtitles ?? [],
-      titleLink: entry.titleLink,
-      text: entry.text,
-      createdAt: new Date(),
-      lastModifiedAt: new Date(),
-    }));
-
-    if (rows.length > 0) {
-      await tx.insert(homesectionentries).values(rows);
+    if (section.entries.length > 0) {
+      await tx.insert(homesectionentries).values(
+        section.entries.map((entry) => ({
+          sectionId,
+          title: !!entry.title ? entry.title : undefined,
+          subtitles: entry.subtitles,
+          titleLink: !!entry.titleLink ? entry.titleLink : undefined,
+          text: entry.text,
+          createdAt: new Date(),
+          lastModifiedAt: new Date(),
+        })),
+      );
     }
   });
 };
@@ -79,10 +90,10 @@ export const getHomeSection = async (
   db: LibSQLDatabase,
   sectionId: number,
 ): Promise<HomeSection | null> => {
-  const rows = await db
+  const rows = (await db
     .select({
       sectionId: homesections.id,
-      sectionOrder: homesections.order,
+      order: homesections.order,
       sectionTitle: homesections.title,
       entryId: homesectionentries.id,
       entryTitle: homesectionentries.title,
@@ -98,13 +109,13 @@ export const getHomeSection = async (
       eq(homesections.id, homesectionentries.sectionId),
     )
     .where(eq(homesections.id, sectionId))
-    .orderBy(homesections.order);
+    .orderBy(homesections.order)) as HomeSectionRow[];
 
   if (rows.length === 0) {
     return null;
   }
 
-  const section: HomeSection = mapRowToHomeSection(rows[0]);
+  const section = mapRowToHomeSection(rows[0]);
 
   for (let i = 1; i < rows.length; i++) {
     section.entries.push(mapRowToHomeSectionEntry(rows[i]));
@@ -151,46 +162,56 @@ export const getHomeSections = async (
   return sections;
 };
 
+type ModifyHomeSectionEntryFormData = Omit<
+  HomeSectionEntryData,
+  "createdAt" | "lastModifiedAt"
+>;
+
+type ModifyHomeSectionFormData = Omit<
+  HomeSection,
+  "id" | "entries" | "createdAt" | "lastModifiedAt"
+> & {
+  entries: ModifyHomeSectionEntryFormData[];
+};
+
 export const modifyHomeSection = async (
   db: LibSQLDatabase,
   sectionId: number,
-  data: unknown,
+  section: ModifyHomeSectionFormData,
 ): Promise<void> => {
-  const formData = parseHomeSectionFormData(data);
-
   await db.transaction(async (tx) => {
     await tx
       .update(homesections)
       .set({
-        title: formData.title,
-        order: formData.order,
+        title: section.title,
+        order: section.order,
         lastModifiedAt: new Date(),
       })
       .where(eq(homesections.id, sectionId));
 
-    for (const entry of formData.entries) {
-      await tx
-        .insert(homesectionentries)
-        .values({
-          id: entry.id,
+    for (const entry of section.entries) {
+      if (entry.id) {
+        await tx
+          .update(homesectionentries)
+          .set({
+            title: !!entry.title ? entry.title : undefined,
+            subtitles: entry.subtitles,
+            titleLink: !!entry.titleLink ? entry.titleLink : undefined,
+            text: entry.text,
+            lastModifiedAt: new Date(),
+          })
+          .where(eq(homesectionentries.id, entry.id));
+      } else {
+        await tx.insert(homesectionentries).values({
           sectionId,
-          title: entry.title,
-          subtitles: entry.subtitles ?? [],
-          titleLink: entry.titleLink,
+          title: !!entry.title ? entry.title : undefined,
+          subtitles: entry.subtitles,
+          titleLink: !!entry.titleLink ? entry.titleLink : undefined,
           text: entry.text,
           createdAt: new Date(),
           lastModifiedAt: new Date(),
-        })
-        .onConflictDoUpdate({
-          target: homesectionentries.id,
-          set: {
-            title: entry.title,
-            subtitles: entry.subtitles ?? [],
-            titleLink: entry.titleLink,
-            text: entry.text,
-            lastModifiedAt: new Date(),
-          },
         });
+      }
     }
   });
 };

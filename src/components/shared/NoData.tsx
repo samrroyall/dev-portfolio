@@ -4,7 +4,7 @@ interface NoDataProps {
   className?: string;
 }
 
-const NoData = ({ className }: NoDataProps) => (
+const NoData = ({ className }: NoDataProps): JSX.Element => (
   <div
     class={`text-secondary-text dark:text-secondary-text-dark flex ${className ?? ""}`}
   >

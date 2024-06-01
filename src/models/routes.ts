@@ -98,6 +98,34 @@ export interface CreateHomeSectionPageSchema {
   query: Static<typeof createHomeSectionPageSchema.query>;
 }
 
+export const createHomeSectionSchema = {
+  body: t.Object({
+    "g-recaptcha-response": t.String(),
+    jsonData: t.String(
+      t.Object({
+        title: t.String(),
+        entries: t.Array(
+          t.Object({
+            title: t.Optional(t.String()),
+            titleLink: t.Optional(t.String()),
+            text: t.String(),
+            subtitles: t.Array(
+              t.Object({
+                title: t.String(),
+                detail: t.Optional(t.String()),
+              }),
+            ),
+          }),
+        ),
+      }),
+    ),
+  }),
+};
+
+export interface CreateHomeSectionSchema {
+  body: Static<typeof createHomeSectionSchema.body>;
+}
+
 export const deleteBlogPostSchema = {
   params: t.Object({
     id: t.Numeric(),
@@ -173,16 +201,6 @@ export interface ModifyBlogPostSchema {
   params: Static<typeof modifyBlogPostSchema.params>;
 }
 
-export const modifyHomeSectionSchema = {
-  params: t.Object({
-    id: t.Numeric(),
-  }),
-};
-
-export interface ModifyHomeSectionSchema {
-  params: Static<typeof modifyHomeSectionSchema.params>;
-}
-
 export const modifyHomeSectionPageSchema = {
   params: t.Object({
     id: t.Numeric(),
@@ -198,14 +216,34 @@ export interface ModifyHomeSectionPageSchema {
   query: Static<typeof modifyHomeSectionPageSchema.query>;
 }
 
-export const newHomeSectionEntrySubtitleSchema = {
-  query: t.Object({
-    entryId: t.String(),
+export const modifyHomeSectionSchema = {
+  body: t.Object({
+    "g-recaptcha-response": t.String(),
+    jsonData: t.String(
+      t.Object({
+        order: t.Numeric(),
+        title: t.String(),
+        entries: t.Array(
+          t.Object({
+            id: t.Optional(t.Numeric()),
+            title: t.Optional(t.String()),
+            titleLink: t.Optional(t.String()),
+            text: t.String(),
+            subtitles: t.Array(
+              t.Object({
+                title: t.String(),
+                detail: t.Optional(t.String()),
+              }),
+            ),
+          }),
+        ),
+      }),
+    ),
   }),
 };
 
-export interface NewHomeSectionEntrySubtitleSchema {
-  query: Static<typeof newHomeSectionEntrySubtitleSchema.query>;
+export interface ModifyHomeSectionSchema {
+  body: Static<typeof modifyHomeSectionSchema.body>;
 }
 
 export const previewBlogPostSchema = {

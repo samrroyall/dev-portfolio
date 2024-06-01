@@ -17,13 +17,17 @@ const closeModalIconClasses = `
 
 interface ModalProps {
   children: Html.Children;
-  id: string;
   className?: string;
+  id?: string;
 }
 
 const Modal = ({ children, className, id }: ModalProps): JSX.Element => {
+  const attrs = {
+    ...(id ? { id } : {}),
+  };
+
   return (
-    <div id={id} class={containerClasses}>
+    <div class={containerClasses} {...attrs}>
       <div class={`${alertClasses} ${className ?? ""}`}>
         <button
           type="button"

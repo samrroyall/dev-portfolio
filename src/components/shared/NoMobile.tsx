@@ -4,7 +4,7 @@ interface NoMobileProps {
   className?: string;
 }
 
-const NoMobile = ({ className }: NoMobileProps) => (
+const NoMobile = ({ className }: NoMobileProps): JSX.Element => (
   <div
     class={`text-secondary-text dark:text-secondary-text-dark flex ${className ?? ""}`}
   >

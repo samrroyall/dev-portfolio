@@ -8,6 +8,7 @@ interface BasePageProps extends DefaultPageProps {
   admin?: boolean;
   current?: string;
   fullPage?: boolean;
+  mobileNav?: boolean;
   pageTitle?: boolean;
   title?: string;
 }
@@ -17,6 +18,7 @@ const BasePage = ({
   current,
   children,
   fullPage,
+  mobileNav,
   theme,
   pageTitle,
   title,
@@ -29,7 +31,9 @@ const BasePage = ({
   return (
     <BaseHtml theme={theme} title={title}>
       <main class="relative">
-        <div class="absolute left-0 top-0 hidden px-5 py-4 lg:inline-block">
+        <div
+          class={`absolute left-0 top-0 px-5 py-4 ${mobileNav ? "hidden" : "max-lg:hidden"}`}
+        >
           <Nav admin={admin ?? false} current={current} />
         </div>
         <div
@@ -39,15 +43,22 @@ const BasePage = ({
             {pageTitle !== false && title ? (
               <PageTitle
                 admin={admin}
-                className={fullPage ? "mx-auto w-[640px]" : ""}
+                className={fullPage && !mobileNav ? "mx-auto w-[640px]" : ""}
                 current={current}
                 title={title}
               />
             ) : null}
             {children}
           </div>
-          <div class="order-first w-full lg:order-last">
-            <Footer admin={admin ?? false} current={current} theme={theme} />
+          <div
+            class={`order-first w-full ${!mobileNav ? "lg:order-last" : ""}`}
+          >
+            <Footer
+              admin={admin ?? false}
+              current={current}
+              mobileNav={mobileNav ?? false}
+              theme={theme}
+            />
           </div>
         </div>
       </main>
