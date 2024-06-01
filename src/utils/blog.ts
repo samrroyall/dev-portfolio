@@ -1,11 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { type LibSQLDatabase } from "drizzle-orm/libsql";
-import {
-  mapRowToBlogInfo,
-  mapRowToBlogPost,
-  type BlogPost,
-  type BlogPostInfo,
-} from "../models/blog";
+import { type BlogPost, type BlogPostInfo } from "../models/blog";
 import { blogposts } from "../models/db";
 
 export const createBlogPost = async (
@@ -39,7 +34,7 @@ export const getBlogPost = async (
     .from(blogposts)
     .where(eq(blogposts.id, blogPostId));
 
-  return result.length > 0 ? mapRowToBlogPost(result[0]) : null;
+  return result[0] ?? null;
 };
 
 export const getBlogPostBySlug = async (
@@ -51,13 +46,13 @@ export const getBlogPostBySlug = async (
     .from(blogposts)
     .where(eq(blogposts.slug, blogPostSlug));
 
-  return result.length > 0 ? mapRowToBlogPost(result[0]) : null;
+  return result[0] ?? null;
 };
 
 export const getBlogPosts = async (
   db: LibSQLDatabase,
-): Promise<BlogPostInfo[]> => {
-  const rows = await db
+): Promise<BlogPostInfo[]> =>
+  await db
     .select({
       id: blogposts.id,
       slug: blogposts.slug,
@@ -69,9 +64,6 @@ export const getBlogPosts = async (
     })
     .from(blogposts)
     .orderBy(desc(blogposts.createdAt));
-
-  return rows.map(mapRowToBlogInfo);
-};
 
 export const modifyBlogPost = async (
   db: LibSQLDatabase,

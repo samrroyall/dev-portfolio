@@ -23,7 +23,14 @@ const Admin = async ({
   homeData,
   theme,
 }: AdminProps): Promise<JSX.Element> => (
-  <BasePage admin={true} current="home" theme={theme} title="Admin Panel">
+  <BasePage
+    admin={true}
+    current="home"
+    fullPage={true}
+    mobileNav={true}
+    theme={theme}
+    title="Admin Panel"
+  >
     <NoMobile className="my-6 justify-center sm:hidden" />
     <div class="max-sm:hidden">
       <script>{reloadPageAfterDelete}</script>

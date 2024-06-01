@@ -43,10 +43,16 @@ const optimisticallyUpdateTheme = `
 interface FooterProps {
   admin: boolean;
   current: string | undefined;
+  mobileNav: boolean;
   theme: Cookie<string | undefined>;
 }
 
-const Footer = ({ admin, current, theme }: FooterProps): JSX.Element => {
+const Footer = ({
+  admin,
+  current,
+  mobileNav,
+  theme,
+}: FooterProps): JSX.Element => {
   const themeButton = (
     <button
       id="toggle-theme-button"
@@ -76,21 +82,29 @@ const Footer = ({ admin, current, theme }: FooterProps): JSX.Element => {
 
   return (
     <footer class="w-full text-xl max-sm:text-2xl xl:text-2xl">
-      <hr class="border-secondary-text dark:border-secondary-text-dark max-lg:hidden" />
+      <hr
+        class={`border-secondary-text dark:border-secondary-text-dark ${mobileNav ? "hidden" : "max-lg:hidden"}`}
+      />
       <div class="relative flex items-center justify-between p-2">
         <button
-          class="text-secondary-text dark:text-secondary-text-dark cursor-pointer lg:hidden"
+          class={`text-secondary-text dark:text-secondary-text-dark cursor-pointer ${!mobileNav ? "lg:hidden" : ""}`}
           hx-on-click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
         </button>
         <Link href="/" noUnderline={true}>
-          <Heading variant={3} text="Sam Royall" className="lg:hidden" />
+          <Heading
+            variant={3}
+            text="Sam Royall"
+            className={!mobileNav ? "lg:hidden" : ""}
+          />
         </Link>
-        <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center justify-end lg:ml-auto">
+        <ul
+          class={`text-secondary-text dark:text-secondary-text-dark flex items-center justify-end ${!mobileNav ? "lg:ml-auto" : ""}`}
+        >
           {icons.map(({ icon, inMobileDropdown }) => (
             <li
-              class={`mx-1 first:ml-0 last:mr-0 ${inMobileDropdown ? "max-lg:hidden" : ""}`}
+              class={`mx-1 first:ml-0 last:mr-0 ${inMobileDropdown && mobileNav ? "hidden" : "max-lg:hidden"}`}
             >
               {icon}
             </li>
@@ -98,7 +112,7 @@ const Footer = ({ admin, current, theme }: FooterProps): JSX.Element => {
         </ul>
       </div>
       <div id="footer-nav" class={footerNavClasses}>
-        <Nav admin={admin} current={current} />
+        <Nav admin={admin} current={current} mobileNav={mobileNav} />
         <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center pb-3 pr-3">
           {icons.map(({ icon, inMobileDropdown }) => (
             <li
@@ -109,7 +123,9 @@ const Footer = ({ admin, current, theme }: FooterProps): JSX.Element => {
           ))}
         </ul>
       </div>
-      <hr class="border-secondary-text dark:border-secondary-text-dark lg:hidden" />
+      <hr
+        class={`border-secondary-text dark:border-secondary-text-dark ${!mobileNav ? "lg:hidden" : ""}`}
+      />
       <script>{optimisticallyUpdateTheme}</script>
     </footer>
   );

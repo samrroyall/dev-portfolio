@@ -13,8 +13,8 @@ export const homesectionentries = sqliteTable("homesectionentries", {
     .notNull(),
   text: text("text").notNull(),
   titleLink: text("title_link"),
-  createdAt: integer("created_at", { mode: "timestamp" }),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   lastModifiedAt: integer("last_modified_at", {
     mode: "timestamp",
-  }),
+  }).notNull(),
 });
