@@ -28,9 +28,7 @@ interface StravaCalendarProps {
   runs: RunMonth;
 }
 
-const StravaCalendar = async ({
-  runs,
-}: StravaCalendarProps): Promise<JSX.Element> => (
+const StravaCalendar = ({ runs }: StravaCalendarProps): JSX.Element => (
   <table class="relative max-w-[350px]">
     <tbody>
       {runs.map((week, i) => (

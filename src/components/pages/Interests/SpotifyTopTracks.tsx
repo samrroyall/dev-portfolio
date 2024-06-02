@@ -5,9 +5,7 @@ interface SpotifyTopTracksProps {
   tracks: Track[];
 }
 
-const SpotifyTopTracks = async ({
-  tracks,
-}: SpotifyTopTracksProps): Promise<JSX.Element> => (
+const SpotifyTopTracks = ({ tracks }: SpotifyTopTracksProps): JSX.Element => (
   <div>
     {tracks.map((track, i) => (
       <span id={`spotify-track-card-${i}`} class={i !== 0 ? "hidden" : ""}>
