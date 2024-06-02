@@ -5,8 +5,6 @@ export const verifyRecaptcha = async (response: string): Promise<boolean> => {
   const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
 
   if (!recaptchaUrl || !recaptchaSecretKey) {
-    console.error("Missing required Recaptcha configuration properties.");
-
     return Promise.resolve(false);
   }
 
@@ -31,8 +29,6 @@ export const isAdmin = async (
   const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH;
 
   if (!adminUsername || !adminPasswordHash) {
-    console.error("Missing required Admin configuration properties.");
-
     return Promise.resolve(false);
   }
 

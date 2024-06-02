@@ -3,7 +3,9 @@ import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 export const blogposts = sqliteTable(
   "blogposts",
   {
-    id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+    id: integer("id", { mode: "number" })
+      .primaryKey({ autoIncrement: true })
+      .notNull(),
     slug: text("slug").notNull().unique(),
     title: text("title").notNull(),
     subtitle: text("subtitle").notNull(),

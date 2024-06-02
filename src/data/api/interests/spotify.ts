@@ -12,15 +12,7 @@ export const getSpotifyData = async (): Promise<Track[] | null> => {
     throw new Error("No value provided for VERCEL_API_URL");
   }
 
-  try {
-    const apiResponse = await fetch(`${apiUrl}/api/spotify`);
+  const apiResponse = await fetch(`${apiUrl}/api/spotify`);
 
-    return (await apiResponse.json()) as Track[];
-  } catch (err) {
-    console.error(
-      `Unexpected error encountered while retrieving Spotify data: ${JSON.stringify(err)}`,
-    );
-
-    return null;
-  }
+  return (await apiResponse.json()) as Track[];
 };

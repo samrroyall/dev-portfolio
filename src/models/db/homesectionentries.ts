@@ -3,7 +3,9 @@ import { type HomeSectionEntrySubtitle } from "../home";
 import { homesections } from "./homesections";
 
 export const homesectionentries = sqliteTable("homesectionentries", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
+  id: integer("id", { mode: "number" })
+    .primaryKey({ autoIncrement: true })
+    .notNull(),
   sectionId: integer("section_id")
     .references(() => homesections.id)
     .notNull(),

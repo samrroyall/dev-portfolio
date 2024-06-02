@@ -8,6 +8,7 @@ import CreateBlogPost from "./CreateBlogPost";
 import CreateHomeSection from "./CreateHomeSection";
 import Home from "./Home";
 import Interests from "./Interests";
+import ModifyBlogPost from "./ModifyBlogPost";
 import ModifyHomeSection from "./ModifyHomeSection";
 import NotFound from "./NotFound";
 
@@ -22,6 +23,7 @@ export {
   CreateHomeSection,
   Home,
   Interests,
+  ModifyBlogPost,
   ModifyHomeSection,
   NotFound,
 };

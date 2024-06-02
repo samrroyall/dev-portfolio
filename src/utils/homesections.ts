@@ -130,7 +130,7 @@ export const getHomeSections = async (
   const rows = await db
     .select({
       sectionId: homesections.id,
-      sectionOrder: homesections.order,
+      order: homesections.order,
       sectionTitle: homesections.title,
       entryId: homesectionentries.id,
       entryTitle: homesectionentries.title,
@@ -152,7 +152,7 @@ export const getHomeSections = async (
   rows.forEach((row) => {
     const n = sections.length;
 
-    if (n === 0 || sections[n - 1].order !== row.sectionOrder) {
+    if (n === 0 || sections[n - 1].order !== row.order) {
       sections.push(mapRowToHomeSection(row));
     } else {
       sections[n - 1].entries.push(mapRowToHomeSectionEntry(row));

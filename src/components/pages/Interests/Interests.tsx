@@ -2,7 +2,7 @@ import { musicText, runningText } from "../../../data/api/interests";
 import { type DefaultPageProps } from "../../../models/components";
 import { type RunMonth, type Track } from "../../../models/interests";
 import { BasePage } from "../../pages";
-import { Sections } from "../../shared";
+import { NoData, Sections } from "../../shared";
 import InterestsPageEntry from "./InterestsPageEntry";
 import SpotifyTopTracks from "./SpotifyTopTracks";
 import StravaCalendar from "./StravaCalendar";
@@ -18,10 +18,10 @@ const Interests = async ({
   theme,
 }: InterestsProps): Promise<JSX.Element> => {
   const runs = await stravaData;
-  const stravaContent = runs ? StravaCalendar({ runs }) : null;
+  const stravaContent = runs ? StravaCalendar({ runs }) : <NoData />;
 
   const tracks = await spotifyData;
-  const spotifyContent = tracks ? SpotifyTopTracks({ tracks }) : null;
+  const spotifyContent = tracks ? SpotifyTopTracks({ tracks }) : <NoData />;
 
   const content = [
     {

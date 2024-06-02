@@ -19,6 +19,7 @@
     "@kitajs/html": "^4.1.0",
     "@kitajs/ts-html-plugin": "^4.0.1",
     "@libsql/client": "^0.6.0",
+    "@sentry/bun": "^8.7.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.10",
     "elysia": "latest",

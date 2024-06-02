@@ -6,7 +6,17 @@ interface DbSchema {
   db: LibSQLDatabase;
 }
 
+interface SentrySchema {
+  logger: {
+    debug: (msg: string) => void;
+    info: (msg: string) => void;
+    warn: (msg: string) => void;
+    error: (msg: string, err: any) => void;
+  };
+}
+
 export type HandlerContext<Schema extends RouteSchema = RouteSchema> = Context<
   Schema & CookieSchema
 > &
-  DbSchema;
+  DbSchema &
+  SentrySchema;
