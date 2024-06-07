@@ -1,4 +1,8 @@
-import { musicText, runningText } from "../../../data/api/interests";
+import {
+  generalText,
+  musicText,
+  runningText,
+} from "../../../data/api/interests";
 import { type DefaultPageProps } from "../../../models/components";
 import { type RunMonth, type Track } from "../../../models/interests";
 import { BasePage } from "../../pages";
@@ -24,6 +28,10 @@ const Interests = async ({
   const spotifyContent = tracks ? SpotifyTopTracks({ tracks }) : <NoData />;
 
   const content = [
+    {
+      title: "General",
+      text: generalText,
+    },
     {
       title: "Running",
       text: runningText,
