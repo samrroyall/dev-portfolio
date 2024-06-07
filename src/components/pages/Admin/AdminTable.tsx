@@ -87,7 +87,7 @@ const AdminTable = ({
         </tbody>
       </table>
       {rows.length === 0 ? (
-        <div class="border-secondary-bg dark:border-secondary-bg-dark border-x border-b py-5">
+        <div class="border-secondary-bg dark:border-secondary-bg-dark border-x border-b px-3 py-5">
           <NoData />
         </div>
       ) : null}
