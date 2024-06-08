@@ -8,6 +8,19 @@ primary_region = 'ord'
 
 [build]
 
+[env]
+  ENV = 'production'
+  USE_MOCKS = 'false'
+  MOCK_DELAY_MS = '1000'
+  EMAILJS_PUBLIC_KEY = 'F4NHlOZnjaqWenlOO'
+  EMAILJS_SERVICE_ID = 'service_0jdhlet'
+  EMAILJS_TEMPLATE_ID = 'template_u4cw0v2'
+  RECAPTCHA_VERIFICATION_URL = 'https://www.google.com/recaptcha/api/siteverify'
+  RECAPTCHA_SITE_KEY = '6LeXBMYpAAAAACYwgr6CDbyGy5cM7M2SbWBAxD7o'
+  LOCAL_DB_PATH = 'file:./local.db'
+  COOKIE_EXPIRY_MS = '86400000'
+  VF_API_URL = 'https://dev-portfolio-functions.vercel.app'
+
 [http_service]
   internal_port = 3000
   force_https = true

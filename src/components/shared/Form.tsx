@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { getHxAttrsFromProps } from "../../models/components";
 import { type HtmxAttributes } from "../../types";
 import Button from "./Button";

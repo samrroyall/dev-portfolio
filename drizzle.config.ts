@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { type Config } from "drizzle-kit";
 
 const useMocks = process.env.USE_MOCKS === "true";
