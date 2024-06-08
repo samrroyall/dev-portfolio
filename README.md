@@ -99,11 +99,20 @@ modification, and deletion of blog posts and home page data.
 Before you can the application locally, ensure you have [Bun](https://bun.sh/) 
 installed.
 
+**Optional:**
+
+If you want to run the application with Docker, ensure you have 
+[Docker Desktop](https://www.docker.com/products/docker-desktop/) installed.
+
 ### Environment Variables
 
 Next, copy the `.env.template` file to `.env` and update the values.
 
 ### Run the application
 
-Run `bun run start` to start the application. The app will be available at 
-`http://localhost:3000`.
+Run `bun run start` to start the app. The app will be available at 
+`http://localhost:3000`. To run the app with live reloading while developing, 
+run `bun run dev`.
+
+To run the app with Docker, run `docker-compose up --build` and the app API 
+will be available at `http://localhost:3000`.
