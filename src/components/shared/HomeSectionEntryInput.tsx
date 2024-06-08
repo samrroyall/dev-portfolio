@@ -16,10 +16,14 @@ const HomeSectionEntryInput = ({
 }: CreateNewHomeSectionEntryProps): JSX.Element => {
   const id = randomBytes(8).toString("hex");
 
+  const toggleDeleteModal = `htmx.toggleClass(htmx.find("#delete-entry-${id}-modal"), "hidden");`;
+
+  const hideSectionEntry = `htmx.find("#homesection-entry-${id}").remove();`;
+
   return (
     <div
       id={`homesection-entry-${id}`}
-      class="homesection-entry border-t p-3 first:border-t-0"
+      class="homesection-entry dark:border-secondary-bg-dark border-t p-3 first:border-t-0"
     >
       {entry ? (
         <Input
@@ -30,7 +34,7 @@ const HomeSectionEntryInput = ({
         />
       ) : null}
       <Input label="Entry Title" name="entryTitle" value={entry?.title ?? ""} />
-      <div class="homesection-entry-subtitles my-6 border-y p-4">
+      <div class="homesection-entry-subtitles dark:border-secondary-bg-dark my-6 border-y p-4">
         {entry?.subtitles
           ? entry.subtitles.map((subtitle) => (
               <HomeSectionEntrySubtitleInput subtitle={subtitle} />
@@ -63,7 +67,10 @@ const HomeSectionEntryInput = ({
       <div class="my-4 text-center">
         {entry ? (
           <>
-            <Modal className="delete-entry-modal flex flex-col items-center justify-center">
+            <Modal
+              id={`delete-entry-${id}-modal`}
+              className="flex flex-col items-center justify-center"
+            >
               <p class="mb-3">
                 {"Are you sure you want to delete this home section entry?"}
               </p>
@@ -73,20 +80,20 @@ const HomeSectionEntryInput = ({
                 hx-delete={`/admin/home/entry/${entry.id}`}
                 hx-swap="none"
                 hx-trigger="click"
-                hx-on-click={`htmx.toggleClass(htmx.find("#homesection-entry-${id}", ".delete-entry-modal"), "hidden"); htmx.find("#homesection-entry-${id}").remove()`}
+                hx-on-click={`${toggleDeleteModal} ${hideSectionEntry}`}
               />
             </Modal>
             <IconButton
               icon={"\udb80\uddb4"}
               label="Delete section entry"
-              hx-on-click={`htmx.toggleClass(htmx.find("#homesection-entry-${id}", ".delete-entry-modal"), "hidden");`}
+              hx-on-click={toggleDeleteModal}
             />
           </>
         ) : (
           <IconButton
             icon={"\udb80\uddb4"}
             label="Delete section entry"
-            hx-on-click={`htmx.find("#homesection-entry-${id}").remove();`}
+            hx-on-click={hideSectionEntry}
           />
         )}
       </div>

@@ -46,14 +46,14 @@ const Admin = async ({
                   createHref="/admin/blog/new"
                   deleteHref={(id: number) => `/admin/blog/${id}`}
                   editHref={(id: number) => `/admin/blog/${id}`}
-                  rows={(await blogData).map(
-                    ({ id, title, createdAt, lastModifiedAt }) => ({
+                  rows={(await blogData)
+                    .map(({ id, title, createdAt, lastModifiedAt }) => ({
                       id,
                       title,
                       createdAt,
                       lastModifiedAt,
-                    }),
-                  )}
+                    }))
+                    .reverse()}
                 />
               </div>,
             ],

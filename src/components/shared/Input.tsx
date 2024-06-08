@@ -9,33 +9,20 @@ type InputType =
   | "text"
   | "textarea";
 
-const standardBorderClasses =
-  "border border-secondary-text dark:border-secondary-text-dark rounded";
+const fieldClasses = `
+  my-3 p-1 *:bg-primary-bg *:dark:bg-primary-bg-dark border rounded
+  border-secondary-text dark:border-secondary-text-dark has-[:focus]:ring-1 
+  has-[:focus]:outline-none has-[:focus]:ring-secondary-text 
+  has-[:focus]:dark:ring-secondary-text has-[:invalid]:border-error-text 
+  has-[:invalid]:ring-error-text has-[:focus:invalid]:ring-error-text
+  *:text-secondary-text dark:*:text-secondary-text-dark
+`;
 
-const focusBorderClasses =
-  "has-[:focus]:outline-none has-[:focus]:ring-1 has-[:focus]:ring-secondary-text has-[:focus]:dark:ring-secondary-text";
-
-const invalidBorderClasses =
-  "has-[:invalid]:border-error-text has-[:invalid]:ring-error-text has-[:focus:invalid]:ring-error-text";
-
-const bgClasses = "*:bg-primary-bg *:dark:bg-primary-bg-dark";
-
-const borderClasses = `${standardBorderClasses} ${focusBorderClasses} ${invalidBorderClasses}`;
-
-const textClasses = "*:text-secondary-text dark:*:text-secondary-text-dark";
-
-const fieldClasses = `my-3 p-1 ${bgClasses} ${borderClasses} ${textClasses}`;
-
-const noBorderClasses = `border-0 ring-0 outline-none`;
-
-const placeholderClasses = `placeholder-primary-text dark:placeholder-primary-text-dark text`;
-
-const disabledClasses =
-  "disabled:text-secondary-bg disabled:dark:text-secondary-bg-dark";
-
-const inputClasses = `bg-transparent w-full p-1 ${noBorderClasses} ${placeholderClasses} ${disabledClasses}`;
-
-const legendClasses = "px-1 text-sm";
+const baseInputClasses = `
+  bg-transparent w-full p-1 border-0 ring-0 outline-none 
+  placeholder-primary-text dark:placeholder-primary-text-dark 
+  disabled:text-secondary-bg disabled:dark:text-secondary-bg-dark
+`;
 
 const requiredClasses = "after:content-['*'] after:ml-1 after:text-error-text";
 
@@ -102,23 +89,22 @@ const Input = (props: InputProps): JSX.Element => {
 
   const hiddenClasses = type === "hidden" ? "hidden" : "";
 
+  const inputClasses = `${baseInputClasses} ${className ?? ""}`;
+
+  const textareaClasses = `h-[15rem] ${baseInputClasses} ${noResize ? "resize-none" : ""} ${className ?? ""}`;
+
   return (
     <fieldset class={`${fieldClasses} ${bottomLegendClasses} ${hiddenClasses}`}>
-      <legend class={`${legendClasses} ${required ? requiredClasses : ""}`}>
+      <legend class={`px-1 text-sm ${required ? requiredClasses : ""}`}>
         {label}
       </legend>
       {type === "textarea" ? (
-        <textarea
-          class={`h-[15rem] ${inputClasses} ${noResize ? "resize-none" : ""} ${className ?? ""}`}
-          name={name}
-          {...attrs}
-          {...hxAttrs}
-        >
+        <textarea class={textareaClasses} name={name} {...attrs} {...hxAttrs}>
           {value ?? ""}
         </textarea>
       ) : (
         <input
-          class={`${inputClasses} ${className ?? ""}`}
+          class={`${inputClasses} `}
           type={type ?? "text"}
           name={name}
           value={value ?? ""}
@@ -128,7 +114,7 @@ const Input = (props: InputProps): JSX.Element => {
         />
       )}
       {maxlength !== undefined ? (
-        <legend class={`${legendClasses} absolute -bottom-2.5 right-[4px]`}>
+        <legend class={`absolute -bottom-2.5 right-[4px] px-1 text-sm`}>
           <span id={textareaLengthId}>0</span>/{maxlength}
         </legend>
       ) : null}

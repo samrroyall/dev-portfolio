@@ -46,7 +46,7 @@ const StravaDayDetail = ({
         >
           <Icon icon={"\udb80\udc4d"} className={arrowClasses} />
         </div>
-        <div class="font-geist-mono flex flex-auto flex-col justify-center px-8 ">
+        <div class="font-geist-mono flex flex-auto flex-col justify-center px-8">
           {
             <div class="flex flex-col">
               <span>{"DISTANCE"}</span>

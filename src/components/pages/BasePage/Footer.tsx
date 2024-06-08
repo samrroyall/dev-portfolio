@@ -2,13 +2,17 @@ import { type Cookie } from "elysia";
 import { Heading, Icon, Link } from "../../shared";
 import Nav from "./Nav";
 
-const footerNavColorClasses =
-  "border-secondary-text dark:border-secondary-text-dark bg-primary-bg dark:bg-primary-bg-dark";
+const borderSecondaryText =
+  "border-secondary-text dark:border-secondary-text-dark";
 
-const footerNavPositionClasses =
-  "absolute flex hidden w-full items-end justify-between border-b";
+const textSecondary = "text-secondary-text dark:text-secondary-text-dark";
 
-const footerNavClasses = `${footerNavPositionClasses} ${footerNavColorClasses}`;
+const footerNavClasses = `
+  absolute flex hidden w-full items-end justify-between border-b bg-primary-bg 
+  dark:bg-primary-bg-dark ${borderSecondaryText}
+`;
+
+const iconItemClasses = "mx-1 leading-6 first:ml-0 last:mr-0 max-sm:leading-7";
 
 const githubIcon = (
   <Icon icon={"\uf113"} link={"https://github.com/samrroyall"} />
@@ -68,31 +72,33 @@ const Footer = ({
   const icons = [
     {
       icon: linkedInIcon,
-      inMobileDropdown: true,
+      moveToMobileDropdown: true,
     },
     {
       icon: githubIcon,
-      inMobileDropdown: true,
+      moveToMobileDropdown: true,
     },
     {
       icon: themeButton,
-      inMobileDropdown: false,
+      moveToMobileDropdown: false,
     },
   ];
 
   return (
-    <footer class="w-full text-xl max-sm:text-2xl xl:text-2xl">
+    <footer
+      class={`w-full text-xl max-sm:text-2xl xl:text-2xl ${textSecondary}`}
+    >
       <hr
-        class={`border-secondary-text dark:border-secondary-text-dark ${mobileNav ? "hidden" : "max-lg:hidden"}`}
+        class={`${borderSecondaryText} ${mobileNav ? "" : "max-lg:"}hidden`}
       />
       <div class="relative flex items-center justify-between p-2">
         <button
-          class={`text-secondary-text dark:text-secondary-text-dark cursor-pointer ${!mobileNav ? "lg:hidden" : ""}`}
+          class={`cursor-pointer ${!mobileNav ? "lg:hidden" : ""}`}
           hx-on-click={`htmx.toggleClass("#footer-nav", "hidden")`}
         >
           {menuIcon}
         </button>
-        <Link href="/" noUnderline={true}>
+        <Link href="/" noUnderline={true} target="_self">
           <Heading
             variant={3}
             text="Sam Royall"
@@ -100,32 +106,32 @@ const Footer = ({
           />
         </Link>
         <ul
-          class={`text-secondary-text dark:text-secondary-text-dark flex items-center justify-end ${!mobileNav ? "lg:ml-auto" : ""}`}
+          class={`flex items-center justify-end ${!mobileNav ? "lg:ml-auto" : ""}`}
         >
-          {icons.map(({ icon, inMobileDropdown }) => (
-            <li
-              class={`mx-1 first:ml-0 last:mr-0 ${inMobileDropdown && mobileNav ? "hidden" : "max-lg:hidden"}`}
-            >
-              {icon}
-            </li>
-          ))}
+          {icons.map(({ icon, moveToMobileDropdown }) =>
+            moveToMobileDropdown ? (
+              <li
+                class={`${iconItemClasses} ${mobileNav ? "" : "max-lg:"}hidden`}
+              >
+                {icon}
+              </li>
+            ) : (
+              <li class={iconItemClasses}>{icon}</li>
+            ),
+          )}
         </ul>
       </div>
       <div id="footer-nav" class={footerNavClasses}>
         <Nav admin={admin} current={current} mobileNav={mobileNav} />
-        <ul class="text-secondary-text dark:text-secondary-text-dark flex items-center pb-3 pr-3">
-          {icons.map(({ icon, inMobileDropdown }) => (
-            <li
-              class={`mx-1 leading-6 first:ml-0 last:mr-0 max-sm:leading-7 ${!inMobileDropdown ? "hidden" : ""}`}
-            >
-              {icon}
-            </li>
-          ))}
+        <ul class="flex items-center pb-3 pr-3">
+          {icons
+            .filter(({ moveToMobileDropdown }) => moveToMobileDropdown)
+            .map(({ icon }) => (
+              <li class={iconItemClasses}>{icon}</li>
+            ))}
         </ul>
       </div>
-      <hr
-        class={`border-secondary-text dark:border-secondary-text-dark ${!mobileNav ? "lg:hidden" : ""}`}
-      />
+      <hr class={`${borderSecondaryText} ${!mobileNav ? "lg:hidden" : ""}`} />
       <script>{optimisticallyUpdateTheme}</script>
     </footer>
   );

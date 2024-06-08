@@ -95,7 +95,10 @@ const HomeSectionForm = ({
             value={section.order.toString()}
           />
         ) : null}
-        <div id="homesection-entries" class="my-4 border-y p-4">
+        <div
+          id="homesection-entries"
+          class="dark:border-secondary-bg-dark my-4 border-y p-4"
+        >
           {section?.entries
             ? section.entries.map((entry) => (
                 <HomeSectionEntryInput entry={entry} />
