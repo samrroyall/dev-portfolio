@@ -11,14 +11,14 @@ import {
   ModifyBlogPost,
   ModifyHomeSection,
   NotFound,
-} from "./components/pages";
+} from "../components/pages";
 import {
   BlogPostPreview,
   HomeSectionEntryInput,
   HomeSectionEntrySubtitleInput,
-} from "./components/shared";
-import { getSpotifyData, getStravaData } from "./data/api/interests";
-import { type HandlerContext } from "./models/handlers";
+} from "../components/shared";
+import { getSpotifyData, getStravaData } from "../data/api/interests";
+import { type HandlerContext } from "../models/handlers";
 import {
   type AuthenticateSchema,
   type BlogPostPageSchema,
@@ -38,7 +38,7 @@ import {
   type PreviewBlogPostSchema,
   type SendEmailSchema,
   type ToggleThemeSchema,
-} from "./models/routes";
+} from "../models/routes";
 import {
   createBlogPost,
   createHomeSection,
@@ -56,7 +56,7 @@ import {
   modifyHomeSection,
   sendEmail,
   verifyRecaptcha,
-} from "./utils";
+} from "../utils";
 
 export const authenticateHandler = async ({
   body,

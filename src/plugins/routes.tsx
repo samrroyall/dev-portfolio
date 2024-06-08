@@ -1,5 +1,24 @@
 import { Elysia } from "elysia";
 import {
+  authenticateSchema,
+  blogPostPageSchema,
+  contactPageSchema,
+  createBlogPostPageSchema,
+  createBlogPostSchema,
+  createHomeSectionSchema,
+  deleteBlogPostSchema,
+  deleteHomeSectionEntrySchema,
+  deleteHomeSectionSchema,
+  loginPageSchema,
+  modifyBlogPostPageSchema,
+  modifyBlogPostSchema,
+  modifyHomeSectionPageSchema,
+  modifyHomeSectionSchema,
+  previewBlogPostSchema,
+  sendEmailSchema,
+  toggleThemeSchema,
+} from "../models/routes";
+import {
   adminPageHandler,
   authenticateHandler,
   blogPageHandler,
@@ -26,25 +45,6 @@ import {
   sendEmailHandler,
   toggleThemeHandler,
 } from "./handlers";
-import {
-  authenticateSchema,
-  blogPostPageSchema,
-  contactPageSchema,
-  createBlogPostPageSchema,
-  createBlogPostSchema,
-  createHomeSectionSchema,
-  deleteBlogPostSchema,
-  deleteHomeSectionEntrySchema,
-  deleteHomeSectionSchema,
-  loginPageSchema,
-  modifyBlogPostPageSchema,
-  modifyBlogPostSchema,
-  modifyHomeSectionPageSchema,
-  modifyHomeSectionSchema,
-  previewBlogPostSchema,
-  sendEmailSchema,
-  toggleThemeSchema,
-} from "./models/routes";
 
 export const publicRoutes = new Elysia()
   .get("/404", notFoundPageHandler)

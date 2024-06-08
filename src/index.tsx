@@ -2,10 +2,8 @@ import "dotenv/config";
 import { html } from "@elysiajs/html";
 import { staticPlugin } from "@elysiajs/static";
 import { Elysia } from "elysia";
-import db from "./db";
 import { cookieSchema } from "./models/routes";
-import { adminRoutes, publicRoutes } from "./routes";
-import sentry from "./sentry";
+import { adminRoutes, db, publicRoutes, sentry } from "./plugins";
 import { validateSession } from "./utils";
 
 if (!process.env.COOKIE_SECRET) {
