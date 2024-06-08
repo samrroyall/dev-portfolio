@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { type RunMonth } from "../../../models/interests";
 import { getMockStravaData } from "../../mocks/interests";
 
