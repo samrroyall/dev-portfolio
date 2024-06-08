@@ -14,7 +14,7 @@ const HomeSectionEntrySubtitleInput = ({
   return (
     <div
       id={`homesection-entry-subtitle-${id}`}
-      class="homesection-entry-subtitle my-4 border-t px-3 first:border-t-0"
+      class="homesection-entry-subtitle dark:border-secondary-bg-dark my-4 border-t px-3 first:border-t-0"
     >
       <div class="flex gap-x-2 *:w-full">
         <Input

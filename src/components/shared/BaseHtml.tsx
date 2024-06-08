@@ -47,6 +47,15 @@ const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
       <head>
         <meta charset="UTF-8" />
         <meta
+          name="description"
+          content="Sam Royall's personal software engineering portfolio"
+        />
+        <meta
+          name="keywords"
+          content="Sam Royall, Software Engineer, Portfolio, Minimalist"
+        />
+        <meta name="author" content="Sam Royall" />
+        <meta
           name="viewport"
           content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
         />
@@ -86,6 +95,37 @@ const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
           integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
           crossorigin="anonymous"
         />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/public/icons/favicon-16x16.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/public/icons/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="192x192"
+          href="/public/icons/android-chrome-192x192.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="512x512"
+          href="/public/icons/android-chrome-512x512.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/public/icons/apple-touch-icon.png"
+        />
+        <link rel="shortcut icon" href="/public/icons/favicon.ico" />
+        <link rel="manifest" href="/public/icons/site.webmanifest" />
       </head>
       <body>{children}</body>
     </html>

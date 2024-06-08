@@ -2,7 +2,7 @@ import { Markdown, NoData, TextDivider } from "../../shared";
 
 interface InterestsPageEntryProps {
   index: number;
-  content: JSX.Element | null;
+  content?: JSX.Element | null;
   text: string;
 }
 
@@ -21,13 +21,13 @@ const InterestsPageEntry = ({
         <div class={`py-6 max-lg:text-center lg:p${even ? "r" : "l"}-6`}>
           <Markdown text={text} />
         </div>
-        {content ? (
+        {!!content ? (
           content
-        ) : (
+        ) : content === null ? (
           <NoData
             className={`w-[350px] justify-center lg:mt-9 lg:justify-${even ? "end" : "start"}`}
           />
-        )}
+        ) : null}
       </div>
       <TextDivider className="group-last/interestsection:hidden" />
     </div>

@@ -1,19 +1,21 @@
 import { type HomeSectionEntryData } from "../../../models/home";
 import { Heading, Link, Markdown, TextDivider } from "../../shared";
 
+const textSecondary = "text-secondary-text dark:text-secondary-text-dark";
+
 export interface HomeSectionEntryProps {
   entry: HomeSectionEntryData;
 }
 
 const HomeSectionEntry = ({ entry }: HomeSectionEntryProps): JSX.Element => {
   const entryHeader = (
-    <div class="text-secondary-text dark:text-secondary-text-dark mb-3">
+    <div class={`mb-3 ${textSecondary}`}>
       {entry.titleLink ? (
         <Link href={entry.titleLink} arrow={true}>
           <Heading
             variant={4}
             text={entry.title}
-            className="text-secondary-text dark:text-secondary-text-dark underline"
+            className={`underline ${textSecondary}`}
             inline={true}
           />
         </Link>
@@ -21,7 +23,7 @@ const HomeSectionEntry = ({ entry }: HomeSectionEntryProps): JSX.Element => {
         <Heading
           variant={4}
           text={entry.title}
-          className="text-secondary-text dark:text-secondary-text-dark"
+          className={textSecondary}
           inline={true}
         />
       )}

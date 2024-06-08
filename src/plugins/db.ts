@@ -1,7 +1,7 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { Elysia } from "elysia";
-import config from "../drizzle.config";
+import config from "../../drizzle.config";
 
 const client = createClient(config.dbCredentials);
 

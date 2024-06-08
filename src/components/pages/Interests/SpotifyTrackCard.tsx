@@ -1,9 +1,11 @@
 import { type Track } from "../../../models/interests";
 import { Icon, Link } from "../../shared";
 
+const textSecondary = "text-secondary-text dark:text-secondary-text-dark";
+
 const arrowClasses = `
-  text-secondary-text dark:text-secondary-text-dark text-xl
-  hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
+  ${textSecondary} hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
+  text-xl 
 `;
 
 const imageSize = 300;
@@ -50,7 +52,7 @@ const SpotifyTrackCard = ({
       </div>
       <div class="ml-8 mt-2">
         <Link href={track.url}>
-          <span class="text-secondary-text dark:text-secondary-text-dark text-lg font-semibold">
+          <span class={`text-lg font-semibold ${textSecondary}`}>
             {track.name}
           </span>
         </Link>
