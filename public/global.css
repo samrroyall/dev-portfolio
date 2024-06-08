@@ -1,0 +1,136 @@
+/* FONTS */
+
+@font-face {
+  font-family: SymbolsNerdFont;
+  src: url("fonts/SymbolsNerdFont-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: GeistSans;
+  src: url("fonts/GeistVF.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: GeistMono;
+  src: url("fonts/GeistMonoVF.ttf") format("truetype");
+}
+
+/* VARIABLES */
+
+:root {
+  --primary-bg: rgb(250 250 250);
+  --secondary-bg: rgb(214 211 209);
+  --tertiary-bg: rgb(168 162 158);
+  --code-bg: rgb(26 27 38);
+  --primary-bg-dark: rgb(9 9 11);
+  --secondary-bg-dark: rgb(39 39 42);
+  --tertiary-bg-dark: rgb(23 23 23);
+  --code-bg-dark: rgb(24 24 27);
+  --primary-text: rgb(115 115 115);
+  --secondary-text: rgb(38 38 38);
+  --tertiary-text: rgb(23 23 23);
+  --primary-text-dark: rgb(168 162 158);
+  --secondary-text-dark: rgb(214 211 209);
+  --tertiary-text-dark: rgb(231 229 228);
+  --code-text: rgb(231 229 228);
+  --error-text: rgb(248 113 113);
+  --strava-orange: rgb(252 82 0);
+  --strava-orange-light: rgb(252 99 25);
+}
+
+/* FONT CLASSES */
+
+.font-symbols,
+.font-symbols * {
+  font-family: SymbolsNerdFont !important;
+}
+
+.font-geist-sans .font-geist-sans * {
+  font-family: GeistSans !important;
+}
+
+/* Set GeistSans as the default font */
+* {
+  font-family: GeistSans;
+}
+
+.font-geist-mono,
+.font-geist-mono * {
+  font-family: GeistMono !important;
+}
+
+/* KATEX */
+
+.katex * {
+  font-family: "Times New Roman", Times, serif;
+}
+
+html:not(.dark) .katex {
+  color: var(--secondary-text);
+}
+
+html.dark .katex {
+  color: var(--secondary-text-dark);
+}
+
+/* TEXT SELECTION */
+
+html:not(.dark) *::selection {
+  background: var(--tertiary-text);
+  color: var(--primary-bg);
+}
+
+html.dark *::selection {
+  background: var(--tertiary-text-dark);
+  color: var(--primary-bg-dark);
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-track {
+  margin: 5px 0 5px 10px;
+  background-color: var(--tertiary-bg);
+  border-radius: 5px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  margin: 5px 0 5px 10px;
+  background-color: var(--tertiary-bg-dark);
+  border-radius: 5px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-text);
+  border-radius: 5px;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-text-dark);
+  border-radius: 5px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary-text);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary-text-dark);
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:active {
+  background-color: black;
+}
+
+html.dark ::-webkit-scrollbar-thumb:active {
+  background-color: white;
+}
+
+/* GRECAPTCHA */
+
+.grecaptcha-badge {
+  display: none;
+}
