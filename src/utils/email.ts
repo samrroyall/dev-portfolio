@@ -1,3 +1,4 @@
+import "dotenv/config";
 import emailjs, { type EmailJSResponseStatus } from "@emailjs/nodejs";
 
 export const sendEmail = async (

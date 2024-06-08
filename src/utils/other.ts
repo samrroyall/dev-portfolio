@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 export const getLowercaseCharAt = (i: number): string | null =>
   i >= 0 && i <= 25
     ? String.fromCharCode("a".charCodeAt(0) + i)

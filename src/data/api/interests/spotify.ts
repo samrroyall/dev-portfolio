@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { type Track } from "../../../models/interests";
 import { getMockSpotifyData } from "../../mocks/interests";
 

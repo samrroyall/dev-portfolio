@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { randomBytes } from "crypto";
 import { and, eq, gt, lt } from "drizzle-orm";
 import { type LibSQLDatabase } from "drizzle-orm/libsql";
