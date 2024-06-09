@@ -126,7 +126,7 @@ const Footer = ({
   );
 
   return (
-    <footer class={`max-xs:text-3xl w-full text-2xl ${textSecondary}`}>
+    <footer class={`w-full text-2xl max-sm:text-3xl ${textSecondary}`}>
       <hr
         class={`${borderSecondaryText} ${mobileNav ? "" : "max-lg:"}hidden`}
       />
