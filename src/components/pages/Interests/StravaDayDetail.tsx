@@ -1,8 +1,8 @@
 import { Icon } from "../../shared";
 
 const arrowClasses = `
-  text-secondary-text dark:text-secondary-text-dark cursor-pointer text-xl
-  hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
+  text-secondary-text dark:text-secondary-text-dark cursor-pointer text-2xl
+  max-sm:text-3xl hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
 `;
 
 const bgClasses = "bg-primary-bg dark:bg-primary-bg-dark";
