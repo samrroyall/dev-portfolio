@@ -21,7 +21,7 @@ const CreateBlogPost = ({
       theme={theme}
       title="Create Blog Post"
     >
-      <NoMobile className="my-6 justify-center sm:hidden" />
+      <NoMobile className="mt-8 justify-center sm:hidden" />
       <BlogPostForm
         id="create-blog-post-form"
         action={`/admin/blog/new`}

@@ -2,7 +2,7 @@ import { type BlogPost } from "../pages";
 import { BlogPostPreview, Form, Icon, Input } from "../shared";
 
 const previewWindowClasses = `
-  hidden h-[79vh] w-[640px] py-3 px-2 rounded overflow-y-scroll border 
+  hidden h-[76.5vh] w-[640px] py-3 px-2 rounded overflow-y-scroll border 
   border-secondary-text dark:border-secondary-text-dark
 `;
 

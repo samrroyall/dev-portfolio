@@ -88,7 +88,7 @@ const AdminTable = ({
       </table>
       {rows.length === 0 ? (
         <div class="border-secondary-bg dark:border-secondary-bg-dark border-x border-b px-3 py-5">
-          <NoData />
+          <NoData className="justify-center" />
         </div>
       ) : null}
       <div class="border-secondary-bg dark:border-secondary-bg-dark border-x border-b  p-3">
