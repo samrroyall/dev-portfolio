@@ -5,10 +5,10 @@ const textSecondary = "text-secondary-text dark:text-secondary-text-dark";
 
 const arrowClasses = `
   ${textSecondary} hover:text-tertiary-text hover:dark:text-tertiary-text-dark 
-  text-xl 
+  max-sm:text-3xl text-2xl 
 `;
 
-const imageSize = 300;
+const imageSize = 275;
 
 interface SpotifyTrackCardProps {
   id: number;
@@ -31,7 +31,7 @@ const SpotifyTrackCard = ({
     <div class="mx-3">
       <div class="flex items-center">
         <button
-          class="mr-4"
+          class="mx-4"
           hx-on-click={`${toggleCard(id)}; ${toggleCard(prevId)};`}
         >
           <Icon icon={"\udb80\udc4d"} className={arrowClasses} />
@@ -44,13 +44,13 @@ const SpotifyTrackCard = ({
           />
         </div>
         <button
-          class="ml-4"
+          class="mx-4"
           hx-on-click={`${toggleCard(id)}; ${toggleCard(nextId)};`}
         >
           <Icon icon={"\udb80\udc54"} className={arrowClasses} />
         </button>
       </div>
-      <div class="ml-8 mt-2">
+      <div class="ml-12 mt-2">
         <Link href={track.url}>
           <span class={`text-lg font-semibold ${textSecondary}`}>
             {track.name}
