@@ -7,6 +7,11 @@ import {
   Modal,
 } from "../shared";
 
+const homeSectionEntryClasses = `
+  homesection-entry border-secondary-text dark:border-secondary-text-dark mt-3
+  rounded border p-4 first:mt-0
+`;
+
 interface CreateNewHomeSectionEntryProps {
   entry?: HomeSectionEntryData;
 }
@@ -21,10 +26,7 @@ const HomeSectionEntryInput = ({
   const hideSectionEntry = `htmx.find("#homesection-entry-${id}").remove();`;
 
   return (
-    <div
-      id={`homesection-entry-${id}`}
-      class="homesection-entry dark:border-secondary-bg-dark border-t p-3 first:border-t-0"
-    >
+    <div id={`homesection-entry-${id}`} class={homeSectionEntryClasses}>
       {entry ? (
         <Input
           label="Entry ID"
@@ -34,7 +36,7 @@ const HomeSectionEntryInput = ({
         />
       ) : null}
       <Input label="Entry Title" name="entryTitle" value={entry?.title ?? ""} />
-      <div class="homesection-entry-subtitles dark:border-secondary-bg-dark my-6 border-y p-4">
+      <div class="homesection-entry-subtitles py-4">
         {entry?.subtitles
           ? entry.subtitles.map((subtitle) => (
               <HomeSectionEntrySubtitleInput subtitle={subtitle} />

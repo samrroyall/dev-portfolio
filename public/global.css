@@ -18,7 +18,7 @@
 /* VARIABLES */
 
 :root {
-  --primary-bg: rgb(250 250 250);
+  --primary-bg: rgb(255 255 255);
   --secondary-bg: rgb(214 211 209);
   --tertiary-bg: rgb(168 162 158);
   --code-bg: rgb(26 27 38);
@@ -133,4 +133,19 @@ html.dark ::-webkit-scrollbar-thumb:active {
 
 .grecaptcha-badge {
   display: none;
+}
+
+/* MOBILE SIZING */
+
+html,
+body {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  padding-bottom: env(safe-area-inset-bottom);
+  overflow-y: hidden;
+}
+
+
+* {
+  touch-action: manipulation;
 }

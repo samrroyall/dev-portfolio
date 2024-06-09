@@ -31,7 +31,7 @@ const Admin = async ({
     theme={theme}
     title="Admin Panel"
   >
-    <NoMobile className="my-6 justify-center sm:hidden" />
+    <NoMobile className="mt-8 justify-center sm:hidden" />
     <div class="max-sm:hidden">
       <script>{reloadPageAfterDelete}</script>
       <Sections

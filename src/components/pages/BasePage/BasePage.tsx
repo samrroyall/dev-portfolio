@@ -30,16 +30,20 @@ const BasePage = ({
 
   return (
     <BaseHtml theme={theme} title={title}>
-      <main class="relative">
+      <main class="relative h-full">
         <div
           class={`absolute left-0 top-0 px-5 py-4 ${mobileNav ? "hidden" : "max-lg:hidden"}`}
         >
-          <Nav admin={admin ?? false} current={current} />
+          <Nav
+            admin={admin ?? false}
+            mobileNav={mobileNav ?? false}
+            current={current}
+          />
         </div>
         <div
-          class={`flex h-screen w-full flex-col lg:justify-between ${contentSizeClasses}`}
+          class={`flex h-full w-full flex-col lg:justify-between ${contentSizeClasses}`}
         >
-          <div class="h-full overflow-y-auto overflow-x-hidden px-3 pb-6 pt-3 max-sm:pb-20">
+          <div class="h-full overflow-y-auto overflow-x-hidden p-3">
             {pageTitle !== false && title ? (
               <PageTitle
                 admin={admin}

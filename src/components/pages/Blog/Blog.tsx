@@ -20,7 +20,7 @@ const Blog = async ({ data, theme }: BlogProps): Promise<JSX.Element> => {
     <BasePage current="blog" theme={theme} title="Blog">
       <SectionDivider />
       {posts.length === 0 ? (
-        <NoData />
+        <NoData className="my-3 justify-center" />
       ) : (
         <div class={cardContainerClasses}>
           {posts.map((post, i) => (

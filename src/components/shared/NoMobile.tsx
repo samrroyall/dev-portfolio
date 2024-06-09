@@ -6,10 +6,10 @@ interface NoMobileProps {
 
 const NoMobile = ({ className }: NoMobileProps): JSX.Element => (
   <div
-    class={`text-secondary-text dark:text-secondary-text-dark flex ${className ?? ""}`}
+    class={`text-secondary-text dark:text-secondary-text-dark flex items-center ${className ?? ""}`}
   >
-    <Icon icon={"\udb82\udd50"} />
-    <span class="ml-2">{"This page is not supported on mobile"}</span>
+    <Icon icon={"\udb82\udd50"} className="text-xl" />
+    <span class="ml-2 text-lg">{"This page is not supported on mobile"}</span>
   </div>
 );
 
