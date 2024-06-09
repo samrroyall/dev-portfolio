@@ -2,6 +2,11 @@ import { randomBytes } from "crypto";
 import { type HomeSectionEntrySubtitle } from "../../models/home";
 import { IconButton, Input } from "../shared";
 
+const homeSectionEntrySubtitleClasses = `
+  homesection-entry-subtitle mt-4 rounded border p-4 first:mt-0
+  border-secondary-text dark:border-secondary-text-dark 
+`;
+
 interface CreateNewHomeSectionEntrySubtitleProps {
   subtitle?: HomeSectionEntrySubtitle;
 }
@@ -14,7 +19,7 @@ const HomeSectionEntrySubtitleInput = ({
   return (
     <div
       id={`homesection-entry-subtitle-${id}`}
-      class="homesection-entry-subtitle dark:border-secondary-bg-dark my-4 border-t px-3 first:border-t-0"
+      class={homeSectionEntrySubtitleClasses}
     >
       <div class="flex gap-x-2 *:w-full">
         <Input

@@ -14,7 +14,7 @@ const Home = async ({ data, theme }: HomeProps): Promise<JSX.Element> => {
   return (
     <BasePage current="home" theme={theme} title="Home">
       {sections.length === 0 ? (
-        <NoData />
+        <NoData className="my-3 justify-center" />
       ) : (
         <Sections
           sectionNum="00"

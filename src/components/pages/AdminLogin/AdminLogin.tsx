@@ -20,7 +20,7 @@ const AdminLogin = ({
   return (
     <BasePage theme={theme} title="Admin Login">
       <SectionDivider />
-      <NoMobile className="my-6 justify-center sm:hidden" />
+      <NoMobile className="mt-8 justify-center sm:hidden" />
       <div class="mx-auto mb-6 mt-3 max-w-screen-sm max-sm:hidden">
         <Form
           id="admin-form"

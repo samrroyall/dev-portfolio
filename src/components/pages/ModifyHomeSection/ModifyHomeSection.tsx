@@ -33,7 +33,7 @@ const ModifyHomeSection = async ({
       theme={theme}
       title="Modify Home Section"
     >
-      <NoMobile className="my-6 justify-center sm:hidden" />
+      <NoMobile className="mt-8 justify-center sm:hidden" />
       <div class="mx-auto mb-6 mt-3 max-w-screen-sm max-sm:hidden">
         <HomeSectionForm
           id="update-home-section-form"

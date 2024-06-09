@@ -27,7 +27,7 @@ const ModifyBlogPost = async ({
       theme={theme}
       title="Modify Blog Post"
     >
-      <NoMobile className="my-6 justify-center sm:hidden" />
+      <NoMobile className="mt-8 justify-center sm:hidden" />
       <BlogPostForm
         id="update-blog-post-form"
         action={`/admin/blog/${post.id}`}

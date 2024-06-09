@@ -69,6 +69,15 @@ const Footer = ({
     </button>
   );
 
+  const menuButton = (
+    <button
+      class={`cursor-pointer ${!mobileNav ? "lg:hidden" : ""}`}
+      hx-on-click={`htmx.toggleClass("#mobile-dropdown", "hidden")`}
+    >
+      {menuIcon}
+    </button>
+  );
+
   const icons = [
     {
       icon: linkedInIcon,
@@ -84,44 +93,9 @@ const Footer = ({
     },
   ];
 
-  return (
-    <footer
-      class={`w-full text-xl max-sm:text-2xl xl:text-2xl ${textSecondary}`}
-    >
-      <hr
-        class={`${borderSecondaryText} ${mobileNav ? "" : "max-lg:"}hidden`}
-      />
-      <div class="relative flex items-center justify-between p-2">
-        <button
-          class={`cursor-pointer ${!mobileNav ? "lg:hidden" : ""}`}
-          hx-on-click={`htmx.toggleClass("#footer-nav", "hidden")`}
-        >
-          {menuIcon}
-        </button>
-        <Link href="/" noUnderline={true} target="_self">
-          <Heading
-            variant={3}
-            text="Sam Royall"
-            className={!mobileNav ? "lg:hidden" : ""}
-          />
-        </Link>
-        <ul
-          class={`flex items-center justify-end ${!mobileNav ? "lg:ml-auto" : ""}`}
-        >
-          {icons.map(({ icon, moveToMobileDropdown }) =>
-            moveToMobileDropdown ? (
-              <li
-                class={`${iconItemClasses} ${mobileNav ? "" : "max-lg:"}hidden`}
-              >
-                {icon}
-              </li>
-            ) : (
-              <li class={iconItemClasses}>{icon}</li>
-            ),
-          )}
-        </ul>
-      </div>
-      <div id="footer-nav" class={footerNavClasses}>
+  const mobileDropdown = (
+    <>
+      <div id="mobile-dropdown" class={footerNavClasses}>
         <Nav admin={admin} current={current} mobileNav={mobileNav} />
         <ul class="flex items-center pb-3 pr-3">
           {icons
@@ -132,6 +106,42 @@ const Footer = ({
         </ul>
       </div>
       <hr class={`${borderSecondaryText} ${!mobileNav ? "lg:hidden" : ""}`} />
+    </>
+  );
+
+  const footerIcons = (
+    <ul
+      class={`flex items-center justify-end ${!mobileNav ? "lg:ml-auto" : ""}`}
+    >
+      {icons.map(({ icon, moveToMobileDropdown }) =>
+        moveToMobileDropdown ? (
+          <li class={`${iconItemClasses} ${mobileNav ? "" : "max-lg:"}hidden`}>
+            {icon}
+          </li>
+        ) : (
+          <li class={iconItemClasses}>{icon}</li>
+        ),
+      )}
+    </ul>
+  );
+
+  return (
+    <footer class={`max-xs:text-3xl w-full text-2xl ${textSecondary}`}>
+      <hr
+        class={`${borderSecondaryText} ${mobileNav ? "" : "max-lg:"}hidden`}
+      />
+      <div class="relative flex items-center justify-between p-2">
+        {menuButton}
+        <Link href="/" noUnderline={true} target="_self">
+          <Heading
+            variant={3}
+            text="Sam Royall"
+            className={!mobileNav ? "lg:hidden" : ""}
+          />
+        </Link>
+        {footerIcons}
+      </div>
+      {mobileDropdown}
       <script>{optimisticallyUpdateTheme}</script>
     </footer>
   );

@@ -2,8 +2,8 @@ import { adminNavRoutes, navRoutes } from "../../../models/routes";
 import { Heading, Icon, Link } from "../../shared";
 
 const navClasses = `
-  pb-3 pl-1 text-lg max-lg:pl-3 max-sm:text-xl bg-primary-bg 
-  dark:bg-primary-bg-dark text-secondary-text dark:text-secondary-text-dark
+  pb-3 pl-1 text-lg max-lg:pl-3 max-sm: bg-primary-bg dark:bg-primary-bg-dark 
+  text-secondary-text dark:text-secondary-text-dark
 `;
 
 const circleIcon = <Icon icon={"\uebb4"} />;
@@ -29,7 +29,9 @@ const Nav = ({ admin, current, mobileNav }: NavProps): JSX.Element => {
       />
       <ul>
         {routes.map(({ label, link }, i) => (
-          <li class="flex h-5 items-end max-sm:h-7">
+          <li
+            class={`flex h-5 items-end ${mobileNav ? "my-1 h-7" : "max-sm:h7 max-sm:my-1"}`}
+          >
             <div class="mr-2 w-5 text-center max-sm:w-7">
               {current && label === current ? (
                 <div>{circleIcon}</div>

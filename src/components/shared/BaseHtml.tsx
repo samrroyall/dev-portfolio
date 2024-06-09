@@ -1,8 +1,9 @@
 import { type DefaultPageProps } from "../../models/components";
 
-const bgClasses = `bg-primary-bg dark:bg-none dark:bg-primary-bg-dark`;
-
-const textClasses = "text-primary-text dark:text-primary-text-dark text-sm";
+const htmlClasses = `
+  text-primary-text dark:text-primary-text-dark text-sm bg-primary-bg 
+  dark:bg-primary-bg-dark 
+`;
 
 const twTheme = {
   darkMode: "selector",
@@ -32,6 +33,15 @@ const twTheme = {
   },
 };
 
+const resizeContentFunc = `
+  function resizeOps() {
+    document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+  };
+
+  resizeOps();
+  window.addEventListener("resize", resizeOps);
+`;
+
 interface BaseHtmlProps extends DefaultPageProps {
   children: Html.Children;
   title?: string;
@@ -41,9 +51,7 @@ const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
   const mode = theme.value === "dark" ? "dark" : "";
 
   return (
-    <html
-      class={`h-screen w-screen overflow-hidden ${bgClasses} ${textClasses} ${mode}`}
-    >
+    <html class={`${htmlClasses} ${mode}`}>
       <head>
         <meta charset="UTF-8" />
         <meta
@@ -57,7 +65,7 @@ const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
         <meta name="author" content="Sam Royall" />
         <meta
           name="viewport"
-          content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1"
         />
         <title>{`Sam Royall${title ? ` — ${title}` : ""}`}</title>
         <script type="text/javascript" src="https://cdn.tailwindcss.com" />
@@ -127,6 +135,7 @@ const BaseHtml = ({ children, theme, title }: BaseHtmlProps): JSX.Element => {
         <link rel="shortcut icon" href="/public/icons/favicon.ico" />
         <link rel="manifest" href="/public/icons/site.webmanifest" />
       </head>
+      <script>{resizeContentFunc}</script>
       <body>{children}</body>
     </html>
   );
