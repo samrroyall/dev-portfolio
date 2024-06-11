@@ -2,7 +2,7 @@ import { type RunMonth } from "../../../models/interests";
 import { mockFunc } from "../../../utils";
 
 const mockData: RunMonth = [
-  [null, null, null, [], [], [], []],
+  [null, null, null, null, null, null, []],
   [
     [],
     [],
@@ -66,9 +66,9 @@ const mockData: RunMonth = [
         avgBpm: 153.3,
       },
     ],
-    [],
-    [],
-    [],
+    null,
+    null,
+    null,
     null,
   ],
 ];
