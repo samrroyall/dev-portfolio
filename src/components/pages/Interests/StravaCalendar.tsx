@@ -4,10 +4,16 @@ import StravaDay, { type StravaDayData } from "./StravaDay";
 const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 const now = new Date();
-const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).getDay();
 
-const isToday = (i: number, j: number): boolean =>
-  now.getDate() === i * 7 + j + 1 - firstDayOfMonth;
+const firstDayOfMonthIdx = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  1,
+).getDay();
+
+const todayCellIdx = firstDayOfMonthIdx + now.getDate() - 1;
+
+const isToday = (i: number, j: number): boolean => todayCellIdx === i * 7 + j;
 
 const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
   if (runs.length === 0) {
