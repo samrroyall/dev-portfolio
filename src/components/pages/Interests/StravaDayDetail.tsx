@@ -30,7 +30,9 @@ const StravaDayDetail = ({
 }: StravaDayDetailProps): JSX.Element => {
   const hours = pace > 60 ? Math.floor(pace / 60) : null;
   const minutes = Math.floor(pace);
-  const seconds = Math.round((pace % 1) * 60);
+  const seconds = Math.round((pace % 1) * 60)
+    .toString()
+    .padStart(2, "0");
 
   return (
     <div
