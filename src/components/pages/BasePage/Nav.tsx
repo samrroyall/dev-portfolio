@@ -11,22 +11,6 @@ const circleIcon = <Icon icon={"\uebb4"} />;
 const pageIndexClasses =
   "font-geist-mono text-primary-text dark:text-primary-text-dark";
 
-const interestsLinkFunc = `
-  var interestsLink = document.getElementById("interests-link");
-
-  if (interestsLink) {
-    interestsLink.addEventListener("click", function(event) {
-      const currentDate = new Date();
-      const originalUrl = event.currentTarget.href;
-
-      const url = new URL(originalUrl);
-      url.searchParams.append('clientDate', currentDate);
-
-      event.currentTarget.href = url.toString();
-    });
-  }
-`;
-
 interface NavProps {
   admin: boolean;
   current: string | undefined;
@@ -46,7 +30,6 @@ const Nav = ({ admin, current, mobileNav }: NavProps): JSX.Element => {
 
   return (
     <>
-      <script>{interestsLinkFunc}</script>
       <nav class={navClasses}>
         <Heading
           variant={3}
@@ -66,7 +49,7 @@ const Nav = ({ admin, current, mobileNav }: NavProps): JSX.Element => {
               {current && label === current ? (
                 <span>{label}</span>
               ) : (
-                <Link id={`${label}-link`} href={link} target="_self">
+                <Link href={link} target="_self">
                   <span>{label}</span>
                 </Link>
               )}
