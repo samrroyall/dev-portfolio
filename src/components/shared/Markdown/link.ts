@@ -1,3 +1,5 @@
+import { randomBytes } from "crypto";
+
 const cleanUrl = (href: string): string | null => {
   let cleanHref: string;
 
@@ -21,9 +23,25 @@ const image = (
     return text;
   }
 
-  const imgClasses = "max-h-[300px] w-auto rounded";
+  const id = randomBytes(8).toString("hex");
 
-  const image = `<img class="${imgClasses}" src="${cleanHref}" alt="${text}" />`;
+  const toggleModalFunc = `document.getElementById('${id}-modal').classList.toggle('hidden');`;
+
+  const closeModalIconClasses =
+    "text-secondary-text dark:text-secondary-text-dark text-2xl sm:text-3xl absolute right-6 top-4 font-symbols";
+
+  const closeModalIcon = `<button type="button" class="${closeModalIconClasses}" onclick="${toggleModalFunc}">\udb80\udd56</button>`;
+
+  const modalImg = `<img class="relative cursor-pointer" src="${cleanHref}" alt="${text}" onclick="${toggleModalFunc}" />`;
+
+  const modalClasses =
+    "fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center backdrop-blur hidden p-4";
+
+  const modal = `<div id="${id}-modal" class="${modalClasses}">${closeModalIcon}${modalImg}</div>`;
+
+  const imgClasses = "max-h-[300px] w-auto rounded cursor-pointer";
+
+  const image = `<img id="${id}" class="${imgClasses}" src="${cleanHref}" alt="${text}" onclick="${toggleModalFunc}" />`;
 
   const descriptionClasses =
     "my-1 text-secondary-text dark:text-secondary-text-dark text-xs";
@@ -34,7 +52,7 @@ const image = (
     ? `<div class="${descriptionClasses}">${imageTitle}${text}</div>`
     : "";
 
-  return `<div class="my-4 mx-auto flex flex-col items-center">${image}${description}</div>`;
+  return `<div class="my-4 mx-auto flex flex-col items-center">${modal}${image}${description}</div>`;
 };
 
 const link = (
