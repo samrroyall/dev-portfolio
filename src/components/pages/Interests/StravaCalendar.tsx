@@ -19,24 +19,25 @@ const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
 };
 
 interface StravaCalendarProps {
-  clientDate: Date | undefined;
+  offset: number | undefined;
   runs: RunMonth;
 }
 
-const StravaCalendar = ({
-  clientDate,
-  runs,
-}: StravaCalendarProps): JSX.Element => {
+const StravaCalendar = ({ offset, runs }: StravaCalendarProps): JSX.Element => {
   const isToday = (i: number, j: number): boolean => {
-    const now = clientDate ?? new Date();
+    let now = new Date();
+
+    if (offset) {
+      now = new Date(now.getTime() + offset * 60 * 60 * 1000);
+    }
 
     const firstDayOfMonthIdx = new Date(
-      now.getFullYear(),
-      now.getMonth(),
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
       1,
-    ).getDay();
+    ).getUTCDay();
 
-    const todayCellIdx = firstDayOfMonthIdx + now.getDate() - 1;
+    const todayCellIdx = firstDayOfMonthIdx + now.getUTCDate() - 1;
 
     return todayCellIdx === i * 7 + j;
   };

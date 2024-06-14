@@ -8,11 +8,11 @@ const injectDateIntoInterestsLink = `
 
   links.forEach(link => {
     link.addEventListener("click", function(event) {
-      const currentDate = new Date();
+      const utcOffset = -1 * new Date().getTimezoneOffset() / 60;
       const originalUrl = event.currentTarget.href;
 
       const url = new URL(originalUrl);
-      url.searchParams.append('clientDate', currentDate);
+      url.searchParams.append('offset', utcOffset);
 
       event.currentTarget.href = url.toString();
     });
