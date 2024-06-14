@@ -12,23 +12,19 @@ import SpotifyTopTracks from "./SpotifyTopTracks";
 import StravaCalendar from "./StravaCalendar";
 
 interface InterestsProps extends DefaultPageProps {
-  clientDate: Date | undefined;
+  offset: number | undefined;
   spotifyData: Promise<Track[] | null>;
   stravaData: Promise<RunMonth | null>;
 }
 
 const Interests = async ({
-  clientDate,
+  offset,
   spotifyData,
   stravaData,
   theme,
 }: InterestsProps): Promise<JSX.Element> => {
   const runs = await stravaData;
-  const stravaContent = runs ? (
-    StravaCalendar({ clientDate, runs })
-  ) : (
-    <NoData />
-  );
+  const stravaContent = runs ? StravaCalendar({ offset, runs }) : <NoData />;
 
   const tracks = await spotifyData;
   const spotifyContent = tracks ? SpotifyTopTracks({ tracks }) : <NoData />;

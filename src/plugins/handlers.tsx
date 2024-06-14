@@ -20,7 +20,6 @@ import {
 import { getSpotifyData, getStravaData } from "../data/api/interests";
 import { type HandlerContext } from "../models/handlers";
 import {
-  InterestsPageSchema,
   type AuthenticateSchema,
   type BlogPostPageSchema,
   type ContactPageSchema,
@@ -31,7 +30,7 @@ import {
   type DeleteBlogPostSchema,
   type DeleteHomeSectionEntrySchema,
   type DeleteHomeSectionSchema,
-  type InterestPageSchema,
+  type InterestsPageSchema,
   type LoginPageSchema,
   type ModifyBlogPostPageSchema,
   type ModifyBlogPostSchema,
@@ -383,11 +382,13 @@ export const homePageHandler = async ({
 export const interestsPageHandler = async ({
   cookie: { theme },
   logger,
-  query: { clientDate },
+  query: { offset },
 }: HandlerContext<InterestsPageSchema>) => {
   try {
+    console.log(`offset: ${offset}`);
+
     return await Interests({
-      clientDate,
+      offset,
       spotifyData: getSpotifyData(),
       stravaData: getStravaData(),
       theme,
@@ -399,7 +400,7 @@ export const interestsPageHandler = async ({
     );
 
     return await Interests({
-      clientDate,
+      offset,
       spotifyData: Promise.resolve(null),
       stravaData: Promise.resolve(null),
       theme,
