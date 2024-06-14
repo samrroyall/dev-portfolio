@@ -17,14 +17,25 @@ code[class*="language-"] {
   hyphens: none;
 }
 
+@media not all and (min-width: 640px) {
+
+  pre[class*="language-"],
+  code[class*="language-"] {
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+  }
+}
+
 @media print {
+
   pre[class*="language-"],
   code[class*="language-"] {
     text-shadow: none;
   }
 }
 
-:not(pre) > code[class*="language-"] {
+:not(pre)>code[class*="language-"] {
   color: #db4c69;
 }
 
@@ -246,7 +257,7 @@ code[class*="language-html"] {
 /*********************************************************
 * Line highlighting
 */
-pre[class*="language-"] > code[class*="language-"] {
+pre[class*="language-"]>code[class*="language-"] {
   position: relative;
   z-index: 1;
 }
