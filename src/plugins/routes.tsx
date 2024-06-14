@@ -9,6 +9,7 @@ import {
   deleteBlogPostSchema,
   deleteHomeSectionEntrySchema,
   deleteHomeSectionSchema,
+  interestsPageSchema,
   loginPageSchema,
   modifyBlogPostPageSchema,
   modifyBlogPostSchema,
@@ -52,7 +53,7 @@ export const publicRoutes = new Elysia()
   .get("/blog", blogPageHandler)
   .get("/blog/post/:slug", blogPostPageHandler, blogPostPageSchema)
   .get("/contact", contactPageHandler, contactPageSchema)
-  .get("/interests", interestsPageHandler)
+  .get("/interests", interestsPageHandler, interestsPageSchema)
   .get("/login", loginPageHandler, loginPageSchema)
   .post("/authenticate", authenticateHandler, authenticateSchema)
   .post("/sendemail", sendEmailHandler, sendEmailSchema)
