@@ -3,6 +3,23 @@ import { BaseHtml, PageTitle } from "../../shared";
 import Footer from "./Footer";
 import Nav from "./Nav";
 
+const injectDateIntoInterestsLink = `
+  const links = document.querySelectorAll("a[href='/interests']");
+
+  links.forEach(link => {
+    link.addEventListener("click", function(event) {
+      const currentDate = new Date();
+      const originalUrl = event.currentTarget.href;
+
+      const url = new URL(originalUrl);
+      url.searchParams.append('clientDate', currentDate);
+
+      event.currentTarget.href = url.toString();
+    });
+  })
+    
+`;
+
 interface BasePageProps extends DefaultPageProps {
   children: Html.Children;
   admin?: boolean;
@@ -64,6 +81,7 @@ const BasePage = ({
               theme={theme}
             />
           </div>
+          <script>{injectDateIntoInterestsLink}</script>
         </div>
       </main>
     </BaseHtml>

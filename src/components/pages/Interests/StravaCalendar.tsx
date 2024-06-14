@@ -19,12 +19,16 @@ const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
 };
 
 interface StravaCalendarProps {
+  clientDate: Date | undefined;
   runs: RunMonth;
 }
 
-const StravaCalendar = ({ runs }: StravaCalendarProps): JSX.Element => {
+const StravaCalendar = ({
+  clientDate,
+  runs,
+}: StravaCalendarProps): JSX.Element => {
   const isToday = (i: number, j: number): boolean => {
-    const now = new Date();
+    const now = clientDate ?? new Date();
 
     const firstDayOfMonthIdx = new Date(
       now.getFullYear(),
