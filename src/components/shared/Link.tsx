@@ -9,19 +9,22 @@ interface LinkProps {
   children: Html.Children;
   href: string;
   arrow?: boolean;
+  id?: string;
   noUnderline?: boolean;
   target?: LinkTarget;
 }
 
 const Link = ({
-  href,
   arrow,
+  href,
+  id,
   noUnderline,
   target,
   children,
 }: LinkProps): JSX.Element => (
   <span class="text-secondary-text dark:text-secondary-text-dark">
     <a
+      id={id}
       class={noUnderline === true ? "" : "underline"}
       href={href}
       target={target ?? "_blank"}

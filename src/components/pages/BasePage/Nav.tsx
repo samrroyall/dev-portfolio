@@ -11,6 +11,22 @@ const circleIcon = <Icon icon={"\uebb4"} />;
 const pageIndexClasses =
   "font-geist-mono text-primary-text dark:text-primary-text-dark";
 
+const interestsLinkFunc = `
+  var interestsLink = document.getElementById("interests-link");
+
+  if (interestsLink) {
+    interestsLink.addEventListener("click", function(event) {
+      const currentDate = new Date();
+      const originalUrl = event.currentTarget.href;
+
+      const url = new URL(originalUrl);
+      url.searchParams.append('clientDate', currentDate);
+
+      event.currentTarget.href = url.toString();
+    });
+  }
+`;
+
 interface NavProps {
   admin: boolean;
   current: string | undefined;
@@ -29,33 +45,36 @@ const Nav = ({ admin, current, mobileNav }: NavProps): JSX.Element => {
   `;
 
   return (
-    <nav class={navClasses}>
-      <Heading
-        variant={3}
-        text="Sam Royall"
-        className={mobileNav ? "hidden" : "max-lg:hidden"}
-      />
-      <ul>
-        {routes.map(({ label, link }, i) => (
-          <li class={listItemClasses}>
-            <div class="mr-2 w-5 text-center max-sm:w-7">
+    <>
+      <script>{interestsLinkFunc}</script>
+      <nav class={navClasses}>
+        <Heading
+          variant={3}
+          text="Sam Royall"
+          className={mobileNav ? "hidden" : "max-lg:hidden"}
+        />
+        <ul>
+          {routes.map(({ label, link }, i) => (
+            <li class={listItemClasses}>
+              <div class="mr-2 w-5 text-center max-sm:w-7">
+                {current && label === current ? (
+                  <div>{circleIcon}</div>
+                ) : (
+                  <span class={pageIndexClasses}>{`0${i}`}</span>
+                )}
+              </div>
               {current && label === current ? (
-                <div>{circleIcon}</div>
-              ) : (
-                <span class={pageIndexClasses}>{`0${i}`}</span>
-              )}
-            </div>
-            {current && label === current ? (
-              <span>{label}</span>
-            ) : (
-              <Link href={link} target="_self">
                 <span>{label}</span>
-              </Link>
-            )}
-          </li>
-        ))}
-      </ul>
-    </nav>
+              ) : (
+                <Link id={`${label}-link`} href={link} target="_self">
+                  <span>{label}</span>
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </>
   );
 };
 

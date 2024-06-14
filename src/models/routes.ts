@@ -156,6 +156,16 @@ export interface DeleteHomeSectionEntrySchema {
   params: Static<typeof deleteHomeSectionEntrySchema.params>;
 }
 
+export const interestsPageSchema = {
+  query: t.Object({
+    clientDate: t.Optional(t.Date()),
+  }),
+};
+
+export interface InterestsPageSchema {
+  query: Static<typeof interestsPageSchema.query>;
+}
+
 export const loginPageSchema = {
   query: t.Object({
     success: t.Optional(t.String()),
