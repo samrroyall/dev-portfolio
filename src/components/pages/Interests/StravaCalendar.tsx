@@ -3,18 +3,6 @@ import StravaDay, { type StravaDayData } from "./StravaDay";
 
 const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-const now = new Date();
-
-const firstDayOfMonthIdx = new Date(
-  now.getFullYear(),
-  now.getMonth(),
-  1,
-).getDay();
-
-const todayCellIdx = firstDayOfMonthIdx + now.getDate() - 1;
-
-const isToday = (i: number, j: number): boolean => todayCellIdx === i * 7 + j;
-
 const mapRunDaysToStravaDayData = (runs: RunDay[]): StravaDayData | null => {
   if (runs.length === 0) {
     return null;
@@ -34,32 +22,48 @@ interface StravaCalendarProps {
   runs: RunMonth;
 }
 
-const StravaCalendar = ({ runs }: StravaCalendarProps): JSX.Element => (
-  <table class="relative max-w-[350px]">
-    <tbody>
-      {runs.map((week, i) => (
+const StravaCalendar = ({ runs }: StravaCalendarProps): JSX.Element => {
+  const isToday = (i: number, j: number): boolean => {
+    const now = new Date();
+
+    const firstDayOfMonthIdx = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      1,
+    ).getDay();
+
+    const todayCellIdx = firstDayOfMonthIdx + now.getDate() - 1;
+
+    return todayCellIdx === i * 7 + j;
+  };
+
+  return (
+    <table class="relative max-w-[350px]">
+      <tbody>
+        {runs.map((week, i) => (
+          <tr>
+            {week.map((day, j) => (
+              <td>
+                {day ? (
+                  <StravaDay
+                    data={mapRunDaysToStravaDayData(day)}
+                    isToday={isToday(i, j)}
+                  />
+                ) : null}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+      <tfoot class="text-secondary-text dark:text-secondary-text-dark">
         <tr>
-          {week.map((day, j) => (
-            <td>
-              {day ? (
-                <StravaDay
-                  data={mapRunDaysToStravaDayData(day)}
-                  isToday={isToday(i, j)}
-                />
-              ) : null}
-            </td>
+          {daysOfWeek.map((d) => (
+            <th safe>{d}</th>
           ))}
         </tr>
-      ))}
-    </tbody>
-    <tfoot class="text-secondary-text dark:text-secondary-text-dark">
-      <tr>
-        {daysOfWeek.map((d) => (
-          <th safe>{d}</th>
-        ))}
-      </tr>
-    </tfoot>
-  </table>
-);
+      </tfoot>
+    </table>
+  );
+};
 
 export default StravaCalendar;

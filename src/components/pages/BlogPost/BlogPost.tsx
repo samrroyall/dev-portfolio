@@ -4,6 +4,12 @@ import { getPrettyDate } from "../../../utils";
 import { BasePage, NotFound } from "../../pages";
 import { Heading, Markdown, SectionDivider } from "../../shared";
 
+const firstLineClasses = `
+first-letter:float-left first-letter:mr-3 first-letter:text-7xl 
+first-letter:font-bold first-letter:text-secondary-text 
+first-letter:dark:text-secondary-text-dark
+`;
+
 interface BlogPostProps extends DefaultPageProps {
   data: Promise<BlogPost | null>;
 }
@@ -27,7 +33,7 @@ const BlogPost = async ({
         >
           {getPrettyDate(post.createdAt)}
         </div>
-        <article class="py-3">
+        <article class={`py-3 ${firstLineClasses}`}>
           <Markdown text={post.text} />
         </article>
       </div>
