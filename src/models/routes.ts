@@ -158,7 +158,7 @@ export interface DeleteHomeSectionEntrySchema {
 
 export const interestsPageSchema = {
   query: t.Object({
-    clientDate: t.Optional(t.Date()),
+    offset: t.Optional(t.Numeric()),
   }),
 };
 
