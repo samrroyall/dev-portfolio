@@ -53,6 +53,8 @@ const code = (
   const lang = (infostring || "").match(/^\S*/)?.[0];
 
   code = code.replace(/\n$/, "");
+  code = code.replace(/    /g, "\t");
+  code = code.replace(/  /g, "\t");
 
   code =
     lang && !!languages[lang]
@@ -75,7 +77,7 @@ const code = (
     lang && !!languages[lang] ? `language-${lang}` : defaultLangStyles;
 
   const preStyleClasses =
-    "bg-code-bg dark:bg-code-bg-dark font-geist-mono text-sm";
+    "bg-code-bg dark:bg-code-bg-dark font-geist-mono max-sm:text-xs text-sm";
 
   const prePositioningClasses = `relative my-6 p-3 ${lang ? "pt-7" : ""} rounded`;
 
