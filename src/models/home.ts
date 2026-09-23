@@ -22,36 +22,48 @@ export interface HomeSection {
   lastModifiedAt: Date;
 }
 
+// One row of `homesections LEFT JOIN homesectionentries`. Section columns are
+// always present; entry columns are null when a section has no entries.
 export interface HomeSectionRow {
   sectionId: number;
   order: number;
   sectionTitle: string;
-  entryId: number;
-  entryTitle?: string;
-  titleLink?: string;
-  subtitles: HomeSectionEntrySubtitle[];
-  text: string;
+  entryId: number | null;
+  entryTitle: string | null;
+  titleLink: string | null;
+  subtitles: HomeSectionEntrySubtitle[] | null;
+  text: string | null;
   createdAt: Date;
   lastModifiedAt: Date;
 }
 
 export const mapRowToHomeSectionEntry = (
   row: HomeSectionRow,
-): HomeSectionEntryData => ({
-  id: row.entryId,
-  title: row.entryTitle ?? "",
-  subtitles: row.subtitles,
-  text: row.text,
-  createdAt: row.createdAt,
-  lastModifiedAt: row.lastModifiedAt,
-  titleLink: row.titleLink ?? undefined,
-});
+): HomeSectionEntryData | null => {
+  if (row.entryId === null) {
+    return null;
+  }
 
-export const mapRowToHomeSection = (row: HomeSectionRow): HomeSection => ({
-  id: row.sectionId,
-  order: row.order,
-  title: row.sectionTitle,
-  entries: [mapRowToHomeSectionEntry(row)],
-  createdAt: row.createdAt,
-  lastModifiedAt: row.lastModifiedAt,
-});
+  return {
+    id: row.entryId,
+    title: row.entryTitle ?? "",
+    subtitles: row.subtitles ?? [],
+    text: row.text ?? "",
+    createdAt: row.createdAt,
+    lastModifiedAt: row.lastModifiedAt,
+    titleLink: row.titleLink ?? undefined,
+  };
+};
+
+export const mapRowToHomeSection = (row: HomeSectionRow): HomeSection => {
+  const entry = mapRowToHomeSectionEntry(row);
+
+  return {
+    id: row.sectionId,
+    order: row.order,
+    title: row.sectionTitle,
+    entries: entry ? [entry] : [],
+    createdAt: row.createdAt,
+    lastModifiedAt: row.lastModifiedAt,
+  };
+};

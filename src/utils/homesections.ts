@@ -6,7 +6,6 @@ import {
   mapRowToHomeSectionEntry,
   type HomeSection,
   type HomeSectionEntryData,
-  type HomeSectionRow,
 } from "../models/home";
 
 type NewHomeSectionEntryFormData = Omit<
@@ -90,7 +89,7 @@ export const getHomeSection = async (
   db: LibSQLDatabase,
   sectionId: number,
 ): Promise<HomeSection | null> => {
-  const rows = (await db
+  const rows = await db
     .select({
       sectionId: homesections.id,
       order: homesections.order,
@@ -104,12 +103,12 @@ export const getHomeSection = async (
       lastModifiedAt: homesections.lastModifiedAt,
     })
     .from(homesections)
-    .fullJoin(
+    .leftJoin(
       homesectionentries,
       eq(homesections.id, homesectionentries.sectionId),
     )
     .where(eq(homesections.id, sectionId))
-    .orderBy(homesections.order)) as HomeSectionRow[];
+    .orderBy(homesections.order);
 
   if (rows.length === 0) {
     return null;
@@ -118,7 +117,11 @@ export const getHomeSection = async (
   const section = mapRowToHomeSection(rows[0]);
 
   for (let i = 1; i < rows.length; i++) {
-    section.entries.push(mapRowToHomeSectionEntry(rows[i]));
+    const entry = mapRowToHomeSectionEntry(rows[i]);
+
+    if (entry) {
+      section.entries.push(entry);
+    }
   }
 
   return section;
@@ -141,7 +144,7 @@ export const getHomeSections = async (
       lastModifiedAt: homesections.lastModifiedAt,
     })
     .from(homesections)
-    .fullJoin(
+    .leftJoin(
       homesectionentries,
       eq(homesections.id, homesectionentries.sectionId),
     )
@@ -155,7 +158,11 @@ export const getHomeSections = async (
     if (n === 0 || sections[n - 1].order !== row.order) {
       sections.push(mapRowToHomeSection(row));
     } else {
-      sections[n - 1].entries.push(mapRowToHomeSectionEntry(row));
+      const entry = mapRowToHomeSectionEntry(row);
+
+      if (entry) {
+        sections[n - 1].entries.push(entry);
+      }
     }
   });
 
