@@ -47,8 +47,9 @@ export const createHomeSection = async (
 
     if (section.entries.length > 0) {
       await tx.insert(homesectionentries).values(
-        section.entries.map((entry) => ({
+        section.entries.map((entry, index) => ({
           sectionId,
+          order: index,
           title: !!entry.title ? entry.title : undefined,
           subtitles: entry.subtitles,
           titleLink: !!entry.titleLink ? entry.titleLink : undefined,
@@ -108,7 +109,11 @@ export const getHomeSection = async (
       eq(homesections.id, homesectionentries.sectionId),
     )
     .where(eq(homesections.id, sectionId))
-    .orderBy(homesections.order);
+    .orderBy(
+      homesections.order,
+      homesectionentries.order,
+      homesectionentries.id,
+    );
 
   if (rows.length === 0) {
     return null;
@@ -148,7 +153,11 @@ export const getHomeSections = async (
       homesectionentries,
       eq(homesections.id, homesectionentries.sectionId),
     )
-    .orderBy(homesections.order);
+    .orderBy(
+      homesections.order,
+      homesectionentries.order,
+      homesectionentries.id,
+    );
 
   const sections: HomeSection[] = [];
 
@@ -196,11 +205,12 @@ export const modifyHomeSection = async (
       })
       .where(eq(homesections.id, sectionId));
 
-    for (const entry of section.entries) {
+    for (const [index, entry] of section.entries.entries()) {
       if (entry.id) {
         await tx
           .update(homesectionentries)
           .set({
+            order: index,
             title: !!entry.title ? entry.title : undefined,
             subtitles: entry.subtitles,
             titleLink: !!entry.titleLink ? entry.titleLink : undefined,
@@ -211,6 +221,7 @@ export const modifyHomeSection = async (
       } else {
         await tx.insert(homesectionentries).values({
           sectionId,
+          order: index,
           title: !!entry.title ? entry.title : undefined,
           subtitles: entry.subtitles,
           titleLink: !!entry.titleLink ? entry.titleLink : undefined,
