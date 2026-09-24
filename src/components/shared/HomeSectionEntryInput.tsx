@@ -25,6 +25,11 @@ const HomeSectionEntryInput = ({
 
   const hideSectionEntry = `htmx.find("#homesection-entry-${id}").remove();`;
 
+  // Reorder entries in the form; their order on submit is saved as the display order.
+  const moveEntryUp = `const el = htmx.find("#homesection-entry-${id}"); const prev = el.previousElementSibling; if (prev) prev.before(el);`;
+
+  const moveEntryDown = `const el = htmx.find("#homesection-entry-${id}"); const next = el.nextElementSibling; if (next) next.after(el);`;
+
   return (
     <div id={`homesection-entry-${id}`} class={homeSectionEntryClasses}>
       {entry ? (
@@ -66,7 +71,17 @@ const HomeSectionEntryInput = ({
         noResize={true}
         value={entry?.text ?? ""}
       />
-      <div class="my-4 text-center">
+      <div class="my-4 flex flex-wrap justify-center gap-2">
+        <IconButton
+          icon={"\uf062"}
+          label="Move up"
+          hx-on-click={moveEntryUp}
+        />
+        <IconButton
+          icon={"\uf063"}
+          label="Move down"
+          hx-on-click={moveEntryDown}
+        />
         {entry ? (
           <>
             <Modal

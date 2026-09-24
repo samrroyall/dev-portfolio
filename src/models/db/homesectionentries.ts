@@ -15,6 +15,8 @@ export const homesectionentries = sqliteTable("homesectionentries", {
     .notNull(),
   text: text("text").notNull(),
   titleLink: text("title_link"),
+  // Position of the entry within its section, taken from the admin form.
+  order: integer("order").notNull().default(0),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
   lastModifiedAt: integer("last_modified_at", {
     mode: "timestamp",
