@@ -390,7 +390,7 @@ export const interestsPageHandler = async ({
     return await Interests({
       offset,
       spotifyData: getSpotifyData(),
-      stravaData: getStravaData(),
+      stravaData: getStravaData(offset),
       theme,
     });
   } catch (err) {
